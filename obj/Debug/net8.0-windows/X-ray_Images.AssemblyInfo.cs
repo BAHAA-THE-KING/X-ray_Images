@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("X-ray_Images")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13b1d336770f0c52b827e468d8508e406877192f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27c0c575898e61b30e43ee4956913e02df6f327b")]
 [assembly: System.Reflection.AssemblyProductAttribute("X-ray_Images")]
 [assembly: System.Reflection.AssemblyTitleAttribute("X-ray_Images")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
