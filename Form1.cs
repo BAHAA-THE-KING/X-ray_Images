@@ -1,4 +1,12 @@
-﻿using X_ray_Images.Classes;
+using X_ray_Images.Classes;
+
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using System;
+
+using System.Windows.Forms;
+
 
 namespace X_ray_Images
 {
@@ -10,8 +18,8 @@ namespace X_ray_Images
     public partial class Form1 : Form
     {
         Mode mode = Mode.None;
-        private Point startPoint = new(-1, -1);
-        private Rectangle selectionRect = new(0, 0, 0, 0);
+        private Point startPoint = new Point(-1, -1);
+        private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
 
         public Form1()
         {
@@ -20,8 +28,8 @@ namespace X_ray_Images
 
         private void Reset()
         {
-            startPoint = new(-1, -1);
-            selectionRect = new(0, 0, 0, 0);
+            startPoint = new Point(-1, -1);
+            selectionRect = new Rectangle(0, 0, 0, 0);
             pictureBox1.Invalidate();
         }
 
@@ -77,13 +85,13 @@ namespace X_ray_Images
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
 
                 pictureBox1.Image = image;
-                pictureBox1.Size = new(image.Width, image.Height);
+                pictureBox1.Size = new Size(image.Width, image.Height);
 
                 Reset();
             }

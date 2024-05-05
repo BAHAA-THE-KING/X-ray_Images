@@ -5,7 +5,7 @@ namespace X_ray_Images
 
         public static Bitmap ProcessImage(Image image, int startX, int startY, int endX, int endY, Color first, Color second)
         {
-            Bitmap newImage = new(image);
+            Bitmap newImage = new Bitmap(image);
 
             //color range 
             Color firstColor = first;

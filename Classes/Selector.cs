@@ -20,7 +20,7 @@ namespace X_ray_Images
             if (selectY < 0) selectY = 0;
             if (selectY > ImageHeight) selectY = ImageHeight;
 
-            return new(selectX, selectY);
+            return new Point(selectX, selectY);
         }
 
         public static Rectangle SelectMove(PictureBox pictureBox1, Point startPoint, int X, int Y)
@@ -45,7 +45,7 @@ namespace X_ray_Images
             int width = Math.Abs(selectX - startX);
             int height = Math.Abs(selectY - startY);
 
-            return new(x, y, width, height);
+            return new Rectangle(x, y, width, height);
         }
 
     }
