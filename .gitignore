@@ -4,3 +4,6 @@ X-ray_Images.csproj
 X-ray_Images.csproj.user
 X-ray_Images.sln
 obj/Debug/net8.0-windows/X-ray_Images.AssemblyInfo.cs
+obj/Debug/net8.0-windows/X-ray_Images.AssemblyInfoInputs.cache
+obj/Debug/net8.0-windows/X-ray_Images.assets.cache
+obj/Debug/net8.0-windows/X-ray_Images.GeneratedMSBuildEditorConfig.editorconfig
