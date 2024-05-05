@@ -1,5 +1,7 @@
-bin/
-obj/
-X-ray_Images.csproj
-X-ray_Images.csproj.user
-X-ray_Images.sln
+
+/.vscode
+/bin
+/obj
+/X-ray_Images.csproj
+/X-ray_Images.csproj.user
+/X-ray_Images.sln
