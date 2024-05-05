@@ -1,4 +1,6 @@
-﻿namespace X_ray_Images
+﻿using X_ray_Images.Classes;
+
+namespace X_ray_Images
 {
     enum Mode
     {
@@ -30,45 +32,14 @@
                 Reset();
                 return;
             }
-            int ImageWidth = pictureBox1.Image.Width;
-            int ImageHeight = pictureBox1.Image.Height;
-
-            int selectX = e.X;
-            if (selectX < 0) selectX = 0;
-            if (selectX > ImageWidth) selectX = ImageWidth;
-
-            int selectY = e.Y;
-            if (selectY < 0) selectY = 0;
-            if (selectY > ImageHeight) selectY = ImageHeight;
-
-            startPoint = new(selectX, selectY);
+            startPoint = Selector.BeginSelect(pictureBox1, e.X, e.Y);
         }
 
         private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && startPoint.X != -1)
             {
-                int ImageWidth = pictureBox1.Image.Width;
-                int ImageHeight = pictureBox1.Image.Height;
-
-                int selectX = e.X;
-                if (selectX < 0) selectX = 0;
-                if (selectX > ImageWidth) selectX = ImageWidth;
-
-                int selectY = e.Y;
-                if (selectY < 0) selectY = 0;
-                if (selectY > ImageHeight) selectY = ImageHeight;
-
-                int startX = startPoint.X;
-                int startY = startPoint.Y;
-
-                int x = Math.Min(startX, selectX);
-                int y = Math.Min(startY, selectY);
-
-                int width = Math.Abs(selectX - startX);
-                int height = Math.Abs(selectY - startY);
-
-                selectionRect = new(x, y, width, height);
+                selectionRect = Selector.SelectMove(pictureBox1, startPoint, e.X, e.Y);
                 pictureBox1.Invalidate();
             }
             else if (e.Button == MouseButtons.Right)
@@ -109,35 +80,10 @@
             OpenFileDialog openFileDialog1 = new();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Bitmap image = new(openFileDialog1.FileName);
+                Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
 
-
-                int boxWidth = 800;
-                int boxHeight = 500;
-                int imageWidth = image.Width;
-                int imageHeight = image.Height;
-
-                if (imageWidth > imageHeight)
-                {
-                    imageHeight = imageHeight * boxWidth / imageWidth;
-                    imageWidth = boxWidth;
-                }
-                else
-                {
-                    imageWidth = imageWidth * boxHeight / imageHeight;
-                    imageHeight = boxHeight;
-                }
-
-                Bitmap resizedImage = new(imageWidth, imageHeight);
-
-                Graphics g = Graphics.FromImage(resizedImage);
-
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-
-                g.DrawImage(image, 0, 0, imageWidth, imageHeight);
-
-                pictureBox1.Image = resizedImage;
-                pictureBox1.Size = new(imageWidth, imageHeight);
+                pictureBox1.Image = image;
+                pictureBox1.Size = new(image.Width, image.Height);
 
                 Reset();
             }
@@ -155,5 +101,4 @@
         }
 
     }
-
 }
