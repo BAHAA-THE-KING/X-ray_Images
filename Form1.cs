@@ -1,4 +1,13 @@
-﻿namespace X_ray_Images
+    ﻿
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using System;
+
+using System.Windows.Forms;
+
+
+namespace X_ray_Images
 {
     enum Mode
     {
@@ -140,6 +149,11 @@
                 pictureBox1.Size = new(imageWidth, imageHeight);
 
                 Reset();
+
+                //Image<Bgr, Byte> img = new Image<Bgr, Byte>(openFileDialog1.FileName);
+                Mat img = new Mat(openFileDialog1.FileName);
+                CvInvoke.CvtColor(img, img, ColorConversion.Bgr2Gray);
+                pictureBox1.Image = img.ToBitmap();
             }
         }
 
