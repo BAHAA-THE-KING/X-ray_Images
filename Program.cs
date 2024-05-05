@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
+
 
 namespace X_ray_Images
 {
@@ -17,6 +16,10 @@ namespace X_ray_Images
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            Bitmap first = new Bitmap("../../testImages/test3.png");
+            Bitmap second = new Bitmap("../../testImages/test2.png");
+           
+           Console.WriteLine(Comparer.compareTwoImages(first, second));
         }
     }
 }
