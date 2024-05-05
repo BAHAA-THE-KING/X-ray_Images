@@ -52,6 +52,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Cursor = Cursors.Hand;
             // 
             // pictureBox5
             // 
@@ -62,6 +63,7 @@
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 13;
             this.pictureBox5.TabStop = false;
+            this.pictureBox5.Cursor = Cursors.Hand;
             // 
             // text
             // 
@@ -72,6 +74,7 @@
             this.text.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.text.TabIndex = 12;
             this.text.TabStop = false;
+            this.text.Cursor = Cursors.Hand;
             // 
             // select
             // 
@@ -83,16 +86,15 @@
             this.select.TabIndex = 11;
             this.select.TabStop = false;
             this.select.Click += new System.EventHandler(this.select_Click);
+            this.select.Cursor = Cursors.Hand;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(225, 119);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(773, 450);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(800, 500);
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button1
             // 
