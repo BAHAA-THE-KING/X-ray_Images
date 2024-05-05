@@ -1,5 +1,4 @@
-﻿
-namespace X_ray_Images
+﻿namespace X_ray_Images
 {
     enum Mode
     {
@@ -113,8 +112,8 @@ namespace X_ray_Images
                 Bitmap image = new(openFileDialog1.FileName);
 
 
-                int boxWidth = pictureBox1.Width;
-                int boxHeight = pictureBox1.Height;
+                int boxWidth = 800;
+                int boxHeight = 500;
                 int imageWidth = image.Width;
                 int imageHeight = image.Height;
 
@@ -143,5 +142,18 @@ namespace X_ray_Images
                 Reset();
             }
         }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            int startX = selectionRect.X;
+            int startY = selectionRect.Y;
+            int endX = selectionRect.X + selectionRect.Width;
+            int endY = selectionRect.Y + selectionRect.Height;
+            Bitmap newImage = Colorer.ProcessImage(pictureBox1.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
+            pictureBox1.Image = newImage;
+            Reset();
+        }
+
     }
+
 }
