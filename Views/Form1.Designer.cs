@@ -123,7 +123,7 @@
             pictureBox1.Location = new Point(240, 122);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(933, 577);
+            pictureBox1.Size = new Size(800, 500);
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
