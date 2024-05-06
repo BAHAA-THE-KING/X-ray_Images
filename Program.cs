@@ -1,4 +1,6 @@
-﻿namespace X_ray_Images
+﻿using System.Diagnostics;
+
+namespace X_ray_Images
 {
     internal static class Program
     {
@@ -11,10 +13,16 @@
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            Bitmap first = new Bitmap("../../testImages/test3.png");
-            Bitmap second = new Bitmap("../../testImages/test2.png");
-           
-           Console.WriteLine(Comparer.compareTwoImages(first, second));
+            //string startupPath = Application.StartupPath;
+            //string currentDirectory = Environment.CurrentDirectory;
+
+            //Debug.WriteLine("Start: " + startupPath);
+            //Debug.WriteLine("Directory: " + currentDirectory);
+
+            //MessageBox.Show("Start: " + startupPath + "\nDirectory: " + currentDirectory);
+
+
+            
         }
     }
 }

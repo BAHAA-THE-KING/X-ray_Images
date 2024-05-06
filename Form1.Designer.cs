@@ -28,131 +28,158 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label label1;
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.text = new System.Windows.Forms.PictureBox();
-            this.select = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.text)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.select)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::X_ray_Images.Properties.Resources.icons8_crop_64;
-            this.pictureBox2.Location = new System.Drawing.Point(5, 106);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 47);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Cursor = Cursors.Hand;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::X_ray_Images.Properties.Resources.icons8_color_64;
-            this.pictureBox5.Location = new System.Drawing.Point(5, 159);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(43, 47);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 13;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
-            this.pictureBox5.Cursor = Cursors.Hand;
-            // 
-            // text
-            // 
-            this.text.Image = global::X_ray_Images.Properties.Resources.icons8_text_50;
-            this.text.Location = new System.Drawing.Point(5, 54);
-            this.text.Name = "text";
-            this.text.Size = new System.Drawing.Size(43, 46);
-            this.text.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.text.TabIndex = 12;
-            this.text.TabStop = false;
-            this.text.Cursor = Cursors.Hand;
-            // 
-            // select
-            // 
-            this.select.Image = global::X_ray_Images.Properties.Resources.icons8_crop_58;
-            this.select.Location = new System.Drawing.Point(5, 7);
-            this.select.Name = "select";
-            this.select.Size = new System.Drawing.Size(43, 41);
-            this.select.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.select.TabIndex = 11;
-            this.select.TabStop = false;
-            this.select.Click += new System.EventHandler(this.select_Click);
-            this.select.Cursor = Cursors.Hand;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(225, 119);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 500);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(841, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 56);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Browse";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            Label label1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            pictureBox2 = new PictureBox();
+            pictureBox5 = new PictureBox();
+            text = new PictureBox();
+            select = new PictureBox();
+            pictureBox1 = new PictureBox();
+            button1 = new Button();
+            pictureBox3 = new PictureBox();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)text).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)select).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Verdana", 36F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label1.ForeColor = System.Drawing.Color.Teal;
-            label1.Location = new System.Drawing.Point(373, 29);
+            label1.Font = new Font("Verdana", 36F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.ForeColor = Color.Teal;
+            label1.Location = new Point(435, 33);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(372, 59);
+            label1.Size = new Size(372, 59);
             label1.TabIndex = 8;
             label1.Text = "Select a Photo";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Cursor = Cursors.Hand;
+            pictureBox2.Image = Properties.Resources.icons8_crop_64;
+            pictureBox2.Location = new Point(6, 122);
+            pictureBox2.Margin = new Padding(4, 3, 4, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(50, 54);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 14;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Cursor = Cursors.Hand;
+            pictureBox5.Image = Properties.Resources.icons8_color_64;
+            pictureBox5.Location = new Point(6, 183);
+            pictureBox5.Margin = new Padding(4, 3, 4, 3);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(50, 54);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.TabIndex = 13;
+            pictureBox5.TabStop = false;
+            pictureBox5.Click += pictureBox5_Click;
+            // 
+            // text
+            // 
+            text.Cursor = Cursors.Hand;
+            text.Image = Properties.Resources.icons8_text_50;
+            text.Location = new Point(6, 62);
+            text.Margin = new Padding(4, 3, 4, 3);
+            text.Name = "text";
+            text.Size = new Size(50, 53);
+            text.SizeMode = PictureBoxSizeMode.Zoom;
+            text.TabIndex = 12;
+            text.TabStop = false;
+            // 
+            // select
+            // 
+            select.Cursor = Cursors.Hand;
+            select.Image = Properties.Resources.icons8_crop_58;
+            select.Location = new Point(6, 8);
+            select.Margin = new Padding(4, 3, 4, 3);
+            select.Name = "select";
+            select.Size = new Size(50, 47);
+            select.SizeMode = PictureBoxSizeMode.Zoom;
+            select.TabIndex = 11;
+            select.TabStop = false;
+            select.Click += select_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(251, 122);
+            pictureBox1.Margin = new Padding(4, 3, 4, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(933, 577);
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.ActiveCaption;
+            button1.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(981, 47);
+            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(131, 65);
+            button1.TabIndex = 9;
+            button1.Text = "Browse";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Cursor = Cursors.Hand;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(6, 243);
+            pictureBox3.Margin = new Padding(4, 3, 4, 3);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(50, 54);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 15;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1145, 623);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.text);
-            this.Controls.Add(this.select);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.text)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.select)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1336, 719);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(pictureBox5);
+            Controls.Add(text);
+            Controls.Add(select);
+            Controls.Add(pictureBox1);
+            Controls.Add(button1);
+            Controls.Add(label1);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "Form1";
+            Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)text).EndInit();
+            ((System.ComponentModel.ISupportInitialize)select).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox text;
-        private System.Windows.Forms.PictureBox select;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox5;
+        private PictureBox text;
+        private PictureBox select;
+        private PictureBox pictureBox1;
+        private Button button1;
+        private PictureBox pictureBox3;
     }
 }
