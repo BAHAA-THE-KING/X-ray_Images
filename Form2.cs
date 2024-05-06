@@ -54,13 +54,19 @@ namespace X_ray_Images
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-            Image firstImg = first.Image;
-            Image secondImg = second.Image;
-            Bitmap firstbitmap = new Bitmap(firstImg);
-            Bitmap secondbitmap = new Bitmap(secondImg);
-            firsttext.Text = Comparer.compareTwoImages(firstbitmap, secondbitmap);
-
+            if (first.Image != null && second.Image != null)
+            {
+                Image firstImg = first.Image;
+                Image secondImg = second.Image;
+                Bitmap firstbitmap = new Bitmap(firstImg);
+                Bitmap secondbitmap = new Bitmap(secondImg);
+                firsttext.Text = Comparer.compareTwoImages(firstbitmap, secondbitmap);
+                MessageBox.Show(Comparer.compareTwoImages(firstbitmap, secondbitmap));
+            }
+            else
+            {
+                MessageBox.Show("Error No images found :(");
+            }
 
         }
 

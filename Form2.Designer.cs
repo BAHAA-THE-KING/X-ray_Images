@@ -41,6 +41,8 @@
             // 
             // first
             // 
+            first.BackColor = SystemColors.ButtonFace;
+            first.BorderStyle = BorderStyle.Fixed3D;
             first.Location = new Point(70, 62);
             first.Name = "first";
             first.Size = new Size(489, 440);
@@ -51,6 +53,8 @@
             // 
             // second
             // 
+            second.BackColor = SystemColors.ButtonFace;
+            second.BorderStyle = BorderStyle.Fixed3D;
             second.Location = new Point(582, 62);
             second.Name = "second";
             second.Size = new Size(496, 440);
@@ -69,9 +73,14 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(507, 22);
+            label3.BackColor = SystemColors.GradientInactiveCaption;
+            label3.BorderStyle = BorderStyle.Fixed3D;
+            label3.Font = new Font("Segoe UI Symbol", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.Green;
+            label3.ImageAlign = ContentAlignment.BottomCenter;
+            label3.Location = new Point(471, 15);
             label3.Name = "label3";
-            label3.Size = new Size(121, 15);
+            label3.Size = new Size(196, 27);
             label3.TabIndex = 4;
             label3.Text = "Compare Two Images";
             label3.Click += label3_Click;
@@ -81,7 +90,7 @@
             button1.BackColor = SystemColors.ActiveCaption;
             button1.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(195, 564);
+            button1.Location = new Point(200, 564);
             button1.Margin = new Padding(4, 3, 4, 3);
             button1.Name = "button1";
             button1.Size = new Size(131, 65);
@@ -109,7 +118,7 @@
             button3.BackColor = SystemColors.ActiveCaption;
             button3.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(483, 564);
+            button3.Location = new Point(507, 564);
             button3.Margin = new Padding(4, 3, 4, 3);
             button3.Name = "button3";
             button3.Size = new Size(131, 65);
