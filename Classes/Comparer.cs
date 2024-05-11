@@ -1,4 +1,7 @@
-﻿namespace X_ray_Images
+﻿using System;
+using System.Drawing;
+
+namespace X_ray_Images
 {
     internal class Comparer
     {

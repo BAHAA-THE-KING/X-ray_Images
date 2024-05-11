@@ -1,4 +1,7 @@
-﻿namespace X_ray_Images
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace X_ray_Images
 {
     partial class Form2
     {
