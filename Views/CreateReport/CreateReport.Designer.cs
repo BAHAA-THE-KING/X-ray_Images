@@ -70,6 +70,22 @@
 			this.CreateLabel.Text = "تقرير جديد";
 			this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
+			// BasicInfoPanel
+			// 
+			this.BasicInfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.BasicInfoPanel.Controls.Add(this.BasicInfoImage);
+			this.BasicInfoPanel.Controls.Add(this.BasicInfoLabel);
+			this.BasicInfoPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.BasicInfoPanel.Location = new System.Drawing.Point(575, 144);
+			this.BasicInfoPanel.Name = "BasicInfoPanel";
+			this.BasicInfoPanel.Size = new System.Drawing.Size(212, 211);
+			this.BasicInfoPanel.TabIndex = 4;
+			this.BasicInfoPanel.Click += new System.EventHandler(this.BasicInfoPanelClick);
+			foreach (System.Windows.Forms.Control child in this.BasicInfoPanel.Controls)
+			{
+				child.Click += new System.EventHandler(this.BasicInfoPanelClick);
+			}
+			// 
 			// BasicInfoLabel
 			// 
 			this.BasicInfoLabel.Font = new System.Drawing.Font("Dubai", 15F);
@@ -92,18 +108,6 @@
 			this.BasicInfoImage.TabIndex = 3;
 			this.BasicInfoImage.TabStop = false;
 			// 
-			// BasicInfoPanel
-			// 
-			this.BasicInfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.BasicInfoPanel.Controls.Add(this.BasicInfoImage);
-			this.BasicInfoPanel.Controls.Add(this.BasicInfoLabel);
-			this.BasicInfoPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BasicInfoPanel.Location = new System.Drawing.Point(575, 144);
-			this.BasicInfoPanel.Name = "BasicInfoPanel";
-			this.BasicInfoPanel.Size = new System.Drawing.Size(212, 211);
-			this.BasicInfoPanel.TabIndex = 4;
-			this.BasicInfoPanel.Click += new System.EventHandler(this.BasicInfoPanelClick);
-			// 
 			// PhotosPanel
 			// 
 			this.PhotosPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -115,17 +119,10 @@
 			this.PhotosPanel.Size = new System.Drawing.Size(212, 211);
 			this.PhotosPanel.TabIndex = 5;
 			this.PhotosPanel.Click += new System.EventHandler(this.PhotosPanelClick);
-			// 
-			// PhotosImage
-			// 
-			this.PhotosImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.PhotosImage.Image = ((System.Drawing.Image)(resources.GetObject("PhotosImage.Image")));
-			this.PhotosImage.Location = new System.Drawing.Point(19, 12);
-			this.PhotosImage.Name = "PhotosImage";
-			this.PhotosImage.Size = new System.Drawing.Size(178, 147);
-			this.PhotosImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.PhotosImage.TabIndex = 3;
-			this.PhotosImage.TabStop = false;
+			foreach (System.Windows.Forms.Control child in this.PhotosPanel.Controls)
+			{
+				child.Click += new System.EventHandler(this.PhotosPanelClick);
+			}
 			// 
 			// PhotosLabel
 			// 
@@ -138,6 +135,17 @@
 			this.PhotosLabel.Text = "صور الحالة";
 			this.PhotosLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// PhotosImage
+			// 
+			this.PhotosImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.PhotosImage.Image = ((System.Drawing.Image)(resources.GetObject("PhotosImage.Image")));
+			this.PhotosImage.Location = new System.Drawing.Point(19, 12);
+			this.PhotosImage.Name = "PhotosImage";
+			this.PhotosImage.Size = new System.Drawing.Size(178, 147);
+			this.PhotosImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.PhotosImage.TabIndex = 3;
+			this.PhotosImage.TabStop = false;
+			// 
 			// AudioPanel
 			// 
 			this.AudioPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -149,17 +157,10 @@
 			this.AudioPanel.Size = new System.Drawing.Size(212, 211);
 			this.AudioPanel.TabIndex = 6;
 			this.AudioPanel.Click += new System.EventHandler(this.AudioPanelClick);
-			// 
-			// AudioImage
-			// 
-			this.AudioImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.AudioImage.Image = ((System.Drawing.Image)(resources.GetObject("AudioImage.Image")));
-			this.AudioImage.Location = new System.Drawing.Point(19, 12);
-			this.AudioImage.Name = "AudioImage";
-			this.AudioImage.Size = new System.Drawing.Size(178, 147);
-			this.AudioImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.AudioImage.TabIndex = 3;
-			this.AudioImage.TabStop = false;
+			foreach (System.Windows.Forms.Control child in this.AudioPanel.Controls)
+			{
+				child.Click += new System.EventHandler(this.AudioPanelClick);
+			}
 			// 
 			// AudioLabel
 			// 
@@ -171,6 +172,17 @@
 			this.AudioLabel.TabIndex = 2;
 			this.AudioLabel.Text = "التشخيص الصوتي";
 			this.AudioLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// AudioImage
+			// 
+			this.AudioImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.AudioImage.Image = ((System.Drawing.Image)(resources.GetObject("AudioImage.Image")));
+			this.AudioImage.Location = new System.Drawing.Point(19, 12);
+			this.AudioImage.Name = "AudioImage";
+			this.AudioImage.Size = new System.Drawing.Size(178, 147);
+			this.AudioImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.AudioImage.TabIndex = 3;
+			this.AudioImage.TabStop = false;
 			// 
 			// CreateReport
 			// 
