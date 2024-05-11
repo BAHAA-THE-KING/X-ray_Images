@@ -1,4 +1,7 @@
-﻿namespace X_ray_Images
+﻿using System;
+using System.Windows.Forms;
+
+namespace X_ray_Images
 {
     internal static class Program
     {

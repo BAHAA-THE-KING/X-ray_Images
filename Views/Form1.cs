@@ -6,7 +6,7 @@ using Emgu.CV.Structure;
 using System;
 
 using System.Windows.Forms;
-
+using System.Drawing;
 
 namespace X_ray_Images
 {

@@ -1,3 +1,6 @@
+using System;
+using System.Drawing;
+
 namespace X_ray_Images
 {
     public class Colorer
