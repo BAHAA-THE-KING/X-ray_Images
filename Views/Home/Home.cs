@@ -16,7 +16,9 @@ namespace X_ray_Images
 		}
 		void CreateButtonClick(object sender, EventArgs e)
 		{
-			Close();
+			CreateReport createReport = new CreateReport();
+			createReport.Show();
+			Hide();
 		}
 	}
 }

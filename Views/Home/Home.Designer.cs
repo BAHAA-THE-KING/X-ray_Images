@@ -52,6 +52,7 @@
 			// CreateButton
 			// 
 			this.CreateButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.CreateButton.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CreateButton.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.CreateButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
 			this.CreateButton.Location = new System.Drawing.Point(325, 139);
