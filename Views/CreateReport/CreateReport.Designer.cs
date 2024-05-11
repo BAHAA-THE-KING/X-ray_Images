@@ -69,7 +69,6 @@
 			this.CreateLabel.TabIndex = 0;
 			this.CreateLabel.Text = "تقرير جديد";
 			this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.CreateLabel.Click += new System.EventHandler(this.Label1Click);
 			// 
 			// BasicInfoLabel
 			// 
@@ -103,6 +102,7 @@
 			this.BasicInfoPanel.Name = "BasicInfoPanel";
 			this.BasicInfoPanel.Size = new System.Drawing.Size(212, 211);
 			this.BasicInfoPanel.TabIndex = 4;
+			this.BasicInfoPanel.Click += new System.EventHandler(this.BasicInfoPanelClick);
 			// 
 			// PhotosPanel
 			// 
@@ -114,6 +114,7 @@
 			this.PhotosPanel.Name = "PhotosPanel";
 			this.PhotosPanel.Size = new System.Drawing.Size(212, 211);
 			this.PhotosPanel.TabIndex = 5;
+			this.PhotosPanel.Click += new System.EventHandler(this.PhotosPanelClick);
 			// 
 			// PhotosImage
 			// 
@@ -147,6 +148,7 @@
 			this.AudioPanel.Name = "AudioPanel";
 			this.AudioPanel.Size = new System.Drawing.Size(212, 211);
 			this.AudioPanel.TabIndex = 6;
+			this.AudioPanel.Click += new System.EventHandler(this.AudioPanelClick);
 			// 
 			// AudioImage
 			// 
@@ -169,7 +171,6 @@
 			this.AudioLabel.TabIndex = 2;
 			this.AudioLabel.Text = "التشخيص الصوتي";
 			this.AudioLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.AudioLabel.Click += new System.EventHandler(this.Label2Click);
 			// 
 			// CreateReport
 			// 

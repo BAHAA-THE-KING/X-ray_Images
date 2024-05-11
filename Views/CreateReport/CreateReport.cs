@@ -10,24 +10,38 @@ namespace X_ray_Images
 	/// </summary>
 	public partial class CreateReport : Form
 	{
+		static bool isBasicOpen = false;
+		static bool isPhotosOpen = false;
+		static bool isAudioOpen = false;
+
 		public CreateReport()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			
+
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
-		void Label1Click(object sender, EventArgs e)
+		private void BasicInfoPanelClick(object sender, EventArgs e)
 		{
-	
+
 		}
-		void Label2Click(object sender, EventArgs e)
+		private void PhotosPanelClick(object sender, EventArgs e)
 		{
-	
+			if (!isPhotosOpen)
+			{
+				isPhotosOpen = true;
+				Form1 form1 = new Form1();
+				form1.Show();
+				//Hide();
+			}
+		}
+		private void AudioPanelClick(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
