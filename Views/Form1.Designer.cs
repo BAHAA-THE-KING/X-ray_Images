@@ -39,10 +39,12 @@
             pictureBox3 = new PictureBox();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            editToolStripMenuItem = new ToolStripMenuItem();
             saveToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
             greyScaleToolStripMenuItem = new ToolStripMenuItem();
+            green2red = new PictureBox();
+            orange2purple = new PictureBox();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -51,17 +53,19 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)green2red).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)orange2purple).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Verdana", 36F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("Verdana", 36F, FontStyle.Italic);
             label1.ForeColor = Color.Teal;
-            label1.Location = new Point(435, 33);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(497, 44);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(372, 59);
+            label1.Size = new Size(464, 73);
             label1.TabIndex = 8;
             label1.Text = "Select a Photo";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -70,10 +74,10 @@
             // 
             pictureBox2.Cursor = Cursors.Hand;
             pictureBox2.Image = Properties.Resources.icons8_crop_64;
-            pictureBox2.Location = new Point(7, 200);
-            pictureBox2.Margin = new Padding(4, 3, 4, 3);
+            pictureBox2.Location = new Point(8, 267);
+            pictureBox2.Margin = new Padding(5, 4, 5, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(50, 54);
+            pictureBox2.Size = new Size(57, 72);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
@@ -82,10 +86,10 @@
             // 
             pictureBox5.Cursor = Cursors.Hand;
             pictureBox5.Image = Properties.Resources.icons8_color_64;
-            pictureBox5.Location = new Point(7, 261);
-            pictureBox5.Margin = new Padding(4, 3, 4, 3);
+            pictureBox5.Location = new Point(8, 348);
+            pictureBox5.Margin = new Padding(5, 4, 5, 4);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(50, 54);
+            pictureBox5.Size = new Size(57, 72);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 13;
             pictureBox5.TabStop = false;
@@ -95,10 +99,10 @@
             // 
             text.Cursor = Cursors.Hand;
             text.Image = Properties.Resources.icons8_text_50;
-            text.Location = new Point(7, 140);
-            text.Margin = new Padding(4, 3, 4, 3);
+            text.Location = new Point(8, 187);
+            text.Margin = new Padding(5, 4, 5, 4);
             text.Name = "text";
-            text.Size = new Size(50, 53);
+            text.Size = new Size(57, 71);
             text.SizeMode = PictureBoxSizeMode.Zoom;
             text.TabIndex = 12;
             text.TabStop = false;
@@ -107,10 +111,10 @@
             // 
             select.Cursor = Cursors.Hand;
             select.Image = Properties.Resources.icons8_crop_58;
-            select.Location = new Point(7, 86);
-            select.Margin = new Padding(4, 3, 4, 3);
+            select.Location = new Point(8, 115);
+            select.Margin = new Padding(5, 4, 5, 4);
             select.Name = "select";
-            select.Size = new Size(50, 47);
+            select.Size = new Size(57, 63);
             select.SizeMode = PictureBoxSizeMode.Zoom;
             select.TabIndex = 11;
             select.TabStop = false;
@@ -120,10 +124,10 @@
             // 
             pictureBox1.BackColor = SystemColors.ButtonFace;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Location = new Point(240, 122);
-            pictureBox1.Margin = new Padding(4, 3, 4, 3);
+            pictureBox1.Location = new Point(274, 163);
+            pictureBox1.Margin = new Padding(5, 4, 5, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(800, 500);
+            pictureBox1.Size = new Size(914, 665);
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
@@ -131,12 +135,12 @@
             // button1
             // 
             button1.BackColor = SystemColors.ActiveCaption;
-            button1.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(981, 41);
-            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Location = new Point(1121, 55);
+            button1.Margin = new Padding(5, 4, 5, 4);
             button1.Name = "button1";
-            button1.Size = new Size(131, 65);
+            button1.Size = new Size(150, 87);
             button1.TabIndex = 9;
             button1.Text = "Browse";
             button1.UseVisualStyleBackColor = false;
@@ -146,10 +150,10 @@
             // 
             pictureBox3.Cursor = Cursors.Hand;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(7, 321);
-            pictureBox3.Margin = new Padding(4, 3, 4, 3);
+            pictureBox3.Location = new Point(8, 592);
+            pictureBox3.Margin = new Padding(5, 4, 5, 4);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(50, 54);
+            pictureBox3.Size = new Size(57, 72);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 15;
             pictureBox3.TabStop = false;
@@ -157,10 +161,12 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1336, 24);
+            menuStrip1.Padding = new Padding(7, 3, 0, 3);
+            menuStrip1.Size = new Size(1527, 30);
             menuStrip1.TabIndex = 16;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -168,39 +174,67 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, openToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "File";
-            // 
-            // editToolStripMenuItem
-            // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { greyScaleToolStripMenuItem });
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(39, 20);
-            editToolStripMenuItem.Text = "Edit";
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Size = new Size(128, 26);
             saveToolStripMenuItem.Text = "Save";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(128, 26);
             openToolStripMenuItem.Text = "Open";
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { greyScaleToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(49, 24);
+            editToolStripMenuItem.Text = "Edit";
             // 
             // greyScaleToolStripMenuItem
             // 
             greyScaleToolStripMenuItem.Name = "greyScaleToolStripMenuItem";
-            greyScaleToolStripMenuItem.Size = new Size(180, 22);
+            greyScaleToolStripMenuItem.Size = new Size(157, 26);
             greyScaleToolStripMenuItem.Text = "GreyScale";
+            // 
+            // green2red
+            // 
+            green2red.Cursor = Cursors.Hand;
+            green2red.Image = (Image)resources.GetObject("green2red.Image");
+            green2red.Location = new Point(8, 428);
+            green2red.Margin = new Padding(5, 4, 5, 4);
+            green2red.Name = "green2red";
+            green2red.Size = new Size(57, 72);
+            green2red.SizeMode = PictureBoxSizeMode.Zoom;
+            green2red.TabIndex = 17;
+            green2red.TabStop = false;
+            green2red.Click += pictureBox4_Click;
+            // 
+            // orange2purple
+            // 
+            orange2purple.Cursor = Cursors.Hand;
+            orange2purple.Image = (Image)resources.GetObject("orange2purple.Image");
+            orange2purple.Location = new Point(8, 508);
+            orange2purple.Margin = new Padding(5, 4, 5, 4);
+            orange2purple.Name = "orange2purple";
+            orange2purple.Size = new Size(57, 72);
+            orange2purple.SizeMode = PictureBoxSizeMode.Zoom;
+            orange2purple.TabIndex = 18;
+            orange2purple.TabStop = false;
+            orange2purple.Click += pictureBox6_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1336, 719);
+            ClientSize = new Size(1527, 959);
+            Controls.Add(orange2purple);
+            Controls.Add(green2red);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox5);
@@ -212,7 +246,7 @@
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
@@ -223,6 +257,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)green2red).EndInit();
+            ((System.ComponentModel.ISupportInitialize)orange2purple).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -242,5 +278,7 @@
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem greyScaleToolStripMenuItem;
+        private PictureBox green2red;
+        private PictureBox orange2purple;
     }
 }
