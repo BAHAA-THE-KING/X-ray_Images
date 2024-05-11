@@ -15,13 +15,13 @@ namespace X_ray_Images
         None = 0,
         Select = 1,
     };
-    public partial class Form1 : Form
+    public partial class Photos : Form
     {
         Mode mode = Mode.None;
         private Point startPoint = new Point(-1, -1);
         private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
 
-        public Form1()
+        public Photos()
         {
             InitializeComponent();
         }

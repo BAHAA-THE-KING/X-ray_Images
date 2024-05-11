@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace X_ray_Images
 {
-    partial class Form1
+    partial class Photos
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace X_ray_Images
         private void InitializeComponent()
         {
             Label label1;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Photos));
             pictureBox2 = new PictureBox();
             pictureBox5 = new PictureBox();
             text = new PictureBox();
@@ -231,7 +231,7 @@ namespace X_ray_Images
             orange2purple.TabStop = false;
             orange2purple.Click += pictureBox6_Click;
             // 
-            // Form1
+            // Photos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -250,8 +250,8 @@ namespace X_ray_Images
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip1;
             Margin = new Padding(5, 4, 5, 4);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Photos";
+            Text = "Photos";
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)text).EndInit();

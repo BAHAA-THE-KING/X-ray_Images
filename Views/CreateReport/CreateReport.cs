@@ -34,8 +34,8 @@ namespace X_ray_Images
 			if (!isPhotosOpen)
 			{
 				isPhotosOpen = true;
-				Form1 form1 = new Form1();
-				form1.Show();
+				Photos photos = new Photos();
+				photos.Show();
 				//Hide();
 			}
 		}
