@@ -81,10 +81,8 @@
 			this.BasicInfoPanel.Size = new System.Drawing.Size(212, 211);
 			this.BasicInfoPanel.TabIndex = 4;
 			this.BasicInfoPanel.Click += new System.EventHandler(this.BasicInfoPanelClick);
-			foreach (System.Windows.Forms.Control child in this.BasicInfoPanel.Controls)
-			{
-				child.Click += new System.EventHandler(this.BasicInfoPanelClick);
-			}
+			this.BasicInfoLabel.Click += new System.EventHandler(this.BasicInfoPanelClick);
+			this.BasicInfoImage.Click += new System.EventHandler(this.BasicInfoPanelClick);
 			// 
 			// BasicInfoLabel
 			// 
@@ -119,10 +117,8 @@
 			this.PhotosPanel.Size = new System.Drawing.Size(212, 211);
 			this.PhotosPanel.TabIndex = 5;
 			this.PhotosPanel.Click += new System.EventHandler(this.PhotosPanelClick);
-			foreach (System.Windows.Forms.Control child in this.PhotosPanel.Controls)
-			{
-				child.Click += new System.EventHandler(this.PhotosPanelClick);
-			}
+			this.PhotosLabel.Click += new System.EventHandler(this.PhotosPanelClick);
+			this.PhotosImage.Click += new System.EventHandler(this.PhotosPanelClick);
 			// 
 			// PhotosLabel
 			// 
@@ -157,10 +153,8 @@
 			this.AudioPanel.Size = new System.Drawing.Size(212, 211);
 			this.AudioPanel.TabIndex = 6;
 			this.AudioPanel.Click += new System.EventHandler(this.AudioPanelClick);
-			foreach (System.Windows.Forms.Control child in this.AudioPanel.Controls)
-			{
-				child.Click += new System.EventHandler(this.AudioPanelClick);
-			}
+			this.AudioLabel.Click += new System.EventHandler(this.AudioPanelClick);
+			this.AudioImage.Click += new System.EventHandler(this.AudioPanelClick);
 			// 
 			// AudioLabel
 			// 
