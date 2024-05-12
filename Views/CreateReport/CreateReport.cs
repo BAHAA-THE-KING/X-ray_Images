@@ -6,9 +6,6 @@ using X_ray_Images.Views.BasicInfo;
 
 namespace X_ray_Images
 {
-    /// <summary>
-    /// Description of CreateReport.
-    /// </summary>
     public partial class CreateReport : Form
     {
         public static bool isBasicOpen = false;

@@ -1,10 +1,8 @@
-using X_ray_Images.Classes;
-
+﻿using X_ray_Images.Classes;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System;
-
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -33,7 +31,7 @@ namespace X_ray_Images
             MainImage.Invalidate();
         }
 
-        private void MainImageMouseDown(object sender, MouseEventArgs e)
+        private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -43,7 +41,7 @@ namespace X_ray_Images
             startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
         }
 
-        private void MainImageMouseMove(object sender, MouseEventArgs e)
+        private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && startPoint.X != -1)
             {
@@ -56,7 +54,7 @@ namespace X_ray_Images
             }
         }
 
-        private void MainImagePaint(object sender, PaintEventArgs e)
+        private void MainImage_Paint(object sender, PaintEventArgs e)
         {
             if (selectionRect.Width > 0 && selectionRect.Height > 0)
             {
@@ -64,26 +62,27 @@ namespace X_ray_Images
             }
         }
 
-        private void select_Click(object sender, EventArgs e)
+        private void SelectImage_Click(object sender, EventArgs e)
         {
             if (mode == Mode.None)
             {
-                MainImage.MouseDown += MainImageMouseDown;
-                MainImage.MouseMove += MainImageMouseMove;
-                MainImage.Paint += MainImagePaint;
+                MainImage.MouseDown += MainImage_MouseDown;
+                MainImage.MouseMove += MainImage_MouseMove;
+                MainImage.Paint += MainImage_Paint;
                 mode = Mode.Select;
             }
             else if (mode == Mode.Select)
             {
-                MainImage.MouseDown -= MainImageMouseDown;
-                MainImage.MouseMove -= MainImageMouseMove;
-                MainImage.Paint -= MainImagePaint;
+                MainImage.MouseDown -= MainImage_MouseDown;
+                MainImage.MouseMove -= MainImage_MouseMove;
+                MainImage.Paint -= MainImage_Paint;
                 Reset();
                 mode = Mode.None;
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //TODO: Need To Fix.
+        private void New_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -97,7 +96,7 @@ namespace X_ray_Images
             }
         }
 
-        private void pictureBox5_Click(object sender, EventArgs e)
+        private void Red2BlueImage_Click(object sender, EventArgs e)
         {
             int startX = selectionRect.X;
             int startY = selectionRect.Y;
@@ -108,27 +107,11 @@ namespace X_ray_Images
             Reset();
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void Compare_Click(object sender, EventArgs e)
         {
 
-            Form2 form2 = new Form2();
+            Compare form2 = new Compare();
             form2.Show();
-            Hide();
-        }
-
-        private void MainImageClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
