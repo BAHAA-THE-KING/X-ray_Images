@@ -107,11 +107,22 @@ namespace X_ray_Images
             Reset();
         }
 
+        private void Orange2PurpleImage_Click(object sender, EventArgs e)
+        {
+            int startX = selectionRect.X;
+            int startY = selectionRect.Y;
+            int endX = selectionRect.X + selectionRect.Width;
+            int endY = selectionRect.Y + selectionRect.Height;
+            Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Orange, Color.Purple);
+            MainImage.Image = newImage;
+            Reset();
+        }
+
         private void Compare_Click(object sender, EventArgs e)
         {
 
-            Compare form2 = new Compare();
-            form2.Show();
+            Compare compare = new Compare();
+            compare.Show();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -128,20 +139,6 @@ namespace X_ray_Images
             else
             {
                 MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
-
-                MainImage.Image = image;
-                MainImage.Size = new Size(image.Width, image.Height);
-
-                Reset();
             }
         }
     }

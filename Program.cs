@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using X_ray_Images.Classes;
 
 namespace X_ray_Images
 {

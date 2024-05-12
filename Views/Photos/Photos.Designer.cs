@@ -224,6 +224,7 @@ namespace X_ray_Images
             this.Orange2PurpleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Orange2PurpleImage.TabIndex = 21;
             this.Orange2PurpleImage.TabStop = false;
+            this.Orange2PurpleImage.Click += new System.EventHandler(this.Orange2PurpleImage_Click);
             // 
             // ColorMapImage
             // 
