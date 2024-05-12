@@ -113,6 +113,7 @@
             guna2Button3.Size = new Size(225, 65);
             guna2Button3.TabIndex = 2;
             guna2Button3.Text = "معلومات أخرى";
+            guna2Button3.Click += guna2Button3_Click;
             // 
             // guna2Button2
             // 
@@ -170,12 +171,14 @@
             // 
             // BaseInfo
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoSize = true;
             ClientSize = new Size(963, 553);
             Controls.Add(panelContainer);
             Controls.Add(panel3);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Name = "BaseInfo";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BaseInfo";

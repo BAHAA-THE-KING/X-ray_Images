@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Windows.Forms;
 namespace X_ray_Images
 {
@@ -147,6 +147,7 @@ namespace X_ray_Images
             this.SaveImageToolStrip.Name = "SaveImageToolStrip";
             this.SaveImageToolStrip.Size = new System.Drawing.Size(123, 26);
             this.SaveImageToolStrip.Text = "حفظ";
+            this.SaveImageToolStrip.Click += saveToolStripMenuItem_Click;
             // 
             // DeleteImageToolStrip
             // 

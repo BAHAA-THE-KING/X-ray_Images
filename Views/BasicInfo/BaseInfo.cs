@@ -15,8 +15,8 @@ namespace X_ray_Images.Views.BasicInfo
         public BaseInfo()
         {
             InitializeComponent();
-            UC_BaseInfo baseinfo = new UC_BaseInfo();
-            addUserControl(baseinfo);
+            UC_Base uc = new UC_Base();
+            addUserControl(uc);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -43,18 +43,25 @@ namespace X_ray_Images.Views.BasicInfo
         }
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            UC_BaseInfo baseinfo= new UC_BaseInfo();
-            addUserControl(baseinfo);
+            UC_Base uc = new UC_Base();
+            addUserControl(uc);
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-
+            UC_Counction uc = new UC_Counction();
+            addUserControl(uc);
         }
 
         private void panelContainer_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            UC_Other uc = new UC_Other();
+            addUserControl(uc);
         }
     }
 }

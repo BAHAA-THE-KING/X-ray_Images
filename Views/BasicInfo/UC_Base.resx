@@ -117,23 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="guna2DataGridView1.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="FixColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
-  <data name="FixColumn.Width" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
-  <data name="varColumn.HeaderText" xml:space="preserve">
-    <value>ادخل المعلومات</value>
-  </data>
-  <data name="varColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
-  <data name="varColumn.Width" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
+  <metadata name="contant.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

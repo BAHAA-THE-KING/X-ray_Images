@@ -113,5 +113,36 @@ namespace X_ray_Images
             Compare form2 = new Compare();
             form2.Show();
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string newImagePath = "../../../testImages/savedImage.png";
+
+            Image image = MainImage.Image;
+
+            if (image != null)
+            {
+                image.Save(newImagePath);
+                MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
+
+                MainImage.Image = image;
+                MainImage.Size = new Size(image.Width, image.Height);
+
+                Reset();
+            }
+        }
     }
 }
