@@ -5,9 +5,6 @@ using System.Windows.Forms;
 
 namespace X_ray_Images
 {
-	/// <summary>
-	/// Description of Audio.
-	/// </summary>
 	public partial class Audio : Form
 	{
 		public Audio()

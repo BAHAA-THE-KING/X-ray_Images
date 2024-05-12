@@ -11,24 +11,14 @@ using X_ray_Images.Classes;
 
 namespace X_ray_Images
 {
-    public partial class Form2 : Form
+    public partial class Compare : Form
     {
-        public Form2()
+        public Compare()
         {
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void PickerButton1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -40,7 +30,7 @@ namespace X_ray_Images
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void PickerButton2_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -52,7 +42,7 @@ namespace X_ray_Images
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void CompareButton_Click(object sender, EventArgs e)
         {
             if (first.Image != null && second.Image != null)
             {

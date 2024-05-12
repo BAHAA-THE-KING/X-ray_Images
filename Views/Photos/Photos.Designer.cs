@@ -1,22 +1,12 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-
 namespace X_ray_Images
 {
     partial class Photos
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            CreateReport.isPhotosOpen = false;
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -26,263 +16,294 @@ namespace X_ray_Images
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            Label label1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Photos));
-            pictureBox2 = new PictureBox();
-            pictureBox5 = new PictureBox();
-            text = new PictureBox();
-            select = new PictureBox();
-            MainImage = new PictureBox();
-            button1 = new Button();
-            pictureBox3 = new PictureBox();
-            menuStrip1 = new MenuStrip();
-            fileToolStripMenuItem = new ToolStripMenuItem();
-            saveToolStripMenuItem = new ToolStripMenuItem();
-            openToolStripMenuItem = new ToolStripMenuItem();
-            editToolStripMenuItem = new ToolStripMenuItem();
-            greyScaleToolStripMenuItem = new ToolStripMenuItem();
-            green2red = new PictureBox();
-            orange2purple = new PictureBox();
-            label1 = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)text).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)select).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)MainImage).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)green2red).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)orange2purple).BeginInit();
-            SuspendLayout();
+            this.CropImage = new System.Windows.Forms.PictureBox();
+            this.Red2BlueImage = new System.Windows.Forms.PictureBox();
+            this.TextImage = new System.Windows.Forms.PictureBox();
+            this.SelectImage = new System.Windows.Forms.PictureBox();
+            this.MainImage = new System.Windows.Forms.PictureBox();
+            this.ToolBar = new System.Windows.Forms.MenuStrip();
+            this.FileToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddImageToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveImageToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteImageToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.CompareToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.CurveImage = new System.Windows.Forms.PictureBox();
+            this.GeometryImage = new System.Windows.Forms.PictureBox();
+            this.RecordImage = new System.Windows.Forms.PictureBox();
+            this.Orange2PurpleImage = new System.Windows.Forms.PictureBox();
+            this.ColorMapImage = new System.Windows.Forms.PictureBox();
+            this.GalleryPanel = new System.Windows.Forms.Panel();
+            this.DangerToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.CropImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Red2BlueImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SelectImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainImage)).BeginInit();
+            this.ToolBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CurveImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GeometryImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RecordImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Orange2PurpleImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorMapImage)).BeginInit();
+            this.SuspendLayout();
             // 
-            // label1
+            // CropImage
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Verdana", 36F, FontStyle.Italic);
-            label1.ForeColor = Color.Teal;
-            label1.Location = new Point(497, 44);
-            label1.Margin = new Padding(5, 0, 5, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(464, 73);
-            label1.TabIndex = 8;
-            label1.Text = "Select a Photo";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            this.CropImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CropImage.Image = ((System.Drawing.Image)(resources.GetObject("CropImage.Image")));
+            this.CropImage.Location = new System.Drawing.Point(7, 64);
+            this.CropImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.CropImage.Name = "CropImage";
+            this.CropImage.Size = new System.Drawing.Size(50, 50);
+            this.CropImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CropImage.TabIndex = 14;
+            this.CropImage.TabStop = false;
             // 
-            // pictureBox2
+            // Red2BlueImage
             // 
-            pictureBox2.Cursor = Cursors.Hand;
-            pictureBox2.Image = Properties.Resources.icons8_crop_64;
-            pictureBox2.Location = new Point(8, 267);
-            pictureBox2.Margin = new Padding(5, 4, 5, 4);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(57, 72);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
+            this.Red2BlueImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Red2BlueImage.Image = ((System.Drawing.Image)(resources.GetObject("Red2BlueImage.Image")));
+            this.Red2BlueImage.Location = new System.Drawing.Point(13, 200);
+            this.Red2BlueImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Red2BlueImage.Name = "Red2BlueImage";
+            this.Red2BlueImage.Size = new System.Drawing.Size(50, 50);
+            this.Red2BlueImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Red2BlueImage.TabIndex = 13;
+            this.Red2BlueImage.TabStop = false;
+            this.Red2BlueImage.Click += new System.EventHandler(this.Red2BlueImage_Click);
             // 
-            // pictureBox5
+            // TextImage
             // 
-            pictureBox5.Cursor = Cursors.Hand;
-            pictureBox5.Image = Properties.Resources.icons8_color_64;
-            pictureBox5.Location = new Point(8, 348);
-            pictureBox5.Margin = new Padding(5, 4, 5, 4);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(57, 72);
-            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox5.TabIndex = 13;
-            pictureBox5.TabStop = false;
-            pictureBox5.Click += pictureBox5_Click;
+            this.TextImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TextImage.Image = ((System.Drawing.Image)(resources.GetObject("TextImage.Image")));
+            this.TextImage.Location = new System.Drawing.Point(79, 200);
+            this.TextImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.TextImage.Name = "TextImage";
+            this.TextImage.Size = new System.Drawing.Size(50, 50);
+            this.TextImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.TextImage.TabIndex = 12;
+            this.TextImage.TabStop = false;
             // 
-            // text
+            // SelectImage
             // 
-            text.Cursor = Cursors.Hand;
-            text.Image = Properties.Resources.icons8_text_50;
-            text.Location = new Point(8, 187);
-            text.Margin = new Padding(5, 4, 5, 4);
-            text.Name = "text";
-            text.Size = new Size(57, 71);
-            text.SizeMode = PictureBoxSizeMode.Zoom;
-            text.TabIndex = 12;
-            text.TabStop = false;
+            this.SelectImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SelectImage.Image = ((System.Drawing.Image)(resources.GetObject("SelectImage.Image")));
+            this.SelectImage.Location = new System.Drawing.Point(7, 133);
+            this.SelectImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.SelectImage.Name = "SelectImage";
+            this.SelectImage.Size = new System.Drawing.Size(50, 50);
+            this.SelectImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SelectImage.TabIndex = 11;
+            this.SelectImage.TabStop = false;
+            this.SelectImage.Click += new System.EventHandler(this.SelectImage_Click);
             // 
-            // select
+            // MainImage
             // 
-            select.Cursor = Cursors.Hand;
-            select.Image = Properties.Resources.icons8_crop_58;
-            select.Location = new Point(8, 115);
-            select.Margin = new Padding(5, 4, 5, 4);
-            select.Name = "select";
-            select.Size = new Size(57, 63);
-            select.SizeMode = PictureBoxSizeMode.Zoom;
-            select.TabIndex = 11;
-            select.TabStop = false;
-            select.Click += select_Click;
+            this.MainImage.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.MainImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.MainImage.Location = new System.Drawing.Point(164, 44);
+            this.MainImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MainImage.Name = "MainImage";
+            this.MainImage.Size = new System.Drawing.Size(984, 453);
+            this.MainImage.TabIndex = 10;
+            this.MainImage.TabStop = false;
             // 
-            // pictureBox1
+            // ToolBar
             // 
-            MainImage.BackColor = SystemColors.ButtonFace;
-            MainImage.BorderStyle = BorderStyle.Fixed3D;
-            MainImage.Location = new Point(274, 163);
-            MainImage.Margin = new Padding(5, 4, 5, 4);
-            MainImage.Name = "pictureBox1";
-            MainImage.Size = new Size(914, 665);
-            MainImage.TabIndex = 10;
-            MainImage.TabStop = false;
-            MainImage.Click += MainImageClick;
+            this.ToolBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ToolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileToolStrip,
+            this.ToolsToolStrip});
+            this.ToolBar.Location = new System.Drawing.Point(0, 0);
+            this.ToolBar.Name = "ToolBar";
+            this.ToolBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.ToolBar.Size = new System.Drawing.Size(1173, 28);
+            this.ToolBar.TabIndex = 16;
+            this.ToolBar.Text = "ToolBar";
             // 
-            // button1
+            // FileToolStrip
             // 
-            button1.BackColor = SystemColors.ActiveCaption;
-            button1.Font = new Font("Verdana", 15.75F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(1121, 55);
-            button1.Margin = new Padding(5, 4, 5, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 87);
-            button1.TabIndex = 9;
-            button1.Text = "Browse";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            this.FileToolStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddImageToolStrip,
+            this.SaveImageToolStrip,
+            this.DeleteImageToolStrip});
+            this.FileToolStrip.Name = "FileToolStrip";
+            this.FileToolStrip.Size = new System.Drawing.Size(50, 24);
+            this.FileToolStrip.Text = "ملف";
             // 
-            // pictureBox3
+            // AddImageToolStrip
             // 
-            pictureBox3.Cursor = Cursors.Hand;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(8, 592);
-            pictureBox3.Margin = new Padding(5, 4, 5, 4);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(57, 72);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 15;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
+            this.AddImageToolStrip.Name = "AddImageToolStrip";
+            this.AddImageToolStrip.Size = new System.Drawing.Size(123, 26);
+            this.AddImageToolStrip.Text = "إضافة";
+            this.AddImageToolStrip.Click += new System.EventHandler(this.New_Click);
             // 
-            // menuStrip1
+            // SaveImageToolStrip
             // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1527, 30);
-            menuStrip1.TabIndex = 16;
-            menuStrip1.Text = "menuStrip1";
+            this.SaveImageToolStrip.Name = "SaveImageToolStrip";
+            this.SaveImageToolStrip.Size = new System.Drawing.Size(123, 26);
+            this.SaveImageToolStrip.Text = "حفظ";
             // 
-            // fileToolStripMenuItem
+            // DeleteImageToolStrip
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, openToolStripMenuItem });
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(46, 24);
-            fileToolStripMenuItem.Text = "File";
+            this.DeleteImageToolStrip.Name = "DeleteImageToolStrip";
+            this.DeleteImageToolStrip.Size = new System.Drawing.Size(123, 26);
+            this.DeleteImageToolStrip.Text = "حذف";
             // 
-            // saveToolStripMenuItem
+            // ToolsToolStrip
             // 
-            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(128, 26);
-            saveToolStripMenuItem.Text = "Save";
+            this.ToolsToolStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CompareToolStrip,
+            this.DangerToolStrip});
+            this.ToolsToolStrip.Name = "ToolsToolStrip";
+            this.ToolsToolStrip.Size = new System.Drawing.Size(68, 24);
+            this.ToolsToolStrip.Text = "الأدوات";
             // 
-            // openToolStripMenuItem
+            // CompareToolStrip
             // 
-            openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(128, 26);
-            openToolStripMenuItem.Text = "Open";
+            this.CompareToolStrip.Name = "CompareToolStrip";
+            this.CompareToolStrip.Size = new System.Drawing.Size(123, 26);
+            this.CompareToolStrip.Text = "مقارنة";
+            this.CompareToolStrip.Click += new System.EventHandler(this.Compare_Click);
             // 
-            // editToolStripMenuItem
+            // DangerToolStrip
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { greyScaleToolStripMenuItem });
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(49, 24);
-            editToolStripMenuItem.Text = "Edit";
+            this.DangerToolStrip.Name = "DangerToolStrip";
+            this.DangerToolStrip.Size = new System.Drawing.Size(215, 26);
+            this.DangerToolStrip.Text = "تحديد خطورة الإصابة";
             // 
-            // greyScaleToolStripMenuItem
+            // CurveImage
             // 
-            greyScaleToolStripMenuItem.Name = "greyScaleToolStripMenuItem";
-            greyScaleToolStripMenuItem.Size = new Size(157, 26);
-            greyScaleToolStripMenuItem.Text = "GreyScale";
+            this.CurveImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CurveImage.Image = ((System.Drawing.Image)(resources.GetObject("CurveImage.Image")));
+            this.CurveImage.Location = new System.Drawing.Point(79, 64);
+            this.CurveImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.CurveImage.Name = "CurveImage";
+            this.CurveImage.Size = new System.Drawing.Size(50, 50);
+            this.CurveImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CurveImage.TabIndex = 17;
+            this.CurveImage.TabStop = false;
             // 
-            // green2red
+            // GeometryImage
             // 
-            green2red.Cursor = Cursors.Hand;
-            green2red.Image = (Image)resources.GetObject("green2red.Image");
-            green2red.Location = new Point(8, 428);
-            green2red.Margin = new Padding(5, 4, 5, 4);
-            green2red.Name = "green2red";
-            green2red.Size = new Size(57, 72);
-            green2red.SizeMode = PictureBoxSizeMode.Zoom;
-            green2red.TabIndex = 17;
-            green2red.TabStop = false;
-            green2red.Click += pictureBox4_Click;
+            this.GeometryImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GeometryImage.Image = ((System.Drawing.Image)(resources.GetObject("GeometryImage.Image")));
+            this.GeometryImage.Location = new System.Drawing.Point(79, 133);
+            this.GeometryImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.GeometryImage.Name = "GeometryImage";
+            this.GeometryImage.Size = new System.Drawing.Size(50, 50);
+            this.GeometryImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.GeometryImage.TabIndex = 18;
+            this.GeometryImage.TabStop = false;
             // 
-            // orange2purple
+            // RecordImage
             // 
-            orange2purple.Cursor = Cursors.Hand;
-            orange2purple.Image = (Image)resources.GetObject("orange2purple.Image");
-            orange2purple.Location = new Point(8, 508);
-            orange2purple.Margin = new Padding(5, 4, 5, 4);
-            orange2purple.Name = "orange2purple";
-            orange2purple.Size = new Size(57, 72);
-            orange2purple.SizeMode = PictureBoxSizeMode.Zoom;
-            orange2purple.TabIndex = 18;
-            orange2purple.TabStop = false;
-            orange2purple.Click += pictureBox6_Click;
+            this.RecordImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RecordImage.Image = ((System.Drawing.Image)(resources.GetObject("RecordImage.Image")));
+            this.RecordImage.Location = new System.Drawing.Point(79, 270);
+            this.RecordImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.RecordImage.Name = "RecordImage";
+            this.RecordImage.Size = new System.Drawing.Size(50, 50);
+            this.RecordImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RecordImage.TabIndex = 19;
+            this.RecordImage.TabStop = false;
+            // 
+            // Orange2PurpleImage
+            // 
+            this.Orange2PurpleImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Orange2PurpleImage.Image = ((System.Drawing.Image)(resources.GetObject("Orange2PurpleImage.Image")));
+            this.Orange2PurpleImage.Location = new System.Drawing.Point(13, 270);
+            this.Orange2PurpleImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Orange2PurpleImage.Name = "Orange2PurpleImage";
+            this.Orange2PurpleImage.Size = new System.Drawing.Size(50, 50);
+            this.Orange2PurpleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Orange2PurpleImage.TabIndex = 21;
+            this.Orange2PurpleImage.TabStop = false;
+            // 
+            // ColorMapImage
+            // 
+            this.ColorMapImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ColorMapImage.Image = ((System.Drawing.Image)(resources.GetObject("ColorMapImage.Image")));
+            this.ColorMapImage.Location = new System.Drawing.Point(13, 340);
+            this.ColorMapImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ColorMapImage.Name = "ColorMapImage";
+            this.ColorMapImage.Size = new System.Drawing.Size(50, 50);
+            this.ColorMapImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ColorMapImage.TabIndex = 20;
+            this.ColorMapImage.TabStop = false;
+            // 
+            // GalleryPanel
+            // 
+            this.GalleryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.GalleryPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.GalleryPanel.Location = new System.Drawing.Point(0, 520);
+            this.GalleryPanel.Name = "GalleryPanel";
+            this.GalleryPanel.Size = new System.Drawing.Size(1173, 161);
+            this.GalleryPanel.TabIndex = 23;
             // 
             // Photos
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1527, 959);
-            Controls.Add(orange2purple);
-            Controls.Add(green2red);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox5);
-            Controls.Add(text);
-            Controls.Add(select);
-            Controls.Add(MainImage);
-            Controls.Add(button1);
-            Controls.Add(label1);
-            Controls.Add(menuStrip1);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            MainMenuStrip = menuStrip1;
-            Margin = new Padding(5, 4, 5, 4);
-            Name = "Photos";
-            Text = "Photos";
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)text).EndInit();
-            ((System.ComponentModel.ISupportInitialize)select).EndInit();
-            ((System.ComponentModel.ISupportInitialize)MainImage).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)green2red).EndInit();
-            ((System.ComponentModel.ISupportInitialize)orange2purple).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1173, 681);
+            this.Controls.Add(this.GalleryPanel);
+            this.Controls.Add(this.Orange2PurpleImage);
+            this.Controls.Add(this.ColorMapImage);
+            this.Controls.Add(this.RecordImage);
+            this.Controls.Add(this.GeometryImage);
+            this.Controls.Add(this.CurveImage);
+            this.Controls.Add(this.CropImage);
+            this.Controls.Add(this.Red2BlueImage);
+            this.Controls.Add(this.TextImage);
+            this.Controls.Add(this.SelectImage);
+            this.Controls.Add(this.MainImage);
+            this.Controls.Add(this.ToolBar);
+            this.MainMenuStrip = this.ToolBar;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "Photos";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Text = "Photos";
+            ((System.ComponentModel.ISupportInitialize)(this.CropImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Red2BlueImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SelectImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
+            this.ToolBar.ResumeLayout(false);
+            this.ToolBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CurveImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GeometryImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RecordImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Orange2PurpleImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorMapImage)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
 
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox5;
-        private PictureBox text;
-        private PictureBox select;
+        private PictureBox CropImage;
+        private PictureBox Red2BlueImage;
+        private PictureBox TextImage;
+        private PictureBox SelectImage;
         private PictureBox MainImage;
-        private Button button1;
-        private PictureBox pictureBox3;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem saveToolStripMenuItem;
-        private ToolStripMenuItem openToolStripMenuItem;
-        private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem greyScaleToolStripMenuItem;
-        private PictureBox green2red;
-        private PictureBox orange2purple;
+        private MenuStrip ToolBar;
+        private ToolStripMenuItem FileToolStrip;
+        private ToolStripMenuItem SaveImageToolStrip;
+        private ToolStripMenuItem ToolsToolStrip;
+        private ToolStripMenuItem CompareToolStrip;
+        private PictureBox CurveImage;
+        private PictureBox GeometryImage;
+        private System.Windows.Forms.PictureBox RecordImage;
+        private System.Windows.Forms.PictureBox Orange2PurpleImage;
+        private System.Windows.Forms.PictureBox ColorMapImage;
+        private System.Windows.Forms.Panel GalleryPanel;
+        private System.Windows.Forms.ToolStripMenuItem AddImageToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem DeleteImageToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem DangerToolStrip;
     }
 }

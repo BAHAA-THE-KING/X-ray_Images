@@ -5,9 +5,6 @@ using System.Windows.Forms;
 
 namespace X_ray_Images
 {
-	/// <summary>
-	/// Description of Home.
-	/// </summary>
 	public partial class Home : Form
 	{
 		public Home()
