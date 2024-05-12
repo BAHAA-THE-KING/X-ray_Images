@@ -1,37 +1,38 @@
 ﻿namespace X_ray_Images
 {
-	partial class CreateReport
-	{
-		/// <summary>
-		/// Designer variable used to keep track of non-visual components.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.Label CreateLabel;
-		private System.Windows.Forms.Label BasicInfoLabel;
-		private System.Windows.Forms.PictureBox BasicInfoImage;
-		private System.Windows.Forms.Panel BasicInfoPanel;
-		private System.Windows.Forms.Panel PhotosPanel;
-		private System.Windows.Forms.PictureBox PhotosImage;
-		private System.Windows.Forms.Label PhotosLabel;
-		private System.Windows.Forms.Panel AudioPanel;
-		private System.Windows.Forms.PictureBox AudioImage;
-		private System.Windows.Forms.Label AudioLabel;
+    partial class CreateReport
+    {
+        /// <summary>
+        /// Designer variable used to keep track of non-visual components.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Label CreateLabel;
+        private System.Windows.Forms.Label BasicInfoLabel;
+        private System.Windows.Forms.PictureBox BasicInfoImage;
+        private System.Windows.Forms.Panel BasicInfoPanel;
+        private System.Windows.Forms.Panel PhotosPanel;
+        private System.Windows.Forms.PictureBox PhotosImage;
+        private System.Windows.Forms.Label PhotosLabel;
+        private System.Windows.Forms.Panel AudioPanel;
+        private System.Windows.Forms.PictureBox AudioImage;
+        private System.Windows.Forms.Label AudioLabel;
+        private System.Windows.Forms.Button SaveButton;
 
-		/// <summary>
-		/// Disposes resources used by the form.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				if (components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose(disposing);
-		}
+        /// <summary>
+        /// Disposes resources used by the form.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
         /// <summary>
         /// This method is required for Windows Forms designer support.
@@ -51,6 +52,7 @@
             AudioPanel = new Panel();
             AudioImage = new PictureBox();
             AudioLabel = new Label();
+            this.SaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)BasicInfoImage).BeginInit();
             BasicInfoPanel.SuspendLayout();
             PhotosPanel.SuspendLayout();
@@ -107,7 +109,6 @@
             BasicInfoPanel.Size = new Size(242, 263);
             BasicInfoPanel.TabIndex = 4;
             BasicInfoPanel.Click += BasicInfoPanelClick;
-            BasicInfoPanel.Paint += BasicInfoPanel_Paint;
             // 
             // PhotosPanel
             // 
@@ -116,7 +117,6 @@
             PhotosPanel.Controls.Add(PhotosLabel);
             PhotosPanel.Cursor = Cursors.Hand;
             PhotosPanel.Location = new Point(374, 180);
-            PhotosPanel.Margin = new Padding(3, 4, 3, 4);
             PhotosPanel.Name = "PhotosPanel";
             PhotosPanel.Size = new Size(242, 263);
             PhotosPanel.TabIndex = 5;
@@ -185,11 +185,24 @@
             AudioLabel.TextAlign = ContentAlignment.MiddleCenter;
             AudioLabel.Click += AudioPanelClick;
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Font = new System.Drawing.Font("Dubai", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveButton.Location = new System.Drawing.Point(374, 475);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.RightToLeft = RightToLeft.Yes;
+            this.SaveButton.Size = new System.Drawing.Size(242, 75);
+            this.SaveButton.TabIndex = 7;
+            this.SaveButton.Text = "حفظ";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButtonClick);
+            // 
             // CreateReport
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 566);
+            this.Controls.Add(this.SaveButton);
             Controls.Add(AudioPanel);
             Controls.Add(PhotosPanel);
             Controls.Add(BasicInfoPanel);
@@ -197,7 +210,6 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "CreateReport";
             Text = "Medications";
-            Load += CreateReport_Load;
             ((System.ComponentModel.ISupportInitialize)BasicInfoImage).EndInit();
             BasicInfoPanel.ResumeLayout(false);
             PhotosPanel.ResumeLayout(false);
