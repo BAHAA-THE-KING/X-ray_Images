@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace X_ray_Images
@@ -16,6 +16,7 @@ namespace X_ray_Images
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            CreateReport.isPhotosOpen = false;
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -37,7 +38,7 @@ namespace X_ray_Images
             pictureBox5 = new PictureBox();
             text = new PictureBox();
             select = new PictureBox();
-            pictureBox1 = new PictureBox();
+            MainImage = new PictureBox();
             button1 = new Button();
             pictureBox3 = new PictureBox();
             menuStrip1 = new MenuStrip();
@@ -53,7 +54,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)text).BeginInit();
             ((System.ComponentModel.ISupportInitialize)select).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)MainImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)green2red).BeginInit();
@@ -123,17 +124,17 @@ namespace X_ray_Images
             select.TabStop = false;
             select.Click += select_Click;
             // 
-            // pictureBox1
+            // Imagebox
             // 
-            pictureBox1.BackColor = SystemColors.ButtonFace;
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Location = new Point(274, 163);
-            pictureBox1.Margin = new Padding(5, 4, 5, 4);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(914, 665);
-            pictureBox1.TabIndex = 10;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            MainImage.BackColor = SystemColors.ButtonFace;
+            MainImage.BorderStyle = BorderStyle.Fixed3D;
+            MainImage.Location = new Point(274, 163);
+            MainImage.Margin = new Padding(5, 4, 5, 4);
+            MainImage.Name = "pictureBox1";
+            MainImage.Size = new Size(914, 665);
+            MainImage.TabIndex = 10;
+            MainImage.TabStop = false;
+            MainImage.Click += MainImageClick;
             // 
             // button1
             // 
@@ -185,12 +186,14 @@ namespace X_ray_Images
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(128, 26);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.Size = new Size(128, 26);
             openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
@@ -243,7 +246,7 @@ namespace X_ray_Images
             Controls.Add(pictureBox5);
             Controls.Add(text);
             Controls.Add(select);
-            Controls.Add(pictureBox1);
+            Controls.Add(MainImage);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(menuStrip1);
@@ -256,7 +259,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)text).EndInit();
             ((System.ComponentModel.ISupportInitialize)select).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)MainImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -272,7 +275,7 @@ namespace X_ray_Images
         private PictureBox pictureBox5;
         private PictureBox text;
         private PictureBox select;
-        private PictureBox pictureBox1;
+        private PictureBox MainImage;
         private Button button1;
         private PictureBox pictureBox3;
         private MenuStrip menuStrip1;
