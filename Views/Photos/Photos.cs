@@ -30,25 +30,25 @@ namespace X_ray_Images
         {
             startPoint = new Point(-1, -1);
             selectionRect = new Rectangle(0, 0, 0, 0);
-            pictureBox1.Invalidate();
+            MainImage.Invalidate();
         }
 
-        private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void MainImageMouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 Reset();
                 return;
             }
-            startPoint = Selector.BeginSelect(pictureBox1, e.X, e.Y);
+            startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
         }
 
-        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void MainImageMouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && startPoint.X != -1)
             {
-                selectionRect = Selector.SelectMove(pictureBox1, startPoint, e.X, e.Y);
-                pictureBox1.Invalidate();
+                selectionRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
+                MainImage.Invalidate();
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -56,7 +56,7 @@ namespace X_ray_Images
             }
         }
 
-        private void PictureBox1_Paint(object sender, PaintEventArgs e)
+        private void MainImagePaint(object sender, PaintEventArgs e)
         {
             if (selectionRect.Width > 0 && selectionRect.Height > 0)
             {
@@ -68,16 +68,16 @@ namespace X_ray_Images
         {
             if (mode == Mode.None)
             {
-                pictureBox1.MouseDown += PictureBox1_MouseDown;
-                pictureBox1.MouseMove += PictureBox1_MouseMove;
-                pictureBox1.Paint += PictureBox1_Paint;
+                MainImage.MouseDown += MainImageMouseDown;
+                MainImage.MouseMove += MainImageMouseMove;
+                MainImage.Paint += MainImagePaint;
                 mode = Mode.Select;
             }
             else if (mode == Mode.Select)
             {
-                pictureBox1.MouseDown -= PictureBox1_MouseDown;
-                pictureBox1.MouseMove -= PictureBox1_MouseMove;
-                pictureBox1.Paint -= PictureBox1_Paint;
+                MainImage.MouseDown -= MainImageMouseDown;
+                MainImage.MouseMove -= MainImageMouseMove;
+                MainImage.Paint -= MainImagePaint;
                 Reset();
                 mode = Mode.None;
             }
@@ -90,8 +90,8 @@ namespace X_ray_Images
             {
                 Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
 
-                pictureBox1.Image = image;
-                pictureBox1.Size = new Size(image.Width, image.Height);
+                MainImage.Image = image;
+                MainImage.Size = new Size(image.Width, image.Height);
 
                 Reset();
             }
@@ -103,8 +103,8 @@ namespace X_ray_Images
             int startY = selectionRect.Y;
             int endX = selectionRect.X + selectionRect.Width;
             int endY = selectionRect.Y + selectionRect.Height;
-            Bitmap newImage = Colorer.ProcessImage(pictureBox1.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
-            pictureBox1.Image = newImage;
+            Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
+            MainImage.Image = newImage;
             Reset();
         }
 
@@ -116,7 +116,7 @@ namespace X_ray_Images
             Hide();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void MainImageClick(object sender, EventArgs e)
         {
 
         }

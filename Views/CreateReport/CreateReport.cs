@@ -39,7 +39,12 @@ namespace X_ray_Images
         }
         private void AudioPanelClick(object sender, EventArgs e)
         {
-
+            if (!isAudioOpen)
+            {
+                isAudioOpen = true;
+                Audio audio = new Audio();
+                audio.Show();
+            }
         }
         private void SaveButtonClick(object sender, EventArgs e)
         {
