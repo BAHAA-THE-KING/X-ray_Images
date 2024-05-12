@@ -33,169 +33,178 @@
 			base.Dispose(disposing);
 		}
 
-		/// <summary>
-		/// This method is required for Windows Forms designer support.
-		/// Do not change the method contents inside the source code editor. The Forms designer might
-		/// not be able to load this method if it was changed manually.
-		/// </summary>
-		private void InitializeComponent()
-		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateReport));
-			this.CreateLabel = new System.Windows.Forms.Label();
-			this.BasicInfoLabel = new System.Windows.Forms.Label();
-			this.BasicInfoImage = new System.Windows.Forms.PictureBox();
-			this.BasicInfoPanel = new System.Windows.Forms.Panel();
-			this.PhotosPanel = new System.Windows.Forms.Panel();
-			this.PhotosImage = new System.Windows.Forms.PictureBox();
-			this.PhotosLabel = new System.Windows.Forms.Label();
-			this.AudioPanel = new System.Windows.Forms.Panel();
-			this.AudioImage = new System.Windows.Forms.PictureBox();
-			this.AudioLabel = new System.Windows.Forms.Label();
-			((System.ComponentModel.ISupportInitialize)(this.BasicInfoImage)).BeginInit();
-			this.BasicInfoPanel.SuspendLayout();
-			this.PhotosPanel.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PhotosImage)).BeginInit();
-			this.AudioPanel.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.AudioImage)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// CreateLabel
-			// 
-			this.CreateLabel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.CreateLabel.Font = new System.Drawing.Font("Dubai", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.CreateLabel.Location = new System.Drawing.Point(0, 0);
-			this.CreateLabel.Name = "CreateLabel";
-			this.CreateLabel.Size = new System.Drawing.Size(882, 70);
-			this.CreateLabel.TabIndex = 0;
-			this.CreateLabel.Text = "تقرير جديد";
-			this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-			// 
-			// BasicInfoPanel
-			// 
-			this.BasicInfoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.BasicInfoPanel.Controls.Add(this.BasicInfoImage);
-			this.BasicInfoPanel.Controls.Add(this.BasicInfoLabel);
-			this.BasicInfoPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.BasicInfoPanel.Location = new System.Drawing.Point(575, 144);
-			this.BasicInfoPanel.Name = "BasicInfoPanel";
-			this.BasicInfoPanel.Size = new System.Drawing.Size(212, 211);
-			this.BasicInfoPanel.TabIndex = 4;
-			this.BasicInfoPanel.Click += new System.EventHandler(this.BasicInfoPanelClick);
-			this.BasicInfoLabel.Click += new System.EventHandler(this.BasicInfoPanelClick);
-			this.BasicInfoImage.Click += new System.EventHandler(this.BasicInfoPanelClick);
-			// 
-			// BasicInfoLabel
-			// 
-			this.BasicInfoLabel.Font = new System.Drawing.Font("Dubai", 15F);
-			this.BasicInfoLabel.Location = new System.Drawing.Point(12, 162);
-			this.BasicInfoLabel.Name = "BasicInfoLabel";
-			this.BasicInfoLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.BasicInfoLabel.Size = new System.Drawing.Size(185, 45);
-			this.BasicInfoLabel.TabIndex = 2;
-			this.BasicInfoLabel.Text = "معلومات أساسية";
-			this.BasicInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// BasicInfoImage
-			// 
-			this.BasicInfoImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.BasicInfoImage.Image = ((System.Drawing.Image)(resources.GetObject("BasicInfoImage.Image")));
-			this.BasicInfoImage.Location = new System.Drawing.Point(19, 12);
-			this.BasicInfoImage.Name = "BasicInfoImage";
-			this.BasicInfoImage.Size = new System.Drawing.Size(178, 147);
-			this.BasicInfoImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.BasicInfoImage.TabIndex = 3;
-			this.BasicInfoImage.TabStop = false;
-			// 
-			// PhotosPanel
-			// 
-			this.PhotosPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.PhotosPanel.Controls.Add(this.PhotosImage);
-			this.PhotosPanel.Controls.Add(this.PhotosLabel);
-			this.PhotosPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.PhotosPanel.Location = new System.Drawing.Point(327, 144);
-			this.PhotosPanel.Name = "PhotosPanel";
-			this.PhotosPanel.Size = new System.Drawing.Size(212, 211);
-			this.PhotosPanel.TabIndex = 5;
-			this.PhotosPanel.Click += new System.EventHandler(this.PhotosPanelClick);
-			this.PhotosLabel.Click += new System.EventHandler(this.PhotosPanelClick);
-			this.PhotosImage.Click += new System.EventHandler(this.PhotosPanelClick);
-			// 
-			// PhotosLabel
-			// 
-			this.PhotosLabel.Font = new System.Drawing.Font("Dubai", 15F);
-			this.PhotosLabel.Location = new System.Drawing.Point(12, 162);
-			this.PhotosLabel.Name = "PhotosLabel";
-			this.PhotosLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.PhotosLabel.Size = new System.Drawing.Size(185, 45);
-			this.PhotosLabel.TabIndex = 2;
-			this.PhotosLabel.Text = "صور الحالة";
-			this.PhotosLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// PhotosImage
-			// 
-			this.PhotosImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.PhotosImage.Image = ((System.Drawing.Image)(resources.GetObject("PhotosImage.Image")));
-			this.PhotosImage.Location = new System.Drawing.Point(19, 12);
-			this.PhotosImage.Name = "PhotosImage";
-			this.PhotosImage.Size = new System.Drawing.Size(178, 147);
-			this.PhotosImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.PhotosImage.TabIndex = 3;
-			this.PhotosImage.TabStop = false;
-			// 
-			// AudioPanel
-			// 
-			this.AudioPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.AudioPanel.Controls.Add(this.AudioImage);
-			this.AudioPanel.Controls.Add(this.AudioLabel);
-			this.AudioPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.AudioPanel.Location = new System.Drawing.Point(81, 144);
-			this.AudioPanel.Name = "AudioPanel";
-			this.AudioPanel.Size = new System.Drawing.Size(212, 211);
-			this.AudioPanel.TabIndex = 6;
-			this.AudioPanel.Click += new System.EventHandler(this.AudioPanelClick);
-			this.AudioLabel.Click += new System.EventHandler(this.AudioPanelClick);
-			this.AudioImage.Click += new System.EventHandler(this.AudioPanelClick);
-			// 
-			// AudioLabel
-			// 
-			this.AudioLabel.Font = new System.Drawing.Font("Dubai", 15F);
-			this.AudioLabel.Location = new System.Drawing.Point(12, 162);
-			this.AudioLabel.Name = "AudioLabel";
-			this.AudioLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.AudioLabel.Size = new System.Drawing.Size(185, 45);
-			this.AudioLabel.TabIndex = 2;
-			this.AudioLabel.Text = "التشخيص الصوتي";
-			this.AudioLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// AudioImage
-			// 
-			this.AudioImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.AudioImage.Image = ((System.Drawing.Image)(resources.GetObject("AudioImage.Image")));
-			this.AudioImage.Location = new System.Drawing.Point(19, 12);
-			this.AudioImage.Name = "AudioImage";
-			this.AudioImage.Size = new System.Drawing.Size(178, 147);
-			this.AudioImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.AudioImage.TabIndex = 3;
-			this.AudioImage.TabStop = false;
-			// 
-			// CreateReport
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(882, 453);
-			this.Controls.Add(this.AudioPanel);
-			this.Controls.Add(this.PhotosPanel);
-			this.Controls.Add(this.BasicInfoPanel);
-			this.Controls.Add(this.CreateLabel);
-			this.Name = "CreateReport";
-			this.Text = "Medications";
-			((System.ComponentModel.ISupportInitialize)(this.BasicInfoImage)).EndInit();
-			this.BasicInfoPanel.ResumeLayout(false);
-			this.PhotosPanel.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.PhotosImage)).EndInit();
-			this.AudioPanel.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.AudioImage)).EndInit();
-			this.ResumeLayout(false);
-		}
-	}
+        /// <summary>
+        /// This method is required for Windows Forms designer support.
+        /// Do not change the method contents inside the source code editor. The Forms designer might
+        /// not be able to load this method if it was changed manually.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateReport));
+            CreateLabel = new Label();
+            BasicInfoLabel = new Label();
+            BasicInfoImage = new PictureBox();
+            BasicInfoPanel = new Panel();
+            PhotosPanel = new Panel();
+            PhotosImage = new PictureBox();
+            PhotosLabel = new Label();
+            AudioPanel = new Panel();
+            AudioImage = new PictureBox();
+            AudioLabel = new Label();
+            ((System.ComponentModel.ISupportInitialize)BasicInfoImage).BeginInit();
+            BasicInfoPanel.SuspendLayout();
+            PhotosPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PhotosImage).BeginInit();
+            AudioPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AudioImage).BeginInit();
+            SuspendLayout();
+            // 
+            // CreateLabel
+            // 
+            CreateLabel.Dock = DockStyle.Top;
+            CreateLabel.Font = new Font("Dubai", 22.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CreateLabel.Location = new Point(0, 0);
+            CreateLabel.Name = "CreateLabel";
+            CreateLabel.Size = new Size(1008, 88);
+            CreateLabel.TabIndex = 0;
+            CreateLabel.Text = "تقرير جديد";
+            CreateLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // BasicInfoLabel
+            // 
+            BasicInfoLabel.Font = new Font("Dubai", 15F);
+            BasicInfoLabel.Location = new Point(14, 202);
+            BasicInfoLabel.Name = "BasicInfoLabel";
+            BasicInfoLabel.RightToLeft = RightToLeft.Yes;
+            BasicInfoLabel.Size = new Size(211, 56);
+            BasicInfoLabel.TabIndex = 2;
+            BasicInfoLabel.Text = "معلومات أساسية";
+            BasicInfoLabel.TextAlign = ContentAlignment.MiddleCenter;
+            BasicInfoLabel.Click += BasicInfoPanelClick;
+            // 
+            // BasicInfoImage
+            // 
+            BasicInfoImage.BackgroundImageLayout = ImageLayout.Center;
+            BasicInfoImage.Image = (Image)resources.GetObject("BasicInfoImage.Image");
+            BasicInfoImage.Location = new Point(22, 15);
+            BasicInfoImage.Margin = new Padding(3, 4, 3, 4);
+            BasicInfoImage.Name = "BasicInfoImage";
+            BasicInfoImage.Size = new Size(203, 184);
+            BasicInfoImage.SizeMode = PictureBoxSizeMode.Zoom;
+            BasicInfoImage.TabIndex = 3;
+            BasicInfoImage.TabStop = false;
+            BasicInfoImage.Click += BasicInfoPanelClick;
+            // 
+            // BasicInfoPanel
+            // 
+            BasicInfoPanel.BorderStyle = BorderStyle.FixedSingle;
+            BasicInfoPanel.Controls.Add(BasicInfoImage);
+            BasicInfoPanel.Controls.Add(BasicInfoLabel);
+            BasicInfoPanel.Cursor = Cursors.Hand;
+            BasicInfoPanel.Location = new Point(657, 180);
+            BasicInfoPanel.Margin = new Padding(3, 4, 3, 4);
+            BasicInfoPanel.Name = "BasicInfoPanel";
+            BasicInfoPanel.Size = new Size(242, 263);
+            BasicInfoPanel.TabIndex = 4;
+            BasicInfoPanel.Click += BasicInfoPanelClick;
+            BasicInfoPanel.Paint += BasicInfoPanel_Paint;
+            // 
+            // PhotosPanel
+            // 
+            PhotosPanel.BorderStyle = BorderStyle.FixedSingle;
+            PhotosPanel.Controls.Add(PhotosImage);
+            PhotosPanel.Controls.Add(PhotosLabel);
+            PhotosPanel.Cursor = Cursors.Hand;
+            PhotosPanel.Location = new Point(374, 180);
+            PhotosPanel.Margin = new Padding(3, 4, 3, 4);
+            PhotosPanel.Name = "PhotosPanel";
+            PhotosPanel.Size = new Size(242, 263);
+            PhotosPanel.TabIndex = 5;
+            PhotosPanel.Click += PhotosPanelClick;
+            // 
+            // PhotosImage
+            // 
+            PhotosImage.BackgroundImageLayout = ImageLayout.Center;
+            PhotosImage.Image = (Image)resources.GetObject("PhotosImage.Image");
+            PhotosImage.Location = new Point(22, 15);
+            PhotosImage.Margin = new Padding(3, 4, 3, 4);
+            PhotosImage.Name = "PhotosImage";
+            PhotosImage.Size = new Size(203, 184);
+            PhotosImage.SizeMode = PictureBoxSizeMode.Zoom;
+            PhotosImage.TabIndex = 3;
+            PhotosImage.TabStop = false;
+            PhotosImage.Click += PhotosPanelClick;
+            // 
+            // PhotosLabel
+            // 
+            PhotosLabel.Font = new Font("Dubai", 15F);
+            PhotosLabel.Location = new Point(14, 202);
+            PhotosLabel.Name = "PhotosLabel";
+            PhotosLabel.RightToLeft = RightToLeft.Yes;
+            PhotosLabel.Size = new Size(211, 56);
+            PhotosLabel.TabIndex = 2;
+            PhotosLabel.Text = "صور الحالة";
+            PhotosLabel.TextAlign = ContentAlignment.MiddleCenter;
+            PhotosLabel.Click += PhotosPanelClick;
+            // 
+            // AudioPanel
+            // 
+            AudioPanel.BorderStyle = BorderStyle.FixedSingle;
+            AudioPanel.Controls.Add(AudioImage);
+            AudioPanel.Controls.Add(AudioLabel);
+            AudioPanel.Cursor = Cursors.Hand;
+            AudioPanel.Location = new Point(93, 180);
+            AudioPanel.Margin = new Padding(3, 4, 3, 4);
+            AudioPanel.Name = "AudioPanel";
+            AudioPanel.Size = new Size(242, 263);
+            AudioPanel.TabIndex = 6;
+            AudioPanel.Click += AudioPanelClick;
+            // 
+            // AudioImage
+            // 
+            AudioImage.BackgroundImageLayout = ImageLayout.Center;
+            AudioImage.Image = (Image)resources.GetObject("AudioImage.Image");
+            AudioImage.Location = new Point(22, 15);
+            AudioImage.Margin = new Padding(3, 4, 3, 4);
+            AudioImage.Name = "AudioImage";
+            AudioImage.Size = new Size(203, 184);
+            AudioImage.SizeMode = PictureBoxSizeMode.Zoom;
+            AudioImage.TabIndex = 3;
+            AudioImage.TabStop = false;
+            AudioImage.Click += AudioPanelClick;
+            // 
+            // AudioLabel
+            // 
+            AudioLabel.Font = new Font("Dubai", 15F);
+            AudioLabel.Location = new Point(14, 202);
+            AudioLabel.Name = "AudioLabel";
+            AudioLabel.RightToLeft = RightToLeft.Yes;
+            AudioLabel.Size = new Size(211, 56);
+            AudioLabel.TabIndex = 2;
+            AudioLabel.Text = "التشخيص الصوتي";
+            AudioLabel.TextAlign = ContentAlignment.MiddleCenter;
+            AudioLabel.Click += AudioPanelClick;
+            // 
+            // CreateReport
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1008, 566);
+            Controls.Add(AudioPanel);
+            Controls.Add(PhotosPanel);
+            Controls.Add(BasicInfoPanel);
+            Controls.Add(CreateLabel);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "CreateReport";
+            Text = "Medications";
+            Load += CreateReport_Load;
+            ((System.ComponentModel.ISupportInitialize)BasicInfoImage).EndInit();
+            BasicInfoPanel.ResumeLayout(false);
+            PhotosPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PhotosImage).EndInit();
+            AudioPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)AudioImage).EndInit();
+            ResumeLayout(false);
+        }
+    }
 }
