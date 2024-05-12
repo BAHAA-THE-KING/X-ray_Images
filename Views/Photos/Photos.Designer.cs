@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace X_ray_Images
@@ -45,8 +45,8 @@ namespace X_ray_Images
             fileToolStripMenuItem = new ToolStripMenuItem();
             saveToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
-            editToolStripMenuItem = new ToolStripMenuItem();
-            greyScaleToolStripMenuItem = new ToolStripMenuItem();
+            ToolsToolStripMenuItem = new ToolStripMenuItem();
+            CompareMenuItem = new ToolStripMenuItem();
             green2red = new PictureBox();
             orange2purple = new PictureBox();
             label1 = new Label();
@@ -124,13 +124,13 @@ namespace X_ray_Images
             select.TabStop = false;
             select.Click += select_Click;
             // 
-            // Imagebox
+            // MainImage
             // 
             MainImage.BackColor = SystemColors.ButtonFace;
             MainImage.BorderStyle = BorderStyle.Fixed3D;
             MainImage.Location = new Point(274, 163);
             MainImage.Margin = new Padding(5, 4, 5, 4);
-            MainImage.Name = "pictureBox1";
+            MainImage.Name = "MainImage";
             MainImage.Size = new Size(914, 665);
             MainImage.TabIndex = 10;
             MainImage.TabStop = false;
@@ -166,7 +166,7 @@ namespace X_ray_Images
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, ToolsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 3, 0, 3);
@@ -178,35 +178,35 @@ namespace X_ray_Images
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveToolStripMenuItem, openToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(46, 24);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Size = new Size(52, 24);
+            fileToolStripMenuItem.Text = "ملف";
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(128, 26);
-            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Size = new Size(122, 26);
+            saveToolStripMenuItem.Text = "حفط";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(128, 26);
-            openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Size = new Size(122, 26);
+            openToolStripMenuItem.Text = "فتح";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
-            // editToolStripMenuItem
+            // ToolsToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { greyScaleToolStripMenuItem });
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(49, 24);
-            editToolStripMenuItem.Text = "Edit";
+            ToolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { CompareMenuItem });
+            ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
+            ToolsToolStripMenuItem.Size = new Size(61, 24);
+            ToolsToolStripMenuItem.Text = "أدوات";
             // 
-            // greyScaleToolStripMenuItem
+            // CompareMenuItem
             // 
-            greyScaleToolStripMenuItem.Name = "greyScaleToolStripMenuItem";
-            greyScaleToolStripMenuItem.Size = new Size(157, 26);
-            greyScaleToolStripMenuItem.Text = "GreyScale";
+            CompareMenuItem.Name = "CompareMenuItem";
+            CompareMenuItem.Size = new Size(224, 26);
+            CompareMenuItem.Text = "مقارنة";
             // 
             // green2red
             // 
@@ -282,8 +282,8 @@ namespace X_ray_Images
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
-        private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem greyScaleToolStripMenuItem;
+        private ToolStripMenuItem ToolsToolStripMenuItem;
+        private ToolStripMenuItem CompareMenuItem;
         private PictureBox green2red;
         private PictureBox orange2purple;
     }
