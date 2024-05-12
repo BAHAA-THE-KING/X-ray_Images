@@ -14,7 +14,7 @@ namespace X_ray_Images.Classes
             
             if (heartToThoracicRatio <= 0.5){
                 if(heartToThoracicRatio <=0.3)
-                return "Make sure that you are selecting the entire hear";
+                return "Make sure that you are selecting the entire heart.";
                 else
                 return "Normal";
             }
