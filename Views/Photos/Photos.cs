@@ -135,7 +135,7 @@ namespace X_ray_Images
         {
             string newImagePath = "../../../testImages/savedImage.png";
 
-            Image image = Imagebox.Image;
+            Image image = MainImage.Image;
 
             if (image != null)
             {
@@ -155,8 +155,8 @@ namespace X_ray_Images
             {
                 Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
 
-                Imagebox.Image = image;
-                Imagebox.Size = new Size(image.Width, image.Height);
+                MainImage.Image = image;
+                MainImage.Size = new Size(image.Width, image.Height);
 
                 Reset();
             }
