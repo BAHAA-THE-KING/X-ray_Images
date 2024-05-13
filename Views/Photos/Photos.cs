@@ -120,12 +120,10 @@ namespace X_ray_Images
 
         private void Compare_Click(object sender, EventArgs e)
         {
-
-            Compare compare = new Compare();
-            compare.Show();
+            new Compare().Show();
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Save_Click(object sender, EventArgs e)
         {
             string newImagePath = "../../../testImages/savedImage.png";
 
@@ -140,6 +138,10 @@ namespace X_ray_Images
             {
                 MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void Danger_Click(object sender, EventArgs e)
+        {
+            new Danger().Show();
         }
     }
 }

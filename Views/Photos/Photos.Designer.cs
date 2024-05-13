@@ -7,6 +7,7 @@ namespace X_ray_Images
         private System.ComponentModel.IContainer components = null;
         protected override void Dispose(bool disposing)
         {
+            CreateReport.isPhotosOpen = false;
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -147,7 +148,7 @@ namespace X_ray_Images
             this.SaveImageToolStrip.Name = "SaveImageToolStrip";
             this.SaveImageToolStrip.Size = new System.Drawing.Size(123, 26);
             this.SaveImageToolStrip.Text = "حفظ";
-            this.SaveImageToolStrip.Click += saveToolStripMenuItem_Click;
+            this.SaveImageToolStrip.Click += Save_Click;
             // 
             // DeleteImageToolStrip
             // 
@@ -176,6 +177,7 @@ namespace X_ray_Images
             this.DangerToolStrip.Name = "DangerToolStrip";
             this.DangerToolStrip.Size = new System.Drawing.Size(215, 26);
             this.DangerToolStrip.Text = "تحديد خطورة الإصابة";
+            this.DangerToolStrip.Click += new System.EventHandler(this.Danger_Click);
             // 
             // CurveImage
             // 

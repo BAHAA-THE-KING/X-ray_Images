@@ -10,34 +10,30 @@ namespace X_ray_Images.Classes
     {
         public static Bitmap LoadImageWithResize(string fileName)
         {
-            Mat image = new Mat(fileName);
+            Bitmap image = new Bitmap(fileName);
 
             int boxWidth = 800;
-            int boxHeight = 500;
+            int boxHeight = 400;
             int imageWidth = image.Width;
             int imageHeight = image.Height;
 
-            if (imageWidth > imageHeight)
-            {
-                imageHeight = imageHeight * boxWidth / imageWidth;
-                imageWidth = boxWidth;
-            }
-            else
-            {
-                imageWidth = imageWidth * boxHeight / imageHeight;
-                imageHeight = boxHeight;
-            }
 
-            Mat resizedImage = new Mat();
+            double ratioX = (double)boxWidth / imageWidth;
+            double ratioY = (double)boxHeight / imageHeight;
+            double ratio = Math.Min(ratioX, ratioY);
 
-            CvInvoke.Resize(image, resizedImage, new Size(imageWidth, imageHeight));
+            int newWidth = (int)(imageWidth * ratio);
+            int newHeight = (int)(imageHeight * ratio);
 
-            CvInvoke.CvtColor(resizedImage, resizedImage, ColorConversion.Bgr2Gray);
+            Bitmap newImage = new Bitmap(newWidth, newHeight);
 
-            return ConvertMatToBitmap(resizedImage);
+            Graphics graphics = Graphics.FromImage(newImage);
+            graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+
+            return ConvertToGrayscale(newImage);
         }
 
-        static Bitmap ConvertMatToBitmap(Mat matImage)
+        public static Bitmap ConvertMatToBitmap(Mat matImage)
         {
             // Convert Mat to byte array
             byte[] data = new byte[matImage.Width * matImage.Height];
@@ -56,6 +52,21 @@ namespace X_ray_Images.Classes
             bitmap.UnlockBits(bitmapData);
 
             return bitmap;
+        }
+
+        public static Bitmap ConvertToGrayscale(Bitmap original)
+        {
+            for (int x = 0; x < original.Width; x++)
+            {
+                for (int y = 0; y < original.Height; y++)
+                {
+                    Color pixelColor = original.GetPixel(x, y);
+                    int grayscaleValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                    original.SetPixel(x, y, Color.FromArgb(grayscaleValue, grayscaleValue, grayscaleValue));
+                }
+            }
+
+            return original;
         }
 
     }
