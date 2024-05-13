@@ -44,7 +44,7 @@
 			this.ConfirmButton.TabIndex = 4;
 			this.ConfirmButton.Text = "تأكيد";
 			this.ConfirmButton.UseVisualStyleBackColor = true;
-			this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButtonClick);
+			this.ConfirmButton.Click += new System.EventHandler(this.Confirm_Click);
 			// 
 			// RecordingLabel
 			// 
@@ -66,6 +66,7 @@
 			this.StartImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.StartImage.TabIndex = 7;
 			this.StartImage.TabStop = false;
+			this.StartImage.Click += new System.EventHandler(this.Start_Click);
 			// 
 			// StopImage
 			// 
@@ -77,6 +78,7 @@
 			this.StopImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.StopImage.TabIndex = 8;
 			this.StopImage.TabStop = false;
+			this.StopImage.Click += new System.EventHandler(this.Stop_Click);
 			// 
 			// PlayImage
 			// 

@@ -5,9 +5,14 @@ using X_ray_Images.Classes;
 
 namespace X_ray_Images
 {
+	enum DangerMode
+	{
+		None = 0,
+		Select = 1,
+	};
 	public partial class Danger : Form
 	{
-		Mode mode = Mode.None;
+		DangerMode mode = DangerMode.None;
 		private Point startPoint = new Point(-1, -1);
 		private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
 
@@ -56,20 +61,20 @@ namespace X_ray_Images
 
 		private void SelectImage_Click(object sender, EventArgs e)
 		{
-			if (mode == Mode.None)
+			if (mode == DangerMode.None)
 			{
 				MainImage.MouseDown += MainImage_MouseDown;
 				MainImage.MouseMove += MainImage_MouseMove;
 				MainImage.Paint += MainImage_Paint;
-				mode = Mode.Select;
+				mode = DangerMode.Select;
 			}
-			else if (mode == Mode.Select)
+			else if (mode == DangerMode.Select)
 			{
 				MainImage.MouseDown -= MainImage_MouseDown;
 				MainImage.MouseMove -= MainImage_MouseMove;
 				MainImage.Paint -= MainImage_Paint;
 				Reset();
-				mode = Mode.None;
+				mode = DangerMode.None;
 			}
 		}
 
