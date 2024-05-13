@@ -1,4 +1,4 @@
-﻿namespace X_ray_Images.Views.BasicInfo
+﻿namespace X_ray_Images
 {
     partial class BaseInfo
     {

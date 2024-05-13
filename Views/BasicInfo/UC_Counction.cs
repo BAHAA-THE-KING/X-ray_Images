@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace X_ray_Images.Views.BasicInfo
+namespace X_ray_Images
 {
     public partial class UC_Counction : UserControl
     {

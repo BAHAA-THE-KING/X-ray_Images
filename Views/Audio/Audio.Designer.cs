@@ -90,6 +90,7 @@
 			this.PlayImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.PlayImage.TabIndex = 9;
 			this.PlayImage.TabStop = false;
+			this.PlayImage.Click += new System.EventHandler(this.Play_Click);
 			// 
 			// Audio
 			// 

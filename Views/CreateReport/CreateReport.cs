@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using X_ray_Images.Views.BasicInfo;
+using X_ray_Images;
 
 namespace X_ray_Images
 {

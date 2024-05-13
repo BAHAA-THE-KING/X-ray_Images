@@ -17,7 +17,7 @@ namespace X_ray_Images
 		static AudioMode mode = AudioMode.None;
 		static WaveInEvent waveIn = new WaveInEvent();
 		static WaveFileWriter waveFileWriter = null;
-		static byte[] waveData = [];
+		static WaveOutEvent outputDevice = new WaveOutEvent();
 		public Audio()
 		{
 			InitializeComponent();
@@ -27,6 +27,7 @@ namespace X_ray_Images
 			if (mode == AudioMode.None)
 			{
 				mode = AudioMode.Recording;
+				File.Delete("C:\\Temp\\audio.wav");
 				waveIn.WaveFormat = new WaveFormat(44100, 1); // 44100 Hz, mono
 				waveIn.DataAvailable += (sender, e) =>
 				{
@@ -43,12 +44,35 @@ namespace X_ray_Images
 		{
 			if (mode == AudioMode.Recording)
 			{
+				mode = AudioMode.None;
 				waveIn.StopRecording();
 				waveFileWriter?.Dispose();
 			}
 			else if (mode == AudioMode.Listening)
 			{
-
+				mode = AudioMode.None;
+				outputDevice.Stop();
+			}
+		}
+		private void Play_Click(object sender, EventArgs e)
+		{
+			if (mode == AudioMode.None)
+			{
+				if (File.Exists("C:\\Temp\\audio.wav"))
+				{
+					mode = AudioMode.Listening;
+					WaveFileReader reader = new WaveFileReader("C:\\Temp\\audio.wav");
+					outputDevice = new WaveOutEvent();
+					outputDevice.Init(reader);
+					outputDevice.Play();
+					outputDevice.PlaybackStopped += (object sender, StoppedEventArgs e) =>
+					{
+						if (mode == AudioMode.Listening)
+						{
+							mode = AudioMode.None;
+						}
+					};
+				}
 			}
 		}
 		private void Confirm_Click(object sender, EventArgs e)
