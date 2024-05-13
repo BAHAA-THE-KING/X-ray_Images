@@ -5,6 +5,7 @@ using Emgu.CV.Structure;
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace X_ray_Images
 {
@@ -125,19 +126,51 @@ namespace X_ray_Images
 
         private void Save_Click(object sender, EventArgs e)
         {
-            string newImagePath = "../../../testImages/savedImage.png";
+            string initialDirectory = Path.Combine(Application.StartupPath, "testImages");
+            string initialFileName = "savedImage.png";
 
-            Image image = MainImage.Image;
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = initialDirectory;
+                saveFileDialog.FileName = initialFileName;
+                saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|All Files|*.*";
+                saveFileDialog.Title = "Save Image As";
 
-            if (image != null)
-            {
-                image.Save(newImagePath);
-                MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string newImagePath = saveFileDialog.FileName;
+
+                    Image imageToSave = MainImage.Image;
+
+                    if (imageToSave != null)
+                    {
+                        // Determine the image format based on the selected file extension
+                        ImageFormat imageFormat = ImageFormat.Png; // Default to PNG
+                        string extension = Path.GetExtension(newImagePath);
+                        if (extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                            extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
+                        {
+                            imageFormat = ImageFormat.Jpeg;
+                        }
+
+                        // Save the image to the specified file path with the determined format
+                        try
+                        {
+                            imageToSave.Save(newImagePath, imageFormat);
+                            MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
-            else
-            {
-                MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+          
         }
         private void Danger_Click(object sender, EventArgs e)
         {

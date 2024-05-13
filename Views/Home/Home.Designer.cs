@@ -39,12 +39,15 @@
             // 
             // CreateButton
             // 
+            CreateButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CreateButton.AutoSize = true;
             CreateButton.BackColor = SystemColors.MenuHighlight;
             CreateButton.Cursor = Cursors.Hand;
             CreateButton.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CreateButton.ForeColor = SystemColors.ButtonHighlight;
             CreateButton.Location = new Point(361, 221);
             CreateButton.Margin = new Padding(0);
+            CreateButton.MaximumSize = new Size(286, 125);
             CreateButton.Name = "CreateButton";
             CreateButton.Size = new Size(286, 125);
             CreateButton.TabIndex = 1;
@@ -54,6 +57,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Historic", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -67,9 +71,9 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top;
             panel1.BackColor = Color.FromArgb(0, 180, 216);
             panel1.Controls.Add(label1);
-            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1008, 79);
@@ -87,9 +91,11 @@
             Name = "Home";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Medications";
+            Load += Home_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         private Label label1;

@@ -37,7 +37,7 @@ namespace X_ray_Images
             AudioPanel = new Panel();
             AudioImage = new PictureBox();
             AudioLabel = new Label();
-            this.SaveButton = new System.Windows.Forms.Button();
+            SaveButton = new Button();
             label1 = new Label();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)BasicInfoImage).BeginInit();
@@ -51,6 +51,7 @@ namespace X_ray_Images
             // 
             // BasicInfoLabel
             // 
+            BasicInfoLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BasicInfoLabel.Font = new Font("Dubai", 15F);
             BasicInfoLabel.Location = new Point(15, 203);
             BasicInfoLabel.Name = "BasicInfoLabel";
@@ -63,10 +64,11 @@ namespace X_ray_Images
             // 
             // BasicInfoImage
             // 
+            BasicInfoImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BasicInfoImage.BackColor = Color.Transparent;
             BasicInfoImage.BackgroundImageLayout = ImageLayout.Center;
             BasicInfoImage.Image = (Image)resources.GetObject("BasicInfoImage.Image");
-            BasicInfoImage.Location = new Point(23, 15);
+            BasicInfoImage.Location = new Point(19, 17);
             BasicInfoImage.Margin = new Padding(3, 4, 3, 4);
             BasicInfoImage.Name = "BasicInfoImage";
             BasicInfoImage.Size = new Size(203, 184);
@@ -77,6 +79,8 @@ namespace X_ray_Images
             // 
             // BasicInfoPanel
             // 
+            BasicInfoPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BasicInfoPanel.AutoScrollMargin = new Size(150, 150);
             BasicInfoPanel.BackColor = Color.FromArgb(0, 180, 216);
             BasicInfoPanel.BorderStyle = BorderStyle.FixedSingle;
             BasicInfoPanel.Controls.Add(BasicInfoImage);
@@ -86,6 +90,8 @@ namespace X_ray_Images
             BasicInfoPanel.ForeColor = SystemColors.ButtonHighlight;
             BasicInfoPanel.Location = new Point(657, 180);
             BasicInfoPanel.Margin = new Padding(3, 4, 3, 4);
+            BasicInfoPanel.MaximumSize = new Size(242, 263);
+            BasicInfoPanel.MinimumSize = new Size(242, 263);
             BasicInfoPanel.Name = "BasicInfoPanel";
             BasicInfoPanel.Size = new Size(242, 263);
             BasicInfoPanel.TabIndex = 4;
@@ -93,6 +99,8 @@ namespace X_ray_Images
             // 
             // PhotosPanel
             // 
+            PhotosPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PhotosPanel.AutoScrollMargin = new Size(150, 150);
             PhotosPanel.BackColor = Color.FromArgb(0, 180, 216);
             PhotosPanel.BorderStyle = BorderStyle.FixedSingle;
             PhotosPanel.Controls.Add(PhotosImage);
@@ -100,6 +108,8 @@ namespace X_ray_Images
             PhotosPanel.Cursor = Cursors.Hand;
             PhotosPanel.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PhotosPanel.Location = new Point(374, 180);
+            PhotosPanel.MaximumSize = new Size(242, 263);
+            PhotosPanel.MinimumSize = new Size(242, 263);
             PhotosPanel.Name = "PhotosPanel";
             PhotosPanel.Size = new Size(242, 263);
             PhotosPanel.TabIndex = 5;
@@ -107,6 +117,7 @@ namespace X_ray_Images
             // 
             // PhotosImage
             // 
+            PhotosImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PhotosImage.BackgroundImageLayout = ImageLayout.Center;
             PhotosImage.Image = (Image)resources.GetObject("PhotosImage.Image");
             PhotosImage.Location = new Point(22, 15);
@@ -120,6 +131,7 @@ namespace X_ray_Images
             // 
             // PhotosLabel
             // 
+            PhotosLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PhotosLabel.Font = new Font("Dubai", 15F);
             PhotosLabel.ForeColor = SystemColors.ButtonHighlight;
             PhotosLabel.Location = new Point(14, 202);
@@ -133,6 +145,8 @@ namespace X_ray_Images
             // 
             // AudioPanel
             // 
+            AudioPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AudioPanel.AutoScrollMargin = new Size(150, 150);
             AudioPanel.BackColor = Color.FromArgb(0, 180, 216);
             AudioPanel.BorderStyle = BorderStyle.FixedSingle;
             AudioPanel.Controls.Add(AudioImage);
@@ -140,6 +154,8 @@ namespace X_ray_Images
             AudioPanel.Cursor = Cursors.Hand;
             AudioPanel.Location = new Point(93, 180);
             AudioPanel.Margin = new Padding(3, 4, 3, 4);
+            AudioPanel.MaximumSize = new Size(242, 263);
+            AudioPanel.MinimumSize = new Size(242, 263);
             AudioPanel.Name = "AudioPanel";
             AudioPanel.Size = new Size(242, 263);
             AudioPanel.TabIndex = 6;
@@ -147,6 +163,7 @@ namespace X_ray_Images
             // 
             // AudioImage
             // 
+            AudioImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AudioImage.BackgroundImageLayout = ImageLayout.Center;
             AudioImage.Image = (Image)resources.GetObject("AudioImage.Image");
             AudioImage.Location = new Point(22, 15);
@@ -160,6 +177,7 @@ namespace X_ray_Images
             // 
             // AudioLabel
             // 
+            AudioLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AudioLabel.Font = new Font("Dubai", 15F);
             AudioLabel.ForeColor = SystemColors.ButtonHighlight;
             AudioLabel.Location = new Point(14, 202);
@@ -173,19 +191,20 @@ namespace X_ray_Images
             // 
             // SaveButton
             // 
-            this.SaveButton.Font = new System.Drawing.Font("Dubai", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveButton.Location = new System.Drawing.Point(374, 475);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.RightToLeft = RightToLeft.Yes;
-            this.SaveButton.Size = new System.Drawing.Size(242, 75);
-            this.SaveButton.TabIndex = 7;
-            this.SaveButton.Text = "حفظ";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButtonClick);
+            SaveButton.Anchor = AnchorStyles.Bottom;
+            SaveButton.Font = new Font("Dubai", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SaveButton.Location = new Point(374, 475);
+            SaveButton.Name = "SaveButton";
+            SaveButton.RightToLeft = RightToLeft.Yes;
+            SaveButton.Size = new Size(242, 75);
+            SaveButton.TabIndex = 7;
+            SaveButton.Text = "حفظ";
+            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += SaveButtonClick;
             // 
             // label1
             // 
-            label1.AutoSize = true;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Calibri", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
@@ -198,9 +217,9 @@ namespace X_ray_Images
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top;
             panel1.BackColor = Color.FromArgb(0, 180, 216);
             panel1.Controls.Add(label1);
-            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1008, 84);
@@ -212,7 +231,7 @@ namespace X_ray_Images
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(196, 211, 249);
             ClientSize = new Size(1008, 566);
-            this.Controls.Add(this.SaveButton);
+            Controls.Add(SaveButton);
             Controls.Add(panel1);
             Controls.Add(AudioPanel);
             Controls.Add(PhotosPanel);
@@ -228,7 +247,6 @@ namespace X_ray_Images
             AudioPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AudioImage).EndInit();
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
