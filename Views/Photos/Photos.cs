@@ -8,14 +8,14 @@ using System.Drawing;
 
 namespace X_ray_Images
 {
-    enum Mode
+    enum PhotosMode
     {
         None = 0,
         Select = 1,
     };
     public partial class Photos : Form
     {
-        Mode mode = Mode.None;
+        PhotosMode mode = PhotosMode.None;
         private Point startPoint = new Point(-1, -1);
         private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
 
@@ -64,20 +64,20 @@ namespace X_ray_Images
 
         private void SelectImage_Click(object sender, EventArgs e)
         {
-            if (mode == Mode.None)
+            if (mode == PhotosMode.None)
             {
                 MainImage.MouseDown += MainImage_MouseDown;
                 MainImage.MouseMove += MainImage_MouseMove;
                 MainImage.Paint += MainImage_Paint;
-                mode = Mode.Select;
+                mode = PhotosMode.Select;
             }
-            else if (mode == Mode.Select)
+            else if (mode == PhotosMode.Select)
             {
                 MainImage.MouseDown -= MainImage_MouseDown;
                 MainImage.MouseMove -= MainImage_MouseMove;
                 MainImage.Paint -= MainImage_Paint;
                 Reset();
-                mode = Mode.None;
+                mode = PhotosMode.None;
             }
         }
 
