@@ -13,7 +13,6 @@ namespace X_ray_Images
     {
         None = 0,
         Select = 1,
-        Cropping = 2,
     };
     public partial class Photos : Form
     {
@@ -21,18 +20,18 @@ namespace X_ray_Images
         private Point startPoint = new Point(-1, -1);
         private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
         static public List<Image> images = [];
+        static public List<GalleryItem> galleryItems = [];
+        int active = 0;
         public Photos()
         {
             InitializeComponent();
         }
-
         private void Reset()
         {
             startPoint = new Point(-1, -1);
             selectionRect = new Rectangle(0, 0, 0, 0);
             MainImage.Invalidate();
         }
-
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -42,7 +41,6 @@ namespace X_ray_Images
             }
             startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
         }
-
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && startPoint.X != -1)
@@ -55,7 +53,6 @@ namespace X_ray_Images
                 Reset();
             }
         }
-
         private void MainImage_Paint(object sender, PaintEventArgs e)
         {
             if (selectionRect.Width > 0 && selectionRect.Height > 0)
@@ -63,7 +60,6 @@ namespace X_ray_Images
                 e.Graphics.DrawRectangle(Pens.Red, selectionRect);
             }
         }
-
         private void SelectImage_Click(object sender, EventArgs e)
         {
             if (mode == PhotosMode.None)
@@ -75,55 +71,46 @@ namespace X_ray_Images
             }
             else if (mode == PhotosMode.Select)
             {
-                MainImage.MouseDown -= MainImage_MouseDown;
-                MainImage.MouseMove -= MainImage_MouseMove;
-                MainImage.Paint -= MainImage_Paint;
-                Reset();
-                mode = PhotosMode.None;
+                RemoveSelection();
             }
         }
         private void CropImage_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.None)
+            if (mode == PhotosMode.Select)
             {
-                MainImage.MouseDown += MainImage_MouseDown;
-                MainImage.MouseMove += MainImage_MouseMove;
-                MainImage.Paint += MainImage_Paint;
-
-                mode = PhotosMode.Cropping;
-            }
-            else if (mode == PhotosMode.Cropping)
-            {
-                MainImage.MouseDown -= MainImage_MouseDown;
-                MainImage.MouseMove -= MainImage_MouseMove;
-                MainImage.Paint -= MainImage_Paint;
-
                 Bitmap image = ImageProcessor.Crop(MainImage.Image, selectionRect);
-                MainImage.Image = image;
-                MainImage.Size = new Size(image.Width, image.Height);
+                SetImage(image);
 
-                Reset();
-                mode = PhotosMode.None;
+                RemoveSelection();
             }
         }
-
-        //TODO: Need To Fix.
         private void New_Click(object sender, EventArgs e)
         {
+            RemoveSelection();
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
 
-                MainImage.Image = image;
-                MainImage.Size = new Size(image.Width, image.Height);
-
                 images.Add(MainImage.Image);
+                int id = images.Count - 1;
+                active = id;
+
+                GalleryItem galleryItem = new GalleryItem(images[id], id, (object sender, EventArgs e) =>
+            {
+                active = id;
+                MainImage.Image = images[id];
+                MainImage.Size = new Size(images[id].Width, images[id].Height);
+            });
+
+                galleryItems.Add(galleryItem);
+                GalleryPanel.Controls.Add(galleryItem.pictureBox);
+                SetImage(image);
 
                 Reset();
             }
         }
-
         private void Red2BlueImage_Click(object sender, EventArgs e)
         {
             int startX = selectionRect.X;
@@ -131,10 +118,10 @@ namespace X_ray_Images
             int endX = selectionRect.X + selectionRect.Width;
             int endY = selectionRect.Y + selectionRect.Height;
             Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
-            MainImage.Image = newImage;
-            Reset();
-        }
+            SetImage(newImage);
 
+            RemoveSelection();
+        }
         private void Orange2PurpleImage_Click(object sender, EventArgs e)
         {
             int startX = selectionRect.X;
@@ -142,17 +129,20 @@ namespace X_ray_Images
             int endX = selectionRect.X + selectionRect.Width;
             int endY = selectionRect.Y + selectionRect.Height;
             Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Orange, Color.Purple);
-            MainImage.Image = newImage;
-            Reset();
-        }
+            SetImage(newImage);
 
+            RemoveSelection();
+        }
         private void Compare_Click(object sender, EventArgs e)
         {
+            RemoveSelection();
+
             new Compare().Show();
         }
-
         private void Save_Click(object sender, EventArgs e)
         {
+            RemoveSelection();
+
             string initialDirectory = Path.Combine(Application.StartupPath, "testImages");
             string initialFileName = "savedImage.png";
 
@@ -201,11 +191,14 @@ namespace X_ray_Images
         }
         private void Danger_Click(object sender, EventArgs e)
         {
+            RemoveSelection();
+
             new Danger().Show();
         }
-
         private void Clear_Click(object sender, EventArgs e)
         {
+            RemoveSelection();
+
             int goodDim = (int)Math.Max(Math.Ceiling(Math.Log2(MainImage.Image.Width)), Math.Ceiling(Math.Log2(MainImage.Image.Height)));
             goodDim = (int)Math.Pow(2, goodDim);
 
@@ -215,7 +208,27 @@ namespace X_ray_Images
 
             Bitmap newImage = new Bitmap(result, new Size(MainImage.Image.Width, MainImage.Image.Height));
 
-            MainImage.Image = newImage;
+            SetImage(newImage);
+        }
+        private void SetImage(Image image)
+        {
+            MainImage.Image = image;
+            MainImage.Size = new Size(image.Width, image.Height);
+
+            images[active] = image;
+            galleryItems[active].pictureBox.Image = image;
+        }
+        private void RemoveSelection()
+        {
+            if (mode == PhotosMode.Select)
+            {
+                MainImage.MouseDown -= MainImage_MouseDown;
+                MainImage.MouseMove -= MainImage_MouseMove;
+                MainImage.Paint -= MainImage_Paint;
+
+                Reset();
+                mode = PhotosMode.None;
+            }
         }
     }
 }
