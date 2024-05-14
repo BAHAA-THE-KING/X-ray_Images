@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using AForge.Imaging.Filters;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 
@@ -10,25 +11,25 @@ namespace X_ray_Images.Classes
     {
         public static Bitmap LoadImageWithResize(string fileName)
         {
-            Bitmap image = new Bitmap(fileName);
+            Bitmap newImage = new Bitmap(fileName);
 
-            int boxWidth = 800;
-            int boxHeight = 400;
-            int imageWidth = image.Width;
-            int imageHeight = image.Height;
+            //int boxWidth = 800;
+            //int boxHeight = 400;
+            //int imageWidth = image.Width;
+            //int imageHeight = image.Height;
 
 
-            double ratioX = (double)boxWidth / imageWidth;
-            double ratioY = (double)boxHeight / imageHeight;
-            double ratio = Math.Min(ratioX, ratioY);
+            //double ratioX = (double)boxWidth / imageWidth;
+            //double ratioY = (double)boxHeight / imageHeight;
+            //double ratio = Math.Min(ratioX, ratioY);
 
-            int newWidth = (int)(imageWidth * ratio);
-            int newHeight = (int)(imageHeight * ratio);
+            //int newWidth = (int)(imageWidth * ratio);
+            //int newHeight = (int)(imageHeight * ratio);
 
-            Bitmap newImage = new Bitmap(newWidth, newHeight);
+            //Bitmap newImage = new Bitmap(newWidth, newHeight);
 
             Graphics graphics = Graphics.FromImage(newImage);
-            graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+            //graphics.DrawImage(image, 0, 0, newWidth, newHeight);
 
             return ConvertToGrayscale(newImage);
         }
@@ -56,17 +57,10 @@ namespace X_ray_Images.Classes
 
         public static Bitmap ConvertToGrayscale(Bitmap original)
         {
-            for (int x = 0; x < original.Width; x++)
-            {
-                for (int y = 0; y < original.Height; y++)
-                {
-                    Color pixelColor = original.GetPixel(x, y);
-                    int grayscaleValue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                    original.SetPixel(x, y, Color.FromArgb(grayscaleValue, grayscaleValue, grayscaleValue));
-                }
-            }
+            Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
+            Bitmap grayImage = filter.Apply(original);
 
-            return original;
+            return grayImage;
         }
 
     }

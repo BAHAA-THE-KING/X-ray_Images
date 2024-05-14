@@ -170,11 +170,19 @@ namespace X_ray_Images
                     }
                 }
             }
-          
+
         }
         private void Danger_Click(object sender, EventArgs e)
         {
             new Danger().Show();
+        }
+
+        private void ColorMapImage_Click(object sender, EventArgs e)
+        {
+            Bitmap img = new Bitmap(MainImage.Image);
+            Bitmap reslult = ImageEnhancer.ApplyHighPassFilter(img);
+            
+            MainImage.Image = reslult;
         }
     }
 }
