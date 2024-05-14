@@ -65,6 +65,7 @@ namespace X_ray_Images
             CropImage.SizeMode = PictureBoxSizeMode.Zoom;
             CropImage.TabIndex = 14;
             CropImage.TabStop = false;
+            CropImage.Click += new System.EventHandler(this.CropImage_Click);
             // 
             // Red2BlueImage
             // 

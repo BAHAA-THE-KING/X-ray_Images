@@ -13,13 +13,14 @@ namespace X_ray_Images
     {
         None = 0,
         Select = 1,
+        Cropping = 2,
     };
     public partial class Photos : Form
     {
         PhotosMode mode = PhotosMode.None;
         private Point startPoint = new Point(-1, -1);
         private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
-        static public Bitmap[] images = [];
+        static public List<Image> images = [];
         public Photos()
         {
             InitializeComponent();
@@ -81,6 +82,30 @@ namespace X_ray_Images
                 mode = PhotosMode.None;
             }
         }
+        private void CropImage_Click(object sender, EventArgs e)
+        {
+            if (mode == PhotosMode.None)
+            {
+                MainImage.MouseDown += MainImage_MouseDown;
+                MainImage.MouseMove += MainImage_MouseMove;
+                MainImage.Paint += MainImage_Paint;
+
+                mode = PhotosMode.Cropping;
+            }
+            else if (mode == PhotosMode.Cropping)
+            {
+                MainImage.MouseDown -= MainImage_MouseDown;
+                MainImage.MouseMove -= MainImage_MouseMove;
+                MainImage.Paint -= MainImage_Paint;
+
+                Bitmap image = ImageProcessor.Crop(MainImage.Image, selectionRect);
+                MainImage.Image = image;
+                MainImage.Size = new Size(image.Width, image.Height);
+
+                Reset();
+                mode = PhotosMode.None;
+            }
+        }
 
         //TODO: Need To Fix.
         private void New_Click(object sender, EventArgs e)
@@ -88,14 +113,12 @@ namespace X_ray_Images
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
+                Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
 
                 MainImage.Image = image;
                 MainImage.Size = new Size(image.Width, image.Height);
 
-                images.Append(MainImage.Image);
-                Console.WriteLine($"{images.Length}");
-
+                images.Add(MainImage.Image);
 
                 Reset();
             }

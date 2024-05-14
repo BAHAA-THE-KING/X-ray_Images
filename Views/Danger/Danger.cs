@@ -93,7 +93,7 @@ namespace X_ray_Images
 			OpenFileDialog openFileDialog1 = new OpenFileDialog();
 			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
-				Bitmap image = Loader.LoadImageWithResize(openFileDialog1.FileName);
+				Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
 
 				MainImage.Image = image;
 				MainImage.Size = new Size(image.Width, image.Height);
