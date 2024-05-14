@@ -19,7 +19,7 @@ namespace X_ray_Images
         PhotosMode mode = PhotosMode.None;
         private Point startPoint = new Point(-1, -1);
         private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
-
+        static public Bitmap[] images = [];
         public Photos()
         {
             InitializeComponent();
@@ -92,6 +92,10 @@ namespace X_ray_Images
 
                 MainImage.Image = image;
                 MainImage.Size = new Size(image.Width, image.Height);
+
+                images.Append(MainImage.Image);
+                Console.WriteLine($"{images.Length}");
+
 
                 Reset();
             }
@@ -179,10 +183,16 @@ namespace X_ray_Images
 
         private void ColorMapImage_Click(object sender, EventArgs e)
         {
-            Bitmap img = new Bitmap(MainImage.Image);
-            Bitmap reslult = ImageEnhancer.ApplyHighPassFilter(img);
-            
-            MainImage.Image = reslult;
+            int goodDim = (int)Math.Max(Math.Ceiling(Math.Log2(MainImage.Image.Width)), Math.Ceiling(Math.Log2(MainImage.Image.Height)));
+            goodDim = (int)Math.Pow(2, goodDim);
+
+            Bitmap img = new Bitmap(MainImage.Image, new Size(goodDim, goodDim));
+
+            Bitmap result = ImageEnhancer.ApplyHighPassFilter(img);
+
+            Bitmap newImage = new Bitmap(result, new Size(MainImage.Image.Width, MainImage.Image.Height));
+
+            MainImage.Image = newImage;
         }
     }
 }

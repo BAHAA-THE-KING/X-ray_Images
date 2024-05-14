@@ -11,25 +11,25 @@ namespace X_ray_Images.Classes
     {
         public static Bitmap LoadImageWithResize(string fileName)
         {
-            Bitmap newImage = new Bitmap(fileName);
+            Bitmap image = new Bitmap(fileName);
 
-            //int boxWidth = 800;
-            //int boxHeight = 400;
-            //int imageWidth = image.Width;
-            //int imageHeight = image.Height;
+            int boxWidth = 800;
+            int boxHeight = 400;
+            int imageWidth = image.Width;
+            int imageHeight = image.Height;
 
 
-            //double ratioX = (double)boxWidth / imageWidth;
-            //double ratioY = (double)boxHeight / imageHeight;
-            //double ratio = Math.Min(ratioX, ratioY);
+            double ratioX = (double)boxWidth / imageWidth;
+            double ratioY = (double)boxHeight / imageHeight;
+            double ratio = Math.Min(ratioX, ratioY);
 
-            //int newWidth = (int)(imageWidth * ratio);
-            //int newHeight = (int)(imageHeight * ratio);
+            int newWidth = (int)(imageWidth * ratio);
+            int newHeight = (int)(imageHeight * ratio);
 
-            //Bitmap newImage = new Bitmap(newWidth, newHeight);
+            Bitmap newImage = new Bitmap(newWidth, newHeight);
 
             Graphics graphics = Graphics.FromImage(newImage);
-            //graphics.DrawImage(image, 0, 0, newWidth, newHeight);
+            graphics.DrawImage(image, 0, 0, newWidth, newHeight);
 
             return ConvertToGrayscale(newImage);
         }

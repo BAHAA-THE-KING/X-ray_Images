@@ -15,12 +15,9 @@ namespace X_ray_Images.Classes
         {
             Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
             Bitmap grayImage = filter.Apply(img);
-            grayImage.Save("C:\\Users\\Bcc\\Desktop\\org.jpg");
-            MessageBox.Show(grayImage.Height + " " + grayImage.Width);
             ComplexImage complex = ComplexImage.FromBitmap(grayImage);
             complex.ForwardFourierTransform();
 
-            complex.ToBitmap().Save("C:\\Users\\Bcc\\Desktop\\fft.jpg");
             Complex[,] fftResult = complex.Data;
 
             int width = fftResult.GetLength(1);
@@ -52,11 +49,9 @@ namespace X_ray_Images.Classes
                 }
             }
 
-            complex.ToBitmap().Save("C:\\Users\\Bcc\\Desktop\\fft edited.jpg");
             complex.BackwardFourierTransform();
 
             Bitmap result = complex.ToBitmap();
-            result.Save("C:\\Users\\Bcc\\Desktop\\asdsadsa.jpg");
             return result;
         }
     }
