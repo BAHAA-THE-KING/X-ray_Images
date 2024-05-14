@@ -181,7 +181,7 @@ namespace X_ray_Images
             new Danger().Show();
         }
 
-        private void ColorMapImage_Click(object sender, EventArgs e)
+        private void Clear_Click(object sender, EventArgs e)
         {
             int goodDim = (int)Math.Max(Math.Ceiling(Math.Log2(MainImage.Image.Width)), Math.Ceiling(Math.Log2(MainImage.Image.Height)));
             goodDim = (int)Math.Pow(2, goodDim);

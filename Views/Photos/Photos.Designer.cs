@@ -39,6 +39,7 @@ namespace X_ray_Images
             Orange2PurpleImage = new PictureBox();
             ColorMapImage = new PictureBox();
             GalleryPanel = new Panel();
+            this.ClearImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)CropImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Red2BlueImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TextImage).BeginInit();
@@ -50,6 +51,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)RecordImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ColorMapImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ClearImage)).BeginInit();
             SuspendLayout();
             // 
             // CropImage
@@ -233,7 +235,6 @@ namespace X_ray_Images
             ColorMapImage.SizeMode = PictureBoxSizeMode.Zoom;
             ColorMapImage.TabIndex = 20;
             ColorMapImage.TabStop = false;
-            ColorMapImage.Click += ColorMapImage_Click;
             // 
             // GalleryPanel
             // 
@@ -245,11 +246,25 @@ namespace X_ray_Images
             GalleryPanel.Size = new Size(1341, 201);
             GalleryPanel.TabIndex = 23;
             // 
+            // ClearImage
+            // 
+            this.ClearImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ClearImage.Image = ((System.Drawing.Image)(resources.GetObject("ClearImage.Image")));
+            this.ClearImage.Location = new System.Drawing.Point(90, 425);
+            this.ClearImage.Margin = new Padding(5, 4, 5, 4);
+            this.ClearImage.Name = "ClearImage";
+            this.ClearImage.Size = new Size(57, 62);
+            this.ClearImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ClearImage.TabIndex = 24;
+            this.ClearImage.TabStop = false;
+            this.ClearImage.Click += Clear_Click;
+            // 
             // Photos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1341, 851);
+            this.Controls.Add(this.ClearImage);
             Controls.Add(GalleryPanel);
             Controls.Add(Orange2PurpleImage);
             Controls.Add(ColorMapImage);
@@ -279,6 +294,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)RecordImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)ColorMapImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ClearImage)).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -304,5 +320,6 @@ namespace X_ray_Images
         private System.Windows.Forms.ToolStripMenuItem AddImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DeleteImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DangerToolStrip;
+        private System.Windows.Forms.PictureBox ClearImage;
     }
 }
