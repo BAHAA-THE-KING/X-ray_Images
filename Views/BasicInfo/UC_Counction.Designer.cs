@@ -1,6 +1,6 @@
 ﻿namespace X_ray_Images.Views.BasicInfo
 {
-    partial class UC_Counction
+    partial class UC_Connection
     {
         private System.ComponentModel.IContainer components = null;
         protected override void Dispose(bool disposing)

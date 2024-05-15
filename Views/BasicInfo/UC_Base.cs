@@ -1,22 +1,12 @@
-﻿namespace X_ray_Images.Views.BasicInfo
-{
-    public class Cell
-    {
-     public   string name;
-     public string value;
+﻿using Emgu.CV.Face;
 
-        public Cell(string name, string value)
-        {
-            this.name = name;
-            this.value = value;
-        }
-    }
+namespace X_ray_Images.Views.BasicInfo
+{
+ 
     public partial class UC_Base : UserControl
     {
-        public List<Cell> cells = new List<Cell>();
-        string[] names = new string[]
-
-
+        public static List<Cell> cells = new List<Cell>();
+        string[] fileds = 
         {
              "اسم المريض",
              "المرض",
@@ -24,24 +14,44 @@
              "اسم الدكتور المشرف",
              "التاريخ"
         };
-        public string[] dd = new string[5];
-
-
-        public UC_Base()
+        private Base _binfo;
+        public UC_Base(Base binfo)
         {
             InitializeComponent();
-
-            foreach (string name in names)
+            this._binfo = binfo;
+            foreach (string filed in fileds)
             {
-                DataGridBasic.Rows.Add(name);
+                DataGridBasic.Rows.Add(filed);
             }
 
-             
+            DataGridBasic.Rows[0].Cells[1].Value = _binfo.name;
+            DataGridBasic.Rows[1].Cells[1].Value = this._binfo.sickness.Count == 0 ? "" : this._binfo.sickness[0];
+
+            DataGridBasic.Rows[2].Cells[1].Value = _binfo.status;
+            DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors.Count == 0 ? "" : this._binfo.doctors[0];
+            ;
+            DataGridBasic.Rows[4].Cells[1].Value = _binfo.date;
+
+
+
+
+
+            //if (cells.Count != 0)
+            //{
+            //    foreach (Cell cell in cells)
+            //    {
+            //        DataGridBasic.Rows.Add(cell.name,cell.value);
+            //    }
+
+            //}
+            //else
+            //{
+            //    foreach (string filed in fileds)
+            //    {
+            //        DataGridBasic.Rows.Add(filed);
+            //    }
+            //} 
             DataGridBasic.CellEndEdit += DataGridBasic_CellEndEdit;
-        }
-        public List<Cell> GetCells()
-        {
-            return cells;
         }
 
         private void DataGridBasic_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -50,10 +60,22 @@
                 string attribValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value?.ToString() ?? "";
                 string newValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? "";
                 DataGridBasic.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = newValue;
-                 cells.Add(new Cell(attribValue, newValue));
-            BaseInfo.PassCellsToOtherFile(cells);
-
-
+                switch (attribValue)
+                {
+                case "اسم المريض":
+                    _binfo.name = newValue;
+                    break;
+                case "المرض":
+                    _binfo.sickness.Add(newValue);
+                    break;
+                case "الحالة":
+                    _binfo.status = newValue; break;
+                case "اسم الدكتور المشرف":
+                    _binfo.doctors.Add( newValue); break;
+                case "التاريخ":
+                    _binfo.date = newValue; break;
+                }
+                
         }
       
 
