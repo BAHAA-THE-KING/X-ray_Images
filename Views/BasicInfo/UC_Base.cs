@@ -1,23 +1,22 @@
-﻿using Guna.UI2.WinForms;
-using OxyPlot;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace X_ray_Images
+﻿namespace X_ray_Images.Views.BasicInfo
 {
+    public class Cell
+    {
+     public   string name;
+     public string value;
+
+        public Cell(string name, string value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+    }
     public partial class UC_Base : UserControl
     {
-        public UC_Base()
-        {
-            InitializeComponent();
+        public List<Cell> cells = new List<Cell>();
         string[] names = new string[]
+
+
         {
              "اسم المريض",
              "المرض",
@@ -25,14 +24,46 @@ namespace X_ray_Images
              "اسم الدكتور المشرف",
              "التاريخ"
         };
+        public string[] dd = new string[5];
+
+
+        public UC_Base()
+        {
+            InitializeComponent();
 
             foreach (string name in names)
             {
-                guna2DataGridView1.Rows.Add(name);
+                DataGridBasic.Rows.Add(name);
             }
+
+             
+            DataGridBasic.CellEndEdit += DataGridBasic_CellEndEdit;
+        }
+        public List<Cell> GetCells()
+        {
+            return cells;
         }
 
+        private void DataGridBasic_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+                var dgv = (DataGridView)sender;      
+                string attribValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value?.ToString() ?? "";
+                string newValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? "";
+                DataGridBasic.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = newValue;
+                 cells.Add(new Cell(attribValue, newValue));
+            BaseInfo.PassCellsToOtherFile(cells);
+
+
+        }
+      
+
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

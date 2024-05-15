@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace X_ray_Images
+namespace X_ray_Images.Views.BasicInfo
 {
     public partial class UC_Counction : UserControl
     {
@@ -23,8 +23,9 @@ namespace X_ray_Images
 
             foreach (string name in names)
             {
-                guna2DataGridView1.Rows.Add(name);
+                DataGridConnect.Rows.Add(name);
             }
         }
+      
     }
 }
