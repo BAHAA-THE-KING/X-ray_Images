@@ -25,6 +25,32 @@ namespace X_ray_Images
         public Photos()
         {
             InitializeComponent();
+            if (images.Count > 0)
+            {
+                GalleryPanel.Controls.Clear();
+                galleryItems.Clear();
+
+                for (int i = 0; i < images.Count; i++)
+                {
+                    int id = i;
+                    GalleryItem galleryItem = new GalleryItem(
+                        images[id],
+                         id,
+                          (object sender, EventArgs e) =>
+                          {
+                              active = id;
+                              MainImage.Image = images[id];
+                              MainImage.Size = new Size(images[id].Width, images[id].Height);
+                          }
+                                );
+
+                    galleryItems.Add(galleryItem);
+                    GalleryPanel.Controls.Add(galleryItem.pictureBox);
+                }
+
+                active = 0;
+                SetImage(images[0]);
+            }
         }
         private void Reset()
         {
@@ -109,6 +135,42 @@ namespace X_ray_Images
                 SetImage(image);
 
                 Reset();
+            }
+        }
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            RemoveSelection();
+
+            if (images.Count > 0)
+            {
+                images.RemoveAt(active);
+                active = Math.Max(0, active - 1);
+                GalleryPanel.Controls.Clear();
+                galleryItems.Clear();
+
+                if (images.Count > 0)
+                    SetImage(images[active]);
+                else
+                    SetImage(null);
+
+                for (int i = 0; i < images.Count; i++)
+                {
+                    int id = i;
+                    GalleryItem galleryItem = new GalleryItem(
+                        images[id],
+                         id,
+                          (object sender, EventArgs e) =>
+                          {
+                              active = id;
+                              MainImage.Image = images[id];
+                              MainImage.Size = new Size(images[id].Width, images[id].Height);
+                          }
+                                );
+
+                    galleryItems.Add(galleryItem);
+                    GalleryPanel.Controls.Add(galleryItem.pictureBox);
+                }
+
             }
         }
         private void Red2BlueImage_Click(object sender, EventArgs e)
@@ -213,6 +275,7 @@ namespace X_ray_Images
         private void SetImage(Image image)
         {
             MainImage.Image = image;
+            if (image == null) return;
             MainImage.Size = new Size(image.Width, image.Height);
 
             images[active] = image;
