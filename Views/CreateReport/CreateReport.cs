@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using X_ray_Images;
+using X_ray_Images.Views.BasicInfo;
 
 namespace X_ray_Images
 {
