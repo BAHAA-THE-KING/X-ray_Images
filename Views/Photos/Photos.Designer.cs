@@ -154,6 +154,7 @@ namespace X_ray_Images
             DeleteImageToolStrip.Name = "DeleteImageToolStrip";
             DeleteImageToolStrip.Size = new Size(131, 26);
             DeleteImageToolStrip.Text = "حذف";
+            DeleteImageToolStrip.Click += Delete_Click;
             // 
             // ToolsToolStrip
             // 
