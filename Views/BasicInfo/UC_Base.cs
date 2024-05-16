@@ -28,28 +28,10 @@ namespace X_ray_Images.Views.BasicInfo
 
             DataGridBasic.Rows[2].Cells[1].Value = _binfo.status;
             DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors.Count == 0 ? "" : this._binfo.doctors[0];
-            ;
+
             DataGridBasic.Rows[4].Cells[1].Value = _binfo.date;
 
 
-
-
-
-            //if (cells.Count != 0)
-            //{
-            //    foreach (Cell cell in cells)
-            //    {
-            //        DataGridBasic.Rows.Add(cell.name,cell.value);
-            //    }
-
-            //}
-            //else
-            //{
-            //    foreach (string filed in fileds)
-            //    {
-            //        DataGridBasic.Rows.Add(filed);
-            //    }
-            //} 
             DataGridBasic.CellEndEdit += DataGridBasic_CellEndEdit;
         }
 

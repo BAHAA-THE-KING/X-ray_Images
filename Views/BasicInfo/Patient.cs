@@ -26,5 +26,17 @@ namespace X_ray_Images.Views.BasicInfo
             + contactInfo.ToString() + "\n"
             + otherInfo.ToString();
         }
+
+        public string? Required()
+        {
+            return "Patient name :" + baseInfo.name + "\n" +
+                "Patient Sicknees :" + baseInfo.sickness[0] + "\n" +
+                "Patient Status :" + baseInfo.status + "\n" +
+                 "Patient doctor's :" + baseInfo.doctors[0] + "\n" +
+                  "Patient diagonsis :" + statusInfo.diagnosis + "\n" +
+                   "Patient indication :" + statusInfo.indication + "\n" +
+                   "Patient phone :" + contactInfo.phone + "\n";
+
+        }
     }
 }

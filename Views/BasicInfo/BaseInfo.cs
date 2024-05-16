@@ -1,5 +1,6 @@
 ﻿using Emgu.CV.Face;
 using Guna.UI2.WinForms;
+using System.Windows.Forms;
 
 namespace X_ray_Images.Views.BasicInfo
 {
@@ -29,41 +30,7 @@ namespace X_ray_Images.Views.BasicInfo
             ucStatus = new UC_Status(statusInfo);
             addUserControl(ucBase);
         }
-        //private void SwitchToTab(string tabName)
-        //{
-        //    if (!loadedUserControls.ContainsKey(tabName))
-        //    {
-        //        // Create and initialize the user control based on the tab name
-        //        UserControl userControl = CreateUserControlForTab(tabName);
-
-
-
-        //        // Add the user control to the collection
-        //        loadedUserControls[tabName] = userControl;
-        //    }
-
-        //    // Show the selected user control in the panel
-        //    UserControl selectedUserControl = loadedUserControls[tabName];
-        //    ShowUserControl(selectedUserControl);
-        //}
-
-        //private UserControl CreateUserControlForTab(string tabName)
-        //{
-        //    // Create and return the appropriate user control based on the tab name
-        //    switch (tabName)
-        //    {
-        //        case "base":
-        //            return new UC_Base();
-        //        case "connect":
-        //            return new UC_Connection();
-        //        case "other":
-        //            return new UC_Other();
-        //        default:
-        //            throw new ArgumentException("Invalid user controler.");
-        //    }
-        //}
-
-
+     
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -88,8 +55,6 @@ namespace X_ray_Images.Views.BasicInfo
 
         private void addUserControl(UserControl userControl)
         {
-            // SwitchToTab(tag);
-            //ShowUserControl(userControl);
             userControl.Dock = DockStyle.Fill;
             panelContainer.Controls.Clear();
             panelContainer.Controls.Add(userControl);
@@ -116,12 +81,56 @@ namespace X_ray_Images.Views.BasicInfo
 
             addUserControl(ucOther);
         }
+        private bool ValidateRequiredFields()
+        {
+            string result = "";
+            if (string.IsNullOrWhiteSpace(baseInfo.name) )                  /// name
+            {
+                result = result + "الرجاء ادخال اسم المريض \n";
+            }
+            if (baseInfo.sickness.Count == 0)                               //sick
+            {
+                result = result + "الرجاء ادخال المرض \n"; 
+            }
+            if (string.IsNullOrWhiteSpace(baseInfo.status))                //status
+            {
+                result = result + "الرجاء ادخال حالة المريض \n";   
+            }
+            if (baseInfo.doctors.Count == 0)                                //doctors
+            {
+                result = result + "الرجاء ادخال اسم الدكتور \n";
+            }
+            if (string.IsNullOrWhiteSpace(statusInfo.diagnosis))           // diagonsis
+            {
+                result = result + "الرجاء ادخال تشخيص المريض \n";
+            }
+            if (string.IsNullOrWhiteSpace(statusInfo.indication))           //indication
+            {
+                result = result + "الرجاء ادخال استطباب المريض \n";
+            }
+            if (string.IsNullOrWhiteSpace(connectInfo.phone))                   //phone
+            {
+                result = result + "الرجاء ادخال رقم هاتف المريض \n";
+            }
+            else
+            {
+                return true;
+            }
+            MessageBox.Show(result, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
 
+        }
         private void guna2Button4_Click(object sender, EventArgs e)
         {
-            Patient patient = new Patient(baseInfo, connectInfo, otherInfo,statusInfo);
-
+            Patient patient = new Patient(baseInfo, connectInfo, otherInfo, statusInfo);
+            if (ValidateRequiredFields())
+            {
             MessageDialog.Show(patient.ToString());
+            }
+            else
+            {
+                MessageDialog.Show(patient.Required());
+            }
             this.Close();
 
         }

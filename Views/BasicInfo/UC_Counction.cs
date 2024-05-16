@@ -50,26 +50,7 @@ namespace X_ray_Images.Views.BasicInfo
                     _cInfo.phone = newValue;
                     break;
             }
-
-                    //Cell newCell = new Cell(attribValue, newValue); ;
-
-                    //if (newValue == null || newValue == "")
-                    //{
-
-                    //    cells.Add(newCell);
-
-                    //}
-                    //else
-                    //{
-                    //    foreach (Cell cell in cells)
-                    //    {
-                    //        if (cell.name == attribValue)
-                    //        { cell.value = newValue; }
-
-                    //    }
-                    //}
-
-            }
+        }
        
 
     }
