@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace X_ray_Images.Views.BasicInfo
 {
-    public class Base
+    public class Base   
     {
         public string name;
         public List<string> sickness;

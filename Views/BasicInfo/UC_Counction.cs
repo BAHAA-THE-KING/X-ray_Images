@@ -15,32 +15,22 @@ namespace X_ray_Images.Views.BasicInfo
     public partial class UC_Connection : UserControl
     {
      private  Contact _cInfo;
-        public static List<Cell> cells = new List<Cell>();
-        string[] names =
+        string[] fields =
         {
              "مكان السكن",
-             "رقم الهاتف",
+             "رقم الهاتف"
         };
        
         public UC_Connection(Contact cInfo)
         {
             InitializeComponent();
             _cInfo = cInfo;
-            if (cells.Count != 0)
-            {
-                foreach (Cell cell in cells)
-                {
-                    DataGridConnect.Rows.Add(cell.name, cell.value);
-                }
 
-            }
-            else
+            foreach (string field in fields)
             {
-                foreach (string name in names)
-                {
-                    DataGridConnect.Rows.Add(name);
-                }
+                DataGridConnect.Rows.Add(field);
             }
+
             DataGridConnect.CellEndEdit += DataGridConnect_CellEndEdit;
         }
     
@@ -54,10 +44,10 @@ namespace X_ray_Images.Views.BasicInfo
             switch (attribValue)
             {
                 case "مكان السكن":
-                     _cInfo.Address= newValue;
+                     _cInfo.address= newValue;
                     break;
                 case "رقم الهاتف":
-                    _cInfo.phone = int.TryParse(newValue,out result) ? result : -1;
+                    _cInfo.phone = newValue;
                     break;
             }
 

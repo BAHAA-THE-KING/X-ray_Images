@@ -14,11 +14,10 @@ namespace X_ray_Images.Views.BasicInfo
 {
     public partial class UC_Other : UserControl
     {
-        public static List<Cell> cells = new List<Cell>();
-        string[] names =
+        string[] fields =
         {
-             "تفاصيل المرض",
-             "تاريخ المراجعة القادمة",
+        "تفاصيل المرض",
+        "تاريخ المراجعة القادمة",
         };
        private  Other _oInfo;
         
@@ -26,22 +25,11 @@ namespace X_ray_Images.Views.BasicInfo
         {
             InitializeComponent();
             _oInfo = oInfo;
-
-            if (cells.Count != 0 )
-            {
-                foreach (Cell cell in cells)
-                {
-                    DataGridOther.Rows.Add(cell.name, cell.value);
-                }
-
-            }
-            else
-            {
-                foreach (string name in names)
-                {
-                    DataGridOther.Rows.Add(name);
-                }
-            }
+        foreach (string field in fields)
+        {
+            DataGridOther.Rows.Add(field);
+        }
+           
             DataGridOther.CellEndEdit += DataGridOther_CellEndEdit;
         }
         private void DataGridOther_CellEndEdit(object sender, DataGridViewCellEventArgs e)

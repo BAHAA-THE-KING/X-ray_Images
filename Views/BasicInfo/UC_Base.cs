@@ -5,7 +5,6 @@ namespace X_ray_Images.Views.BasicInfo
  
     public partial class UC_Base : UserControl
     {
-        public static List<Cell> cells = new List<Cell>();
         string[] fileds = 
         {
              "اسم المريض",

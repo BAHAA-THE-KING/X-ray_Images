@@ -10,22 +10,22 @@ namespace X_ray_Images.Views.BasicInfo
 {
     public class Contact
     {
-        public string Address;
-        public int phone;
+        public string address;
+        public string phone;
 
-        public Contact(string address, int phone)
+        public Contact(string address, string phone)
         {
-            Address = address;
+            this.address = address;
             this.phone = phone;
         }
         public Contact()
         {
-            Address = "";
-            this.phone = -1;
+            this.address = "";
+            this.phone = "-1";
         }
         public override string? ToString()
         {
-            return "address: " + Address + "\n" + "phone: " + phone ;
+            return "address: " + this.address + "\n" + "phone: " + this.phone ;
         }
     }
 }
