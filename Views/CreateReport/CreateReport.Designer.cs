@@ -96,6 +96,7 @@ namespace X_ray_Images
             BasicInfoPanel.Size = new Size(242, 263);
             BasicInfoPanel.TabIndex = 4;
             BasicInfoPanel.Click += BasicInfoPanelClick;
+            BasicInfoPanel.Paint += BasicInfoPanel_Paint;
             // 
             // PhotosPanel
             // 

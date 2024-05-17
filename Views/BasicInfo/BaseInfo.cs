@@ -84,41 +84,50 @@ namespace X_ray_Images.Views.BasicInfo
         private bool ValidateRequiredFields()
         {
             string result = "";
-            if (string.IsNullOrWhiteSpace(baseInfo.name) )                  /// name
-            {
-                result = result + "الرجاء ادخال اسم المريض \n";
-            }
-            if (baseInfo.sickness.Count == 0)                               //sick
-            {
-                result = result + "الرجاء ادخال المرض \n"; 
-            }
-            if (string.IsNullOrWhiteSpace(baseInfo.status))                //status
-            {
-                result = result + "الرجاء ادخال حالة المريض \n";   
-            }
-            if (baseInfo.doctors.Count == 0)                                //doctors
-            {
-                result = result + "الرجاء ادخال اسم الدكتور \n";
-            }
-            if (string.IsNullOrWhiteSpace(statusInfo.diagnosis))           // diagonsis
-            {
-                result = result + "الرجاء ادخال تشخيص المريض \n";
-            }
-            if (string.IsNullOrWhiteSpace(statusInfo.indication))           //indication
-            {
-                result = result + "الرجاء ادخال استطباب المريض \n";
-            }
-            if (string.IsNullOrWhiteSpace(connectInfo.phone))                   //phone
-            {
-                result = result + "الرجاء ادخال رقم هاتف المريض \n";
-            }
-            else
-            {
-                return true;
-            }
-            MessageBox.Show(result, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
+            bool isValid = true;
 
+            if (string.IsNullOrWhiteSpace(baseInfo.name)) // name
+            {
+                result += "الرجاء ادخال اسم المريض \n";
+                isValid = false;
+            }
+            if (baseInfo.sickness.Count == 0) // sickness
+            {
+                result += "الرجاء ادخال المرض \n";
+                isValid = false;
+            }
+            if (string.IsNullOrWhiteSpace(baseInfo.status)) // status
+            {
+                result += "الرجاء ادخال حالة المريض \n";
+                isValid = false;
+            }
+            if (baseInfo.doctors.Count == 0) // doctors
+            {
+                result += "الرجاء ادخال اسم الدكتور \n";
+                isValid = false;
+            }
+            if (string.IsNullOrWhiteSpace(statusInfo.diagnosis)) // diagnosis
+            {
+                result += "الرجاء ادخال تشخيص المريض \n";
+                isValid = false;
+            }
+            if (string.IsNullOrWhiteSpace(statusInfo.indication)) // indication
+            {
+                result += "الرجاء ادخال استطباب المريض \n";
+                isValid = false;
+            }
+            if (connectInfo.phone=="-1") // phone
+            {
+                result += "الرجاء ادخال رقم هاتف المريض \n";
+                isValid = false;
+            }
+
+            if (!isValid)
+            {
+                MessageBox.Show(result, "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return isValid;
         }
         private void guna2Button4_Click(object sender, EventArgs e)
         {
@@ -126,12 +135,13 @@ namespace X_ray_Images.Views.BasicInfo
             if (ValidateRequiredFields())
             {
             MessageDialog.Show(patient.ToString());
+            this.Close();
             }
             else
             {
                 MessageDialog.Show(patient.Required());
             }
-            this.Close();
+           
 
         }
 
