@@ -115,6 +115,7 @@ namespace X_ray_Images
             MainImage.Size = new Size(1124, 565);
             MainImage.TabIndex = 10;
             MainImage.TabStop = false;
+            MainImage.Click += new System.EventHandler(this.MainImage_Click);
             // 
             // ToolBar
             // 
@@ -200,6 +201,7 @@ namespace X_ray_Images
             GeometryImage.SizeMode = PictureBoxSizeMode.Zoom;
             GeometryImage.TabIndex = 18;
             GeometryImage.TabStop = false;
+            GeometryImage.Click += new System.EventHandler(this.Shape_Click);
             // 
             // RecordImage
             // 

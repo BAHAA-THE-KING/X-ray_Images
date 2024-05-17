@@ -9,14 +9,18 @@ using System.Drawing.Imaging;
 
 namespace X_ray_Images
 {
-    enum PhotosMode
+    public enum PhotosMode
     {
         None = 0,
         Select = 1,
+        Drawing = 2,
     };
     public partial class Photos : Form
     {
-        PhotosMode mode = PhotosMode.None;
+        static public PhotosMode mode = PhotosMode.None;
+        private Point firstPoint = new Point(-1, -1);
+        private Point secondPoint = new Point(-1, -1);
+        private Point thirdPoint = new Point(-1, -1);
         private Point startPoint = new Point(-1, -1);
         private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
         static public List<Image> images = [];
@@ -55,8 +59,75 @@ namespace X_ray_Images
         private void Reset()
         {
             startPoint = new Point(-1, -1);
+            firstPoint = new Point(-1, -1);
+            secondPoint = new Point(-1, -1);
+            thirdPoint = new Point(-1, -1);
             selectionRect = new Rectangle(0, 0, 0, 0);
             MainImage.Invalidate();
+        }
+        private void MainImage_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs mouseArgs = (MouseEventArgs)e;
+
+            if (mode == PhotosMode.Drawing)
+            {
+                if (Shapes.shape == 1)
+                {
+                    if (firstPoint.X == -1)
+                    {
+                        firstPoint.X = mouseArgs.X;
+                        firstPoint.Y = mouseArgs.Y;
+                    }
+                    else if (secondPoint.X == -1)
+                    {
+                        secondPoint.X = mouseArgs.X;
+                        secondPoint.Y = mouseArgs.Y;
+                        Bitmap image = Drawer.DrawCircle(MainImage.Image, firstPoint, secondPoint);
+                        SetImage(image);
+                        Reset();
+                        mode = PhotosMode.None;
+                    }
+                }
+                if (Shapes.shape == 2)
+                {
+                    if (firstPoint.X == -1)
+                    {
+                        firstPoint.X = mouseArgs.X;
+                        firstPoint.Y = mouseArgs.Y;
+                    }
+                    else if (secondPoint.X == -1)
+                    {
+                        secondPoint.X = mouseArgs.X;
+                        secondPoint.Y = mouseArgs.Y;
+                    }
+                    else if (thirdPoint.X == -1)
+                    {
+                        thirdPoint.X = mouseArgs.X;
+                        thirdPoint.Y = mouseArgs.Y;
+                        Bitmap image = Drawer.DrawTriangle(MainImage.Image, firstPoint, secondPoint, thirdPoint);
+                        SetImage(image);
+                        Reset();
+                        mode = PhotosMode.None;
+                    }
+                }
+                if (Shapes.shape == 3)
+                {
+                    if (firstPoint.X == -1)
+                    {
+                        firstPoint.X = mouseArgs.X;
+                        firstPoint.Y = mouseArgs.Y;
+                    }
+                    else if (secondPoint.X == -1)
+                    {
+                        secondPoint.X = mouseArgs.X;
+                        secondPoint.Y = mouseArgs.Y;
+                        Bitmap image = Drawer.DrawRectangle(MainImage.Image, firstPoint, secondPoint);
+                        SetImage(image);
+                        Reset();
+                        mode = PhotosMode.None;
+                    }
+                }
+            }
         }
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
@@ -271,6 +342,10 @@ namespace X_ray_Images
             Bitmap newImage = new Bitmap(result, new Size(MainImage.Image.Width, MainImage.Image.Height));
 
             SetImage(newImage);
+        }
+        private void Shape_Click(object sender, EventArgs e)
+        {
+            new Shapes().Show();
         }
         private void SetImage(Image image)
         {
