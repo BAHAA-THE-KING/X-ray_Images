@@ -34,6 +34,7 @@
             CreateButton = new Button();
             label1 = new Label();
             panel1 = new Panel();
+            button1 = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             CreateButton.Cursor = Cursors.Hand;
             CreateButton.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CreateButton.ForeColor = SystemColors.ButtonHighlight;
-            CreateButton.Location = new Point(361, 221);
+            CreateButton.Location = new Point(198, 228);
             CreateButton.Margin = new Padding(0);
             CreateButton.MaximumSize = new Size(286, 125);
             CreateButton.Name = "CreateButton";
@@ -79,12 +80,31 @@
             panel1.Size = new Size(1008, 79);
             panel1.TabIndex = 2;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button1.AutoSize = true;
+            button1.BackColor = SystemColors.MenuHighlight;
+            button1.Cursor = Cursors.Hand;
+            button1.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(541, 228);
+            button1.Margin = new Padding(0);
+            button1.MaximumSize = new Size(286, 125);
+            button1.Name = "button1";
+            button1.Size = new Size(286, 125);
+            button1.TabIndex = 3;
+            button1.Text = "البحث في الصور";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += Search_for_Images;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(196, 211, 249);
             ClientSize = new Size(1008, 566);
+            Controls.Add(button1);
             Controls.Add(panel1);
             Controls.Add(CreateButton);
             Margin = new Padding(3, 4, 3, 4);
@@ -100,5 +120,6 @@
 
         private Label label1;
         private Panel panel1;
+        private Button button1;
     }
 }

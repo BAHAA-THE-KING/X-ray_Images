@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using X_ray_Images.Views.Search;
 
 namespace X_ray_Images
 {
@@ -32,6 +33,13 @@ namespace X_ray_Images
         private void Home_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Search_for_Images(object sender, EventArgs e)
+        {
+            SearchView searching = new SearchView();
+            searching.Show();
+            Hide();
         }
     }
 }
