@@ -79,5 +79,20 @@ namespace X_ray_Images
             return new Circle(x, y, rr);
         }
 
+        public static Line SelectMoveHorizontal(Point startPoint, int X, int Y)
+        {
+            return new Line(startPoint.X, startPoint.Y, X, startPoint.Y);
+        }
+
+        public static Line SelectMoveVertical(Point startPoint, int X, int Y)
+        {
+            return new Line(startPoint.X, startPoint.Y, startPoint.X, Y);
+        }
+        
+        public static Line SelectMoveSlope(Point startPoint, int X, int Y)
+        {
+            return new Line(startPoint.X, startPoint.Y, X, Y);
+        }
+
     }
 }

@@ -33,8 +33,9 @@ namespace X_ray_Images
         private Point secondPoint = new Point(-1, -1);
         private Point thirdPoint = new Point(-1, -1);
         private Point startPoint = new Point(-1, -1);
-        private Rectangle selectionRect = new Rectangle(0, 0, 0, 0);
-        private Circle circle = new Circle(0, 0, 0);
+        private Rectangle tempRect = new Rectangle(0, 0, 0, 0);
+        private Circle tempCircle = new Circle(0, 0, 0);
+        private Line tempLine = new Line(-1, -1, -1, -1);
         static public List<Image> images = [];
         static public List<GalleryItem> galleryItems = [];
         int active = 0;
@@ -74,8 +75,8 @@ namespace X_ray_Images
             firstPoint = new Point(-1, -1);
             secondPoint = new Point(-1, -1);
             thirdPoint = new Point(-1, -1);
-            selectionRect = new Rectangle(0, 0, 0, 0);
-            circle = new Circle(0, 0, 0);
+            tempRect = new Rectangle(0, 0, 0, 0);
+            tempCircle = new Circle(0, 0, 0);
             MainImage.Invalidate();
         }
         private void MainImage_Click(object sender, EventArgs e)
@@ -128,9 +129,15 @@ namespace X_ray_Images
                 if (e.Button == MouseButtons.Left && startPoint.X != -1)
                 {
                     if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
-                        selectionRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
+                        tempRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
                     else if (mode == PhotosMode.Drawing && shapeType == Shape.Circle)
-                        circle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
+                        tempCircle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
+                    else if (mode == PhotosMode.Drawing && shapeType == Shape.Horizontal)
+                        tempLine = Selector.SelectMoveHorizontal(startPoint, e.X, e.Y);
+                    else if (mode == PhotosMode.Drawing && shapeType == Shape.Vertical)
+                        tempLine = Selector.SelectMoveVertical(startPoint, e.X, e.Y);
+                    else if (mode == PhotosMode.Drawing && shapeType == Shape.Slope)
+                        tempLine = Selector.SelectMoveSlope(startPoint, e.X, e.Y);
 
                     MainImage.Invalidate();
                 }
@@ -146,11 +153,15 @@ namespace X_ray_Images
             {
                 if (shapeType == Shape.Circle)
                 {
-                    SetImage(Drawer.DrawCircle(MainImage.Image, circle));
+                    SetImage(Drawer.DrawCircle(MainImage.Image, tempCircle));
                 }
                 if (shapeType == Shape.Rectangle)
                 {
-                    SetImage(Drawer.DrawRectangle(MainImage.Image, selectionRect));
+                    SetImage(Drawer.DrawRectangle(MainImage.Image, tempRect));
+                }
+                if (shapeType == Shape.Horizontal || shapeType == Shape.Vertical || shapeType == Shape.Slope)
+                {
+                    SetImage(Drawer.DrawRuler(MainImage.Image, tempLine));
                 }
                 if (shapeType != Shape.Triangle)
                 {
@@ -161,13 +172,13 @@ namespace X_ray_Images
         private void MainImage_Paint(object sender, EventArgs e)
         {
             PaintEventArgs paintEvent = (PaintEventArgs)e;
-            if (selectionRect.Width > 0 && selectionRect.Height > 0)
+            if (tempRect.Width > 0 && tempRect.Height > 0)
             {
-                paintEvent.Graphics.DrawRectangle(Pens.Red, selectionRect);
+                paintEvent.Graphics.DrawRectangle(Pens.Red, tempRect);
             }
-            if (circle.radius > 0)
+            if (tempCircle.radius > 0)
             {
-                paintEvent.Graphics.DrawEllipse(Pens.Red, circle.cx - circle.radius, circle.cy - circle.radius, circle.radius * 2, circle.radius * 2);
+                paintEvent.Graphics.DrawEllipse(Pens.Red, tempCircle.cx - tempCircle.radius, tempCircle.cy - tempCircle.radius, tempCircle.radius * 2, tempCircle.radius * 2);
             }
             if (firstPoint.X != -1)
             {
@@ -176,6 +187,10 @@ namespace X_ray_Images
             if (secondPoint.X != -1)
             {
                 paintEvent.Graphics.DrawEllipse(Pens.Red, secondPoint.X - 10, secondPoint.Y - 10, 10 * 2, 10 * 2);
+            }
+            if (tempLine.start.X != -1)
+            {
+                paintEvent.Graphics.DrawLine(Pens.Red, tempLine.start, tempLine.end);
             }
         }
         private void SelectImage_Click(object sender, EventArgs e)
@@ -193,7 +208,7 @@ namespace X_ray_Images
         {
             if (mode == PhotosMode.Select)
             {
-                Bitmap image = ImageProcessor.Crop(MainImage.Image, selectionRect);
+                Bitmap image = ImageProcessor.Crop(MainImage.Image, tempRect);
                 SetImage(image);
 
                 RemoveSelection();
@@ -264,10 +279,10 @@ namespace X_ray_Images
         }
         private void Red2BlueImage_Click(object sender, EventArgs e)
         {
-            int startX = selectionRect.X;
-            int startY = selectionRect.Y;
-            int endX = selectionRect.X + selectionRect.Width;
-            int endY = selectionRect.Y + selectionRect.Height;
+            int startX = tempRect.X;
+            int startY = tempRect.Y;
+            int endX = tempRect.X + tempRect.Width;
+            int endY = tempRect.Y + tempRect.Height;
             Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
             SetImage(newImage);
 
@@ -275,10 +290,10 @@ namespace X_ray_Images
         }
         private void Orange2PurpleImage_Click(object sender, EventArgs e)
         {
-            int startX = selectionRect.X;
-            int startY = selectionRect.Y;
-            int endX = selectionRect.X + selectionRect.Width;
-            int endY = selectionRect.Y + selectionRect.Height;
+            int startX = tempRect.X;
+            int startY = tempRect.Y;
+            int endX = tempRect.X + tempRect.Width;
+            int endY = tempRect.Y + tempRect.Height;
             Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Orange, Color.Purple);
             SetImage(newImage);
 

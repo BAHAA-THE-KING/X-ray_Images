@@ -30,13 +30,15 @@ namespace X_ray_Images.Classes
             graphics.DrawRectangle(Pens.Red, rectangle);
             return result;
         }
-        public static Bitmap DrawRuler(Image image, Point firstPoint, Point secondPoint)
+        public static Bitmap DrawRuler(Image image, Line line)
         {
             Bitmap result = new Bitmap(image);
             Graphics graphics = Graphics.FromImage(result);
             Pen arrowedPen = new Pen(Color.Red);
-            arrowedPen.StartCap = LineCap.ArrowAnchor;
-            arrowedPen.EndCap = LineCap.ArrowAnchor;
+            arrowedPen.CustomStartCap = new AdjustableArrowCap(5, 5);
+            arrowedPen.CustomEndCap = new AdjustableArrowCap(5, 5);
+            Point firstPoint = line.start;
+            Point secondPoint = line.end;
             graphics.DrawLine(arrowedPen, firstPoint, secondPoint);
 
             // Dashes
@@ -55,8 +57,8 @@ namespace X_ray_Images.Classes
             endTemp.X = (int)(firstPoint.X * 0.25 + secondPoint.X * 0.75);
             endTemp.Y = (int)(firstPoint.Y * 0.25 + secondPoint.Y * 0.75);
 
-            Point end1 = Rotate(endTemp, 90, firstPoint);
-            Point end2 = Rotate(endTemp, -90, firstPoint);
+            Point end1 = Rotate(endTemp, 90, secondPoint);
+            Point end2 = Rotate(endTemp, -90, secondPoint);
             graphics.DrawLine(dashedPen, end1, end2);
 
             return result;
