@@ -116,6 +116,7 @@ namespace X_ray_Images
             MainImage.TabIndex = 10;
             MainImage.TabStop = false;
             MainImage.Click += new System.EventHandler(this.MainImage_Click);
+            MainImage.Paint += new System.Windows.Forms.PaintEventHandler(this.MainImage_Paint);
             // 
             // ToolBar
             // 

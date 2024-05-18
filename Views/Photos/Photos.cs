@@ -80,11 +80,13 @@ namespace X_ray_Images
                     {
                         firstPoint.X = mouseArgs.X;
                         firstPoint.Y = mouseArgs.Y;
+                        MainImage.Invalidate();
                     }
                     else if (secondPoint.X == -1)
                     {
                         secondPoint.X = mouseArgs.X;
                         secondPoint.Y = mouseArgs.Y;
+                        MainImage.Invalidate();
                     }
                     else if (thirdPoint.X == -1)
                     {
@@ -112,7 +114,7 @@ namespace X_ray_Images
             {
                 if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing && shapeType == 3))
                     selectionRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
-                else if (mode == PhotosMode.Drawing || shapeType == 1)
+                else if (mode == PhotosMode.Drawing && shapeType == 1)
                     circle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
 
                 MainImage.Invalidate();
@@ -137,15 +139,24 @@ namespace X_ray_Images
                 RemoveSelection();
             }
         }
-        private void MainImage_Paint(object sender, PaintEventArgs e)
+        private void MainImage_Paint(object sender, EventArgs e)
         {
+            PaintEventArgs paintEvent = (PaintEventArgs)e;
             if (selectionRect.Width > 0 && selectionRect.Height > 0)
             {
-                e.Graphics.DrawRectangle(Pens.Red, selectionRect);
+                paintEvent.Graphics.DrawRectangle(Pens.Red, selectionRect);
             }
             if (circle.radius > 0)
             {
-                e.Graphics.DrawEllipse(Pens.Red, circle.cx - circle.radius, circle.cy - circle.radius, circle.radius * 2, circle.radius * 2);
+                paintEvent.Graphics.DrawEllipse(Pens.Red, circle.cx - circle.radius, circle.cy - circle.radius, circle.radius * 2, circle.radius * 2);
+            }
+            if (firstPoint.X != -1)
+            {
+                paintEvent.Graphics.DrawEllipse(Pens.Red, firstPoint.X - 10, firstPoint.Y - 10, 10 * 2, 10 * 2);
+            }
+            if (secondPoint.X != -1)
+            {
+                paintEvent.Graphics.DrawEllipse(Pens.Red, secondPoint.X - 10, secondPoint.Y - 10, 10 * 2, 10 * 2);
             }
         }
         private void SelectImage_Click(object sender, EventArgs e)
@@ -351,7 +362,6 @@ namespace X_ray_Images
             MainImage.MouseDown += MainImage_MouseDown;
             MainImage.MouseMove += MainImage_MouseMove;
             if (shapeType != 2) MainImage.MouseUp += MainImage_MouseUp;
-            MainImage.Paint += MainImage_Paint;
             mode = PhotosMode.Drawing;
 
         }
@@ -371,7 +381,6 @@ namespace X_ray_Images
                 MainImage.MouseDown -= MainImage_MouseDown;
                 MainImage.MouseMove -= MainImage_MouseMove;
                 if (mode == PhotosMode.Drawing && shapeType != 2) MainImage.MouseUp -= MainImage_MouseUp;
-                MainImage.Paint -= MainImage_Paint;
 
                 Reset();
                 mode = PhotosMode.None;
