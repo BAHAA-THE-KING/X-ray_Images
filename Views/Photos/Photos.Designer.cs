@@ -92,6 +92,7 @@ namespace X_ray_Images
             TextImage.SizeMode = PictureBoxSizeMode.Zoom;
             TextImage.TabIndex = 12;
             TextImage.TabStop = false;
+            TextImage.Click += TextImage_Click;
             // 
             // SelectImage
             // 
@@ -117,11 +118,10 @@ namespace X_ray_Images
             MainImage.TabIndex = 10;
             MainImage.TabStop = false;
             MainImage.Click += MainImage_Click;
-            MainImage.Click += new System.EventHandler(this.MainImage_Click);
-            MainImage.Paint += new System.Windows.Forms.PaintEventHandler(this.MainImage_Paint);
-            MainImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseDown);
-            MainImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseMove);
-            MainImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseUp);
+            MainImage.Paint += MainImage_Paint;
+            MainImage.MouseDown += MainImage_MouseDown;
+            MainImage.MouseMove += MainImage_MouseMove;
+            MainImage.MouseUp += MainImage_MouseUp;
             // 
             // ToolBar
             // 
@@ -145,21 +145,21 @@ namespace X_ray_Images
             // AddImageToolStrip
             // 
             AddImageToolStrip.Name = "AddImageToolStrip";
-            AddImageToolStrip.Size = new Size(131, 26);
+            AddImageToolStrip.Size = new Size(224, 26);
             AddImageToolStrip.Text = "إضافة";
             AddImageToolStrip.Click += New_Click;
             // 
             // SaveImageToolStrip
             // 
             SaveImageToolStrip.Name = "SaveImageToolStrip";
-            SaveImageToolStrip.Size = new Size(131, 26);
+            SaveImageToolStrip.Size = new Size(224, 26);
             SaveImageToolStrip.Text = "حفظ";
             SaveImageToolStrip.Click += Save_Click;
             // 
             // DeleteImageToolStrip
             // 
             DeleteImageToolStrip.Name = "DeleteImageToolStrip";
-            DeleteImageToolStrip.Size = new Size(131, 26);
+            DeleteImageToolStrip.Size = new Size(224, 26);
             DeleteImageToolStrip.Text = "حذف";
             DeleteImageToolStrip.Click += Delete_Click;
             // 
@@ -195,7 +195,7 @@ namespace X_ray_Images
             CurveImage.SizeMode = PictureBoxSizeMode.Zoom;
             CurveImage.TabIndex = 17;
             CurveImage.TabStop = false;
-            CurveImage.Click += new System.EventHandler(this.Free_Click);
+            CurveImage.Click += Free_Click;
             // 
             // GeometryImage
             // 
@@ -221,6 +221,7 @@ namespace X_ray_Images
             RecordImage.SizeMode = PictureBoxSizeMode.Zoom;
             RecordImage.TabIndex = 19;
             RecordImage.TabStop = false;
+            RecordImage.Click += RecordImage_Click;
             // 
             // Orange2PurpleImage
             // 
@@ -246,6 +247,7 @@ namespace X_ray_Images
             ColorMapImage.SizeMode = PictureBoxSizeMode.Zoom;
             ColorMapImage.TabIndex = 20;
             ColorMapImage.TabStop = false;
+            ColorMapImage.Click += ColorMapImage_Click;
             // 
             // GalleryPanel
             // 

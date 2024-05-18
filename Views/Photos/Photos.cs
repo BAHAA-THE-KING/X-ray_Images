@@ -145,8 +145,15 @@ namespace X_ray_Images
         private void Save_Click(object sender, EventArgs e)
         {
             ResetState();
+            string appPath = Application.StartupPath;
 
-            string initialDirectory = Path.Combine(Application.StartupPath, "testImages");
+            string netPath = Directory.GetParent(appPath).FullName;
+            string debugPath = Directory.GetParent(netPath).FullName;
+            string binPath = Directory.GetParent(debugPath).FullName;
+
+            string projectPath = Directory.GetParent(binPath).FullName;
+
+            string initialDirectory = Path.Combine(projectPath, "testImages");
             string initialFileName = "savedImage.png";
 
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
@@ -480,12 +487,23 @@ namespace X_ray_Images
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            RemoveSelection();
+            ResetState();
+            string appPath = Application.StartupPath;
+
+            string netPath = Directory.GetParent(appPath).FullName;
+            string debugPath = Directory.GetParent(netPath).FullName;
+            string binPath = Directory.GetParent(debugPath).FullName;
+
+            string projectPath = Directory.GetParent(binPath).FullName;
+
+            string initialDirectory = Path.Combine(projectPath, "testImages");
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = initialDirectory;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
+
 
                 images.Add(MainImage.Image);
                 int id = images.Count - 1;
@@ -504,6 +522,21 @@ namespace X_ray_Images
 
                 Reset();
             }
+        }
+
+        private void ColorMapImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RecordImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextImage_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
