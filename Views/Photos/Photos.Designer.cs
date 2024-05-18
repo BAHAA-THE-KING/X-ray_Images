@@ -39,7 +39,8 @@ namespace X_ray_Images
             Orange2PurpleImage = new PictureBox();
             ColorMapImage = new PictureBox();
             GalleryPanel = new Panel();
-            this.ClearImage = new System.Windows.Forms.PictureBox();
+            ClearImage = new PictureBox();
+            CreateButton = new Button();
             ((System.ComponentModel.ISupportInitialize)CropImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Red2BlueImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TextImage).BeginInit();
@@ -51,7 +52,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)RecordImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ColorMapImage).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ClearImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ClearImage).BeginInit();
             SuspendLayout();
             // 
             // CropImage
@@ -65,7 +66,7 @@ namespace X_ray_Images
             CropImage.SizeMode = PictureBoxSizeMode.Zoom;
             CropImage.TabIndex = 14;
             CropImage.TabStop = false;
-            CropImage.Click += new System.EventHandler(this.CropImage_Click);
+            CropImage.Click += CropImage_Click;
             // 
             // Red2BlueImage
             // 
@@ -115,6 +116,7 @@ namespace X_ray_Images
             MainImage.Size = new Size(1124, 565);
             MainImage.TabIndex = 10;
             MainImage.TabStop = false;
+            MainImage.Click += MainImage_Click;
             MainImage.Click += new System.EventHandler(this.MainImage_Click);
             MainImage.Paint += new System.Windows.Forms.PaintEventHandler(this.MainImage_Paint);
             MainImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseDown);
@@ -206,7 +208,7 @@ namespace X_ray_Images
             GeometryImage.SizeMode = PictureBoxSizeMode.Zoom;
             GeometryImage.TabIndex = 18;
             GeometryImage.TabStop = false;
-            GeometryImage.Click += new System.EventHandler(this.Shape_Click);
+            GeometryImage.Click += Shape_Click;
             // 
             // RecordImage
             // 
@@ -257,23 +259,42 @@ namespace X_ray_Images
             // 
             // ClearImage
             // 
-            this.ClearImage.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ClearImage.Image = ((System.Drawing.Image)(resources.GetObject("ClearImage.Image")));
-            this.ClearImage.Location = new System.Drawing.Point(90, 425);
-            this.ClearImage.Margin = new Padding(5, 4, 5, 4);
-            this.ClearImage.Name = "ClearImage";
-            this.ClearImage.Size = new Size(57, 62);
-            this.ClearImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ClearImage.TabIndex = 24;
-            this.ClearImage.TabStop = false;
-            this.ClearImage.Click += Clear_Click;
+            ClearImage.Cursor = Cursors.Hand;
+            ClearImage.Image = (Image)resources.GetObject("ClearImage.Image");
+            ClearImage.Location = new Point(90, 425);
+            ClearImage.Margin = new Padding(5, 4, 5, 4);
+            ClearImage.Name = "ClearImage";
+            ClearImage.Size = new Size(57, 62);
+            ClearImage.SizeMode = PictureBoxSizeMode.Zoom;
+            ClearImage.TabIndex = 24;
+            ClearImage.TabStop = false;
+            ClearImage.Click += Clear_Click;
+            // 
+            // CreateButton
+            // 
+            CreateButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CreateButton.BackColor = SystemColors.MenuHighlight;
+            CreateButton.Cursor = Cursors.Hand;
+            CreateButton.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CreateButton.ForeColor = SystemColors.ButtonHighlight;
+            CreateButton.Location = new Point(8, 513);
+            CreateButton.Margin = new Padding(0);
+            CreateButton.MaximumSize = new Size(167, 95);
+            CreateButton.MinimumSize = new Size(167, 95);
+            CreateButton.Name = "CreateButton";
+            CreateButton.Size = new Size(167, 95);
+            CreateButton.TabIndex = 26;
+            CreateButton.Text = "إضافة صورة";
+            CreateButton.UseVisualStyleBackColor = false;
+            CreateButton.Click += CreateButton_Click;
             // 
             // Photos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1341, 851);
-            this.Controls.Add(this.ClearImage);
+            Controls.Add(CreateButton);
+            Controls.Add(ClearImage);
             Controls.Add(GalleryPanel);
             Controls.Add(Orange2PurpleImage);
             Controls.Add(ColorMapImage);
@@ -303,7 +324,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)RecordImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)ColorMapImage).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ClearImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ClearImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -330,5 +351,6 @@ namespace X_ray_Images
         private System.Windows.Forms.ToolStripMenuItem DeleteImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DangerToolStrip;
         private System.Windows.Forms.PictureBox ClearImage;
+        private Button CreateButton;
     }
 }

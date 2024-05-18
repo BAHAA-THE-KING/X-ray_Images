@@ -1,4 +1,4 @@
-﻿using X_ray_Images.Classes;
+using X_ray_Images.Classes;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -477,5 +477,33 @@ namespace X_ray_Images
             SetImage(newImage);
         }
 
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            RemoveSelection();
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
+
+                images.Add(MainImage.Image);
+                int id = images.Count - 1;
+                active = id;
+
+                GalleryItem galleryItem = new GalleryItem(images[id], id, (object sender, EventArgs e) =>
+                {
+                    active = id;
+                    MainImage.Image = images[id];
+                    MainImage.Size = new Size(images[id].Width, images[id].Height);
+                });
+
+                galleryItems.Add(galleryItem);
+                GalleryPanel.Controls.Add(galleryItem.pictureBox);
+                SetImage(image);
+
+                Reset();
+            }
+        }
     }
 }
