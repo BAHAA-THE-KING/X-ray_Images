@@ -117,6 +117,9 @@ namespace X_ray_Images
             MainImage.TabStop = false;
             MainImage.Click += new System.EventHandler(this.MainImage_Click);
             MainImage.Paint += new System.Windows.Forms.PaintEventHandler(this.MainImage_Paint);
+            MainImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseDown);
+            MainImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseMove);
+            MainImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainImage_MouseUp);
             // 
             // ToolBar
             // 

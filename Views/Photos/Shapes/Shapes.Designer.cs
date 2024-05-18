@@ -8,6 +8,9 @@ namespace X_ray_Images
 		private System.Windows.Forms.PictureBox CircleImage;
 		private System.Windows.Forms.PictureBox TriangleImage;
 		private System.Windows.Forms.PictureBox RectangleImage;
+		private System.Windows.Forms.PictureBox VerticalImage;
+		private System.Windows.Forms.PictureBox HorizontalImage;
+		private System.Windows.Forms.PictureBox SlopeImage;
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing && (components != null))
@@ -25,9 +28,15 @@ namespace X_ray_Images
 			this.CircleImage = new System.Windows.Forms.PictureBox();
 			this.TriangleImage = new System.Windows.Forms.PictureBox();
 			this.RectangleImage = new System.Windows.Forms.PictureBox();
+			this.VerticalImage = new System.Windows.Forms.PictureBox();
+			this.HorizontalImage = new System.Windows.Forms.PictureBox();
+			this.SlopeImage = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.CircleImage)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.TriangleImage)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.RectangleImage)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.VerticalImage)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.HorizontalImage)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.SlopeImage)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// CircleImage
@@ -46,7 +55,7 @@ namespace X_ray_Images
 			// 
 			this.TriangleImage.Image = ((System.Drawing.Image)(resources.GetObject("TriangleImage.Image")));
 			this.TriangleImage.Cursor = Cursors.Hand;
-			this.TriangleImage.Location = new System.Drawing.Point(187, 12);
+			this.TriangleImage.Location = new System.Drawing.Point(190, 12);
 			this.TriangleImage.Name = "TriangleImage";
 			this.TriangleImage.Size = new System.Drawing.Size(129, 129);
 			this.TriangleImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -66,14 +75,53 @@ namespace X_ray_Images
 			this.RectangleImage.TabStop = false;
 			this.RectangleImage.Click += new System.EventHandler(this.Rectangle_Click);
 			// 
+			// VerticalImage
+			// 
+			this.VerticalImage.Image = ((System.Drawing.Image)(resources.GetObject("VerticalImage.Image")));
+			this.VerticalImage.Cursor = Cursors.Hand;
+			this.VerticalImage.Location = new System.Drawing.Point(724, 12);
+			this.VerticalImage.Name = "VerticalImage";
+			this.VerticalImage.Size = new System.Drawing.Size(129, 129);
+			this.VerticalImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.VerticalImage.TabIndex = 3;
+			this.VerticalImage.TabStop = false;
+			this.VerticalImage.Click += new System.EventHandler(this.Vertical_Click);
+			// 
+			// HorizontalImage
+			// 
+			this.HorizontalImage.Image = ((System.Drawing.Image)(resources.GetObject("HorizontalImage.Image")));
+			this.HorizontalImage.Cursor = Cursors.Hand;
+			this.HorizontalImage.Location = new System.Drawing.Point(546, 12);
+			this.HorizontalImage.Name = "HorizontalImage";
+			this.HorizontalImage.Size = new System.Drawing.Size(129, 129);
+			this.HorizontalImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.HorizontalImage.TabIndex = 4;
+			this.HorizontalImage.TabStop = false;
+			this.HorizontalImage.Click += new System.EventHandler(this.Horizontal_Click);
+			// 
+			// SlopeImage
+			// 
+			this.SlopeImage.Image = ((System.Drawing.Image)(resources.GetObject("SlopeImage.Image")));
+			this.SlopeImage.Cursor = Cursors.Hand;
+			this.SlopeImage.Location = new System.Drawing.Point(902, 12);
+			this.SlopeImage.Name = "SlopeImage";
+			this.SlopeImage.Size = new System.Drawing.Size(129, 129);
+			this.SlopeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.SlopeImage.TabIndex = 5;
+			this.SlopeImage.TabStop = false;
+			this.SlopeImage.Click += new System.EventHandler(this.Slope_Click);
+			// 
 			// Shapes
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(509, 153);
-			this.Controls.Add(this.RectangleImage);
-			this.Controls.Add(this.TriangleImage);
+			this.ClientSize = new System.Drawing.Size(1043, 153);
 			this.Controls.Add(this.CircleImage);
+			this.Controls.Add(this.TriangleImage);
+			this.Controls.Add(this.RectangleImage);
+			this.Controls.Add(this.HorizontalImage);
+			this.Controls.Add(this.VerticalImage);
+			this.Controls.Add(this.SlopeImage);
 			this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.Name = "Shapes";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -81,6 +129,9 @@ namespace X_ray_Images
 			((System.ComponentModel.ISupportInitialize)(this.CircleImage)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.TriangleImage)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.RectangleImage)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.VerticalImage)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.HorizontalImage)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.SlopeImage)).EndInit();
 			this.ResumeLayout(false);
 
 		}

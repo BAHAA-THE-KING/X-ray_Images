@@ -15,10 +15,20 @@ namespace X_ray_Images
         Select = 1,
         Drawing = 2,
     };
+    public enum Shape
+    {
+        None = 0,
+        Circle = 1,
+        Triangle = 2,
+        Rectangle = 3,
+        Horizontal = 4,
+        Vertical = 5,
+        Slope = 6,
+    };
     public partial class Photos : Form
     {
         static public PhotosMode mode = PhotosMode.None;
-        int shapeType = 0;
+        Shape shapeType = Shape.None;
         private Point firstPoint = new Point(-1, -1);
         private Point secondPoint = new Point(-1, -1);
         private Point thirdPoint = new Point(-1, -1);
@@ -74,7 +84,7 @@ namespace X_ray_Images
 
             if (mode == PhotosMode.Drawing)
             {
-                if (shapeType == 2)
+                if (shapeType == Shape.Triangle)
                 {
                     if (firstPoint.X == -1)
                     {
@@ -101,42 +111,51 @@ namespace X_ray_Images
         }
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing))
             {
-                Reset();
-                return;
+                if (e.Button == MouseButtons.Right)
+                {
+                    Reset();
+                    return;
+                }
+                startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
             }
-            startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && startPoint.X != -1)
+            if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing))
             {
-                if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing && shapeType == 3))
-                    selectionRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
-                else if (mode == PhotosMode.Drawing && shapeType == 1)
-                    circle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
+                if (e.Button == MouseButtons.Left && startPoint.X != -1)
+                {
+                    if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
+                        selectionRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
+                    else if (mode == PhotosMode.Drawing && shapeType == Shape.Circle)
+                        circle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
 
-                MainImage.Invalidate();
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                Reset();
+                    MainImage.Invalidate();
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    Reset();
+                }
             }
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
         {
             if (mode == PhotosMode.Drawing)
             {
-                if (shapeType == 1)
+                if (shapeType == Shape.Circle)
                 {
                     SetImage(Drawer.DrawCircle(MainImage.Image, circle));
                 }
-                if (shapeType == 3)
+                if (shapeType == Shape.Rectangle)
                 {
                     SetImage(Drawer.DrawRectangle(MainImage.Image, selectionRect));
                 }
-                RemoveSelection();
+                if (shapeType != Shape.Triangle)
+                {
+                    RemoveSelection();
+                }
             }
         }
         private void MainImage_Paint(object sender, EventArgs e)
@@ -163,7 +182,6 @@ namespace X_ray_Images
         {
             if (mode == PhotosMode.None)
             {
-                MainImage.MouseDown += MainImage_MouseDown;
                 MainImage.MouseMove += MainImage_MouseMove;
                 MainImage.Paint += MainImage_Paint;
                 mode = PhotosMode.Select;
@@ -356,12 +374,9 @@ namespace X_ray_Images
                 RemoveSelection();
             }
         }
-        public void attachShapeDrawer(int shapeType)
+        public void attachShapeDrawer(Shape shapeType)
         {
             this.shapeType = shapeType;
-            MainImage.MouseDown += MainImage_MouseDown;
-            MainImage.MouseMove += MainImage_MouseMove;
-            if (shapeType != 2) MainImage.MouseUp += MainImage_MouseUp;
             mode = PhotosMode.Drawing;
 
         }
@@ -378,10 +393,6 @@ namespace X_ray_Images
         {
             if (mode == PhotosMode.Select || mode == PhotosMode.Drawing)
             {
-                MainImage.MouseDown -= MainImage_MouseDown;
-                MainImage.MouseMove -= MainImage_MouseMove;
-                if (mode == PhotosMode.Drawing && shapeType != 2) MainImage.MouseUp -= MainImage_MouseUp;
-
                 Reset();
                 mode = PhotosMode.None;
             }
