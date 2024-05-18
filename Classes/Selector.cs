@@ -88,11 +88,16 @@ namespace X_ray_Images
         {
             return new Line(startPoint.X, startPoint.Y, startPoint.X, Y);
         }
-        
+
         public static Line SelectMoveSlope(Point startPoint, int X, int Y)
         {
             return new Line(startPoint.X, startPoint.Y, X, Y);
         }
 
+        public static List<Point> SelectMoveFree(List<Point> points, int X, int Y)
+        {
+            points.Add(new Point(X, Y));
+            return points;
+        }
     }
 }

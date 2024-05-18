@@ -193,6 +193,7 @@ namespace X_ray_Images
             CurveImage.SizeMode = PictureBoxSizeMode.Zoom;
             CurveImage.TabIndex = 17;
             CurveImage.TabStop = false;
+            CurveImage.Click += new System.EventHandler(this.Free_Click);
             // 
             // GeometryImage
             // 

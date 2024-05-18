@@ -19,8 +19,8 @@ namespace X_ray_Images.Classes
         {
             Bitmap result = new Bitmap(image);
             Graphics graphics = Graphics.FromImage(result);
-            Point[] points = [firstPoint, secondPoint, thirdPoint, firstPoint];
-            graphics.DrawLines(Pens.Red, points);
+            Point[] points = [firstPoint, secondPoint, thirdPoint];
+            graphics.DrawPolygon(Pens.Red, points);
             return result;
         }
         public static Bitmap DrawRectangle(Image image, Rectangle rectangle)
@@ -63,20 +63,23 @@ namespace X_ray_Images.Classes
 
             return result;
         }
+        public static Bitmap DrawFree(Image image, List<Point> points)
+        {
+            Bitmap result = new Bitmap(image);
+            Graphics graphics = Graphics.FromImage(result);
+            graphics.DrawLines(Pens.Red, points.ToArray());
+            return result;
+        }
         private static Point Rotate(Point from, float angle, Point around)
         {
-            // Convert angle from degrees to radians
             double radianAngle = Math.PI * angle / 180.0;
 
-            // Calculate the distance between the center and the point to rotate
             double dx = from.X - around.X;
             double dy = from.Y - around.Y;
 
-            // Calculate the new x and y coordinates using the rotation formula
             double newX = around.X + (dx * Math.Cos(radianAngle)) - (dy * Math.Sin(radianAngle));
             double newY = around.Y + (dx * Math.Sin(radianAngle)) + (dy * Math.Cos(radianAngle));
 
-            // Return the new point
             return new Point((int)newX, (int)newY);
         }
 
