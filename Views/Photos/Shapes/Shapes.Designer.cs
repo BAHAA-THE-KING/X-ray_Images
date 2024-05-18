@@ -33,6 +33,7 @@ namespace X_ray_Images
 			// CircleImage
 			// 
 			this.CircleImage.Image = ((System.Drawing.Image)(resources.GetObject("CircleImage.Image")));
+			this.CircleImage.Cursor = Cursors.Hand;
 			this.CircleImage.Location = new System.Drawing.Point(12, 12);
 			this.CircleImage.Name = "CircleImage";
 			this.CircleImage.Size = new System.Drawing.Size(129, 129);
@@ -44,6 +45,7 @@ namespace X_ray_Images
 			// TriangleImage
 			// 
 			this.TriangleImage.Image = ((System.Drawing.Image)(resources.GetObject("TriangleImage.Image")));
+			this.TriangleImage.Cursor = Cursors.Hand;
 			this.TriangleImage.Location = new System.Drawing.Point(187, 12);
 			this.TriangleImage.Name = "TriangleImage";
 			this.TriangleImage.Size = new System.Drawing.Size(129, 129);
@@ -55,6 +57,7 @@ namespace X_ray_Images
 			// RectangleImage
 			// 
 			this.RectangleImage.Image = ((System.Drawing.Image)(resources.GetObject("RectangleImage.Image")));
+			this.RectangleImage.Cursor = Cursors.Hand;
 			this.RectangleImage.Location = new System.Drawing.Point(368, 12);
 			this.RectangleImage.Name = "RectangleImage";
 			this.RectangleImage.Size = new System.Drawing.Size(129, 129);

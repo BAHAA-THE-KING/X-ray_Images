@@ -7,27 +7,25 @@ namespace X_ray_Images
 {
     public partial class Shapes : Form
     {
-        static public int shape = 0;
-        public Shapes()
+        Action<int> attachShapeDrawer;
+        public Shapes(Action<int> attachShapeDrawer)
         {
             InitializeComponent();
+            this.attachShapeDrawer = attachShapeDrawer;
         }
         private void Circle_Click(object sender, EventArgs e)
         {
-            shape = 1;
-            Photos.mode = PhotosMode.Drawing;
+            attachShapeDrawer(1);
             Close();
         }
         private void Triangle_Click(object sender, EventArgs e)
         {
-            shape = 2;
-            Photos.mode = PhotosMode.Drawing;
+            attachShapeDrawer(2);
             Close();
         }
         private void Rectangle_Click(object sender, EventArgs e)
         {
-            shape = 3;
-            Photos.mode = PhotosMode.Drawing;
+            attachShapeDrawer(3);
             Close();
         }
     }
