@@ -182,8 +182,6 @@ namespace X_ray_Images
         {
             if (mode == PhotosMode.None)
             {
-                MainImage.MouseMove += MainImage_MouseMove;
-                MainImage.Paint += MainImage_Paint;
                 mode = PhotosMode.Select;
             }
             else if (mode == PhotosMode.Select)
