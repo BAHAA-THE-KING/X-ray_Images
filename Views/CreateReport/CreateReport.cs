@@ -19,11 +19,12 @@ namespace X_ray_Images
         }
         private void BasicInfoPanelClick(object sender, EventArgs e)
         {
-            //{ 
-                //isBasicOpen = true;
+            if (!isBasicOpen)
+            {
+                isBasicOpen = true;
                 BaseInfo baseInfo = new BaseInfo();
                 baseInfo.Show();
-            //}
+            }
         }
         private void PhotosPanelClick(object sender, EventArgs e)
         {

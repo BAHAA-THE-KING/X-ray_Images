@@ -30,28 +30,6 @@ namespace X_ray_Images.Views.BasicInfo
             ucStatus = new UC_Status(statusInfo);
             addUserControl(ucBase);
         }
-     
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BaseInfo_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void ShowUserControl(UserControl userControl)
-        {
-            userControl.Dock = DockStyle.Fill;
-            panelContainer.Controls.Clear();
-            panelContainer.Controls.Add(userControl);
-            userControl.BringToFront();
-        }
 
         private void addUserControl(UserControl userControl)
         {

@@ -5,7 +5,7 @@
         private System.ComponentModel.IContainer components = null;
         protected override void Dispose(bool disposing)
         {
-            //CreateReport.isBasicOpen = false;.
+            CreateReport.isBasicOpen = false;
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -101,7 +101,6 @@
             label1.TabIndex = 0;
             label1.Text = "أدخل معلومات التقرير";
             label1.TextAlign = ContentAlignment.TopCenter;
-            label1.Click += label1_Click;
             // 
             // process1
             // 
