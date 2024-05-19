@@ -12,10 +12,11 @@ namespace X_ray_Images
         public static bool isBasicOpen = false;
         public static bool isPhotosOpen = false;
         public static bool isAudioOpen = false;
-
-        public CreateReport()
+        Action showHome;
+        public CreateReport(Action showHome)
         {
             InitializeComponent();
+            this.showHome = showHome;
         }
         private void BasicInfoPanelClick(object sender, EventArgs e)
         {

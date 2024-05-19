@@ -24,6 +24,7 @@ namespace X_ray_Images
                 }
             }
             base.Dispose(disposing);
+            showHome();
         }
         private void InitializeComponent()
         {

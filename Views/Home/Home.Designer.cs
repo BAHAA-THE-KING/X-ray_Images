@@ -111,7 +111,6 @@
             Name = "Home";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Medications";
-            Load += Home_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

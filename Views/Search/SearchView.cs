@@ -12,9 +12,12 @@ namespace X_ray_Images.Views.Search
 {
     public partial class SearchView : Form
     {
-        public SearchView()
+        Action showHome;
+        public SearchView(Action showHome)
         {
             InitializeComponent();
+
+            this.showHome = showHome;
 
             comboBox_minSize.SelectedIndex = 1;
             comboBox_maxSize.SelectedIndex = 1;
@@ -51,7 +54,7 @@ namespace X_ray_Images.Views.Search
         private void browse_button_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog browser = new FolderBrowserDialog();
-            if(browser.ShowDialog() == DialogResult.OK)
+            if (browser.ShowDialog() == DialogResult.OK)
             {
                 Folder_Path.Text = browser.SelectedPath;
             }

@@ -15,7 +15,10 @@ namespace X_ray_Images
         }
         void CreateButtonClick(object sender, EventArgs e)
         {
-            CreateReport createReport = new CreateReport();
+            CreateReport createReport = new CreateReport(() =>
+            {
+                Show();
+            });
             createReport.Show();
             Hide();
         }
@@ -29,15 +32,12 @@ namespace X_ray_Images
             // Set the button's location to the calculated center position
             CreateButton.Location = new Point(centerX, centerY);
         }
-
-        private void Home_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Search_for_Images(object sender, EventArgs e)
         {
-            SearchView searching = new SearchView();
+            SearchView searching = new SearchView(() =>
+            {
+                Show();
+            });
             searching.Show();
             Hide();
         }
