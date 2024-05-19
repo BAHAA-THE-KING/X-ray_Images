@@ -6,45 +6,42 @@ namespace X_ray_Images
     public class Colorer
     {
 
-        public static Bitmap ProcessImage(Image image, int startX, int startY, int endX, int endY, Color first, Color second)
+        public static Bitmap ProcessImage(Image image, int startX, int startY,
+            int endX, int endY, Color firstColor, Color secondColor)
         {
             Bitmap newImage = new Bitmap(image);
-
-            //color range 
-            Color firstColor = first;
-            Color secondColor = second;
-            Color sickEnd = Color.FromArgb(255, 255, 255);
-            Color sickStart = Color.FromArgb(167, 167, 167);
-
-            Color normalEnd = Color.FromArgb(50, 50, 50);
-            Color normalStart = Color.FromArgb(0, 0, 0);
-
             for (int x = startX; x < endX; x++)
             {
                 for (int y = startY; y < endY; y++)
                 {
                     Color pixelColor = newImage.GetPixel(x, y);
-                    // newImage.SetPixel(x, y, selectedColor);
+
+                    //If Pixel color is closer to white
                     if (pixelColor.R >= 150)
                     {
-                        if (IsInRange(pixelColor.R, sickStart.R, sickEnd.R))
+                        //Strong color
+                        if (IsInRange(pixelColor.R, 180, 255))
                         {
                             newImage.SetPixel(x, y, firstColor);
                         }
+                        //Shading color
                         else
                         {
-                            newImage.SetPixel(x, y, getRedShadeColor(pixelColor.R / 10, firstColor));
+                            newImage.SetPixel(x, y, getFirstColorShade(pixelColor.R / 10, firstColor));
                         }
                     }
+                    //Else if Pixel color is closer to black
                     else
                     {
-                        if (IsInRange(pixelColor.R, normalStart.R, normalEnd.R))
+                        //Strong color
+                        if (IsInRange(pixelColor.R, 0, 50))
                         {
                             newImage.SetPixel(x, y, secondColor);
                         }
+                        //Shading color
                         else
                         {
-                            newImage.SetPixel(x, y, getBlueShadeColor(pixelColor.R / 10, secondColor));
+                            newImage.SetPixel(x, y, getSecondColorShade(pixelColor.R / 10, secondColor));
 
                         }
                     }
@@ -58,16 +55,16 @@ namespace X_ray_Images
             return color >= start && color <= end;
         }
 
-        static Color getRedShadeColor(int selectedColor, Color color)
+        static Color getFirstColorShade(int selectedColor, Color color)
         {
             int shadeValue = (int)Math.Round((double)10 * selectedColor);
-            return Color.FromArgb(255, color.R - shadeValue <= 0 ? 0 : color.R - shadeValue, color.G + shadeValue >= 255 ? 255 : color.G + shadeValue, color.B); //
+            return Color.FromArgb(255, color.R - shadeValue <= 0 ? 0 : color.R - shadeValue, color.G + shadeValue >= 255 ? 255 : color.G + shadeValue, color.B);
         }
 
-        static Color getBlueShadeColor(int selectedColor, Color color)
+        static Color getSecondColorShade(int selectedColor, Color color)
         {
             int shadeValue = (int)Math.Round((double)10 * selectedColor);
-            return Color.FromArgb(255, color.R, color.G + shadeValue >= 255 ? 255 : color.G + shadeValue, color.B - shadeValue <= 0 ? 0 : color.B - shadeValue); //
+            return Color.FromArgb(255, color.R, color.G + shadeValue >= 255 ? 255 : color.G + shadeValue, color.B - shadeValue <= 0 ? 0 : color.B - shadeValue);
         }
 
     }
