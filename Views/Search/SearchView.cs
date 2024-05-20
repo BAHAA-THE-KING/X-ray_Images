@@ -53,6 +53,7 @@ namespace X_ray_Images.Views.Search
             }
             else
             {
+                filter_button.Enabled = false;
                 FileInfo[] filtered_images = Classes.Search.FilterImages(images, minSize, maxSize, minDate, maxDate);
 
 
@@ -69,6 +70,8 @@ namespace X_ray_Images.Views.Search
                 await Task.Run(() => DisplayResults(filtered_images, progress));
 
                 MessageBox.Show(filtered_images.Length.ToString() + " images found after applying filter");
+
+                filter_button.Enabled = true;
             }
         }
 
@@ -95,11 +98,15 @@ namespace X_ray_Images.Views.Search
                 return;
             }
 
+            filter_button.Enabled = false;
+
             Progress<int> progress = startProgress();
 
             await Task.Run(() => DisplayResults(images, progress));
 
             MessageBox.Show(images.Length.ToString() + " images found in folder");
+
+            filter_button.Enabled = true;
         }
 
         private void DisplayResults(FileInfo[] files, IProgress<int> progress)
