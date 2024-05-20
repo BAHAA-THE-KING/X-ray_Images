@@ -43,12 +43,14 @@ namespace X_ray_Images
             return whitePercentage;
         }
 
-        private static bool IsWhite(Color color)
+        public static bool IsWhite(Color color)
         {
-            // Define a threshold for what constitutes white (adjust as needed)
-            int threshold = 130; // Example threshold value (adjust as needed)
-
-            return (color.R >= threshold && color.G >= threshold && color.B >= threshold);
+            double brightnessThreshold = 0.9;
+            double brightness = color.GetBrightness();
+            return brightness >= brightnessThreshold;
+            //
+            // int threshold = 130; 
+            // return (color.R >= threshold && color.G >= threshold && color.B >= threshold);
         }
     }
 }

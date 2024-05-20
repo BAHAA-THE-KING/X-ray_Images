@@ -84,7 +84,7 @@ namespace X_ray_Images
 			int startY = selectionRect.Y;
 			int endX = selectionRect.X + selectionRect.Width;
 			int endY = selectionRect.Y + selectionRect.Height;
-			string result = SeverityDetector.detect(MainImage.Image, startY, endY);
+			string result = SeverityDetector.detect(new Bitmap(MainImage.Image),startX, startY, endX,endY);
 			ResultLabel.Text = result;
 		}
 
