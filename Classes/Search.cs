@@ -8,7 +8,17 @@ namespace X_ray_Images.Classes
 {
     internal class Search
     {
-        public static FileInfo[] SearchImages(string folderPath, long minSize, long maxSize, DateTime minDate, DateTime maxDate)
+        public static FileInfo[] FilterImages(FileInfo[] images, long minSize, long maxSize, DateTime minDate, DateTime maxDate)
+        {
+            var files = images
+                .Where(file => file.Length >= minSize && file.Length <= maxSize)
+                .Where(file => file.LastWriteTime >= minDate && file.LastWriteTime <= maxDate)
+                .ToArray();
+
+            return files;
+        }
+
+        public static FileInfo[] SearchImages(string folderPath)
         {
             if (!Directory.Exists(folderPath))
             {
@@ -20,8 +30,6 @@ namespace X_ray_Images.Classes
 
             var files = new DirectoryInfo(folderPath).GetFiles()
                 .Where(file => allowedExtensions.Contains(file.Extension.ToLower()))
-                .Where(file => file.Length >= minSize && file.Length <= maxSize)
-                .Where(file => file.LastWriteTime >= minDate && file.LastWriteTime <= maxDate)
                 .ToArray();
 
             return files;
