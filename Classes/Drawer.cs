@@ -70,6 +70,15 @@ namespace X_ray_Images.Classes
             graphics.DrawLines(Pens.Red, points.ToArray());
             return result;
         }
+        public static Bitmap DrawText(Image image, string text, Rectangle bounds)
+        {
+            Bitmap result = new Bitmap(image);
+            Graphics graphics = Graphics.FromImage(result);
+            Font font = new Font("Arial", bounds.Height / 2);
+            Brush brush = new SolidBrush(Color.Red);
+            graphics.DrawString(text, font, brush, bounds);
+            return result;
+        }
         private static Point Rotate(Point from, float angle, Point around)
         {
             double radianAngle = Math.PI * angle / 180.0;

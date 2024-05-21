@@ -15,6 +15,7 @@ namespace X_ray_Images
         Select = 1,
         Drawing = 2,
         Free = 3,
+        Text = 4,
     };
     public enum Shape
     {
@@ -38,6 +39,7 @@ namespace X_ray_Images
         private Circle tempCircle = new Circle(0, 0, 0);
         private Line tempLine = new Line(-1, -1, -1, -1);
         private List<Point> tempFree = [];
+        private string tempText = "";
         static public List<Image> images = [];
         static public List<GalleryItem> galleryItems = [];
         int active = 0;
@@ -86,7 +88,7 @@ namespace X_ray_Images
         // Management
         private void ResetState()
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free)
+            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
             {
                 Reset();
                 mode = PhotosMode.None;
@@ -102,6 +104,7 @@ namespace X_ray_Images
             tempRect = new Rectangle(0, 0, 0, 0);
             tempCircle = new Circle(0, 0, 0);
             tempFree = [];
+            tempText = "";
             MainImage.Invalidate();
         }
         private void SetImage(Image image)
@@ -284,7 +287,7 @@ namespace X_ray_Images
         }
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free)
+            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
             {
                 if (e.Button == MouseButtons.Right)
                 {
@@ -299,13 +302,13 @@ namespace X_ray_Images
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free)
+            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
             {
                 if (e.Button == MouseButtons.Left)
                 {
                     if (startPoint.X != -1)
                     {
-                        if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
+                        if (mode == PhotosMode.Select || mode == PhotosMode.Text || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
                             tempRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
                         else if (mode == PhotosMode.Drawing && shapeType == Shape.Circle)
                             tempCircle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
@@ -351,6 +354,12 @@ namespace X_ray_Images
             {
                 SetImage(Drawer.DrawFree(MainImage.Image, tempFree));
                 Reset();
+            }
+            else if (mode == PhotosMode.Text)
+            {
+                SetImage(Drawer.DrawText(MainImage.Image, tempText, tempRect));
+                ResetState();
+                InactiveImage(TextImage);
             }
         }
         private void MainImage_Paint(object sender, EventArgs e)
@@ -536,7 +545,21 @@ namespace X_ray_Images
 
         private void TextImage_Click(object sender, EventArgs e)
         {
-
+            if (mode == PhotosMode.None)
+            {
+                ActiveImage(TextImage);
+                new Text(setText).Show();
+            }
+            else if (mode == PhotosMode.Text)
+            {
+                InactiveImage(TextImage);
+                ResetState();
+            }
+        }
+        private void setText(string text)
+        {
+            mode = PhotosMode.Text;
+            tempText = text;
         }
     }
 }

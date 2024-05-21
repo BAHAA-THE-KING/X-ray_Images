@@ -12,8 +12,8 @@ namespace X_ray_Images
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Home());
-            Bitmap image = new Bitmap("testImages/hd.jpeg");
-            Console.WriteLine(SeverityDetector.detect(image,0,0,100,100));
+            //Bitmap image = new Bitmap("C:\\Users\\ASUS\\Desktop\\GitHub\\X-ray_Images\\testImages\\hd.jpeg");
+            //Console.WriteLine(SeverityDetector.detect(image,0,0,100,100));
         }
 
     }
