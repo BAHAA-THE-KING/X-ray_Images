@@ -1,6 +1,7 @@
 
 
 using Emgu.CV;
+using QuestPDF.Fluent;
 
 namespace X_ray_Images.Classes
 {
@@ -8,7 +9,6 @@ namespace X_ray_Images.Classes
     {
         public static string detectHeartProblem(Bitmap image, int y1, int y2)
         {
-
             int imageWidth = image.Width;
             int heartSpace = Math.Abs(y2 - y1);
             double heartToThoracicRatio = heartSpace / (imageWidth + 0.0);
