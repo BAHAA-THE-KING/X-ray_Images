@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ namespace X_ray_Images.Views.Search
 {
     public partial class SearchView : Form
     {
+        private FileInfo[] images = null;
+        static private ProgressBarForm progressBarForm;
+
         Action showHome;
         public SearchView(Action showHome)
         {
@@ -25,7 +29,7 @@ namespace X_ray_Images.Views.Search
             listView.LargeImageList = imageList;
         }
 
-        private void search_button_Click(object sender, EventArgs e)
+        private async void filter_button_Click(object sender, EventArgs e)
         {
             string folderPath = Folder_Path.Text;
 
@@ -43,44 +47,132 @@ namespace X_ray_Images.Views.Search
             {
                 MessageBox.Show("beginning date is after the final date...\ncorrect it please");
             }
+            else if (images == null)
+            {
+                MessageBox.Show("no images in this folder");
+            }
             else
             {
-                FileInfo[] images = Classes.Search.SearchImages(folderPath, minSize, maxSize, minDate, maxDate);
-                MessageBox.Show(images.Length.ToString() + " images was found");
-                DisplayResults(images);
+                filter_button.Enabled = false;
+                FileInfo[] filtered_images = Classes.Search.FilterImages(images, minSize, maxSize, minDate, maxDate);
+
+
+                if (filtered_images.Length < 1)
+                {
+                    listView.Items.Clear();
+                    imageList.Images.Clear();
+                    MessageBox.Show("no images fulfill the conditions");
+                    return;
+                }
+
+                Progress<int> progress = startProgress();
+
+                await Task.Run(() => DisplayResults(filtered_images, progress));
+
+                MessageBox.Show(filtered_images.Length.ToString() + " images found after applying filter");
+
+                filter_button.Enabled = true;
             }
         }
 
-        private void browse_button_Click(object sender, EventArgs e)
+        private async void browse_button_Click(object sender, EventArgs e)
         {
+            string old = Folder_Path.Text;
+
             FolderBrowserDialog browser = new FolderBrowserDialog();
             if (browser.ShowDialog() == DialogResult.OK)
             {
                 Folder_Path.Text = browser.SelectedPath;
             }
+
+            if(old == Folder_Path.Text)
+            {
+                return;
+            }
+
+            images = Classes.Search.SearchImages(Folder_Path.Text);
+
+            if(images == null || images.Length == 0)
+            {
+                MessageBox.Show("this folder has no images.");
+                return;
+            }
+
+            filter_button.Enabled = false;
+
+            Progress<int> progress = startProgress();
+
+            await Task.Run(() => DisplayResults(images, progress));
+
+            MessageBox.Show(images.Length.ToString() + " images found in folder");
+
+            filter_button.Enabled = true;
         }
 
-        private void DisplayResults(FileInfo[] files)
+        private void DisplayResults(FileInfo[] files, IProgress<int> progress)
         {
-            listView.Items.Clear();
-            imageList.Images.Clear();
+
+            listView.Invoke((Action)(() =>
+            {
+                listView.Items.Clear();
+                imageList.Images.Clear();
+            }));
+
+            int total_files = files.Length;
+            int processed_files = 0;
 
             foreach (var file in files)
             {
                 try
                 {
                     Image img = Image.FromFile(file.FullName);
-                    imageList.Images.Add(file.Name, img);
 
-                    var listViewItem = new ListViewItem(file.Name);
-                    listViewItem.ImageKey = file.Name;
-                    listView.Items.Add(listViewItem);
+                    listView.Invoke((Action)(() =>
+                    {
+                        imageList.Images.Add(file.Name, img);
+
+                        var listViewItem = new ListViewItem(file.Name);
+                        listViewItem.ImageKey = file.Name;
+                        listView.Items.Add(listViewItem);
+                    }));
+
+                    processed_files++;
+                    int percentage = (int)((double)(processed_files *  100 / total_files));
+
+                    progress?.Report(percentage);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error loading image {file.Name}: {ex.Message}");
+                    listView.Invoke((Action)(() =>
+                    {
+                        MessageBox.Show($"Error loading image {file.Name}: {ex.Message}");
+                    }));
                 }
             }
+        }
+
+        static private Progress<int> startProgress()
+        {
+            progressBarForm = new ProgressBarForm();
+
+            ProgressBar progressBar = progressBarForm.progressBar;
+            progressBar.Minimum = 0;
+            progressBar.Maximum = 100;
+            progressBar.Value = 0;
+
+            progressBarForm.Show();
+
+            var progress = new Progress<int>(percent =>
+            {
+                progressBar.Value = percent;
+
+                if (percent >= 100)
+                {
+                    progressBarForm.Close();
+                }
+            });
+
+            return progress;
         }
 
     }

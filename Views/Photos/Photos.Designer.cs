@@ -37,7 +37,7 @@ namespace X_ray_Images
             GeometryImage = new PictureBox();
             RecordImage = new PictureBox();
             Orange2PurpleImage = new PictureBox();
-            ColorMapImage = new PictureBox();
+            WhatsAppImage = new PictureBox();
             GalleryPanel = new Panel();
             ClearImage = new PictureBox();
             CreateButton = new Button();
@@ -51,7 +51,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)GeometryImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)RecordImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ColorMapImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ClearImage).BeginInit();
             SuspendLayout();
             // 
@@ -145,21 +145,21 @@ namespace X_ray_Images
             // AddImageToolStrip
             // 
             AddImageToolStrip.Name = "AddImageToolStrip";
-            AddImageToolStrip.Size = new Size(224, 26);
+            AddImageToolStrip.Size = new Size(131, 26);
             AddImageToolStrip.Text = "إضافة";
             AddImageToolStrip.Click += New_Click;
             // 
             // SaveImageToolStrip
             // 
             SaveImageToolStrip.Name = "SaveImageToolStrip";
-            SaveImageToolStrip.Size = new Size(224, 26);
+            SaveImageToolStrip.Size = new Size(131, 26);
             SaveImageToolStrip.Text = "حفظ";
             SaveImageToolStrip.Click += Save_Click;
             // 
             // DeleteImageToolStrip
             // 
             DeleteImageToolStrip.Name = "DeleteImageToolStrip";
-            DeleteImageToolStrip.Size = new Size(224, 26);
+            DeleteImageToolStrip.Size = new Size(131, 26);
             DeleteImageToolStrip.Text = "حذف";
             DeleteImageToolStrip.Click += Delete_Click;
             // 
@@ -236,18 +236,18 @@ namespace X_ray_Images
             Orange2PurpleImage.TabStop = false;
             Orange2PurpleImage.Click += Orange2PurpleImage_Click;
             // 
-            // ColorMapImage
+            // WhatsAppImage
             // 
-            ColorMapImage.Cursor = Cursors.Hand;
-            ColorMapImage.Image = (Image)resources.GetObject("ColorMapImage.Image");
-            ColorMapImage.Location = new Point(15, 425);
-            ColorMapImage.Margin = new Padding(5, 4, 5, 4);
-            ColorMapImage.Name = "ColorMapImage";
-            ColorMapImage.Size = new Size(57, 62);
-            ColorMapImage.SizeMode = PictureBoxSizeMode.Zoom;
-            ColorMapImage.TabIndex = 20;
-            ColorMapImage.TabStop = false;
-            ColorMapImage.Click += ColorMapImage_Click;
+            WhatsAppImage.Cursor = Cursors.Hand;
+            WhatsAppImage.Image = (Image)resources.GetObject("WhatsAppImage.Image");
+            WhatsAppImage.Location = new Point(15, 425);
+            WhatsAppImage.Margin = new Padding(5, 4, 5, 4);
+            WhatsAppImage.Name = "WhatsAppImage";
+            WhatsAppImage.Size = new Size(57, 62);
+            WhatsAppImage.SizeMode = PictureBoxSizeMode.Zoom;
+            WhatsAppImage.TabIndex = 20;
+            WhatsAppImage.TabStop = false;
+            WhatsAppImage.Click += WhatsApp_Click;
             // 
             // GalleryPanel
             // 
@@ -299,7 +299,7 @@ namespace X_ray_Images
             Controls.Add(ClearImage);
             Controls.Add(GalleryPanel);
             Controls.Add(Orange2PurpleImage);
-            Controls.Add(ColorMapImage);
+            Controls.Add(WhatsAppImage);
             Controls.Add(RecordImage);
             Controls.Add(GeometryImage);
             Controls.Add(CurveImage);
@@ -325,7 +325,7 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)GeometryImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)RecordImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ColorMapImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)ClearImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -347,7 +347,7 @@ namespace X_ray_Images
         private PictureBox GeometryImage;
         private System.Windows.Forms.PictureBox RecordImage;
         private System.Windows.Forms.PictureBox Orange2PurpleImage;
-        private System.Windows.Forms.PictureBox ColorMapImage;
+        private System.Windows.Forms.PictureBox WhatsAppImage;
         private System.Windows.Forms.Panel GalleryPanel;
         private System.Windows.Forms.ToolStripMenuItem AddImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DeleteImageToolStrip;
