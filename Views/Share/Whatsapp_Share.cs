@@ -37,6 +37,7 @@ namespace X_ray_Images.Views.Share
         public static string logininfo = "";
         public bool fileSent = false;
         public string FilePath { get; set; }
+        public bool IsDoc { get; set; } = false;
 
         public event Action FileSent; // Event to signal file sent
 
@@ -83,7 +84,7 @@ namespace X_ray_Images.Views.Share
                     {
                         if (!fileSent)
                         {
-                            SendFile(FilePath, false);
+                            SendFile(FilePath);
                             fileSent = true;
                             FileSent?.Invoke();
                         }
@@ -129,7 +130,7 @@ namespace X_ray_Images.Views.Share
         }
 
 
-        public void SendFile(string filePath, bool isPdf)
+        public void SendFile(string filePath)
         {
             if (driver == null) return;
             //WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
@@ -164,10 +165,11 @@ namespace X_ray_Images.Views.Share
 
             // Choose the correct upload option based on file type
             IWebElement uploadOption;
-            if (isPdf)
+            if (IsDoc)
             {
                 uploadOption = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/ul/div/div[1]/li/div"));
             }
+          
             else
             {
                 uploadOption = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/ul/div/div[2]/li/div"));
@@ -200,7 +202,7 @@ namespace X_ray_Images.Views.Share
 
                 Thread.Sleep(1000);
                 CloseFileDialog();
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 try
                 {
 
@@ -208,7 +210,7 @@ namespace X_ray_Images.Views.Share
                     sendButton.Click();
 
 
-                    Thread.Sleep(3000);
+                    Thread.Sleep(6000);
 
                     OnStop();
 
