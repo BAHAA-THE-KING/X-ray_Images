@@ -6,6 +6,7 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using X_ray_Images.Views.Share;
 
 namespace X_ray_Images
 {
@@ -533,9 +534,66 @@ namespace X_ray_Images
             }
         }
 
-        private void ColorMapImage_Click(object sender, EventArgs e)
+        private void WhatsApp_Click(object sender, EventArgs e)
         {
 
+            string appPath = Application.StartupPath;
+
+            string netPath = Directory.GetParent(appPath).FullName;
+            string debugPath = Directory.GetParent(netPath).FullName;
+            string binPath = Directory.GetParent(debugPath).FullName;
+
+            string projectPath = Directory.GetParent(binPath).FullName;
+
+            string initialDirectory = Path.Combine(projectPath, "testImages", "share");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(initialDirectory))
+            {
+                Directory.CreateDirectory(initialDirectory);
+            }
+
+            string imageFilePath = Path.Combine(initialDirectory, "share.png");
+
+            if (MainImage.Image != null)
+            {
+                // Save the image from the PictureBox to the specified path if it doesn't already exist
+                if (!File.Exists(imageFilePath))
+                {
+                    MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Thread serviceThread = new Thread(() =>
+            {
+                try
+                {
+
+                    Whatsapp_Share relnServ = new Whatsapp_Share();
+                    relnServ.FilePath = imageFilePath;
+                    relnServ.FileSent += () =>
+                    {
+                        // Invoke to ensure the message box is shown on the main UI thread
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        });
+                    };
+                    relnServ.OnDebug();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error in service thread: " + ex.Message);
+                }
+            });
+
+            serviceThread.IsBackground = true;
+            serviceThread.Start();
         }
 
         private void RecordImage_Click(object sender, EventArgs e)
