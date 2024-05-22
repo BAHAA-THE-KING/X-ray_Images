@@ -1,9 +1,12 @@
-﻿using System;
+﻿using MathNet.Numerics;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
+using X_ray_Images.Classes;
 
 namespace X_ray_Images.Views.BasicInfo
 {
@@ -53,6 +56,32 @@ namespace X_ray_Images.Views.BasicInfo
                "Patient Indication: " + statusInfo.indication + "\n" +
                "Patient Phone: " + contactInfo.phone + "\n";
             return patientInfo;
+
+
+        }
+        public void ConvertToPDF()
+        {
+            //string dateString = "22/5/2024";
+            //string nextReviewString = "22/11/2024"; // Example next review date
+
+            DateTime dateTime = DateTime.MinValue;
+            DateTime nextdateReview = DateTime.MinValue;
+
+            try
+            {
+                dateTime = DateTime.ParseExact(baseInfo.date, "d/M/yyyy", CultureInfo.InvariantCulture);
+                nextdateReview = DateTime.ParseExact(otherInfo.nextdate, "d/M/yyyy", CultureInfo.InvariantCulture);
+                //Console.WriteLine("Parsed DateTime: " + dateTime);
+                //Console.WriteLine("Next DateTime: " + nextdateReview);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid date format.");
+            }
+
+            PDF.Generate(baseInfo.name, baseInfo.sickness[0], otherInfo.details, baseInfo.status, baseInfo.doctors[0],
+                dateTime, nextdateReview, statusInfo.diagnosis, statusInfo.description, statusInfo.indication,
+                contactInfo.address, contactInfo.phone);
 
 
         }

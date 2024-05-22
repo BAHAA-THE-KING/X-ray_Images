@@ -113,7 +113,8 @@ namespace X_ray_Images.Views.BasicInfo
             if (ValidateRequiredFields())
             {
             MessageDialog.Show(patient.ToString());
-            this.Close();
+                patient.ConvertToPDF();
+                this.Close();
             }
             else
             {
