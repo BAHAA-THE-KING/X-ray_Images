@@ -40,6 +40,7 @@ namespace WTelegramClientTestWF
             textBoxCode = new TextBox();
             buttonSendCode = new Button();
             panelActions = new Panel();
+            getContact = new Button();
             numberToSendTo = new TextBox();
             label4 = new Label();
             buttonSendFile = new Button();
@@ -47,6 +48,9 @@ namespace WTelegramClientTestWF
             textBoxPhone = new TextBox();
             textBoxApiHash = new TextBox();
             textBoxApiID = new TextBox();
+            UserNameLabel = new Label();
+            userName = new TextBox();
+            SendToUser = new Button();
             panelActions.SuspendLayout();
             SuspendLayout();
             // 
@@ -79,7 +83,7 @@ namespace WTelegramClientTestWF
             listBox.Location = new Point(12, 148);
             listBox.Margin = new Padding(3, 4, 3, 4);
             listBox.Name = "listBox";
-            listBox.Size = new Size(831, 384);
+            listBox.Size = new Size(666, 384);
             listBox.TabIndex = 12;
             listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
             // 
@@ -168,6 +172,7 @@ namespace WTelegramClientTestWF
             // panelActions
             // 
             panelActions.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panelActions.Controls.Add(getContact);
             panelActions.Controls.Add(numberToSendTo);
             panelActions.Controls.Add(label4);
             panelActions.Controls.Add(buttonSendFile);
@@ -180,10 +185,21 @@ namespace WTelegramClientTestWF
             panelActions.TabIndex = 11;
             panelActions.Visible = false;
             // 
+            // getContact
+            // 
+            getContact.Location = new Point(115, 4);
+            getContact.Margin = new Padding(3, 4, 3, 4);
+            getContact.Name = "getContact";
+            getContact.Size = new Size(105, 45);
+            getContact.TabIndex = 8;
+            getContact.Text = "Get contact";
+            getContact.UseVisualStyleBackColor = true;
+            getContact.Click += getContact_ClickAsync;
+            // 
             // numberToSendTo
             // 
             numberToSendTo.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            numberToSendTo.Location = new Point(534, 16);
+            numberToSendTo.Location = new Point(639, 16);
             numberToSendTo.Margin = new Padding(3, 4, 3, 4);
             numberToSendTo.Name = "numberToSendTo";
             numberToSendTo.Size = new Size(179, 22);
@@ -193,7 +209,7 @@ namespace WTelegramClientTestWF
             // label4
             // 
             label4.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(344, 14);
+            label4.Location = new Point(449, 14);
             label4.Margin = new Padding(0);
             label4.Name = "label4";
             label4.Padding = new Padding(2);
@@ -203,7 +219,7 @@ namespace WTelegramClientTestWF
             // 
             // buttonSendFile
             // 
-            buttonSendFile.Location = new Point(113, 4);
+            buttonSendFile.Location = new Point(224, 4);
             buttonSendFile.Margin = new Padding(3, 4, 3, 4);
             buttonSendFile.Name = "buttonSendFile";
             buttonSendFile.Size = new Size(105, 45);
@@ -214,7 +230,7 @@ namespace WTelegramClientTestWF
             // 
             // buttonSendMsg
             // 
-            buttonSendMsg.Location = new Point(224, 4);
+            buttonSendMsg.Location = new Point(335, 4);
             buttonSendMsg.Margin = new Padding(3, 4, 3, 4);
             buttonSendMsg.Name = "buttonSendMsg";
             buttonSendMsg.Size = new Size(105, 45);
@@ -250,11 +266,49 @@ namespace WTelegramClientTestWF
             textBoxApiID.Size = new Size(100, 22);
             textBoxApiID.TabIndex = 1;
             // 
+            // UserNameLabel
+            // 
+            UserNameLabel.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            UserNameLabel.Location = new Point(690, 159);
+            UserNameLabel.Margin = new Padding(0);
+            UserNameLabel.Name = "UserNameLabel";
+            UserNameLabel.Padding = new Padding(2);
+            UserNameLabel.Size = new Size(110, 27);
+            UserNameLabel.TabIndex = 9;
+            UserNameLabel.Text = "User Name";
+            UserNameLabel.Visible = false;
+            // 
+            // userName
+            // 
+            userName.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            userName.Location = new Point(688, 190);
+            userName.Margin = new Padding(3, 4, 3, 4);
+            userName.Name = "userName";
+            userName.Size = new Size(155, 22);
+            userName.TabIndex = 9;
+            userName.Visible = false;
+            userName.TextChanged += userName_TextChanged;
+            // 
+            // SendToUser
+            // 
+            SendToUser.Location = new Point(709, 236);
+            SendToUser.Margin = new Padding(3, 4, 3, 4);
+            SendToUser.Name = "SendToUser";
+            SendToUser.Size = new Size(105, 45);
+            SendToUser.TabIndex = 13;
+            SendToUser.Text = "Send To User";
+            SendToUser.UseVisualStyleBackColor = true;
+            SendToUser.Visible = false;
+            SendToUser.Click += SendToUser_ClickAsync;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(855, 548);
+            Controls.Add(SendToUser);
+            Controls.Add(userName);
+            Controls.Add(UserNameLabel);
             Controls.Add(panelActions);
             Controls.Add(buttonSendCode);
             Controls.Add(labelCode);
@@ -299,6 +353,10 @@ namespace WTelegramClientTestWF
         private Button buttonSendFile;
         private TextBox numberToSendTo;
         private Label label4;
+        private Button getContact;
+        private TextBox userName;
+        private Label UserNameLabel;
+        private Button SendToUser;
     }
 }
 

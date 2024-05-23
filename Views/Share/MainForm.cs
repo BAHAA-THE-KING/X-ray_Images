@@ -1,5 +1,7 @@
-﻿using Emgu.CV.Features2D;
+﻿using Emgu.CV;
+using Emgu.CV.Features2D;
 using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -7,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using TL;
 using WTelegram;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WTelegramClientTestWF
 {
@@ -14,22 +17,23 @@ namespace WTelegramClientTestWF
     {
         private Client _client;
         //private WTelegram.Client _client;
-        private User _user;
-        private List<ChatBase> _chats;
+
+        private List<long> _chats;
         private Dictionary<string, long> chatIdMap = new Dictionary<string, long>();
         private long selectedChatId;
+        private long selectedChatIdContact;
         public string FilePath { get; set; }
         public MainForm()
         {
             InitializeComponent();
             WTelegram.Helpers.Log = (l, s) => Debug.WriteLine(s);
             buttonSendFile.Enabled = false;
+            SendToUser.Enabled = false;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _client?.Dispose();
-            //Properties.Settings.Default.Save();
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -58,6 +62,9 @@ namespace WTelegramClientTestWF
                 return;
             }
             panelActions.Visible = true;
+            UserNameLabel.Visible = true;
+            userName.Visible = true;
+            SendToUser.Visible = true;
             listBox.Items.Add($"We are now connected as {_client.User}");
         }
 
@@ -70,9 +77,9 @@ namespace WTelegramClientTestWF
         private async void buttonGetChats_Click(object sender, EventArgs e)
         {
             var result = await _client.Messages_GetAllChats();
+            listBox.Items.Clear();
             foreach (var user in result.chats)
             {
-                // Add user or group information to your ListBox
                 listBox.Items.Add(user.Value);
 
                 if (!chatIdMap.ContainsKey(user.Value.ToString()))
@@ -81,7 +88,7 @@ namespace WTelegramClientTestWF
                 }
                 else
                 {
-                    // Handle the case where the key already exists.
+
                 }
 
             }
@@ -120,8 +127,8 @@ namespace WTelegramClientTestWF
 
             if (!string.IsNullOrEmpty(numberToSendTo.Text))
             {
-                   var contacts = await _client.Contacts_ImportContacts(new[] { new InputPhoneContact { phone = numberToSendTo.Text } });
-                    if (contacts.imported.Length > 0)
+                var contacts = await _client.Contacts_ImportContacts(new[] { new InputPhoneContact { phone = numberToSendTo.Text } });
+                if (contacts.imported.Length > 0)
                 {
                     var inputFile = await _client.UploadFileAsync(FilePath);
                     await _client.SendMediaAsync(contacts.users[contacts.imported[0].user_id], "", inputFile);
@@ -142,6 +149,7 @@ namespace WTelegramClientTestWF
                 catch (KeyNotFoundException ex)
                 {
                     Console.WriteLine($"Key not found: {ex.Message}");
+
                 }
             }
         }
@@ -164,11 +172,11 @@ namespace WTelegramClientTestWF
 
         private async void buttonSendMsg_Click(object sender, EventArgs e)
         {
-                var msg = "_Here is your *saved message*:_\n";
-                var entities = _client.MarkdownToEntities(ref msg);
+            var msg = "_Here is your *saved message*:_\n";
+            var entities = _client.MarkdownToEntities(ref msg);
             var inputFile = await _client.UploadFileAsync(FilePath);
             await _client.SendMediaAsync(InputPeer.Self, msg, inputFile);
-            
+
         }
 
         private void numberToSendTo_TextChanged(object sender, EventArgs e)
@@ -178,22 +186,57 @@ namespace WTelegramClientTestWF
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             buttonSendFile.Enabled = true;
             if (listBox.SelectedItem != null)
             {
                 string selectedItem = listBox.GetItemText(listBox.SelectedItem);
                 if (chatIdMap.ContainsKey(selectedItem))
                 {
-                    chatIdMap.TryGetValue(selectedItem,out  long chatId);
-                    selectedChatId  = chatId;
-              
+                    chatIdMap.TryGetValue(selectedItem, out long chatId);
+                    selectedChatId = chatId;
+
                 }
                 else
                 {
-                    // Handle the case where the selected item doesn't have a chat ID.
+
+
                 }
+            }
+        }
+
+        private async void getContact_ClickAsync(object sender, EventArgs e)
+        {
+            var result = await _client.Contacts_GetContacts();
+            listBox.Items.Clear();
+            foreach (var user in result.users)
+            {
+                listBox.Items.Add(user.Key + "            " + user.Value);
+            }
+
+
+        }
+
+        private void userName_TextChanged(object sender, EventArgs e)
+        {
+            buttonSendFile.Enabled = false;
+            SendToUser.Enabled = true;
+        }
+
+        private async void SendToUser_ClickAsync(object sender, EventArgs e)
+        {
+            try
+            {
+                var resolved = await _client.Contacts_ResolveUsername(userName.Text); // without the @
+                await _client.SendMessageAsync(resolved, "Hello!");
+                var inputFile = await _client.UploadFileAsync(FilePath);
+                await _client.SendMediaAsync(resolved, "Here is the photo", inputFile);
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc);
             }
         }
     }
 }
+
