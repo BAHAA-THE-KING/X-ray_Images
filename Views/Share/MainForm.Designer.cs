@@ -47,7 +47,6 @@ namespace WTelegramClientTestWF
             textBoxPhone = new TextBox();
             textBoxApiHash = new TextBox();
             textBoxApiID = new TextBox();
-            openFileDialog1 = new OpenFileDialog();
             panelActions.SuspendLayout();
             SuspendLayout();
             // 
@@ -232,7 +231,6 @@ namespace WTelegramClientTestWF
             textBoxPhone.Name = "textBoxPhone";
             textBoxPhone.Size = new Size(179, 22);
             textBoxPhone.TabIndex = 6;
-            textBoxPhone.Text = "+963936854969";
             // 
             // textBoxApiHash
             // 
@@ -242,7 +240,6 @@ namespace WTelegramClientTestWF
             textBoxApiHash.Name = "textBoxApiHash";
             textBoxApiHash.Size = new Size(280, 22);
             textBoxApiHash.TabIndex = 3;
-            textBoxApiHash.Text = "53dcd9f72472442947a4fb1fc5f767e6";
             // 
             // textBoxApiID
             // 
@@ -252,11 +249,6 @@ namespace WTelegramClientTestWF
             textBoxApiID.Name = "textBoxApiID";
             textBoxApiID.Size = new Size(100, 22);
             textBoxApiID.TabIndex = 1;
-            textBoxApiID.Text = "26772720";
-            // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainForm
             // 
@@ -305,7 +297,6 @@ namespace WTelegramClientTestWF
 		private System.Windows.Forms.Panel panelActions;
 		private System.Windows.Forms.Button buttonSendMsg;
         private Button buttonSendFile;
-        private OpenFileDialog openFileDialog1;
         private TextBox numberToSendTo;
         private Label label4;
     }
