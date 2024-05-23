@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 using X_ray_Images.Views.Share;
+using WTelegramClientTestWF;
 
 namespace X_ray_Images
 {
@@ -28,7 +29,7 @@ namespace X_ray_Images
         Vertical = 5,
         Slope = 6,
     };
-  
+
     public partial class Photos : Form
     {
         static public PhotosMode mode = PhotosMode.None;
@@ -179,29 +180,29 @@ namespace X_ray_Images
 
                         Image imageToSave = MainImage.Image;
 
-                     
-                            // Determine the image format based on the selected file extension
-                            ImageFormat imageFormat = ImageFormat.Png; // Default to PNG
-                            string extension = Path.GetExtension(newImagePath);
-                            if (extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                                extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
-                            {
-                                imageFormat = ImageFormat.Jpeg;
-                            }
 
-                            // Save the image to the specified file path with the determined format
-                            try
-                            {
-                                imageToSave.Save(newImagePath, imageFormat);
-                                savedFileName = Path.GetFileName(newImagePath);
-                                MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        
-                        
+                        // Determine the image format based on the selected file extension
+                        ImageFormat imageFormat = ImageFormat.Png; // Default to PNG
+                        string extension = Path.GetExtension(newImagePath);
+                        if (extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                            extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
+                        {
+                            imageFormat = ImageFormat.Jpeg;
+                        }
+
+                        // Save the image to the specified file path with the determined format
+                        try
+                        {
+                            imageToSave.Save(newImagePath, imageFormat);
+                            savedFileName = Path.GetFileName(newImagePath);
+                            MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+
                     }
                 }
             }
@@ -209,7 +210,7 @@ namespace X_ray_Images
             {
                 MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
         }
         private void Delete_Click(object sender, EventArgs e)
@@ -545,7 +546,7 @@ namespace X_ray_Images
 
         private void WhatsApp_Click(object sender, EventArgs e)
         {
-            Save_Click(sender,e);
+            Save_Click(sender, e);
 
             if (string.IsNullOrEmpty(savedFileName))
             {
@@ -568,7 +569,7 @@ namespace X_ray_Images
                 Directory.CreateDirectory(initialDirectory);
             }
 
-            string imageFilePath = Path.Combine(initialDirectory, savedFileName); 
+            string imageFilePath = Path.Combine(initialDirectory, savedFileName);
 
             if (MainImage.Image != null)
             {
@@ -614,7 +615,7 @@ namespace X_ray_Images
         private void RecordImage_Click(object sender, EventArgs e)
         {
 
-        }
+        } 
 
         private void TextImage_Click(object sender, EventArgs e)
         {
@@ -634,5 +635,50 @@ namespace X_ray_Images
             mode = PhotosMode.Text;
             tempText = text;
         }
+
+        private void Telegram_Click(object sender, EventArgs e)
+        {
+            Save_Click(sender,e);
+            if (string.IsNullOrEmpty(savedFileName))
+            {
+                MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string appPath = Application.StartupPath;
+
+            string netPath = Directory.GetParent(appPath).FullName;
+            string debugPath = Directory.GetParent(netPath).FullName;
+            string binPath = Directory.GetParent(debugPath).FullName;
+
+            string projectPath = Directory.GetParent(binPath).FullName;
+
+            string initialDirectory = Path.Combine(projectPath, "testImages", "share");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(initialDirectory))
+            {
+                Directory.CreateDirectory(initialDirectory);
+            }
+
+            string imageFilePath = Path.Combine(initialDirectory, savedFileName);
+
+            if (MainImage.Image != null)
+            {
+                // Save the image from the PictureBox to the specified path if it doesn't already exist
+                if (!File.Exists(imageFilePath))
+                {
+                    MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MainForm telegram = new MainForm();
+            telegram.FilePath = imageFilePath;
+            telegram.Show();
+         }
     }
 }
