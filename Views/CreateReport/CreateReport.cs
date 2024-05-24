@@ -47,12 +47,10 @@ namespace X_ray_Images
         }
         private void SaveButtonClick(object sender, EventArgs e)
         {
-
+            
         }
-
-        private void BasicInfoPanel_Paint(object sender, PaintEventArgs e)
+        private void CompressButtonClick(object sender, EventArgs e)
         {
-
         }
     }
 }

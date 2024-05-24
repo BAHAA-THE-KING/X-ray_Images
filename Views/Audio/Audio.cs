@@ -3,38 +3,82 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using NAudio.Wave;
+using X_ray_Images.Classes;
 using X_ray_Images.Views.Share;
 
 namespace X_ray_Images
 {
-	enum AudioMode
-	{
-		None = 0,
-		Recording = 1,
-		Listening = 2,
-	};
+    enum AudioMode
+    {
+        None = 0,
+        Recording = 1,
+        Listening = 2,
+    };
     public partial class Audio : Form
     {
-        static AudioMode mode = AudioMode.None;
-        static WaveInEvent waveIn = new WaveInEvent();
-        static WaveFileWriter waveFileWriter = null;
-        static WaveOutEvent outputDevice = new WaveOutEvent();
+        AudioMode mode = AudioMode.None;
+        WaveInEvent waveIn;
+        WaveFileWriter? waveFileWriter;
+        WaveFileReader reader;
+        WaveOutEvent outputDevice;
         public Audio()
         {
             InitializeComponent();
+            ControlViews();
         }
+        // Control View
+        void ActivateElement(Control pictureBox)
+        {
+            pictureBox.Visible = true;
+        }
+        void InactivateElement(Control pictureBox)
+        {
+            pictureBox.Visible = false;
+        }
+        void ControlViews()
+        {
+            if (mode == AudioMode.None)
+            {
+                ActivateElement(StartImage);
+                ActivateElement(PlayImage);
+                InactivateElement(StopImage);
+                InactivateElement(RecordingLabel);
+                InactivateElement(ListeningLabel);
+            }
+            else if (mode == AudioMode.Listening)
+            {
+                InactivateElement(StartImage);
+                InactivateElement(PlayImage);
+                ActivateElement(StopImage);
+                InactivateElement(RecordingLabel);
+                ActivateElement(ListeningLabel);
+            }
+            else if (mode == AudioMode.Recording)
+            {
+                InactivateElement(StartImage);
+                InactivateElement(PlayImage);
+                ActivateElement(StopImage);
+                ActivateElement(RecordingLabel);
+                InactivateElement(ListeningLabel);
+            }
+        }
+
+        // Functionality
         private void Start_Click(object sender, EventArgs e)
         {
             if (mode == AudioMode.None)
             {
                 mode = AudioMode.Recording;
-                File.Delete("C:\\Temp\\audio.wav");
+                ControlViews();
+                if (File.Exists(Paths.AudioTempFile)) File.Delete(Paths.AudioTempFile);
+                waveIn = new WaveInEvent();
+                waveFileWriter = null;
                 waveIn.WaveFormat = new WaveFormat(44100, 1); // 44100 Hz, mono
                 waveIn.DataAvailable += (sender, e) =>
                 {
                     // Initialize the WaveFileWriter on the first call to the DataAvailable event
-                    Directory.CreateDirectory("C:\\Temp");
-                    waveFileWriter ??= new WaveFileWriter("C:\\Temp\\audio.wav", waveIn.WaveFormat);
+                    Directory.CreateDirectory(Paths.AudioTempDir);
+                    waveFileWriter ??= new WaveFileWriter(Paths.AudioTempFile, waveIn.WaveFormat);
                     // Write the recorded audio data to the WAV file
                     waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
                 };
@@ -46,23 +90,26 @@ namespace X_ray_Images
             if (mode == AudioMode.Recording)
             {
                 mode = AudioMode.None;
+                ControlViews();
                 waveIn.StopRecording();
-                waveFileWriter?.Dispose();
+                waveFileWriter.Close();
             }
             else if (mode == AudioMode.Listening)
             {
                 mode = AudioMode.None;
-                outputDevice.Stop();
+                ControlViews();
+                reader.Close();
             }
         }
         private void Play_Click(object sender, EventArgs e)
         {
             if (mode == AudioMode.None)
             {
-                if (File.Exists("C:\\Temp\\audio.wav"))
+                if (File.Exists(Paths.AudioTempFile))
                 {
                     mode = AudioMode.Listening;
-                    WaveFileReader reader = new WaveFileReader("C:\\Temp\\audio.wav");
+                    ControlViews();
+                    reader = new WaveFileReader(Paths.AudioTempFile);
                     outputDevice = new WaveOutEvent();
                     outputDevice.Init(reader);
                     outputDevice.Play();
@@ -71,6 +118,8 @@ namespace X_ray_Images
                         if (mode == AudioMode.Listening)
                         {
                             mode = AudioMode.None;
+                            ControlViews();
+                            reader.Close();
                         }
                     };
                 }
@@ -83,15 +132,13 @@ namespace X_ray_Images
 
         private void WhatsAppImage_Click(object sender, EventArgs e)
         {
-            
-
             Thread serviceThread = new Thread(() =>
             {
                 try
                 {
 
                     Whatsapp_Share relnServ = new Whatsapp_Share();
-                    relnServ.FilePath = "C:\\Temp\\audio.wav";
+                    relnServ.FilePath = Paths.AudioTempFile;
                     relnServ.IsDoc = true;
                     relnServ.FileSent += () =>
                     {

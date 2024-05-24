@@ -49,11 +49,11 @@ namespace X_ray_Images
         public string savedFileName;
 
         // Coloring Icons
-        static void ActiveImage(PictureBox pictureBox)
+        void ActiveImage(PictureBox pictureBox)
         {
             pictureBox.BackColor = SystemColors.ActiveCaption;
         }
-        static void InactiveImage(PictureBox pictureBox)
+        void InactiveImage(PictureBox pictureBox)
         {
             pictureBox.BackColor = SystemColors.Control;
         }
@@ -615,7 +615,7 @@ namespace X_ray_Images
         private void RecordImage_Click(object sender, EventArgs e)
         {
 
-        } 
+        }
 
         private void TextImage_Click(object sender, EventArgs e)
         {
@@ -638,7 +638,7 @@ namespace X_ray_Images
 
         private void Telegram_Click(object sender, EventArgs e)
         {
-            Save_Click(sender,e);
+            Save_Click(sender, e);
             if (string.IsNullOrEmpty(savedFileName))
             {
                 MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -679,6 +679,6 @@ namespace X_ray_Images
             MainForm telegram = new MainForm();
             telegram.FilePath = imageFilePath;
             telegram.Show();
-         }
+        }
     }
 }

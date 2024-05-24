@@ -4,6 +4,7 @@ namespace X_ray_Images
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Label CreateLabel;
+        private System.Windows.Forms.Panel CreatePanel;
         private System.Windows.Forms.Label BasicInfoLabel;
         private System.Windows.Forms.PictureBox BasicInfoImage;
         private System.Windows.Forms.Panel BasicInfoPanel;
@@ -14,6 +15,7 @@ namespace X_ray_Images
         private System.Windows.Forms.PictureBox AudioImage;
         private System.Windows.Forms.Label AudioLabel;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button CompressButton;
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -39,15 +41,16 @@ namespace X_ray_Images
             AudioImage = new PictureBox();
             AudioLabel = new Label();
             SaveButton = new Button();
-            label1 = new Label();
-            panel1 = new Panel();
+            CompressButton = new Button();
+            CreateLabel = new Label();
+            CreatePanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)BasicInfoImage).BeginInit();
             BasicInfoPanel.SuspendLayout();
             PhotosPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PhotosImage).BeginInit();
             AudioPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AudioImage).BeginInit();
-            panel1.SuspendLayout();
+            CreatePanel.SuspendLayout();
             SuspendLayout();
             // 
             // BasicInfoLabel
@@ -97,7 +100,6 @@ namespace X_ray_Images
             BasicInfoPanel.Size = new Size(242, 263);
             BasicInfoPanel.TabIndex = 4;
             BasicInfoPanel.Click += BasicInfoPanelClick;
-            BasicInfoPanel.Paint += BasicInfoPanel_Paint;
             // 
             // PhotosPanel
             // 
@@ -195,7 +197,7 @@ namespace X_ray_Images
             // 
             SaveButton.Anchor = AnchorStyles.Bottom;
             SaveButton.Font = new Font("Dubai", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SaveButton.Location = new Point(374, 475);
+            SaveButton.Location = new Point(238, 475);
             SaveButton.Name = "SaveButton";
             SaveButton.RightToLeft = RightToLeft.Yes;
             SaveButton.Size = new Size(242, 75);
@@ -204,28 +206,41 @@ namespace X_ray_Images
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += SaveButtonClick;
             // 
-            // label1
+            // CompressButton
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Calibri", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(417, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(175, 49);
-            label1.TabIndex = 0;
-            label1.Text = "تقرير جديد";
-            label1.TextAlign = ContentAlignment.TopCenter;
+            CompressButton.Anchor = AnchorStyles.Bottom;
+            CompressButton.Font = new Font("Dubai", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CompressButton.Location = new Point(510, 475);
+            CompressButton.Name = "CompressButton";
+            CompressButton.RightToLeft = RightToLeft.Yes;
+            CompressButton.Size = new Size(242, 75);
+            CompressButton.TabIndex = 7;
+            CompressButton.Text = "حفظ مع ضغط";
+            CompressButton.UseVisualStyleBackColor = true;
+            CompressButton.Click += CompressButtonClick;
             // 
-            // panel1
+            // CreateLabel
             // 
-            panel1.Anchor = AnchorStyles.Top;
-            panel1.BackColor = Color.FromArgb(0, 180, 216);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1008, 84);
-            panel1.TabIndex = 7;
+            CreateLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CreateLabel.BackColor = Color.Transparent;
+            CreateLabel.Font = new Font("Calibri", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CreateLabel.ForeColor = Color.White;
+            CreateLabel.Location = new Point(417, 18);
+            CreateLabel.Name = "CreateLabel";
+            CreateLabel.Size = new Size(175, 49);
+            CreateLabel.TabIndex = 0;
+            CreateLabel.Text = "تقرير جديد";
+            CreateLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // CreatePanel
+            // 
+            CreatePanel.Anchor = AnchorStyles.Top;
+            CreatePanel.BackColor = Color.FromArgb(0, 180, 216);
+            CreatePanel.Controls.Add(CreateLabel);
+            CreatePanel.Location = new Point(0, 0);
+            CreatePanel.Name = "CreatePanel";
+            CreatePanel.Size = new Size(1008, 84);
+            CreatePanel.TabIndex = 7;
             // 
             // CreateReport
             // 
@@ -234,7 +249,8 @@ namespace X_ray_Images
             BackColor = Color.FromArgb(196, 211, 249);
             ClientSize = new Size(1008, 566);
             Controls.Add(SaveButton);
-            Controls.Add(panel1);
+            Controls.Add(CompressButton);
+            Controls.Add(CreatePanel);
             Controls.Add(AudioPanel);
             Controls.Add(PhotosPanel);
             Controls.Add(BasicInfoPanel);
@@ -248,11 +264,8 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)PhotosImage).EndInit();
             AudioPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AudioImage).EndInit();
-            panel1.ResumeLayout(false);
+            CreatePanel.ResumeLayout(false);
             ResumeLayout(false);
         }
-
-        private Label label1;
-        private Panel panel1;
     }
 }
