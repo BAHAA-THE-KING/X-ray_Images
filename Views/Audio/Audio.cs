@@ -21,10 +21,12 @@ namespace X_ray_Images
         WaveFileWriter? waveFileWriter;
         WaveFileReader reader;
         WaveOutEvent outputDevice;
-        public Audio()
+        string path = "";
+        public Audio(string path)
         {
             InitializeComponent();
             ControlViews();
+            this.path = path;
         }
         // Control View
         void ActivateElement(Control pictureBox)
@@ -70,7 +72,7 @@ namespace X_ray_Images
             {
                 mode = AudioMode.Recording;
                 ControlViews();
-                if (File.Exists(Paths.AudioTempFile)) File.Delete(Paths.AudioTempFile);
+                if (File.Exists(path)) File.Delete(path);
                 waveIn = new WaveInEvent();
                 waveFileWriter = null;
                 waveIn.WaveFormat = new WaveFormat(44100, 1); // 44100 Hz, mono
@@ -78,7 +80,7 @@ namespace X_ray_Images
                 {
                     // Initialize the WaveFileWriter on the first call to the DataAvailable event
                     Directory.CreateDirectory(Paths.AudioTempDir);
-                    waveFileWriter ??= new WaveFileWriter(Paths.AudioTempFile, waveIn.WaveFormat);
+                    waveFileWriter ??= new WaveFileWriter(path, waveIn.WaveFormat);
                     // Write the recorded audio data to the WAV file
                     waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
                 };
@@ -105,11 +107,11 @@ namespace X_ray_Images
         {
             if (mode == AudioMode.None)
             {
-                if (File.Exists(Paths.AudioTempFile))
+                if (File.Exists(path))
                 {
                     mode = AudioMode.Listening;
                     ControlViews();
-                    reader = new WaveFileReader(Paths.AudioTempFile);
+                    reader = new WaveFileReader(path);
                     outputDevice = new WaveOutEvent();
                     outputDevice.Init(reader);
                     outputDevice.Play();
@@ -138,7 +140,7 @@ namespace X_ray_Images
                 {
 
                     Whatsapp_Share relnServ = new Whatsapp_Share();
-                    relnServ.FilePath = Paths.AudioTempFile;
+                    relnServ.FilePath = path;
                     relnServ.IsDoc = true;
                     relnServ.FileSent += () =>
                     {

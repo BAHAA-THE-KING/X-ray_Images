@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using X_ray_Images;
+using X_ray_Images.Classes;
 using X_ray_Images.Views.BasicInfo;
 
 namespace X_ray_Images
@@ -41,13 +42,13 @@ namespace X_ray_Images
             if (!isAudioOpen)
             {
                 isAudioOpen = true;
-                Audio audio = new Audio();
+                Audio audio = new Audio(Paths.AudioTempFile);
                 audio.Show();
             }
         }
         private void SaveButtonClick(object sender, EventArgs e)
         {
-            
+
         }
         private void CompressButtonClick(object sender, EventArgs e)
         {

@@ -1,4 +1,6 @@
-﻿namespace X_ray_Images
+﻿using X_ray_Images.Classes;
+
+namespace X_ray_Images
 {
     partial class Audio
     {
@@ -11,7 +13,7 @@
         private System.Windows.Forms.PictureBox PlayImage;
         protected override void Dispose(bool disposing)
         {
-            CreateReport.isAudioOpen = false;
+            if (this.path.Equals(Paths.AudioTempFile)) CreateReport.isAudioOpen = false;
             if (disposing)
             {
                 if (components != null)
