@@ -37,10 +37,11 @@ namespace X_ray_Images
             GeometryImage = new PictureBox();
             RecordImage = new PictureBox();
             Orange2PurpleImage = new PictureBox();
-            ColorMapImage = new PictureBox();
+            WhatsAppImage = new PictureBox();
             GalleryPanel = new Panel();
             ClearImage = new PictureBox();
             CreateButton = new Button();
+            Telegram = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)CropImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Red2BlueImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TextImage).BeginInit();
@@ -51,15 +52,16 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)GeometryImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)RecordImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ColorMapImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ClearImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Telegram).BeginInit();
             SuspendLayout();
             // 
             // CropImage
             // 
             CropImage.Cursor = Cursors.Hand;
             CropImage.Image = (Image)resources.GetObject("CropImage.Image");
-            CropImage.Location = new Point(8, 80);
+            CropImage.Location = new Point(8, 50);
             CropImage.Margin = new Padding(5, 4, 5, 4);
             CropImage.Name = "CropImage";
             CropImage.Size = new Size(57, 62);
@@ -72,7 +74,7 @@ namespace X_ray_Images
             // 
             Red2BlueImage.Cursor = Cursors.Hand;
             Red2BlueImage.Image = (Image)resources.GetObject("Red2BlueImage.Image");
-            Red2BlueImage.Location = new Point(15, 250);
+            Red2BlueImage.Location = new Point(15, 220);
             Red2BlueImage.Margin = new Padding(5, 4, 5, 4);
             Red2BlueImage.Name = "Red2BlueImage";
             Red2BlueImage.Size = new Size(57, 62);
@@ -85,7 +87,7 @@ namespace X_ray_Images
             // 
             TextImage.Cursor = Cursors.Hand;
             TextImage.Image = (Image)resources.GetObject("TextImage.Image");
-            TextImage.Location = new Point(90, 250);
+            TextImage.Location = new Point(90, 220);
             TextImage.Margin = new Padding(5, 4, 5, 4);
             TextImage.Name = "TextImage";
             TextImage.Size = new Size(57, 62);
@@ -98,7 +100,7 @@ namespace X_ray_Images
             // 
             SelectImage.Cursor = Cursors.Hand;
             SelectImage.Image = (Image)resources.GetObject("SelectImage.Image");
-            SelectImage.Location = new Point(8, 166);
+            SelectImage.Location = new Point(8, 136);
             SelectImage.Margin = new Padding(5, 4, 5, 4);
             SelectImage.Name = "SelectImage";
             SelectImage.Size = new Size(57, 62);
@@ -145,21 +147,21 @@ namespace X_ray_Images
             // AddImageToolStrip
             // 
             AddImageToolStrip.Name = "AddImageToolStrip";
-            AddImageToolStrip.Size = new Size(224, 26);
+            AddImageToolStrip.Size = new Size(131, 26);
             AddImageToolStrip.Text = "إضافة";
             AddImageToolStrip.Click += New_Click;
             // 
             // SaveImageToolStrip
             // 
             SaveImageToolStrip.Name = "SaveImageToolStrip";
-            SaveImageToolStrip.Size = new Size(224, 26);
+            SaveImageToolStrip.Size = new Size(131, 26);
             SaveImageToolStrip.Text = "حفظ";
             SaveImageToolStrip.Click += Save_Click;
             // 
             // DeleteImageToolStrip
             // 
             DeleteImageToolStrip.Name = "DeleteImageToolStrip";
-            DeleteImageToolStrip.Size = new Size(224, 26);
+            DeleteImageToolStrip.Size = new Size(131, 26);
             DeleteImageToolStrip.Text = "حذف";
             DeleteImageToolStrip.Click += Delete_Click;
             // 
@@ -188,7 +190,7 @@ namespace X_ray_Images
             // 
             CurveImage.Cursor = Cursors.Hand;
             CurveImage.Image = (Image)resources.GetObject("CurveImage.Image");
-            CurveImage.Location = new Point(90, 80);
+            CurveImage.Location = new Point(90, 50);
             CurveImage.Margin = new Padding(5, 4, 5, 4);
             CurveImage.Name = "CurveImage";
             CurveImage.Size = new Size(57, 62);
@@ -201,7 +203,7 @@ namespace X_ray_Images
             // 
             GeometryImage.Cursor = Cursors.Hand;
             GeometryImage.Image = (Image)resources.GetObject("GeometryImage.Image");
-            GeometryImage.Location = new Point(90, 166);
+            GeometryImage.Location = new Point(90, 136);
             GeometryImage.Margin = new Padding(5, 4, 5, 4);
             GeometryImage.Name = "GeometryImage";
             GeometryImage.Size = new Size(57, 62);
@@ -214,7 +216,7 @@ namespace X_ray_Images
             // 
             RecordImage.Cursor = Cursors.Hand;
             RecordImage.Image = (Image)resources.GetObject("RecordImage.Image");
-            RecordImage.Location = new Point(90, 338);
+            RecordImage.Location = new Point(90, 308);
             RecordImage.Margin = new Padding(5, 4, 5, 4);
             RecordImage.Name = "RecordImage";
             RecordImage.Size = new Size(57, 62);
@@ -227,7 +229,7 @@ namespace X_ray_Images
             // 
             Orange2PurpleImage.Cursor = Cursors.Hand;
             Orange2PurpleImage.Image = (Image)resources.GetObject("Orange2PurpleImage.Image");
-            Orange2PurpleImage.Location = new Point(15, 338);
+            Orange2PurpleImage.Location = new Point(15, 308);
             Orange2PurpleImage.Margin = new Padding(5, 4, 5, 4);
             Orange2PurpleImage.Name = "Orange2PurpleImage";
             Orange2PurpleImage.Size = new Size(57, 62);
@@ -236,18 +238,18 @@ namespace X_ray_Images
             Orange2PurpleImage.TabStop = false;
             Orange2PurpleImage.Click += Orange2PurpleImage_Click;
             // 
-            // ColorMapImage
+            // WhatsAppImage
             // 
-            ColorMapImage.Cursor = Cursors.Hand;
-            ColorMapImage.Image = (Image)resources.GetObject("ColorMapImage.Image");
-            ColorMapImage.Location = new Point(15, 425);
-            ColorMapImage.Margin = new Padding(5, 4, 5, 4);
-            ColorMapImage.Name = "ColorMapImage";
-            ColorMapImage.Size = new Size(57, 62);
-            ColorMapImage.SizeMode = PictureBoxSizeMode.Zoom;
-            ColorMapImage.TabIndex = 20;
-            ColorMapImage.TabStop = false;
-            ColorMapImage.Click += ColorMapImage_Click;
+            WhatsAppImage.Cursor = Cursors.Hand;
+            WhatsAppImage.Image = (Image)resources.GetObject("WhatsAppImage.Image");
+            WhatsAppImage.Location = new Point(15, 395);
+            WhatsAppImage.Margin = new Padding(5, 4, 5, 4);
+            WhatsAppImage.Name = "WhatsAppImage";
+            WhatsAppImage.Size = new Size(57, 62);
+            WhatsAppImage.SizeMode = PictureBoxSizeMode.Zoom;
+            WhatsAppImage.TabIndex = 20;
+            WhatsAppImage.TabStop = false;
+            WhatsAppImage.Click += WhatsApp_Click;
             // 
             // GalleryPanel
             // 
@@ -263,7 +265,7 @@ namespace X_ray_Images
             // 
             ClearImage.Cursor = Cursors.Hand;
             ClearImage.Image = (Image)resources.GetObject("ClearImage.Image");
-            ClearImage.Location = new Point(90, 425);
+            ClearImage.Location = new Point(90, 395);
             ClearImage.Margin = new Padding(5, 4, 5, 4);
             ClearImage.Name = "ClearImage";
             ClearImage.Size = new Size(57, 62);
@@ -279,7 +281,7 @@ namespace X_ray_Images
             CreateButton.Cursor = Cursors.Hand;
             CreateButton.Font = new Font("Tahoma", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CreateButton.ForeColor = SystemColors.ButtonHighlight;
-            CreateButton.Location = new Point(8, 513);
+            CreateButton.Location = new Point(8, 550);
             CreateButton.Margin = new Padding(0);
             CreateButton.MaximumSize = new Size(167, 95);
             CreateButton.MinimumSize = new Size(167, 95);
@@ -290,16 +292,30 @@ namespace X_ray_Images
             CreateButton.UseVisualStyleBackColor = false;
             CreateButton.Click += CreateButton_Click;
             // 
+            // Telegram
+            // 
+            Telegram.Cursor = Cursors.Hand;
+            Telegram.Image = (Image)resources.GetObject("Telegram.Image");
+            Telegram.Location = new Point(15, 483);
+            Telegram.Margin = new Padding(5, 4, 5, 4);
+            Telegram.Name = "Telegram";
+            Telegram.Size = new Size(57, 62);
+            Telegram.SizeMode = PictureBoxSizeMode.Zoom;
+            Telegram.TabIndex = 27;
+            Telegram.TabStop = false;
+            Telegram.Click += Telegram_Click;
+            // 
             // Photos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1341, 851);
+            Controls.Add(Telegram);
             Controls.Add(CreateButton);
             Controls.Add(ClearImage);
             Controls.Add(GalleryPanel);
             Controls.Add(Orange2PurpleImage);
-            Controls.Add(ColorMapImage);
+            Controls.Add(WhatsAppImage);
             Controls.Add(RecordImage);
             Controls.Add(GeometryImage);
             Controls.Add(CurveImage);
@@ -325,8 +341,9 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)GeometryImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)RecordImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)Orange2PurpleImage).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ColorMapImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)ClearImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Telegram).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -347,12 +364,13 @@ namespace X_ray_Images
         private PictureBox GeometryImage;
         private System.Windows.Forms.PictureBox RecordImage;
         private System.Windows.Forms.PictureBox Orange2PurpleImage;
-        private System.Windows.Forms.PictureBox ColorMapImage;
+        private System.Windows.Forms.PictureBox WhatsAppImage;
         private System.Windows.Forms.Panel GalleryPanel;
         private System.Windows.Forms.ToolStripMenuItem AddImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DeleteImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DangerToolStrip;
         private System.Windows.Forms.PictureBox ClearImage;
         private Button CreateButton;
+        private PictureBox Telegram;
     }
 }

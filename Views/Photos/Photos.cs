@@ -6,6 +6,8 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
+using X_ray_Images.Views.Share;
+using WTelegramClientTestWF;
 
 namespace X_ray_Images
 {
@@ -15,6 +17,7 @@ namespace X_ray_Images
         Select = 1,
         Drawing = 2,
         Free = 3,
+        Text = 4,
     };
     public enum Shape
     {
@@ -26,6 +29,7 @@ namespace X_ray_Images
         Vertical = 5,
         Slope = 6,
     };
+
     public partial class Photos : Form
     {
         static public PhotosMode mode = PhotosMode.None;
@@ -38,9 +42,11 @@ namespace X_ray_Images
         private Circle tempCircle = new Circle(0, 0, 0);
         private Line tempLine = new Line(-1, -1, -1, -1);
         private List<Point> tempFree = [];
+        private string tempText = "";
         static public List<Image> images = [];
         static public List<GalleryItem> galleryItems = [];
         int active = 0;
+        public string savedFileName;
 
         // Coloring Icons
         static void ActiveImage(PictureBox pictureBox)
@@ -86,7 +92,7 @@ namespace X_ray_Images
         // Management
         private void ResetState()
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free)
+            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
             {
                 Reset();
                 mode = PhotosMode.None;
@@ -102,6 +108,7 @@ namespace X_ray_Images
             tempRect = new Rectangle(0, 0, 0, 0);
             tempCircle = new Circle(0, 0, 0);
             tempFree = [];
+            tempText = "";
             MainImage.Invalidate();
         }
         private void SetImage(Image image)
@@ -145,32 +152,35 @@ namespace X_ray_Images
         private void Save_Click(object sender, EventArgs e)
         {
             ResetState();
-            string appPath = Application.StartupPath;
-
-            string netPath = Directory.GetParent(appPath).FullName;
-            string debugPath = Directory.GetParent(netPath).FullName;
-            string binPath = Directory.GetParent(debugPath).FullName;
-
-            string projectPath = Directory.GetParent(binPath).FullName;
-
-            string initialDirectory = Path.Combine(projectPath, "testImages");
-            string initialFileName = "savedImage.png";
-
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            if (MainImage.Image != null)
             {
-                saveFileDialog.InitialDirectory = initialDirectory;
-                saveFileDialog.FileName = initialFileName;
-                saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|All Files|*.*";
-                saveFileDialog.Title = "Save Image As";
+                savedFileName = string.Empty;
 
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                string appPath = Application.StartupPath;
+
+                string netPath = Directory.GetParent(appPath).FullName;
+                string debugPath = Directory.GetParent(netPath).FullName;
+                string binPath = Directory.GetParent(debugPath).FullName;
+
+                string projectPath = Directory.GetParent(binPath).FullName;
+
+                string initialDirectory = Path.Combine(projectPath, "testImages");
+                string initialFileName = "savedImage.png";
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
-                    string newImagePath = saveFileDialog.FileName;
+                    saveFileDialog.InitialDirectory = initialDirectory;
+                    saveFileDialog.FileName = initialFileName;
+                    saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|All Files|*.*";
+                    saveFileDialog.Title = "Save Image As";
 
-                    Image imageToSave = MainImage.Image;
-
-                    if (imageToSave != null)
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
+                        string newImagePath = saveFileDialog.FileName;
+
+                        Image imageToSave = MainImage.Image;
+
+
                         // Determine the image format based on the selected file extension
                         ImageFormat imageFormat = ImageFormat.Png; // Default to PNG
                         string extension = Path.GetExtension(newImagePath);
@@ -184,19 +194,23 @@ namespace X_ray_Images
                         try
                         {
                             imageToSave.Save(newImagePath, imageFormat);
+                            savedFileName = Path.GetFileName(newImagePath);
                             MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
         private void Delete_Click(object sender, EventArgs e)
@@ -284,7 +298,7 @@ namespace X_ray_Images
         }
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free)
+            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
             {
                 if (e.Button == MouseButtons.Right)
                 {
@@ -299,13 +313,13 @@ namespace X_ray_Images
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free)
+            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
             {
                 if (e.Button == MouseButtons.Left)
                 {
                     if (startPoint.X != -1)
                     {
-                        if (mode == PhotosMode.Select || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
+                        if (mode == PhotosMode.Select || mode == PhotosMode.Text || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
                             tempRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
                         else if (mode == PhotosMode.Drawing && shapeType == Shape.Circle)
                             tempCircle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
@@ -351,6 +365,12 @@ namespace X_ray_Images
             {
                 SetImage(Drawer.DrawFree(MainImage.Image, tempFree));
                 Reset();
+            }
+            else if (mode == PhotosMode.Text)
+            {
+                SetImage(Drawer.DrawText(MainImage.Image, tempText, tempRect));
+                ResetState();
+                InactiveImage(TextImage);
             }
         }
         private void MainImage_Paint(object sender, EventArgs e)
@@ -524,19 +544,141 @@ namespace X_ray_Images
             }
         }
 
-        private void ColorMapImage_Click(object sender, EventArgs e)
+        private void WhatsApp_Click(object sender, EventArgs e)
         {
+            Save_Click(sender, e);
 
+            if (string.IsNullOrEmpty(savedFileName))
+            {
+                MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string appPath = Application.StartupPath;
+
+            string netPath = Directory.GetParent(appPath).FullName;
+            string debugPath = Directory.GetParent(netPath).FullName;
+            string binPath = Directory.GetParent(debugPath).FullName;
+
+            string projectPath = Directory.GetParent(binPath).FullName;
+
+            string initialDirectory = Path.Combine(projectPath, "testImages", "share");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(initialDirectory))
+            {
+                Directory.CreateDirectory(initialDirectory);
+            }
+
+            string imageFilePath = Path.Combine(initialDirectory, savedFileName);
+
+            if (MainImage.Image != null)
+            {
+                // Save the image from the PictureBox to the specified path if it doesn't already exist
+                if (!File.Exists(imageFilePath))
+                {
+                    MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Thread serviceThread = new Thread(() =>
+            {
+                try
+                {
+
+                    Whatsapp_Share relnServ = new Whatsapp_Share();
+                    relnServ.FilePath = imageFilePath;
+                    relnServ.FileSent += () =>
+                    {
+                        // Invoke to ensure the message box is shown on the main UI thread
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        });
+                    };
+                    relnServ.OnDebug();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error in service thread: " + ex.Message);
+                }
+            });
+
+            serviceThread.IsBackground = true;
+            serviceThread.Start();
         }
 
         private void RecordImage_Click(object sender, EventArgs e)
         {
 
-        }
+        } 
 
         private void TextImage_Click(object sender, EventArgs e)
         {
-
+            if (mode == PhotosMode.None)
+            {
+                ActiveImage(TextImage);
+                new Text(setText).Show();
+            }
+            else if (mode == PhotosMode.Text)
+            {
+                InactiveImage(TextImage);
+                ResetState();
+            }
         }
+        private void setText(string text)
+        {
+            mode = PhotosMode.Text;
+            tempText = text;
+        }
+
+        private void Telegram_Click(object sender, EventArgs e)
+        {
+            Save_Click(sender,e);
+            if (string.IsNullOrEmpty(savedFileName))
+            {
+                MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string appPath = Application.StartupPath;
+
+            string netPath = Directory.GetParent(appPath).FullName;
+            string debugPath = Directory.GetParent(netPath).FullName;
+            string binPath = Directory.GetParent(debugPath).FullName;
+
+            string projectPath = Directory.GetParent(binPath).FullName;
+
+            string initialDirectory = Path.Combine(projectPath, "testImages", "share");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(initialDirectory))
+            {
+                Directory.CreateDirectory(initialDirectory);
+            }
+
+            string imageFilePath = Path.Combine(initialDirectory, savedFileName);
+
+            if (MainImage.Image != null)
+            {
+                // Save the image from the PictureBox to the specified path if it doesn't already exist
+                if (!File.Exists(imageFilePath))
+                {
+                    MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MainForm telegram = new MainForm();
+            telegram.FilePath = imageFilePath;
+            telegram.Show();
+         }
     }
 }

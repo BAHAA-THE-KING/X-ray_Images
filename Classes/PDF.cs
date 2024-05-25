@@ -1,22 +1,37 @@
-
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 using QuestPDF.Helpers;
 using System;
+using System.IO;
 using System.Windows.Forms;
+
 namespace X_ray_Images.Classes
 {
     public class PDF
     {
-
         public static bool Generate(string name, string illness, string illnessDescription, string status, string doctorName, DateTime date, DateTime nextReview, string diagnoses, string diagnosisDescription, string cure, string address, string phoneNumber)
         {
             try
             {
                 QuestPDF.Settings.License = LicenseType.Community;
+                string appPath = Application.StartupPath;
+
+                string netPath = Directory.GetParent(appPath).FullName;
+                string debugPath = Directory.GetParent(netPath).FullName;
+                string binPath = Directory.GetParent(debugPath).FullName;
+
+                string projectPath = Directory.GetParent(binPath).FullName;
 
                 string uniqueFileName = $"PatientReport_{Guid.NewGuid()}.pdf";
-                string filePath = Path.Combine("pdfs", uniqueFileName);
+                string pdfDirectory = Path.Combine(projectPath, "pdfs");
+
+                // Ensure the directory exists
+                if (!Directory.Exists(pdfDirectory))
+                {
+                    Directory.CreateDirectory(pdfDirectory);
+                }
+
+                string filePath = Path.Combine(pdfDirectory, uniqueFileName);
 
                 Document.Create(container =>
                 {
@@ -133,12 +148,12 @@ namespace X_ray_Images.Classes
                 })
                 .GeneratePdf(filePath);
 
-                // MessageBox.Show($"PDF generated successfully at: {filePath}", "Success!");
+                MessageBox.Show($"PDF generated successfully at: {filePath}", "Success!");
                 return true;
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.GetBaseException().Message, "Generating PDF file failed!");
+                MessageBox.Show(exc.GetBaseException().Message, "Generating PDF file failed! " + exc);
                 return false;
             }
         }
