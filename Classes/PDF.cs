@@ -129,14 +129,6 @@ namespace X_ray_Images.Classes
                                     });
                                 });
                             });
-
-                        page.Footer()
-                            .AlignCenter()
-                            .Text(x =>
-                            {
-                                x.Span("Page ");
-                                x.CurrentPageNumber();
-                            });
                     });
                 })
                 .GeneratePdf(filePath);
