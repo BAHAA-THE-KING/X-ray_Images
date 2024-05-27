@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using X_ray_Images;
 using X_ray_Images.Classes;
@@ -48,10 +49,64 @@ namespace X_ray_Images
         }
         private void SaveButtonClick(object sender, EventArgs e)
         {
+            if (!BaseInfo.ValidateRequiredFields())
+            {
+                return;
+            }
+            if (Photos.images.Count == 0)
+            {
+                MessageBox.Show("يجب إدخال صورة واحدة على الأقل");
+                return;
+            }
+            if (!File.Exists(Paths.AudioTempFile))
+            {
+                MessageBox.Show("يجب إضافة تسجيل صوتي لوصف الحالة");
+            }
+            string path = Paths.CreatePath(BaseInfo.baseInfo.name);
+            Directory.CreateDirectory(path);
 
+            Patient patient = new Patient(BaseInfo.baseInfo, BaseInfo.connectInfo, BaseInfo.otherInfo, BaseInfo.statusInfo);
+            patient.ConvertToPDF(Path.Combine(path, "التقربر الطبي.pdf"));
+
+            for (int i = 0; i < Photos.images.Count; i++)
+            {
+                Image image = Photos.images[i];
+                image.Save(Path.Join(path, "صورة " + i + ".png"), ImageFormat.Png);
+            }
+
+            File.Copy(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.wav"));
         }
         private void CompressButtonClick(object sender, EventArgs e)
         {
+            if (!BaseInfo.ValidateRequiredFields())
+            {
+                return;
+            }
+            if (Photos.images.Count == 0)
+            {
+                MessageBox.Show("يجب إدخال صورة واحدة على الأقل");
+                return;
+            }
+            if (!File.Exists(Paths.AudioTempFile))
+            {
+                MessageBox.Show("يجب إضافة تسجيل صوتي لوصف الحالة");
+            }
+            string path = Paths.CreatePath(BaseInfo.baseInfo.name);
+            Directory.CreateDirectory(path);
+
+            Patient patient = new Patient(BaseInfo.baseInfo, BaseInfo.connectInfo, BaseInfo.otherInfo, BaseInfo.statusInfo);
+            patient.ConvertToPDF(Path.Combine(path, "التقربر الطبي.pdf"));
+            Compressor.CompressPdf(Path.Combine(path, "التقربر الطبي.pdf"), Path.Combine(path, "التقربر الطبي.pdf"));
+
+            for (int i = 0; i < Photos.images.Count; i++)
+            {
+                Image image = Photos.images[i];
+                image.Save(Path.Join(path, "صورة " + i + ".png"), ImageFormat.Png);
+                Compressor.CompressImage(Path.Join(path, "صورة " + i + ".png"), Path.Join(path, "صورة " + i + ".jpeg"), 100);
+                File.Delete(Path.Join(path, "صورة " + i + ".png"));
+            }
+
+            Compressor.CompressAudio(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.mp3"));
         }
     }
 }

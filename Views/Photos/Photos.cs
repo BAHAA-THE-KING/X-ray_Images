@@ -160,21 +160,11 @@ namespace X_ray_Images
                 {
                     savedFileName = string.Empty;
 
-                    string appPath = Application.StartupPath;
-
-                    string netPath = Directory.GetParent(appPath).FullName;
-                    string debugPath = Directory.GetParent(netPath).FullName;
-                    string binPath = Directory.GetParent(debugPath).FullName;
-
-                    string projectPath = Directory.GetParent(binPath).FullName;
-
-                    string initialDirectory = Path.Combine(projectPath, "testImages");
-                    string initialFileName = "savedImage.png";
+                    string initialDirectory = Paths.CreatePath("testImages");
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
                         saveFileDialog.InitialDirectory = initialDirectory;
-                        saveFileDialog.FileName = initialFileName;
                         saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|All Files|*.*";
                         saveFileDialog.Title = "Save Image As";
 
@@ -543,15 +533,8 @@ namespace X_ray_Images
         private void CreateButton_Click(object sender, EventArgs e)
         {
             ResetState();
-            string appPath = Application.StartupPath;
 
-            string netPath = Directory.GetParent(appPath).FullName;
-            string debugPath = Directory.GetParent(netPath).FullName;
-            string binPath = Directory.GetParent(debugPath).FullName;
-
-            string projectPath = Directory.GetParent(binPath).FullName;
-
-            string initialDirectory = Path.Combine(projectPath, "testImages");
+            string initialDirectory = Paths.CreatePath("testImages");
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = initialDirectory;
@@ -591,15 +574,9 @@ namespace X_ray_Images
                     MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string appPath = Application.StartupPath;
 
-                string netPath = Directory.GetParent(appPath).FullName;
-                string debugPath = Directory.GetParent(netPath).FullName;
-                string binPath = Directory.GetParent(debugPath).FullName;
-
-                string projectPath = Directory.GetParent(binPath).FullName;
-
-                string initialDirectory = Path.Combine(projectPath, "testImages", "share");
+                string initialDirectory = Paths.CreatePath("testImages");
+                initialDirectory = Path.Combine(initialDirectory, "share");
 
                 // Ensure the directory exists
                 if (!Directory.Exists(initialDirectory))
@@ -696,15 +673,9 @@ namespace X_ray_Images
                     MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string appPath = Application.StartupPath;
 
-                string netPath = Directory.GetParent(appPath).FullName;
-                string debugPath = Directory.GetParent(netPath).FullName;
-                string binPath = Directory.GetParent(debugPath).FullName;
-
-                string projectPath = Directory.GetParent(binPath).FullName;
-
-                string initialDirectory = Path.Combine(projectPath, "testImages", "share");
+                string initialDirectory = Paths.CreatePath("testImages");
+                initialDirectory = Path.Combine(initialDirectory, "share");
 
                 // Ensure the directory exists
                 if (!Directory.Exists(initialDirectory))

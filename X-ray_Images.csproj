@@ -11,13 +11,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Accord.Video.FFMPEG" Version="3.8.0" />
     <PackageReference Include="AForge.Imaging" Version="2.2.5" />
     <PackageReference Include="AForge.Math" Version="2.2.5" />
     <PackageReference Include="AForge.NetStandard" Version="2.2.6.1" />
     <PackageReference Include="Emgu.CV" Version="4.9.0.5494" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
+    <PackageReference Include="itext7" Version="8.0.4" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="NAudio.Lame" Version="2.1.0" />
+    <PackageReference Include="OpenCV" Version="2.4.11" />
     <PackageReference Include="OxyPlot.WindowsForms" Version="2.1.2" />
     <PackageReference Include="QuestPDF" Version="2024.3.7" />
     <PackageReference Include="Selenium.WebDriver" Version="4.21.0" />

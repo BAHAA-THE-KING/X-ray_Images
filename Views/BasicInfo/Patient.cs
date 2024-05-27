@@ -10,7 +10,7 @@ using X_ray_Images.Classes;
 
 namespace X_ray_Images.Views.BasicInfo
 {
-    public  class Patient
+    public class Patient
     {
         Base baseInfo;
         Contact contactInfo;
@@ -26,7 +26,7 @@ namespace X_ray_Images.Views.BasicInfo
 
         public override string? ToString()
         {
-            return baseInfo.ToString() + "\n" + statusInfo.ToString()+"\n"
+            return baseInfo.ToString() + "\n" + statusInfo.ToString() + "\n"
             + contactInfo.ToString() + "\n"
             + otherInfo.ToString();
         }
@@ -59,7 +59,7 @@ namespace X_ray_Images.Views.BasicInfo
 
 
         }
-        public void ConvertToPDF()
+        public void ConvertToPDF(string path)
         {
             //string dateString = "22/5/2024";
             //string nextReviewString = "22/11/2024"; // Example next review date
@@ -81,7 +81,7 @@ namespace X_ray_Images.Views.BasicInfo
 
             PDF.Generate(baseInfo.name, baseInfo.sickness[0], otherInfo.details, baseInfo.status, baseInfo.doctors[0],
                 dateTime, nextdateReview, statusInfo.diagnosis, statusInfo.description, statusInfo.indication,
-                contactInfo.address, contactInfo.phone);
+                contactInfo.address, contactInfo.phone, path);
 
 
         }
