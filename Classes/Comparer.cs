@@ -11,14 +11,15 @@ namespace X_ray_Images
             double secondPercentage = whitePercetageOf(second);
             Console.WriteLine("first:" + firstPercentage + "\n second:" + secondPercentage);
             double developmentPerecentage = 10.0;
-            if(Math.Abs(firstPercentage - secondPercentage) >= developmentPerecentage)
+            if (Math.Abs(firstPercentage - secondPercentage) >= developmentPerecentage)
             {
-                return firstPercentage>secondPercentage? "decrease in size noticed" : "Growth in size noticed";
+                return firstPercentage > secondPercentage ? "decrease in size noticed" : "Growth in size noticed";
             }
             return "similar";
         }
 
-        private static double whitePercetageOf(Bitmap first) {
+        private static double whitePercetageOf(Bitmap first)
+        {
             int totalPixels = first.Width * first.Height;
 
             // Count white pixels
@@ -46,10 +47,10 @@ namespace X_ray_Images
         public static bool IsWhite(Color color)
         {
             double brightnessThreshold = 0.5;
-            double brightness = color.GetBrightness();      
-            bool isWhiteBrightness= brightness >= brightnessThreshold;
-            int threshold = 130; 
-            bool isWhiteRGB= color.R >= threshold && color.G >= threshold && color.B >= threshold;
+            double brightness = color.GetBrightness();
+            bool isWhiteBrightness = brightness >= brightnessThreshold;
+            int threshold = 130;
+            bool isWhiteRGB = color.R >= threshold && color.G >= threshold && color.B >= threshold;
             return isWhiteBrightness;
         }
     }

@@ -4,10 +4,10 @@ using System;
 
 namespace X_ray_Images.Views.BasicInfo
 {
- 
+
     public partial class UC_Base : UserControl
     {
-        string[] fileds = 
+        string[] fileds =
         {
              "اسم المريض",
              "المرض",
@@ -43,9 +43,9 @@ namespace X_ray_Images.Views.BasicInfo
 
         private void DataGridBasic_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-                var dgv = (DataGridView)sender;      
-                string attribValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value?.ToString() ?? "";
-                string newValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? "";
+            var dgv = (DataGridView)sender;
+            string attribValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value?.ToString() ?? "";
+            string newValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? "";
             DataGridBasic.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = newValue;
 
             if (e.RowIndex == 4)
@@ -57,26 +57,26 @@ namespace X_ray_Images.Views.BasicInfo
                     DateTimeStyles.None,
                     out DateTime result
                     );
-                if(success)
-                    datevalue  = result;
+                if (success)
+                    datevalue = result;
                 else
                 {
                     MessageBox.Show("التاريخ غير صحيح \n d/M/yyyy ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     DataGridBasic.Rows[4].Cells[1].Value = datevalue.ToString("d/M/yyyy");
-                 
+
                 }
             }
-            if(e.RowIndex == 1)
+            if (e.RowIndex == 1)
             {
                 _binfo.sickness.Clear();
-                 _sickness= newValue.Split('،');
+                _sickness = newValue.Split('،');
 
                 foreach (string item in _sickness)
                 {
                     _binfo.sickness.Add(item.Trim());
                 }
             }
-              if (e.RowIndex == 3)
+            if (e.RowIndex == 3)
             {
                 _binfo.doctors.Clear();
                 _doctors = newValue.Split('،');
@@ -86,23 +86,23 @@ namespace X_ray_Images.Views.BasicInfo
                     _binfo.doctors.Add(item.Trim());
                 }
             }
-                switch (attribValue)
-                {
+            switch (attribValue)
+            {
                 case "اسم المريض":
                     _binfo.name = newValue;
                     break;
                 case "المرض":
-                    //_binfo.sickness.Add(newValue); break;
+                //_binfo.sickness.Add(newValue); break;
                 case "الحالة":
                     _binfo.status = newValue; break;
                 case "اسم الدكتور المشرف":
-                    //_binfo.doctors.Add( newValue); break;
+                //_binfo.doctors.Add( newValue); break;
                 case "التاريخ":
                     _binfo.date = datevalue.ToString("d/M/yyyy"); break;
-                }
-                
+            }
+
         }
-      
+
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

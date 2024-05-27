@@ -51,10 +51,10 @@ namespace X_ray_Images.Classes
                                         column.Item().Text(text =>
                                         {
                                             text.Span("Illness: ").SemiBold().FontColor(Colors.Black);
-                                            for(int i = 0;i < illness.Count;i++)
+                                            for (int i = 0; i < illness.Count; i++)
                                             {
-                                                
-                                                if(i == illness.Count-1)
+
+                                                if (i == illness.Count - 1)
                                                 {
                                                     text.Span(illness[i]).FontColor(Colors.Grey.Darken1);
                                                 }
@@ -80,12 +80,12 @@ namespace X_ray_Images.Classes
                                         column.Item().Text(text =>
                                         {
                                             text.Span("Supervised Doctor: ").SemiBold().FontColor(Colors.Black);
-                                          
+
                                             for (int i = 0; i < doctors.Count; i++)
                                             {
                                                 if (i == doctors.Count - 1)
                                                 {
-                                                   text.Span(doctors[i]).FontColor(Colors.Grey.Darken1);
+                                                    text.Span(doctors[i]).FontColor(Colors.Grey.Darken1);
                                                 }
                                                 else
                                                     text.Span(doctors[i] + ", ").FontColor(Colors.Grey.Darken1);

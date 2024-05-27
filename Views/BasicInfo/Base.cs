@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace X_ray_Images.Views.BasicInfo
 {
-    public class Base   
+    public class Base
     {
         public string name;
         public List<string> sickness;
@@ -22,7 +22,7 @@ namespace X_ray_Images.Views.BasicInfo
             this.doctors = new List<string>();
             this.date = "";
         }
-            public Base(string name, List<string> sickness, string status, List<string> doctors, string date)
+        public Base(string name, List<string> sickness, string status, List<string> doctors, string date)
         {
             this.name = name;
             this.sickness = sickness;
@@ -33,10 +33,10 @@ namespace X_ray_Images.Views.BasicInfo
 
         public override string? ToString()
         {
-            return "name: " + name + "\n" + "sickness: " + sickness[0]+"\n"
-                +"status: "+status+"\n" + "doctors: " + doctors[0] + "\n"
-                +"date :" + date;
-                ;
+            return "name: " + name + "\n" + "sickness: " + sickness[0] + "\n"
+                + "status: " + status + "\n" + "doctors: " + doctors[0] + "\n"
+                + "date :" + date;
+            ;
         }
     }
 }

@@ -85,14 +85,14 @@ namespace X_ray_Images.Views.Search
                 Folder_Path.Text = browser.SelectedPath;
             }
 
-            if(old == Folder_Path.Text)
+            if (old == Folder_Path.Text)
             {
                 return;
             }
 
             images = Classes.Search.SearchImages(Folder_Path.Text);
 
-            if(images == null || images.Length == 0)
+            if (images == null || images.Length == 0)
             {
                 MessageBox.Show("this folder has no images.");
                 return;
@@ -137,7 +137,7 @@ namespace X_ray_Images.Views.Search
                     }));
 
                     processed_files++;
-                    int percentage = (int)((double)(processed_files *  100 / total_files));
+                    int percentage = (int)((double)(processed_files * 100 / total_files));
 
                     progress?.Report(percentage);
                 }

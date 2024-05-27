@@ -1,25 +1,25 @@
 ﻿
 namespace WTelegramClientTestWF
 {
-	partial class MainForm
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         #region Windows Form Designer generated code
 
@@ -336,20 +336,20 @@ namespace WTelegramClientTestWF
         #endregion
 
         private System.Windows.Forms.Button buttonLogin;
-		private System.Windows.Forms.Button buttonGetChats;
-		private System.Windows.Forms.ListBox listBox;
-		private System.Windows.Forms.TextBox textBoxApiID;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBoxApiHash;
-		private System.Windows.Forms.LinkLabel linkLabel;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox textBoxPhone;
-		private System.Windows.Forms.Label labelCode;
-		private System.Windows.Forms.TextBox textBoxCode;
-		private System.Windows.Forms.Button buttonSendCode;
-		private System.Windows.Forms.Panel panelActions;
-		private System.Windows.Forms.Button buttonSendMsg;
+        private System.Windows.Forms.Button buttonGetChats;
+        private System.Windows.Forms.ListBox listBox;
+        private System.Windows.Forms.TextBox textBoxApiID;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxApiHash;
+        private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxPhone;
+        private System.Windows.Forms.Label labelCode;
+        private System.Windows.Forms.TextBox textBoxCode;
+        private System.Windows.Forms.Button buttonSendCode;
+        private System.Windows.Forms.Panel panelActions;
+        private System.Windows.Forms.Button buttonSendMsg;
         private Button buttonSendFile;
         private TextBox numberToSendTo;
         private Label label4;

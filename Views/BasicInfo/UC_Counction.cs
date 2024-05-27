@@ -14,13 +14,13 @@ namespace X_ray_Images.Views.BasicInfo
 {
     public partial class UC_Connection : UserControl
     {
-     private  Contact _cInfo;
+        private Contact _cInfo;
         string[] fields =
         {
              "مكان السكن",
              "رقم الهاتف"
         };
-       
+
         public UC_Connection(Contact cInfo)
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace X_ray_Images.Views.BasicInfo
 
             DataGridConnect.CellEndEdit += DataGridConnect_CellEndEdit;
         }
-    
+
         private void DataGridConnect_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgv = (DataGridView)sender;
@@ -44,14 +44,14 @@ namespace X_ray_Images.Views.BasicInfo
             switch (attribValue)
             {
                 case "مكان السكن":
-                     _cInfo.address= newValue;
+                    _cInfo.address = newValue;
                     break;
                 case "رقم الهاتف":
                     _cInfo.phone = newValue;
                     break;
             }
         }
-       
+
 
     }
 }

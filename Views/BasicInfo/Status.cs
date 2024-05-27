@@ -33,7 +33,7 @@ namespace X_ray_Images.Views.BasicInfo
         {
             return "diagnosis :" + this.diagnosis + "\n"
            + "description :" + this.description + "\n"
-           + "indication :"+ this.indication;
+           + "indication :" + this.indication;
         }
     }
 }

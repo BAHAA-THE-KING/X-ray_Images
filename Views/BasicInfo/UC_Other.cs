@@ -20,18 +20,18 @@ namespace X_ray_Images.Views.BasicInfo
         "تفاصيل المرض",
         "تاريخ المراجعة القادمة",
         };
-       private  Other _oInfo;
+        private Other _oInfo;
         private DateTime datevalue = DateTime.Now;
 
         public UC_Other(Other oInfo)
         {
             InitializeComponent();
             _oInfo = oInfo;
-        foreach (string field in fields)
-        {
-            DataGridOther.Rows.Add(field);
-        }
-           
+            foreach (string field in fields)
+            {
+                DataGridOther.Rows.Add(field);
+            }
+
             DataGridOther.CellEndEdit += DataGridOther_CellEndEdit;
         }
         private void DataGridOther_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -67,8 +67,8 @@ namespace X_ray_Images.Views.BasicInfo
                     _oInfo.nextdate = datevalue.ToString("d/M/yyyy");
                     break;
             }
-                   
+
         }
-      
+
     }
 }

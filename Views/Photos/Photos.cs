@@ -594,7 +594,7 @@ namespace X_ray_Images
                         MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
                     }
                 }
-              
+
                 Thread serviceThread = new Thread(() =>
                 {
                     try
@@ -694,7 +694,7 @@ namespace X_ray_Images
                         MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
                     }
                 }
-              
+
 
                 MainForm telegram = new MainForm();
                 telegram.FilePath = imageFilePath;

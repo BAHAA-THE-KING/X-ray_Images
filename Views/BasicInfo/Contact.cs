@@ -25,7 +25,7 @@ namespace X_ray_Images.Views.BasicInfo
         }
         public override string? ToString()
         {
-            return "address: " + this.address + "\n" + "phone: " + this.phone ;
+            return "address: " + this.address + "\n" + "phone: " + this.phone;
         }
     }
 }

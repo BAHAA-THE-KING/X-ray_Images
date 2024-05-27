@@ -9,7 +9,7 @@ namespace X_ray_Images.Classes
     {
         public static string detectHeartProblem(Bitmap image, int h1, int h2, int t1, int t2)
         {
-            int thoracicSpace = Math.Abs(t2 - t1);;
+            int thoracicSpace = Math.Abs(t2 - t1); ;
             int heartSpace = Math.Abs(h2 - h1);
             double heartToThoracicRatio = heartSpace / (thoracicSpace + 0.0);
 
@@ -27,8 +27,9 @@ namespace X_ray_Images.Classes
             else
                 return "Severe Enlargement";
         }
-    
-        public static string detect(Bitmap image,int x1, int y1, int x2, int y2){
+
+        public static string detect(Bitmap image, int x1, int y1, int x2, int y2)
+        {
             int startX = Math.Min(x1, x2);
             int endX = Math.Max(x1, x2);
             int startY = Math.Min(y1, y2);
@@ -39,32 +40,32 @@ namespace X_ray_Images.Classes
             // Count white pixels
             int whitePixelCount = 0;
             for (int y = startY; y <= endY; y++)
+            {
+                for (int x = startX; x <= endX; x++)
                 {
-                    for (int x = startX; x <= endX; x++)
-                    {
-                        Color pixelColor = image.GetPixel(x, y);
+                    Color pixelColor = image.GetPixel(x, y);
 
-                        // Check if the pixel brightness is above the threshold
-                        if (Comparer.IsWhite(pixelColor))
-                        {
-                            whitePixelCount++;
-                        }
+                    // Check if the pixel brightness is above the threshold
+                    if (Comparer.IsWhite(pixelColor))
+                    {
+                        whitePixelCount++;
                     }
                 }
+            }
 
-                // Calculate percentage of white pixels
-                double whitePercentage = (double)whitePixelCount / totalPixels * 100;
-                // MessageBox.Show("white percentage: "+whitePercentage);
-                double low=20,midLow=40,mid=60,midHigh=80;
-                if(whitePercentage<low)
+            // Calculate percentage of white pixels
+            double whitePercentage = (double)whitePixelCount / totalPixels * 100;
+            // MessageBox.Show("white percentage: "+whitePercentage);
+            double low = 20, midLow = 40, mid = 60, midHigh = 80;
+            if (whitePercentage < low)
                 return "low density";
-                else if(whitePercentage<midLow)
+            else if (whitePercentage < midLow)
                 return "mid-low density";
-                else if(whitePercentage<mid)
+            else if (whitePercentage < mid)
                 return "mid density";
-                else if(whitePercentage<midHigh)
+            else if (whitePercentage < midHigh)
                 return "mid-heigh density";
-                else return "high density";
+            else return "high density";
         }
     }
 }

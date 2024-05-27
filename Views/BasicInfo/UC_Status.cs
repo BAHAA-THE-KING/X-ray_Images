@@ -47,7 +47,7 @@ namespace X_ray_Images.Views.BasicInfo
                     break;
                 case "الاستطباب":
                     _statusInfo.indication = newValue; break;
-             
+
             }
 
         }

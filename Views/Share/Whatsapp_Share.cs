@@ -169,7 +169,7 @@ namespace X_ray_Images.Views.Share
             {
                 uploadOption = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/ul/div/div[1]/li/div"));
             }
-          
+
             else
             {
                 uploadOption = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/ul/div/div[2]/li/div"));
