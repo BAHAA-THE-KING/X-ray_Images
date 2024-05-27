@@ -74,7 +74,7 @@ namespace X_ray_Images.Classes
         {
             Bitmap result = new Bitmap(image);
             Graphics graphics = Graphics.FromImage(result);
-            Font font = new Font("Arial", bounds.Height / 2);
+            Font font = new Font("Arial", Math.Max(1, bounds.Height / 2));
             Brush brush = new SolidBrush(Color.Red);
             graphics.DrawString(text, font, brush, bounds);
             return result;

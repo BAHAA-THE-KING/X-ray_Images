@@ -594,12 +594,7 @@ namespace X_ray_Images
                         MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
+              
                 Thread serviceThread = new Thread(() =>
                 {
                     try
@@ -626,6 +621,12 @@ namespace X_ray_Images
                 serviceThread.IsBackground = true;
                 serviceThread.Start();
             }
+            else
+            {
+                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
         private void RecordImage_Click(object sender, EventArgs e)
         {
@@ -693,15 +694,16 @@ namespace X_ray_Images
                         MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+              
 
                 MainForm telegram = new MainForm();
                 telegram.FilePath = imageFilePath;
                 telegram.Show();
+            }
+            else
+            {
+                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
         }
     }

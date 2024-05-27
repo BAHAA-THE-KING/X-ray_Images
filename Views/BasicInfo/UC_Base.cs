@@ -1,4 +1,6 @@
 ﻿using Emgu.CV.Face;
+using System.Globalization;
+using System;
 
 namespace X_ray_Images.Views.BasicInfo
 {
@@ -14,10 +16,14 @@ namespace X_ray_Images.Views.BasicInfo
              "التاريخ"
         };
         private Base _binfo;
+        private DateTime datevalue = DateTime.Now;
+        private string[] _sickness;
+        private string[] _doctors;
         public UC_Base(Base binfo)
         {
             InitializeComponent();
             this._binfo = binfo;
+
             foreach (string filed in fileds)
             {
                 DataGridBasic.Rows.Add(filed);
@@ -40,21 +46,59 @@ namespace X_ray_Images.Views.BasicInfo
                 var dgv = (DataGridView)sender;      
                 string attribValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value?.ToString() ?? "";
                 string newValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? "";
-                DataGridBasic.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = newValue;
+            DataGridBasic.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = newValue;
+
+            if (e.RowIndex == 4)
+            {
+                bool success = DateTime.TryParseExact(
+                    newValue,
+                    "d/M/yyyy",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out DateTime result
+                    );
+                if(success)
+                    datevalue  = result;
+                else
+                {
+                    MessageBox.Show("التاريخ غير صحيح \n d/M/yyyy ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    DataGridBasic.Rows[4].Cells[1].Value = datevalue.ToString("d/M/yyyy");
+                 
+                }
+            }
+            if(e.RowIndex == 1)
+            {
+                _binfo.sickness.Clear();
+                 _sickness= newValue.Split('،');
+
+                foreach (string item in _sickness)
+                {
+                    _binfo.sickness.Add(item.Trim());
+                }
+            }
+              if (e.RowIndex == 3)
+            {
+                _binfo.doctors.Clear();
+                _doctors = newValue.Split('،');
+
+                foreach (string item in _doctors)
+                {
+                    _binfo.doctors.Add(item.Trim());
+                }
+            }
                 switch (attribValue)
                 {
                 case "اسم المريض":
                     _binfo.name = newValue;
                     break;
                 case "المرض":
-                    _binfo.sickness.Add(newValue);
-                    break;
+                    //_binfo.sickness.Add(newValue); break;
                 case "الحالة":
                     _binfo.status = newValue; break;
                 case "اسم الدكتور المشرف":
-                    _binfo.doctors.Add( newValue); break;
+                    //_binfo.doctors.Add( newValue); break;
                 case "التاريخ":
-                    _binfo.date = newValue; break;
+                    _binfo.date = datevalue.ToString("d/M/yyyy"); break;
                 }
                 
         }

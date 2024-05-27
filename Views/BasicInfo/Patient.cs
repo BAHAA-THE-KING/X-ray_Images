@@ -79,7 +79,7 @@ namespace X_ray_Images.Views.BasicInfo
                 Console.WriteLine("Invalid date format.");
             }
 
-            PDF.Generate(baseInfo.name, baseInfo.sickness[0], otherInfo.details, baseInfo.status, baseInfo.doctors[0],
+            PDF.Generate(baseInfo.name, baseInfo.sickness, otherInfo.details, baseInfo.status, baseInfo.doctors,
                 dateTime, nextdateReview, statusInfo.diagnosis, statusInfo.description, statusInfo.indication,
                 contactInfo.address, contactInfo.phone, path);
 

@@ -9,7 +9,7 @@ namespace X_ray_Images.Classes
 {
     public class PDF
     {
-        public static bool Generate(string name, string illness, string illnessDescription, string status, string doctorName, DateTime date, DateTime nextReview, string diagnoses, string diagnosisDescription, string cure, string address, string phoneNumber, string filePath)
+        public static bool Generate(string name, List<string> illness, string illnessDescription, string status, List<string> doctors, DateTime date, DateTime nextReview, string diagnoses, string diagnosisDescription, string cure, string address, string phoneNumber, string filePath)
         {
             try
             {
@@ -51,7 +51,17 @@ namespace X_ray_Images.Classes
                                         column.Item().Text(text =>
                                         {
                                             text.Span("Illness: ").SemiBold().FontColor(Colors.Black);
-                                            text.Span(illness).FontColor(Colors.Grey.Darken1);
+                                            for(int i = 0;i < illness.Count;i++)
+                                            {
+                                                
+                                                if(i == illness.Count-1)
+                                                {
+                                                    text.Span(illness[i]).FontColor(Colors.Grey.Darken1);
+                                                }
+                                                else
+                                                    text.Span(illness[i] + ", ").FontColor(Colors.Grey.Darken1);
+
+                                            }
                                         });
                                         column.Item().Text(text =>
                                         {
@@ -70,17 +80,27 @@ namespace X_ray_Images.Classes
                                         column.Item().Text(text =>
                                         {
                                             text.Span("Supervised Doctor: ").SemiBold().FontColor(Colors.Black);
-                                            text.Span(doctorName).FontColor(Colors.Grey.Darken1);
+                                          
+                                            for (int i = 0; i < doctors.Count; i++)
+                                            {
+                                                if (i == doctors.Count - 1)
+                                                {
+                                                   text.Span(doctors[i]).FontColor(Colors.Grey.Darken1);
+                                                }
+                                                else
+                                                    text.Span(doctors[i] + ", ").FontColor(Colors.Grey.Darken1);
+
+                                            }
                                         });
                                         column.Item().Text(text =>
                                         {
                                             text.Span("Date: ").SemiBold().FontColor(Colors.Black);
-                                            text.Span(date.ToString("d_M_y")).FontColor(Colors.Grey.Darken1);
+                                            text.Span(date.ToString("d/M/yyyy")).FontColor(Colors.Grey.Darken1);
                                         });
                                         column.Item().Text(text =>
                                         {
                                             text.Span("Next Review: ").SemiBold().FontColor(Colors.Black);
-                                            text.Span(nextReview.ToString("d_M_y")).FontColor(Colors.Grey.Darken1);
+                                            text.Span(nextReview.ToString("d/M/yyyy")).FontColor(Colors.Grey.Darken1);
                                         });
                                     });
                                 });

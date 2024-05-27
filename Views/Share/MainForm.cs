@@ -38,7 +38,27 @@ namespace WTelegramClientTestWF
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(((LinkLabel)sender).Tag as string);
+            string url = ((LinkLabel)sender).Tag as string;
+            if (!string.IsNullOrEmpty(url))
+            {
+                try
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo
+                    {
+                        FileName = url,
+                        UseShellExecute = true
+                    };
+                    Process.Start(psi);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("The URL is empty or invalid.");
+            }
         }
 
         private async void buttonLogin_Click(object sender, EventArgs e)

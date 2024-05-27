@@ -17,6 +17,7 @@ namespace X_ray_Images
         private void TextOK_Click(object sender, EventArgs e)
         {
             setText(TextTextBox.Text);
+            MessageBox.Show("يجب تحديد مستطيل لكي يظهر النص", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
             Close();
         }
     }
