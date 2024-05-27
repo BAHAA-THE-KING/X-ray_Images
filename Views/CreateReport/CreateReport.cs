@@ -106,7 +106,7 @@ namespace X_ray_Images
                 File.Delete(Path.Join(path, "صورة " + i + ".png"));
             }
 
-            Compressor.CompressAudio(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.mp3"));
+            Compressor.CompressAudioFile(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.mp3"));
         }
     }
 }

@@ -95,13 +95,24 @@ namespace X_ray_Images.Classes
         }
 
         //Compress audio file 
-        public static void CompressAudio(string inputFilePath, string outputFilePath)
+        public static void CompressAudioFile(string inputFile, string outputFile)
         {
-            using (var reader = new Mp3FileReader(inputFilePath))
+            using (var reader = new AudioFileReader(inputFile))
             {
-                using (var writer = new LameMP3FileWriter(outputFilePath, reader.WaveFormat, LAMEPreset.VBR_10))
+                var outFormat = new WaveFormat(44100, reader.WaveFormat.Channels);
+                using (var resampler = new MediaFoundationResampler(reader, outFormat))
                 {
-                    reader.CopyTo(writer);
+                    resampler.ResamplerQuality = 60; // Set resampler quality (1-60)
+
+                    using (var writer = new LameMP3FileWriter(outputFile, resampler.WaveFormat, LAMEPreset.STANDARD))
+                    {
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = resampler.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            writer.Write(buffer, 0, bytesRead);
+                        }
+                    }
                 }
             }
         }
