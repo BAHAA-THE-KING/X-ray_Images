@@ -33,6 +33,7 @@ namespace X_ray_Images
             ToolsToolStrip = new ToolStripMenuItem();
             CompareToolStrip = new ToolStripMenuItem();
             DangerToolStrip = new ToolStripMenuItem();
+            HeartToolStrip = new ToolStripMenuItem();
             CurveImage = new PictureBox();
             GeometryImage = new PictureBox();
             RecordImage = new PictureBox();
@@ -167,7 +168,7 @@ namespace X_ray_Images
             // 
             // ToolsToolStrip
             // 
-            ToolsToolStrip.DropDownItems.AddRange(new ToolStripItem[] { CompareToolStrip, DangerToolStrip });
+            ToolsToolStrip.DropDownItems.AddRange(new ToolStripItem[] { CompareToolStrip, DangerToolStrip, HeartToolStrip });
             ToolsToolStrip.Name = "ToolsToolStrip";
             ToolsToolStrip.Size = new Size(70, 24);
             ToolsToolStrip.Text = "الأدوات";
@@ -185,6 +186,13 @@ namespace X_ray_Images
             DangerToolStrip.Size = new Size(223, 26);
             DangerToolStrip.Text = "تحديد خطورة الإصابة";
             DangerToolStrip.Click += Danger_Click;
+            // 
+            // HeartToolStrip
+            // 
+            HeartToolStrip.Name = "HeartToolStrip";
+            HeartToolStrip.Size = new Size(223, 26);
+            HeartToolStrip.Text = "الكشف عن مرض تضخم القلب";
+            HeartToolStrip.Click += Heart_Click;
             // 
             // CurveImage
             // 
@@ -369,6 +377,7 @@ namespace X_ray_Images
         private System.Windows.Forms.ToolStripMenuItem AddImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DeleteImageToolStrip;
         private System.Windows.Forms.ToolStripMenuItem DangerToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem HeartToolStrip;
         private System.Windows.Forms.PictureBox ClearImage;
         private Button CreateButton;
         private PictureBox Telegram;

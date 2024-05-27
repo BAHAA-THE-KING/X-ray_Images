@@ -252,6 +252,11 @@ namespace X_ray_Images
             ResetState();
             new Danger().Show();
         }
+        private void Heart_Click(object sender, EventArgs e)
+        {
+            ResetState();
+            new Heart().Show();
+        }
 
         // MainImage Control
         private void MainImage_Click(object sender, EventArgs e)

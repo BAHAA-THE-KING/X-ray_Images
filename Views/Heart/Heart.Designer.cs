@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 namespace X_ray_Images
 {
-	partial class Danger
+	partial class Heart
 	{
 		private System.ComponentModel.IContainer components = null;
 		protected override void Dispose(bool disposing)
@@ -18,7 +18,7 @@ namespace X_ray_Images
 
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Danger));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Heart));
 			this.MainImage = new System.Windows.Forms.PictureBox();
 			this.SelectImage = new System.Windows.Forms.PictureBox();
 			this.ScanImage = new System.Windows.Forms.PictureBox();
@@ -98,7 +98,7 @@ namespace X_ray_Images
 			PickerButton.UseVisualStyleBackColor = false;
 			PickerButton.Click += PickerButton_Click;
 			// 
-			// Danger
+			// Heart
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -110,9 +110,9 @@ namespace X_ray_Images
 			this.Controls.Add(this.SelectImage);
 			this.Controls.Add(this.MainImage);
 			this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			this.Name = "Danger";
+			this.Name = "Heart";
 			this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.Text = "تحديد خطورة الإصابة";
+			this.Text = "الكشف عن تضخم القلب";
 			((System.ComponentModel.ISupportInitialize)(this.MainImage)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.SelectImage)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ScanImage)).EndInit();
