@@ -1,33 +1,24 @@
 ﻿using Emgu.CV.Face;
 using Guna.UI2.WinForms;
 using System.Windows.Forms;
+using X_ray_Images.Classes;
 
 namespace X_ray_Images.Views.BasicInfo
 {
     public partial class BaseInfo : Form
     {
         public Dictionary<string, UserControl> loadedUserControls = new Dictionary<string, UserControl>();
-        public UC_Base ucBase;
-        public UC_Connection ucConnection;
-        public UC_Other ucOther;
-        public UC_Status ucStatus;
-        public Base baseInfo;
-        public Contact connectInfo;
-        public Other otherInfo;
-        public Status statusInfo;
+        public static Base baseInfo = new Base();
+        public static Contact connectInfo = new Contact();
+        public static Other otherInfo = new Other();
+        public static Status statusInfo = new Status();
+        public static UC_Base ucBase = new UC_Base(baseInfo);
+        public static UC_Connection ucConnection = new UC_Connection(connectInfo);
+        public static UC_Other ucOther = new UC_Other(otherInfo);
+        public static UC_Status ucStatus = new UC_Status(statusInfo);
         public BaseInfo()
         {
             InitializeComponent();
-            baseInfo = new Base();
-            otherInfo = new Other();
-            connectInfo = new Contact();
-            statusInfo = new Status();
-
-
-            ucBase = new UC_Base(baseInfo);
-            ucConnection = new UC_Connection(connectInfo);
-            ucOther = new UC_Other(otherInfo);
-            ucStatus = new UC_Status(statusInfo);
             addUserControl(ucBase);
         }
 
@@ -59,7 +50,7 @@ namespace X_ray_Images.Views.BasicInfo
 
             addUserControl(ucOther);
         }
-        private bool ValidateRequiredFields()
+        public static bool ValidateRequiredFields()
         {
             string result = "";
             bool isValid = true;
@@ -94,7 +85,7 @@ namespace X_ray_Images.Views.BasicInfo
                 result += "الرجاء ادخال استطباب المريض \n";
                 isValid = false;
             }
-            if (connectInfo.phone=="-1") // phone
+            if (connectInfo.phone == "-1") // phone
             {
                 result += "الرجاء ادخال رقم هاتف المريض \n";
                 isValid = false;
@@ -112,16 +103,12 @@ namespace X_ray_Images.Views.BasicInfo
             Patient patient = new Patient(baseInfo, connectInfo, otherInfo, statusInfo);
             if (ValidateRequiredFields())
             {
-            MessageDialog.Show(patient.ToString());
-                patient.ConvertToPDF();
                 this.Close();
             }
             else
             {
                 MessageDialog.Show(patient.Required());
             }
-           
-
         }
 
         private void guna2Button5_Click(object sender, EventArgs e)

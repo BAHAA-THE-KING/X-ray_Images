@@ -1,30 +1,34 @@
-﻿namespace X_ray_Images
+﻿using X_ray_Images.Classes;
+
+namespace X_ray_Images
 {
-	partial class Audio
-	{
-		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.Label RecordingLabel;
-		private System.Windows.Forms.Button ConfirmButton;
-		private System.Windows.Forms.PictureBox StartImage;
-		private System.Windows.Forms.PictureBox StopImage;
-		private System.Windows.Forms.PictureBox PlayImage;
-		protected override void Dispose(bool disposing)
-		{
-			CreateReport.isAudioOpen = false;
-			if (disposing)
-			{
-				if (components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose(disposing);
-		}
+    partial class Audio
+    {
+        private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Label RecordingLabel;
+        private System.Windows.Forms.Label ListeningLabel;
+        private System.Windows.Forms.Button ConfirmButton;
+        private System.Windows.Forms.PictureBox StartImage;
+        private System.Windows.Forms.PictureBox StopImage;
+        private System.Windows.Forms.PictureBox PlayImage;
+        protected override void Dispose(bool disposing)
+        {
+            if (this.path.Equals(Paths.AudioTempFile)) CreateReport.isAudioOpen = false;
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Audio));
             ConfirmButton = new Button();
             RecordingLabel = new Label();
+            ListeningLabel = new Label();
             StartImage = new PictureBox();
             StopImage = new PictureBox();
             PlayImage = new PictureBox();
@@ -58,6 +62,16 @@
             RecordingLabel.Size = new Size(269, 96);
             RecordingLabel.TabIndex = 6;
             RecordingLabel.Text = "جارٍ التسجيل";
+            // 
+            // ListeningLabel
+            // 
+            ListeningLabel.Font = new Font("Dubai", 25.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ListeningLabel.Location = new Point(362, 335);
+            ListeningLabel.Name = "ListeningLabel";
+            ListeningLabel.RightToLeft = RightToLeft.Yes;
+            ListeningLabel.Size = new Size(269, 96);
+            ListeningLabel.TabIndex = 6;
+            ListeningLabel.Text = "جارٍ الاستماع";
             // 
             // StartImage
             // 
@@ -121,6 +135,7 @@
             Controls.Add(StopImage);
             Controls.Add(StartImage);
             Controls.Add(RecordingLabel);
+            Controls.Add(ListeningLabel);
             Controls.Add(ConfirmButton);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Audio";

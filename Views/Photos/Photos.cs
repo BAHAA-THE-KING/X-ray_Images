@@ -32,28 +32,29 @@ namespace X_ray_Images
 
     public partial class Photos : Form
     {
-        static public PhotosMode mode = PhotosMode.None;
+        PhotosMode mode = PhotosMode.None;
         Shape shapeType = Shape.None;
-        private Point firstPoint = new Point(-1, -1);
-        private Point secondPoint = new Point(-1, -1);
-        private Point thirdPoint = new Point(-1, -1);
-        private Point startPoint = new Point(-1, -1);
-        private Rectangle tempRect = new Rectangle(0, 0, 0, 0);
-        private Circle tempCircle = new Circle(0, 0, 0);
-        private Line tempLine = new Line(-1, -1, -1, -1);
-        private List<Point> tempFree = [];
-        private string tempText = "";
-        static public List<Image> images = [];
-        static public List<GalleryItem> galleryItems = [];
+        Point firstPoint = new Point(-1, -1);
+        Point secondPoint = new Point(-1, -1);
+        Point thirdPoint = new Point(-1, -1);
+        Point startPoint = new Point(-1, -1);
+        Rectangle tempRect = new Rectangle(0, 0, 0, 0);
+        Circle tempCircle = new Circle(0, 0, 0);
+        Line tempLine = new Line(-1, -1, -1, -1);
+        List<Point> tempFree = [];
+        string tempText = "";
+        public static List<Image> images = [];
+        public static List<string> recordings = [];
+        private List<GalleryItem> galleryItems = [];
         int active = 0;
         public string savedFileName;
 
         // Coloring Icons
-        static void ActiveImage(PictureBox pictureBox)
+        void ActiveImage(PictureBox pictureBox)
         {
             pictureBox.BackColor = SystemColors.ActiveCaption;
         }
-        static void InactiveImage(PictureBox pictureBox)
+        void InactiveImage(PictureBox pictureBox)
         {
             pictureBox.BackColor = SystemColors.Control;
         }
@@ -132,6 +133,7 @@ namespace X_ray_Images
                 Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
 
                 images.Add(MainImage.Image);
+                recordings.Add("");
                 int id = images.Count - 1;
                 active = id;
 
@@ -151,75 +153,64 @@ namespace X_ray_Images
         }
         private void Save_Click(object sender, EventArgs e)
         {
-            ResetState();
-            if (MainImage.Image != null)
+            if (active < images.Count)
             {
-                savedFileName = string.Empty;
-
-                string appPath = Application.StartupPath;
-
-                string netPath = Directory.GetParent(appPath).FullName;
-                string debugPath = Directory.GetParent(netPath).FullName;
-                string binPath = Directory.GetParent(debugPath).FullName;
-
-                string projectPath = Directory.GetParent(binPath).FullName;
-
-                string initialDirectory = Path.Combine(projectPath, "testImages");
-                string initialFileName = "savedImage.png";
-
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                ResetState();
+                if (MainImage.Image != null)
                 {
-                    saveFileDialog.InitialDirectory = initialDirectory;
-                    saveFileDialog.FileName = initialFileName;
-                    saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|All Files|*.*";
-                    saveFileDialog.Title = "Save Image As";
+                    savedFileName = string.Empty;
 
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    string initialDirectory = Paths.CreatePath("testImages");
+
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        string newImagePath = saveFileDialog.FileName;
+                        saveFileDialog.InitialDirectory = initialDirectory;
+                        saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|All Files|*.*";
+                        saveFileDialog.Title = "Save Image As";
 
-                        Image imageToSave = MainImage.Image;
-
-
-                        // Determine the image format based on the selected file extension
-                        ImageFormat imageFormat = ImageFormat.Png; // Default to PNG
-                        string extension = Path.GetExtension(newImagePath);
-                        if (extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                            extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            imageFormat = ImageFormat.Jpeg;
-                        }
+                            string newImagePath = saveFileDialog.FileName;
 
-                        // Save the image to the specified file path with the determined format
-                        try
-                        {
-                            imageToSave.Save(newImagePath, imageFormat);
-                            savedFileName = Path.GetFileName(newImagePath);
-                            MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            Image imageToSave = MainImage.Image;
 
 
+                            // Determine the image format based on the selected file extension
+                            ImageFormat imageFormat = ImageFormat.Png; // Default to PNG
+                            string extension = Path.GetExtension(newImagePath);
+                            if (extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                                extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase))
+                            {
+                                imageFormat = ImageFormat.Jpeg;
+                            }
+
+                            // Save the image to the specified file path with the determined format
+                            try
+                            {
+                                imageToSave.Save(newImagePath, imageFormat);
+                                savedFileName = Path.GetFileName(newImagePath);
+                                MessageBox.Show("Image saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
-            {
-                MessageBox.Show("No image to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
         }
         private void Delete_Click(object sender, EventArgs e)
         {
-            ResetState();
-
-            if (images.Count > 0)
+            if (active < images.Count)
             {
+                ResetState();
                 images.RemoveAt(active);
+                recordings.RemoveAt(active);
                 active = Math.Max(0, active - 1);
                 GalleryPanel.Controls.Clear();
                 galleryItems.Clear();
@@ -254,191 +245,213 @@ namespace X_ray_Images
         private void Compare_Click(object sender, EventArgs e)
         {
             ResetState();
-
             new Compare().Show();
         }
         private void Danger_Click(object sender, EventArgs e)
         {
             ResetState();
-
             new Danger().Show();
         }
 
         // MainImage Control
         private void MainImage_Click(object sender, EventArgs e)
         {
-            MouseEventArgs mouseArgs = (MouseEventArgs)e;
-
-            if (mode == PhotosMode.Drawing)
+            if (active < images.Count)
             {
-                if (shapeType == Shape.Triangle)
-                {
-                    if (firstPoint.X == -1)
-                    {
-                        firstPoint.X = mouseArgs.X;
-                        firstPoint.Y = mouseArgs.Y;
-                        MainImage.Invalidate();
-                    }
-                    else if (secondPoint.X == -1)
-                    {
-                        secondPoint.X = mouseArgs.X;
-                        secondPoint.Y = mouseArgs.Y;
-                        MainImage.Invalidate();
-                    }
-                    else if (thirdPoint.X == -1)
-                    {
-                        thirdPoint.X = mouseArgs.X;
-                        thirdPoint.Y = mouseArgs.Y;
+                MouseEventArgs mouseArgs = (MouseEventArgs)e;
 
-                        SetImage(Drawer.DrawTriangle(MainImage.Image, firstPoint, secondPoint, thirdPoint));
-                        Reset();
+                if (mode == PhotosMode.Drawing)
+                {
+                    if (shapeType == Shape.Triangle)
+                    {
+                        if (firstPoint.X == -1)
+                        {
+                            firstPoint.X = mouseArgs.X;
+                            firstPoint.Y = mouseArgs.Y;
+                            MainImage.Invalidate();
+                        }
+                        else if (secondPoint.X == -1)
+                        {
+                            secondPoint.X = mouseArgs.X;
+                            secondPoint.Y = mouseArgs.Y;
+                            MainImage.Invalidate();
+                        }
+                        else if (thirdPoint.X == -1)
+                        {
+                            thirdPoint.X = mouseArgs.X;
+                            thirdPoint.Y = mouseArgs.Y;
+
+                            SetImage(Drawer.DrawTriangle(MainImage.Image, firstPoint, secondPoint, thirdPoint));
+                            Reset();
+                        }
                     }
                 }
             }
         }
         private void MainImage_MouseDown(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
+            if (active < images.Count)
             {
-                if (e.Button == MouseButtons.Right)
+                if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
                 {
-                    Reset();
-                    return;
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        Reset();
+                        return;
+                    }
+                    if (mode == PhotosMode.Free)
+                        tempFree = Selector.SelectMoveFree(tempFree, e.X, e.Y);
+                    else
+                        startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
                 }
-                if (mode == PhotosMode.Free)
-                    tempFree = Selector.SelectMoveFree(tempFree, e.X, e.Y);
-                else
-                    startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
             }
         }
         private void MainImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
+            if (active < images.Count)
             {
-                if (e.Button == MouseButtons.Left)
+                if (mode == PhotosMode.Select || mode == PhotosMode.Drawing || mode == PhotosMode.Free || mode == PhotosMode.Text)
                 {
-                    if (startPoint.X != -1)
+                    if (e.Button == MouseButtons.Left)
                     {
-                        if (mode == PhotosMode.Select || mode == PhotosMode.Text || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
-                            tempRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
-                        else if (mode == PhotosMode.Drawing && shapeType == Shape.Circle)
-                            tempCircle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
-                        else if (mode == PhotosMode.Drawing && shapeType == Shape.Horizontal)
-                            tempLine = Selector.SelectMoveHorizontal(startPoint, e.X, e.Y);
-                        else if (mode == PhotosMode.Drawing && shapeType == Shape.Vertical)
-                            tempLine = Selector.SelectMoveVertical(startPoint, e.X, e.Y);
-                        else if (mode == PhotosMode.Drawing && shapeType == Shape.Slope)
-                            tempLine = Selector.SelectMoveSlope(startPoint, e.X, e.Y);
-                    }
-                    if (mode == PhotosMode.Free)
-                        tempFree = Selector.SelectMoveFree(tempFree, e.X, e.Y);
+                        if (startPoint.X != -1)
+                        {
+                            if (mode == PhotosMode.Select || mode == PhotosMode.Text || (mode == PhotosMode.Drawing && shapeType == Shape.Rectangle))
+                                tempRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
+                            else if (mode == PhotosMode.Drawing && shapeType == Shape.Circle)
+                                tempCircle = Selector.SelectMoveCircle(MainImage, startPoint, e.X, e.Y);
+                            else if (mode == PhotosMode.Drawing && shapeType == Shape.Horizontal)
+                                tempLine = Selector.SelectMoveHorizontal(startPoint, e.X, e.Y);
+                            else if (mode == PhotosMode.Drawing && shapeType == Shape.Vertical)
+                                tempLine = Selector.SelectMoveVertical(startPoint, e.X, e.Y);
+                            else if (mode == PhotosMode.Drawing && shapeType == Shape.Slope)
+                                tempLine = Selector.SelectMoveSlope(startPoint, e.X, e.Y);
+                        }
+                        if (mode == PhotosMode.Free)
+                            tempFree = Selector.SelectMoveFree(tempFree, e.X, e.Y);
 
-                    MainImage.Invalidate();
-                }
-                else if (e.Button == MouseButtons.Right)
-                {
-                    Reset();
+                        MainImage.Invalidate();
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        Reset();
+                    }
                 }
             }
         }
         private void MainImage_MouseUp(object sender, MouseEventArgs e)
         {
-            if (mode == PhotosMode.Drawing)
+            if (active < images.Count)
             {
-                if (shapeType == Shape.Circle)
+                if (mode == PhotosMode.Drawing)
                 {
-                    SetImage(Drawer.DrawCircle(MainImage.Image, tempCircle));
+                    if (shapeType == Shape.Circle)
+                    {
+                        SetImage(Drawer.DrawCircle(MainImage.Image, tempCircle));
+                        Reset();
+                    }
+                    if (shapeType == Shape.Rectangle)
+                    {
+                        SetImage(Drawer.DrawRectangle(MainImage.Image, tempRect));
+                        Reset();
+                    }
+                    if (shapeType == Shape.Horizontal || shapeType == Shape.Vertical || shapeType == Shape.Slope)
+                    {
+                        SetImage(Drawer.DrawRuler(MainImage.Image, tempLine));
+                        Reset();
+                    }
+                }
+                else if (mode == PhotosMode.Free)
+                {
+                    SetImage(Drawer.DrawFree(MainImage.Image, tempFree));
                     Reset();
                 }
-                if (shapeType == Shape.Rectangle)
+                else if (mode == PhotosMode.Text)
                 {
-                    SetImage(Drawer.DrawRectangle(MainImage.Image, tempRect));
-                    Reset();
+                    SetImage(Drawer.DrawText(MainImage.Image, tempText, tempRect));
+                    ResetState();
+                    InactiveImage(TextImage);
                 }
-                if (shapeType == Shape.Horizontal || shapeType == Shape.Vertical || shapeType == Shape.Slope)
-                {
-                    SetImage(Drawer.DrawRuler(MainImage.Image, tempLine));
-                    Reset();
-                }
-            }
-            else if (mode == PhotosMode.Free)
-            {
-                SetImage(Drawer.DrawFree(MainImage.Image, tempFree));
-                Reset();
-            }
-            else if (mode == PhotosMode.Text)
-            {
-                SetImage(Drawer.DrawText(MainImage.Image, tempText, tempRect));
-                ResetState();
-                InactiveImage(TextImage);
             }
         }
         private void MainImage_Paint(object sender, EventArgs e)
         {
-            PaintEventArgs paintEvent = (PaintEventArgs)e;
-            if (tempRect.Width > 0 && tempRect.Height > 0)
+            if (active < images.Count)
             {
-                paintEvent.Graphics.DrawRectangle(Pens.Red, tempRect);
-            }
-            if (tempCircle.radius > 0)
-            {
-                paintEvent.Graphics.DrawEllipse(Pens.Red, tempCircle.cx - tempCircle.radius, tempCircle.cy - tempCircle.radius, tempCircle.radius * 2, tempCircle.radius * 2);
-            }
-            if (firstPoint.X != -1)
-            {
-                paintEvent.Graphics.DrawEllipse(Pens.Red, firstPoint.X - 10, firstPoint.Y - 10, 10 * 2, 10 * 2);
-            }
-            if (secondPoint.X != -1)
-            {
-                paintEvent.Graphics.DrawEllipse(Pens.Red, secondPoint.X - 10, secondPoint.Y - 10, 10 * 2, 10 * 2);
-            }
-            if (tempLine.start.X != -1)
-            {
-                paintEvent.Graphics.DrawLine(Pens.Red, tempLine.start, tempLine.end);
-            }
-            if (tempFree.Count > 1)
-            {
-                paintEvent.Graphics.DrawLines(Pens.Red, tempFree.ToArray());
+                PaintEventArgs paintEvent = (PaintEventArgs)e;
+                if (tempRect.Width > 0 && tempRect.Height > 0)
+                {
+                    paintEvent.Graphics.DrawRectangle(Pens.Red, tempRect);
+                }
+                if (tempCircle.radius > 0)
+                {
+                    paintEvent.Graphics.DrawEllipse(Pens.Red, tempCircle.cx - tempCircle.radius, tempCircle.cy - tempCircle.radius, tempCircle.radius * 2, tempCircle.radius * 2);
+                }
+                if (firstPoint.X != -1)
+                {
+                    paintEvent.Graphics.DrawEllipse(Pens.Red, firstPoint.X - 10, firstPoint.Y - 10, 10 * 2, 10 * 2);
+                }
+                if (secondPoint.X != -1)
+                {
+                    paintEvent.Graphics.DrawEllipse(Pens.Red, secondPoint.X - 10, secondPoint.Y - 10, 10 * 2, 10 * 2);
+                }
+                if (tempLine.start.X != -1)
+                {
+                    paintEvent.Graphics.DrawLine(Pens.Red, tempLine.start, tempLine.end);
+                }
+                if (tempFree.Count > 1)
+                {
+                    paintEvent.Graphics.DrawLines(Pens.Red, tempFree.ToArray());
+                }
             }
         }
 
         // States Controls
         private void SelectImage_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.None)
+            if (active < images.Count)
             {
-                ActiveImage(SelectImage);
-                mode = PhotosMode.Select;
-            }
-            else if (mode == PhotosMode.Select)
-            {
-                InactiveImage(SelectImage);
-                ResetState();
+                if (mode == PhotosMode.None)
+                {
+                    ActiveImage(SelectImage);
+                    mode = PhotosMode.Select;
+                }
+                else if (mode == PhotosMode.Select)
+                {
+                    InactiveImage(SelectImage);
+                    ResetState();
+                }
             }
         }
         private void Free_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.None)
+            if (active < images.Count)
             {
-                ActiveImage(CurveImage);
-                mode = PhotosMode.Free;
-            }
-            else if (mode == PhotosMode.Free)
-            {
-                InactiveImage(CurveImage);
-                ResetState();
+                if (mode == PhotosMode.None)
+                {
+                    ActiveImage(CurveImage);
+                    mode = PhotosMode.Free;
+                }
+                else if (mode == PhotosMode.Free)
+                {
+                    InactiveImage(CurveImage);
+                    ResetState();
+                }
             }
         }
         private void Shape_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.None)
+            if (active < images.Count)
             {
-                new Shapes(attachShapeDrawer).Show();
-            }
-            else if (mode == PhotosMode.Drawing)
-            {
-                InactiveImage(GeometryImage);
-                ResetState();
+                if (mode == PhotosMode.None)
+                {
+                    new Shapes(attachShapeDrawer).Show();
+                }
+                else if (mode == PhotosMode.Drawing)
+                {
+                    InactiveImage(GeometryImage);
+                    ResetState();
+                }
             }
         }
         public void attachShapeDrawer(Shape shapeType)
@@ -452,71 +465,76 @@ namespace X_ray_Images
         // Functions
         private void CropImage_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+            if (active < images.Count)
             {
-                Bitmap image = ImageProcessor.Crop(MainImage.Image, tempRect);
-                SetImage(image);
+                if (mode == PhotosMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+                {
+                    Bitmap image = ImageProcessor.Crop(MainImage.Image, tempRect);
+                    SetImage(image);
 
-                Reset();
+                    Reset();
+                }
             }
         }
         private void Red2BlueImage_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+            if (active < images.Count)
             {
-                int startX = tempRect.X;
-                int startY = tempRect.Y;
-                int endX = tempRect.X + tempRect.Width;
-                int endY = tempRect.Y + tempRect.Height;
-                Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
-                SetImage(newImage);
+                if (mode == PhotosMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+                {
+                    int startX = tempRect.X;
+                    int startY = tempRect.Y;
+                    int endX = tempRect.X + tempRect.Width;
+                    int endY = tempRect.Y + tempRect.Height;
+                    Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
+                    SetImage(newImage);
 
-                Reset();
+                    Reset();
+                }
             }
         }
         private void Orange2PurpleImage_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+            if (active < images.Count)
             {
-                int startX = tempRect.X;
-                int startY = tempRect.Y;
-                int endX = tempRect.X + tempRect.Width;
-                int endY = tempRect.Y + tempRect.Height;
-                Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Orange, Color.Purple);
-                SetImage(newImage);
+                if (mode == PhotosMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+                {
+                    int startX = tempRect.X;
+                    int startY = tempRect.Y;
+                    int endX = tempRect.X + tempRect.Width;
+                    int endY = tempRect.Y + tempRect.Height;
+                    Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Orange, Color.Purple);
+                    SetImage(newImage);
 
-                Reset();
+                    Reset();
+                }
             }
         }
         private void Clear_Click(object sender, EventArgs e)
         {
-            ResetState();
+            if (active < images.Count)
+            {
+                ResetState();
 
-            int goodDim = (int)Math.Max(Math.Ceiling(Math.Log2(MainImage.Image.Width)), Math.Ceiling(Math.Log2(MainImage.Image.Height)));
-            goodDim = (int)Math.Pow(2, goodDim);
+                int goodDim = (int)Math.Max(Math.Ceiling(Math.Log2(MainImage.Image.Width)), Math.Ceiling(Math.Log2(MainImage.Image.Height)));
+                goodDim = (int)Math.Pow(2, goodDim);
 
-            Bitmap img = new Bitmap(MainImage.Image, new Size(goodDim, goodDim));
+                Bitmap img = new Bitmap(MainImage.Image, new Size(goodDim, goodDim));
 
-            Bitmap result = ImageEnhancer.ApplyHighPassFilter(img);
+                Bitmap result = ImageEnhancer.ApplyHighPassFilter(img);
 
-            Bitmap newImage = new Bitmap(result, new Size(MainImage.Image.Width, MainImage.Image.Height));
+                Bitmap newImage = new Bitmap(result, new Size(MainImage.Image.Width, MainImage.Image.Height));
 
-            SetImage(newImage);
+                SetImage(newImage);
+            }
         }
 
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
             ResetState();
-            string appPath = Application.StartupPath;
 
-            string netPath = Directory.GetParent(appPath).FullName;
-            string debugPath = Directory.GetParent(netPath).FullName;
-            string binPath = Directory.GetParent(debugPath).FullName;
-
-            string projectPath = Directory.GetParent(binPath).FullName;
-
-            string initialDirectory = Path.Combine(projectPath, "testImages");
+            string initialDirectory = Paths.CreatePath("testImages");
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = initialDirectory;
@@ -526,6 +544,7 @@ namespace X_ray_Images
 
 
                 images.Add(MainImage.Image);
+                recordings.Add("");
                 int id = images.Count - 1;
                 active = id;
 
@@ -546,88 +565,96 @@ namespace X_ray_Images
 
         private void WhatsApp_Click(object sender, EventArgs e)
         {
-            Save_Click(sender, e);
-
-            if (string.IsNullOrEmpty(savedFileName))
+            if (active < images.Count)
             {
-                MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            string appPath = Application.StartupPath;
+                Save_Click(sender, e);
 
-            string netPath = Directory.GetParent(appPath).FullName;
-            string debugPath = Directory.GetParent(netPath).FullName;
-            string binPath = Directory.GetParent(debugPath).FullName;
-
-            string projectPath = Directory.GetParent(binPath).FullName;
-
-            string initialDirectory = Path.Combine(projectPath, "testImages", "share");
-
-            // Ensure the directory exists
-            if (!Directory.Exists(initialDirectory))
-            {
-                Directory.CreateDirectory(initialDirectory);
-            }
-
-            string imageFilePath = Path.Combine(initialDirectory, savedFileName);
-
-            if (MainImage.Image != null)
-            {
-                // Save the image from the PictureBox to the specified path if it doesn't already exist
-                if (!File.Exists(imageFilePath))
+                if (string.IsNullOrEmpty(savedFileName))
                 {
-                    MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-            }
-            else
-            {
-                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            Thread serviceThread = new Thread(() =>
-            {
-                try
+                string initialDirectory = Paths.CreatePath("testImages");
+                initialDirectory = Path.Combine(initialDirectory, "share");
+
+                // Ensure the directory exists
+                if (!Directory.Exists(initialDirectory))
                 {
+                    Directory.CreateDirectory(initialDirectory);
+                }
 
-                    Whatsapp_Share relnServ = new Whatsapp_Share();
-                    relnServ.FilePath = imageFilePath;
-                    relnServ.FileSent += () =>
+                string imageFilePath = Path.Combine(initialDirectory, savedFileName);
+
+                if (MainImage.Image != null)
+                {
+                    // Save the image from the PictureBox to the specified path if it doesn't already exist
+                    if (!File.Exists(imageFilePath))
                     {
-                        // Invoke to ensure the message box is shown on the main UI thread
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        });
-                    };
-                    relnServ.OnDebug();
+                        MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("Error in service thread: " + ex.Message);
+                    MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-            });
 
-            serviceThread.IsBackground = true;
-            serviceThread.Start();
+                Thread serviceThread = new Thread(() =>
+                {
+                    try
+                    {
+
+                        Whatsapp_Share relnServ = new Whatsapp_Share();
+                        relnServ.FilePath = imageFilePath;
+                        relnServ.FileSent += () =>
+                        {
+                            // Invoke to ensure the message box is shown on the main UI thread
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            });
+                        };
+                        relnServ.OnDebug();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error in service thread: " + ex.Message);
+                    }
+                });
+
+                serviceThread.IsBackground = true;
+                serviceThread.Start();
+            }
         }
-
         private void RecordImage_Click(object sender, EventArgs e)
         {
-
-        } 
+            if (active < recordings.Count)
+            {
+                string newFileName = recordings[active];
+                if (newFileName.Equals(""))
+                {
+                    newFileName = Paths.AudioTempDir + "\\" + DateTime.Now.ToBinary() + ".wav";
+                    recordings[active] = newFileName;
+                }
+                new Audio(newFileName).Show();
+            }
+        }
 
         private void TextImage_Click(object sender, EventArgs e)
         {
-            if (mode == PhotosMode.None)
+            if (active < images.Count)
             {
-                ActiveImage(TextImage);
-                new Text(setText).Show();
-            }
-            else if (mode == PhotosMode.Text)
-            {
-                InactiveImage(TextImage);
-                ResetState();
+                if (mode == PhotosMode.None)
+                {
+                    ActiveImage(TextImage);
+                    new Text(setText).Show();
+                }
+                else if (mode == PhotosMode.Text)
+                {
+                    InactiveImage(TextImage);
+                    ResetState();
+                }
             }
         }
         private void setText(string text)
@@ -638,47 +665,44 @@ namespace X_ray_Images
 
         private void Telegram_Click(object sender, EventArgs e)
         {
-            Save_Click(sender,e);
-            if (string.IsNullOrEmpty(savedFileName))
+            if (active < images.Count)
             {
-                MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            string appPath = Application.StartupPath;
-
-            string netPath = Directory.GetParent(appPath).FullName;
-            string debugPath = Directory.GetParent(netPath).FullName;
-            string binPath = Directory.GetParent(debugPath).FullName;
-
-            string projectPath = Directory.GetParent(binPath).FullName;
-
-            string initialDirectory = Path.Combine(projectPath, "testImages", "share");
-
-            // Ensure the directory exists
-            if (!Directory.Exists(initialDirectory))
-            {
-                Directory.CreateDirectory(initialDirectory);
-            }
-
-            string imageFilePath = Path.Combine(initialDirectory, savedFileName);
-
-            if (MainImage.Image != null)
-            {
-                // Save the image from the PictureBox to the specified path if it doesn't already exist
-                if (!File.Exists(imageFilePath))
+                Save_Click(sender, e);
+                if (string.IsNullOrEmpty(savedFileName))
                 {
-                    MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    MessageBox.Show("Image not saved. Cannot proceed with sharing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-            }
-            else
-            {
-                MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            MainForm telegram = new MainForm();
-            telegram.FilePath = imageFilePath;
-            telegram.Show();
-         }
+                string initialDirectory = Paths.CreatePath("testImages");
+                initialDirectory = Path.Combine(initialDirectory, "share");
+
+                // Ensure the directory exists
+                if (!Directory.Exists(initialDirectory))
+                {
+                    Directory.CreateDirectory(initialDirectory);
+                }
+
+                string imageFilePath = Path.Combine(initialDirectory, savedFileName);
+
+                if (MainImage.Image != null)
+                {
+                    // Save the image from the PictureBox to the specified path if it doesn't already exist
+                    if (!File.Exists(imageFilePath))
+                    {
+                        MainImage.Image.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No image found in the PictureBox.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                MainForm telegram = new MainForm();
+                telegram.FilePath = imageFilePath;
+                telegram.Show();
+            }
+        }
     }
 }
