@@ -7,11 +7,11 @@ namespace X_ray_Images.Classes
 {
     public class SeverityDetector
     {
-        public static string detectHeartProblem(Bitmap image, int y1, int y2)
+        public static string detectHeartProblem(Bitmap image, int h1, int h2, int t1, int t2)
         {
-            int imageWidth = image.Width;
-            int heartSpace = Math.Abs(y2 - y1);
-            double heartToThoracicRatio = heartSpace / (imageWidth + 0.0);
+            int thoracicSpace = Math.Abs(t2 - t1);;
+            int heartSpace = Math.Abs(h2 - h1);
+            double heartToThoracicRatio = heartSpace / (thoracicSpace + 0.0);
 
             if (heartToThoracicRatio <= 0.5)
             {
@@ -54,7 +54,7 @@ namespace X_ray_Images.Classes
 
                 // Calculate percentage of white pixels
                 double whitePercentage = (double)whitePixelCount / totalPixels * 100;
-
+                // MessageBox.Show("white percentage: "+whitePercentage);
                 double low=20,midLow=40,mid=60,midHigh=80;
                 if(whitePercentage<low)
                 return "low density";

@@ -45,12 +45,12 @@ namespace X_ray_Images
 
         public static bool IsWhite(Color color)
         {
-            double brightnessThreshold = 0.9;
-            double brightness = color.GetBrightness();
-            return brightness >= brightnessThreshold;
-            //
-            // int threshold = 130; 
-            // return (color.R >= threshold && color.G >= threshold && color.B >= threshold);
+            double brightnessThreshold = 0.5;
+            double brightness = color.GetBrightness();      
+            bool isWhiteBrightness= brightness >= brightnessThreshold;
+            int threshold = 130; 
+            bool isWhiteRGB= color.R >= threshold && color.G >= threshold && color.B >= threshold;
+            return isWhiteBrightness;
         }
     }
 }
