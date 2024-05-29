@@ -40,6 +40,9 @@ namespace X_ray_Images
 			this.MainImage.Size = new System.Drawing.Size(984, 453);
 			this.MainImage.TabIndex = 10;
 			this.MainImage.TabStop = false;
+			this.MainImage.MouseDown += MainImage_MouseDown;
+			this.MainImage.MouseMove += MainImage_MouseMove;
+			this.MainImage.Paint += MainImage_Paint;
 			// 
 			// SelectImage
 			// 

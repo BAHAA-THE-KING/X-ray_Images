@@ -98,6 +98,9 @@ namespace X_ray_Images
                 Reset();
                 mode = PhotosMode.None;
                 shapeType = Shape.None;
+                InactiveImage(SelectImage);
+                InactiveImage(GeometryImage);
+                InactiveImage(CurveImage);
             }
         }
         private void Reset()
@@ -307,7 +310,10 @@ namespace X_ray_Images
                     if (mode == PhotosMode.Free)
                         tempFree = Selector.SelectMoveFree(tempFree, e.X, e.Y);
                     else
+                    {
                         startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
+                        tempRect = new Rectangle(startPoint.X, startPoint.Y, 0, 0);
+                    }
                 }
             }
         }
@@ -353,23 +359,23 @@ namespace X_ray_Images
                     if (shapeType == Shape.Circle)
                     {
                         SetImage(Drawer.DrawCircle(MainImage.Image, tempCircle));
-                        Reset();
+                        ResetState();
                     }
                     if (shapeType == Shape.Rectangle)
                     {
                         SetImage(Drawer.DrawRectangle(MainImage.Image, tempRect));
-                        Reset();
+                        ResetState();
                     }
                     if (shapeType == Shape.Horizontal || shapeType == Shape.Vertical || shapeType == Shape.Slope)
                     {
                         SetImage(Drawer.DrawRuler(MainImage.Image, tempLine));
-                        Reset();
+                        ResetState();
                     }
                 }
                 else if (mode == PhotosMode.Free)
                 {
                     SetImage(Drawer.DrawFree(MainImage.Image, tempFree));
-                    Reset();
+                    ResetState();
                 }
                 else if (mode == PhotosMode.Text)
                 {
@@ -477,7 +483,7 @@ namespace X_ray_Images
                     Bitmap image = ImageProcessor.Crop(MainImage.Image, tempRect);
                     SetImage(image);
 
-                    Reset();
+                    ResetState();
                 }
             }
         }
@@ -494,7 +500,7 @@ namespace X_ray_Images
                     Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Red, Color.Blue);
                     SetImage(newImage);
 
-                    Reset();
+                    ResetState();
                 }
             }
         }
@@ -511,7 +517,7 @@ namespace X_ray_Images
                     Bitmap newImage = Colorer.ProcessImage(MainImage.Image, startX, startY, endX, endY, Color.Orange, Color.Purple);
                     SetImage(newImage);
 
-                    Reset();
+                    ResetState();
                 }
             }
         }

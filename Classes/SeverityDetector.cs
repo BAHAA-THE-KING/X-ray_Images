@@ -58,14 +58,14 @@ namespace X_ray_Images.Classes
             // MessageBox.Show("white percentage: "+whitePercentage);
             double low = 20, midLow = 40, mid = 60, midHigh = 80;
             if (whitePercentage < low)
-                return "low density";
+                return "low illness";
             else if (whitePercentage < midLow)
-                return "mid-low density";
+                return "mid-low illness";
             else if (whitePercentage < mid)
-                return "mid density";
+                return "mid illness";
             else if (whitePercentage < midHigh)
-                return "mid-heigh density";
-            else return "high density";
+                return "mid-heigh illness";
+            else return "high illness";
         }
     }
 }
