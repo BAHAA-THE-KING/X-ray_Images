@@ -526,7 +526,7 @@ namespace X_ray_Images
 
                 Bitmap img = new Bitmap(MainImage.Image, new Size(goodDim, goodDim));
 
-                Bitmap result = ImageEnhancer.ApplyHighPassFilter(img);
+                Bitmap result = ImageEnhancer.EnhanceWithFourier(img);
 
                 Bitmap newImage = new Bitmap(result, new Size(MainImage.Image.Width, MainImage.Image.Height));
 
