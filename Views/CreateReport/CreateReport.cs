@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.IO;
 using X_ray_Images;
 using X_ray_Images.Classes;
 using X_ray_Images.Views.BasicInfo;
@@ -63,6 +64,7 @@ namespace X_ray_Images
                 MessageBox.Show("يجب إضافة تسجيل صوتي لوصف الحالة");
             }
             string path = Paths.CreatePath(BaseInfo.baseInfo.name);
+            if (Directory.Exists(path)) Directory.Delete(path, true);
             Directory.CreateDirectory(path);
 
             Patient patient = new Patient(BaseInfo.baseInfo, BaseInfo.connectInfo, BaseInfo.otherInfo, BaseInfo.statusInfo);
@@ -72,9 +74,26 @@ namespace X_ray_Images
             {
                 Image image = Photos.images[i];
                 image.Save(Path.Join(path, "صورة " + i + ".png"), ImageFormat.Png);
+                string recording = Photos.recordings[i];
+                if (!recording.Equals(""))
+                {
+                    File.Copy(recording, Path.Combine(path, "تسجيل " + i + ".wav"));
+                }
             }
 
-            File.Copy(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.wav"));
+            while (true)
+            {
+                try
+                {
+                    File.Copy(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.wav"));
+                }
+                catch
+                {
+                    Thread.Sleep(500);
+                    continue;
+                }
+                break;
+            }
         }
         private void CompressButtonClick(object sender, EventArgs e)
         {
@@ -92,21 +111,109 @@ namespace X_ray_Images
                 MessageBox.Show("يجب إضافة تسجيل صوتي لوصف الحالة");
             }
             string path = Paths.CreatePath(BaseInfo.baseInfo.name);
+            if (Directory.Exists(path)) Directory.Delete(path, true);
             Directory.CreateDirectory(path);
 
+
             Patient patient = new Patient(BaseInfo.baseInfo, BaseInfo.connectInfo, BaseInfo.otherInfo, BaseInfo.statusInfo);
-            patient.ConvertToPDF(Path.Combine(path, "التقربر الطبي.pdf"));
-            Compressor.CompressPdf(Path.Combine(path, "التقربر الطبي.pdf"), Path.Combine(path, "التقربر الطبي.pdf"));
+            patient.ConvertToPDF(Path.Combine(path, "temppdf.pdf"));
+
+            while (true)
+            {
+                try
+                {
+                    Compressor.CompressPdf(Path.Combine(path, "temppdf.pdf"), Path.Combine(path, "التقربر الطبي.pdf"));
+                }
+                catch
+                {
+                    Thread.Sleep(500);
+                    continue;
+                }
+                break;
+            }
+
+            while (true)
+            {
+                try
+                {
+                    File.Delete(Path.Combine(path, "temppdf.pdf"));
+                }
+                catch
+                {
+                    Thread.Sleep(500);
+                    continue;
+                }
+                break;
+            }
+
 
             for (int i = 0; i < Photos.images.Count; i++)
             {
                 Image image = Photos.images[i];
                 image.Save(Path.Join(path, "صورة " + i + ".png"), ImageFormat.Png);
-                Compressor.CompressImage(Path.Join(path, "صورة " + i + ".png"), Path.Join(path, "صورة " + i + ".jpeg"), 100);
-                File.Delete(Path.Join(path, "صورة " + i + ".png"));
+
+                while (true)
+                {
+                    try
+                    {
+                        Compressor.CompressImage(Path.Join(path, "صورة " + i + ".png"), Path.Join(path, "صورة " + i + ".jpeg"), 100);
+                    }
+                    catch
+                    {
+                        Thread.Sleep(500);
+                        continue;
+                    }
+                    break;
+                }
+
+
+                while (true)
+                {
+                    try
+                    {
+                        File.Delete(Path.Join(path, "صورة " + i + ".png"));
+                    }
+                    catch
+                    {
+                        Thread.Sleep(500);
+                        continue;
+                    }
+                    break;
+                }
+
+                string recording = Photos.recordings[i];
+                if (!recording.Equals(""))
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            Compressor.CompressAudioFile(recording, Path.Combine(path, "تسجيل " + i + ".mp3"));
+                        }
+                        catch
+                        {
+                            Thread.Sleep(500);
+                            continue;
+                        }
+                        break;
+                    }
+                }
             }
 
-            Compressor.CompressAudioFile(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.mp3"));
+            while (true)
+            {
+                try
+                {
+                    Compressor.CompressAudioFile(Paths.AudioTempFile, Path.Combine(path, "وصف الحالة.mp3"));
+                }
+                catch
+                {
+                    Thread.Sleep(500);
+                    continue;
+                }
+                break;
+            }
         }
     }
 }
+

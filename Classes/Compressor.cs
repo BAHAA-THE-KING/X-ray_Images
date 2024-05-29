@@ -42,8 +42,6 @@ namespace X_ray_Images.Classes
                     // Save the image using the JPEG codec and the quality parameter
                     sourceImage.Save(destinationPath, jpegCodec, encoderParams);
                 }
-
-                Console.WriteLine($"Image saved successfully to {destinationPath}");
             }
             catch (Exception ex)
             {
