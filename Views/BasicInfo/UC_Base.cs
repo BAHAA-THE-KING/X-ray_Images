@@ -49,8 +49,7 @@ namespace X_ray_Images.Views.BasicInfo
                 
 
             DataGridBasic.Rows[2].Cells[1].Value = _binfo.status;
-            //DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors.Count == 0 ? "" : this._binfo.doctors[0];
-            if (this._binfo.sickness.Count == 0)
+            if (this._binfo.doctors.Count == 0)
             {
                 DataGridBasic.Rows[3].Cells[1].Value = "";
 
