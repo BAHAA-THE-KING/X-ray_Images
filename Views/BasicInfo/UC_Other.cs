@@ -31,6 +31,8 @@ namespace X_ray_Images.Views.BasicInfo
             {
                 DataGridOther.Rows.Add(field);
             }
+            DataGridOther.Rows[0].Cells[1].Value = _oInfo.details;
+            DataGridOther.Rows[1].Cells[1].Value = _oInfo.nextdate;
 
             DataGridOther.CellEndEdit += DataGridOther_CellEndEdit;
         }

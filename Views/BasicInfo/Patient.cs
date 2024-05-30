@@ -69,10 +69,15 @@ namespace X_ray_Images.Views.BasicInfo
 
             try
             {
+                
                 dateTime = DateTime.ParseExact(baseInfo.date, "d/M/yyyy", CultureInfo.InvariantCulture);
+                if (string.IsNullOrWhiteSpace(otherInfo.nextdate)) { 
+                // 
+                }
+                else
+                {
                 nextdateReview = DateTime.ParseExact(otherInfo.nextdate, "d/M/yyyy", CultureInfo.InvariantCulture);
-                //Console.WriteLine("Parsed DateTime: " + dateTime);
-                //Console.WriteLine("Next DateTime: " + nextdateReview);
+                }
             }
             catch (FormatException)
             {

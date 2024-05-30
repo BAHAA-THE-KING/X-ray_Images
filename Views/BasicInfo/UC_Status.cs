@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TL;
 
 namespace X_ray_Images.Views.BasicInfo
 {
@@ -28,6 +29,10 @@ namespace X_ray_Images.Views.BasicInfo
             {
                 DataGridStatus.Rows.Add(filed);
             }
+
+            DataGridStatus.Rows[0].Cells[1].Value = _statusInfo.diagnosis;
+            DataGridStatus.Rows[1].Cells[1].Value = _statusInfo.description;
+            DataGridStatus.Rows[2].Cells[1].Value = _statusInfo.indication;
 
             DataGridStatus.CellEndEdit += DataGridStatus_CellEndEdit;
         }

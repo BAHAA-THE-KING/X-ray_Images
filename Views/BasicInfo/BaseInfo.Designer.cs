@@ -10,6 +10,13 @@
             {
                 components.Dispose();
             }
+            if (disposing)
+            { 
+                foreach (var control in loadedUserControls.Values)
+                {
+                    control.Dispose();
+                }
+            }
             base.Dispose(disposing);
         }
 

@@ -30,10 +30,41 @@ namespace X_ray_Images.Views.BasicInfo
             }
 
             DataGridBasic.Rows[0].Cells[1].Value = _binfo.name;
-            DataGridBasic.Rows[1].Cells[1].Value = this._binfo.sickness.Count == 0 ? "" : this._binfo.sickness[0];
+            if (this._binfo.sickness.Count == 0)
+            {
+                DataGridBasic.Rows[1].Cells[1].Value = "";
+
+            }
+            else
+            {
+                for(int i = 0; i<this._binfo.sickness.Count; i++)
+                {
+                    DataGridBasic.Rows[1].Cells[1].Value = this._binfo.sickness[i] + "، ";
+                    if (i == this._binfo.sickness.Count-1)
+                        DataGridBasic.Rows[1].Cells[1].Value = this._binfo.sickness[i];
+
+                }
+            }
+                
+                
 
             DataGridBasic.Rows[2].Cells[1].Value = _binfo.status;
-            DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors.Count == 0 ? "" : this._binfo.doctors[0];
+            //DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors.Count == 0 ? "" : this._binfo.doctors[0];
+            if (this._binfo.sickness.Count == 0)
+            {
+                DataGridBasic.Rows[3].Cells[1].Value = "";
+
+            }
+            else
+            {
+                for (int i = 0; i < this._binfo.doctors.Count; i++)
+                {
+                    DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors[i] + "، ";
+                    if (i == this._binfo.doctors.Count - 1)
+                        DataGridBasic.Rows[3].Cells[1].Value = this._binfo.doctors[i];
+
+                }
+            }
 
             DataGridBasic.Rows[4].Cells[1].Value = _binfo.date;
 

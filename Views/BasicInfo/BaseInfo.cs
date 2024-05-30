@@ -12,16 +12,23 @@ namespace X_ray_Images.Views.BasicInfo
         public static Contact connectInfo = new Contact();
         public static Other otherInfo = new Other();
         public static Status statusInfo = new Status();
-        public static UC_Base ucBase = new UC_Base(baseInfo);
-        public static UC_Connection ucConnection = new UC_Connection(connectInfo);
-        public static UC_Other ucOther = new UC_Other(otherInfo);
-        public static UC_Status ucStatus = new UC_Status(statusInfo);
+        public static UC_Base ucBase; 
+        public static UC_Connection ucConnection ;
+        public static UC_Other ucOther ;
+        public static UC_Status ucStatus;
         public BaseInfo()
         {
             InitializeComponent();
+            InitializeUserControls();
             addUserControl(ucBase);
         }
-
+        private void InitializeUserControls()
+        {
+            ucBase = new UC_Base(baseInfo);
+            ucConnection = new UC_Connection(connectInfo);
+            ucOther = new UC_Other(otherInfo);
+            ucStatus = new UC_Status(statusInfo);
+        }
         private void addUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;

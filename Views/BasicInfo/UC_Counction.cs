@@ -30,6 +30,8 @@ namespace X_ray_Images.Views.BasicInfo
             {
                 DataGridConnect.Rows.Add(field);
             }
+            DataGridConnect.Rows[0].Cells[1].Value = _cInfo.address;
+            DataGridConnect.Rows[1].Cells[1].Value = _cInfo.phone;
 
             DataGridConnect.CellEndEdit += DataGridConnect_CellEndEdit;
         }
