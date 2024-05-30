@@ -61,9 +61,6 @@ namespace X_ray_Images.Views.BasicInfo
         }
         public void ConvertToPDF(string path)
         {
-            //string dateString = "22/5/2024";
-            //string nextReviewString = "22/11/2024"; // Example next review date
-
             DateTime dateTime = DateTime.MinValue;
             DateTime nextdateReview = DateTime.MinValue;
 

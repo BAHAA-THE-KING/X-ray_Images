@@ -33,10 +33,12 @@ namespace X_ray_Images
             StopImage = new PictureBox();
             PlayImage = new PictureBox();
             WhatsAppImage = new PictureBox();
+            TelegramImage = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)StartImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)StopImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PlayImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)WhatsAppImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TelegramImage).BeginInit();
             SuspendLayout();
             // 
             // ConfirmButton
@@ -125,11 +127,25 @@ namespace X_ray_Images
             WhatsAppImage.TabStop = false;
             WhatsAppImage.Click += WhatsAppImage_Click;
             // 
+            // TelegramImage
+            // 
+            TelegramImage.Cursor = Cursors.Hand;
+            TelegramImage.Image = (Image)resources.GetObject("TelegramImage.Image");
+            TelegramImage.Location = new Point(14, 91);
+            TelegramImage.Margin = new Padding(5, 4, 5, 4);
+            TelegramImage.Name = "TelegramImage";
+            TelegramImage.Size = new Size(57, 62);
+            TelegramImage.SizeMode = PictureBoxSizeMode.Zoom;
+            TelegramImage.TabIndex = 22;
+            TelegramImage.TabStop = false;
+            TelegramImage.Click += TelegramImage_Click;
+            // 
             // Audio
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 566);
+            Controls.Add(TelegramImage);
             Controls.Add(WhatsAppImage);
             Controls.Add(PlayImage);
             Controls.Add(StopImage);
@@ -144,9 +160,11 @@ namespace X_ray_Images
             ((System.ComponentModel.ISupportInitialize)StopImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)PlayImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)WhatsAppImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TelegramImage).EndInit();
             ResumeLayout(false);
         }
 
         private PictureBox WhatsAppImage;
+        private PictureBox TelegramImage;
     }
 }

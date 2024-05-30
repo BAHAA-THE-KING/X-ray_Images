@@ -1,7 +1,9 @@
 ﻿using Emgu.CV.Face;
 using Guna.UI2.WinForms;
 using System.Windows.Forms;
+using WTelegramClientTestWF;
 using X_ray_Images.Classes;
+using X_ray_Images.Views.Share;
 
 namespace X_ray_Images.Views.BasicInfo
 {
@@ -12,10 +14,11 @@ namespace X_ray_Images.Views.BasicInfo
         public static Contact connectInfo = new Contact();
         public static Other otherInfo = new Other();
         public static Status statusInfo = new Status();
-        public static UC_Base ucBase; 
-        public static UC_Connection ucConnection ;
-        public static UC_Other ucOther ;
+        public static UC_Base ucBase;
+        public static UC_Connection ucConnection;
+        public static UC_Other ucOther;
         public static UC_Status ucStatus;
+        private Patient patient;
         public BaseInfo()
         {
             InitializeComponent();
@@ -107,7 +110,7 @@ namespace X_ray_Images.Views.BasicInfo
         }
         private void guna2Button4_Click(object sender, EventArgs e)
         {
-            Patient patient = new Patient(baseInfo, connectInfo, otherInfo, statusInfo);
+            patient = new Patient(baseInfo, connectInfo, otherInfo, statusInfo);
             if (ValidateRequiredFields())
             {
                 this.Close();
@@ -121,6 +124,99 @@ namespace X_ray_Images.Views.BasicInfo
         private void guna2Button5_Click(object sender, EventArgs e)
         {
             addUserControl(ucStatus);
+        }
+
+        private void WhatsAppImage_Click(object sender, EventArgs e)
+        {
+            if (ValidateRequiredFields())
+            {
+                string path = Paths.CreatePath(BaseInfo.baseInfo.name);
+                
+                if (Directory.Exists(path)) Directory.Delete(path, true);
+                Directory.CreateDirectory(path);
+                path  = Path.Combine(path, "WhatsAppShare");
+                Directory.CreateDirectory(path);
+
+                Patient patient = new Patient(BaseInfo.baseInfo, BaseInfo.connectInfo, BaseInfo.otherInfo, BaseInfo.statusInfo);
+                path = Path.Combine(path, "التقربر الطبي.pdf");
+                patient.ConvertToPDF(path);
+                Thread serviceThread = new Thread(() =>
+                {
+                    try
+                    {
+                        Whatsapp_Share relnServ = new Whatsapp_Share();
+                        relnServ.FilePath = path;
+                        relnServ.IsDoc = true;
+                        relnServ.WaitingForSelectChat += () =>
+                        {
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                MessageBox.Show("Please Pick A Chat To Send To!", "Waiting", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            });
+                        };
+                        relnServ.FileSent += () =>
+                        {
+                            // Invoke to ensure the message box is shown on the main UI thread
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            });
+                        };
+                        relnServ.OnDebug();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error in service thread: " + ex.Message);
+                    }
+                });
+
+                serviceThread.IsBackground = true;
+                serviceThread.Start();
+            }
+            else
+            {
+                if (patient != null)
+                {
+                MessageDialog.Show(patient.Required());
+
+                }
+                else
+                {
+                  
+                }
+            }
+        }
+
+        private void TelegramImage_Click(object sender, EventArgs e)
+        {
+            if (ValidateRequiredFields())
+            {
+                string path = Paths.CreatePath(BaseInfo.baseInfo.name);
+
+                if (Directory.Exists(path)) Directory.Delete(path, true);
+                Directory.CreateDirectory(path);
+                path = Path.Combine(path, "TelegramShare");
+                Directory.CreateDirectory(path);
+
+                Patient patient = new Patient(BaseInfo.baseInfo, BaseInfo.connectInfo, BaseInfo.otherInfo, BaseInfo.statusInfo);
+                path = Path.Combine(path, "التقربر الطبي.pdf");
+                patient.ConvertToPDF(path);
+                Telegram_Share telegram = new Telegram_Share();
+                telegram.FilePath = path;
+                telegram.Show();
+            }
+            else
+            {
+                if (patient != null)
+                {
+                    MessageDialog.Show(patient.Required());
+
+                }
+                else
+                {
+                    
+                }
+            }
         }
     }
 }

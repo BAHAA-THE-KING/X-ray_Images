@@ -40,6 +40,7 @@ namespace X_ray_Images.Views.Share
         public bool IsDoc { get; set; } = false;
 
         public event Action FileSent; // Event to signal file sent
+        public event Action WaitingForSelectChat; 
 
 
         public Whatsapp_Share()
@@ -133,9 +134,9 @@ namespace X_ray_Images.Views.Share
         public void SendFile(string filePath)
         {
             if (driver == null) return;
-            //WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             //IWebElement parentElement = wait1.Until(d => d.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[3]/div/div[3]/div[1]/div/div")));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             IWebElement parentElement = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[3]/div/div[3]/div[1]/div/div"));
 
             // Find all child elements within the parent element
@@ -154,9 +155,10 @@ namespace X_ray_Images.Views.Share
                 });
             ", child);
             }
-
+            WaitingForSelectChat?.Invoke();
             // Wait for an element to be clicked
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+
             wait.Until(d => (bool)(js.ExecuteScript("return window.__selenium_element_clicked || false;")));
 
             // Find and click the paperclip icon

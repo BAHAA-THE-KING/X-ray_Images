@@ -64,7 +64,7 @@ namespace X_ray_Images.Views.BasicInfo
 
                 }
             }
-
+                
             DataGridBasic.Rows[4].Cells[1].Value = _binfo.date;
 
 

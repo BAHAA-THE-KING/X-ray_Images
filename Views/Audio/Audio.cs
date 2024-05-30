@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using NAudio.Wave;
+using WTelegramClientTestWF;
 using X_ray_Images.Classes;
 using X_ray_Images.Views.Share;
 
@@ -142,9 +143,15 @@ namespace X_ray_Images
                     Whatsapp_Share relnServ = new Whatsapp_Share();
                     relnServ.FilePath = path;
                     relnServ.IsDoc = true;
+                    relnServ.WaitingForSelectChat += () =>
+                    {
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            MessageBox.Show("Please Pick A Chat To Send To!", "Waiting", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        });
+                    };
                     relnServ.FileSent += () =>
                     {
-                        // Invoke to ensure the message box is shown on the main UI thread
                         this.Invoke((MethodInvoker)delegate
                         {
                             MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -160,6 +167,13 @@ namespace X_ray_Images
 
             serviceThread.IsBackground = true;
             serviceThread.Start();
+        }
+
+        private void TelegramImage_Click(object sender, EventArgs e)
+        { 
+            Telegram_Share telegram = new Telegram_Share();
+            telegram.FilePath = path;
+            telegram.Show();
         }
     }
 }

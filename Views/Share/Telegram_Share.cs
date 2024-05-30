@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WTelegramClientTestWF
 {
-    public partial class MainForm : Form
+    public partial class Telegram_Share : Form
     {
         private Client _client;
         //private WTelegram.Client _client;
@@ -23,7 +23,7 @@ namespace WTelegramClientTestWF
         private long selectedChatId;
         private long selectedChatIdContact;
         public string FilePath { get; set; }
-        public MainForm()
+        public Telegram_Share()
         {
             InitializeComponent();
             WTelegram.Helpers.Log = (l, s) => Debug.WriteLine(s);
@@ -136,41 +136,46 @@ namespace WTelegramClientTestWF
         }
         private async void buttonSendFile_Click(object sender, EventArgs e)
         {
-            if (listBox.SelectedItem == null && string.IsNullOrEmpty(numberToSendTo.Text))
+            try
             {
-                MessageBox.Show("Please select a chat or enter a phone number.");
-                return;
+                if (listBox.SelectedItem == null && string.IsNullOrEmpty(numberToSendTo.Text))
+                {
+                    MessageBox.Show("Please select a chat or enter a phone number.");
+                    return;
+                }
+
+
+                //var file = await _client.UploadFileAsync(filePath);
+
+                if (!string.IsNullOrEmpty(numberToSendTo.Text))
+                {
+                    var contacts = await _client.Contacts_ImportContacts(new[] { new InputPhoneContact { phone = numberToSendTo.Text } });
+                    if (contacts.imported.Length > 0)
+                    {
+                        var inputFile = await _client.UploadFileAsync(FilePath);
+                        await _client.SendMediaAsync(contacts.users[contacts.imported[0].user_id], "", inputFile);
+                    }
+
+                }
+                else
+                {
+                    try
+                    {
+                        var chats = await _client.Messages_GetAllChats();
+                        InputPeer peer = chats.chats[selectedChatId];
+                        var inputFile = await _client.UploadFileAsync(FilePath);
+                        await _client.SendMediaAsync(peer, "Here is the photo", inputFile);
+                    }
+                    catch (KeyNotFoundException ex)
+                    {
+                        Console.WriteLine($"Key not found: {ex.Message}");
+                    }
+                }
+                MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
-            //var file = await _client.UploadFileAsync(filePath);
-
-            if (!string.IsNullOrEmpty(numberToSendTo.Text))
+            catch(Exception ex)
             {
-                var contacts = await _client.Contacts_ImportContacts(new[] { new InputPhoneContact { phone = numberToSendTo.Text } });
-                if (contacts.imported.Length > 0)
-                {
-                    var inputFile = await _client.UploadFileAsync(FilePath);
-                    await _client.SendMediaAsync(contacts.users[contacts.imported[0].user_id], "", inputFile);
-                }
-
-            }
-            else
-            {
-
-                try
-                {
-                    var chats = await _client.Messages_GetAllChats();
-                    InputPeer peer = chats.chats[selectedChatId];
-                    var inputFile = await _client.UploadFileAsync(FilePath);
-                    await _client.SendMediaAsync(peer, "Here is the photo", inputFile);
-                    // Your existing code here
-                }
-                catch (KeyNotFoundException ex)
-                {
-                    Console.WriteLine($"Key not found: {ex.Message}");
-
-                }
+                Console.WriteLine($"Exception: {ex.Message}");
             }
         }
         private async void buttonGetDialogs_Click(object sender, EventArgs e)
@@ -196,7 +201,7 @@ namespace WTelegramClientTestWF
             var entities = _client.MarkdownToEntities(ref msg);
             var inputFile = await _client.UploadFileAsync(FilePath);
             await _client.SendMediaAsync(InputPeer.Self, msg, inputFile);
-
+            MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void numberToSendTo_TextChanged(object sender, EventArgs e)
@@ -251,6 +256,7 @@ namespace WTelegramClientTestWF
                 await _client.SendMessageAsync(resolved, "Hello!");
                 var inputFile = await _client.UploadFileAsync(FilePath);
                 await _client.SendMediaAsync(resolved, "Here is the photo", inputFile);
+                MessageBox.Show("File has been sent successfully!", "File Sent", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception exc)
             {

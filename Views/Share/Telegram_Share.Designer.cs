@@ -1,7 +1,7 @@
 ﻿
 namespace WTelegramClientTestWF
 {
-    partial class MainForm
+    partial class Telegram_Share
     {
         /// <summary>
         /// Required designer variable.

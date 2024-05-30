@@ -44,6 +44,9 @@ namespace X_ray_Images
             CompressButton = new Button();
             CreateLabel = new Label();
             CreatePanel = new Panel();
+            TelegramImage = new PictureBox();
+            WhatsAppImage = new PictureBox();
+            ShareZipFile = new Button();
             ((System.ComponentModel.ISupportInitialize)BasicInfoImage).BeginInit();
             BasicInfoPanel.SuspendLayout();
             PhotosPanel.SuspendLayout();
@@ -51,6 +54,8 @@ namespace X_ray_Images
             AudioPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AudioImage).BeginInit();
             CreatePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TelegramImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).BeginInit();
             SuspendLayout();
             // 
             // BasicInfoLabel
@@ -197,7 +202,7 @@ namespace X_ray_Images
             // 
             SaveButton.Anchor = AnchorStyles.Bottom;
             SaveButton.Font = new Font("Dubai", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SaveButton.Location = new Point(238, 475);
+            SaveButton.Location = new Point(93, 479);
             SaveButton.Name = "SaveButton";
             SaveButton.RightToLeft = RightToLeft.Yes;
             SaveButton.Size = new Size(242, 75);
@@ -210,7 +215,7 @@ namespace X_ray_Images
             // 
             CompressButton.Anchor = AnchorStyles.Bottom;
             CompressButton.Font = new Font("Dubai", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            CompressButton.Location = new Point(510, 475);
+            CompressButton.Location = new Point(374, 479);
             CompressButton.Name = "CompressButton";
             CompressButton.RightToLeft = RightToLeft.Yes;
             CompressButton.Size = new Size(242, 75);
@@ -236,11 +241,52 @@ namespace X_ray_Images
             // 
             CreatePanel.Anchor = AnchorStyles.Top;
             CreatePanel.BackColor = Color.FromArgb(0, 180, 216);
+            CreatePanel.Controls.Add(TelegramImage);
+            CreatePanel.Controls.Add(WhatsAppImage);
             CreatePanel.Controls.Add(CreateLabel);
             CreatePanel.Location = new Point(0, 0);
             CreatePanel.Name = "CreatePanel";
             CreatePanel.Size = new Size(1008, 84);
             CreatePanel.TabIndex = 7;
+            // 
+            // TelegramImage
+            // 
+            TelegramImage.Cursor = Cursors.Hand;
+            TelegramImage.Image = (Image)resources.GetObject("TelegramImage.Image");
+            TelegramImage.Location = new Point(928, 11);
+            TelegramImage.Margin = new Padding(5, 4, 5, 4);
+            TelegramImage.Name = "TelegramImage";
+            TelegramImage.Size = new Size(57, 62);
+            TelegramImage.SizeMode = PictureBoxSizeMode.Zoom;
+            TelegramImage.TabIndex = 26;
+            TelegramImage.TabStop = false;
+            TelegramImage.Click += TelegramImage_Click;
+            // 
+            // WhatsAppImage
+            // 
+            WhatsAppImage.Cursor = Cursors.Hand;
+            WhatsAppImage.Image = (Image)resources.GetObject("WhatsAppImage.Image");
+            WhatsAppImage.Location = new Point(861, 11);
+            WhatsAppImage.Margin = new Padding(5, 4, 5, 4);
+            WhatsAppImage.Name = "WhatsAppImage";
+            WhatsAppImage.Size = new Size(57, 62);
+            WhatsAppImage.SizeMode = PictureBoxSizeMode.Zoom;
+            WhatsAppImage.TabIndex = 25;
+            WhatsAppImage.TabStop = false;
+            WhatsAppImage.Click += WhatsAppImage_Click;
+            // 
+            // ShareZipFile
+            // 
+            ShareZipFile.Anchor = AnchorStyles.Bottom;
+            ShareZipFile.Font = new Font("Dubai", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ShareZipFile.Location = new Point(638, 479);
+            ShareZipFile.Name = "ShareZipFile";
+            ShareZipFile.RightToLeft = RightToLeft.Yes;
+            ShareZipFile.Size = new Size(290, 75);
+            ShareZipFile.TabIndex = 8;
+            ShareZipFile.Text = "حفظ الملف المضغوط";
+            ShareZipFile.UseVisualStyleBackColor = true;
+            ShareZipFile.Click += SaveZipFile_Click;
             // 
             // CreateReport
             // 
@@ -248,6 +294,7 @@ namespace X_ray_Images
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(196, 211, 249);
             ClientSize = new Size(1008, 566);
+            Controls.Add(ShareZipFile);
             Controls.Add(SaveButton);
             Controls.Add(CompressButton);
             Controls.Add(CreatePanel);
@@ -265,7 +312,13 @@ namespace X_ray_Images
             AudioPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AudioImage).EndInit();
             CreatePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)TelegramImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).EndInit();
             ResumeLayout(false);
         }
+
+        private Button ShareZipFile;
+        private PictureBox TelegramImage;
+        private PictureBox WhatsAppImage;
     }
 }

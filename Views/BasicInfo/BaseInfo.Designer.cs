@@ -24,6 +24,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseInfo));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -35,7 +36,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
+            TelegramImage = new PictureBox();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            WhatsAppImage = new PictureBox();
             panel2 = new Panel();
             label1 = new Label();
             process1 = new System.Diagnostics.Process();
@@ -46,13 +49,17 @@
             guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             panelContainer = new Panel();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TelegramImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).BeginInit();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 180, 216);
+            panel1.Controls.Add(TelegramImage);
             panel1.Controls.Add(guna2Button4);
+            panel1.Controls.Add(WhatsAppImage);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -60,6 +67,19 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(963, 67);
             panel1.TabIndex = 0;
+            // 
+            // TelegramImage
+            // 
+            TelegramImage.Cursor = Cursors.Hand;
+            TelegramImage.Image = (Image)resources.GetObject("TelegramImage.Image");
+            TelegramImage.Location = new Point(901, 4);
+            TelegramImage.Margin = new Padding(5, 4, 5, 4);
+            TelegramImage.Name = "TelegramImage";
+            TelegramImage.Size = new Size(57, 62);
+            TelegramImage.SizeMode = PictureBoxSizeMode.Zoom;
+            TelegramImage.TabIndex = 24;
+            TelegramImage.TabStop = false;
+            TelegramImage.Click += TelegramImage_Click;
             // 
             // guna2Button4
             // 
@@ -86,6 +106,19 @@
             guna2Button4.TabIndex = 3;
             guna2Button4.Text = "تأكيد المعلومات";
             guna2Button4.Click += guna2Button4_Click;
+            // 
+            // WhatsAppImage
+            // 
+            WhatsAppImage.Cursor = Cursors.Hand;
+            WhatsAppImage.Image = (Image)resources.GetObject("WhatsAppImage.Image");
+            WhatsAppImage.Location = new Point(834, 4);
+            WhatsAppImage.Margin = new Padding(5, 4, 5, 4);
+            WhatsAppImage.Name = "WhatsAppImage";
+            WhatsAppImage.Size = new Size(57, 62);
+            WhatsAppImage.SizeMode = PictureBoxSizeMode.Zoom;
+            WhatsAppImage.TabIndex = 23;
+            WhatsAppImage.TabStop = false;
+            WhatsAppImage.Click += WhatsAppImage_Click;
             // 
             // panel2
             // 
@@ -250,6 +283,8 @@
             Text = "BaseInfo";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)TelegramImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)WhatsAppImage).EndInit();
             panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -267,5 +302,7 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
+        private PictureBox TelegramImage;
+        private PictureBox WhatsAppImage;
     }
 }
