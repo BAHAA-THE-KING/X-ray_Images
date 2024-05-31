@@ -1,4 +1,6 @@
-﻿namespace X_ray_Images
+﻿using X_ray_Images.Classes;
+
+namespace X_ray_Images
 {
   partial class Home
   {
@@ -14,6 +16,7 @@
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
     protected override void Dispose(bool disposing)
     {
+      if (File.Exists(Paths.AudioTempDir)) File.Delete(Paths.AudioTempDir);
       if (disposing)
       {
         if (components != null)
@@ -109,6 +112,7 @@
       Controls.Add(CreateButton);
       Margin = new Padding(3, 4, 3, 4);
       Name = "Home";
+      Resize += this.Home_Resize;
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Medications";
       panel1.ResumeLayout(false);

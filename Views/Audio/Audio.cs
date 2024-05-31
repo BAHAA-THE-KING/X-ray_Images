@@ -28,40 +28,40 @@ namespace X_ray_Images
             InitializeComponent();
             ControlViews();
             this.path = path;
-            Text = title;
+            MainLabel.Text = title;
         }
         // Control View
-        void ActivateElement(Control pictureBox)
+        void ActivateElement(Control control)
         {
-            pictureBox.Visible = true;
+            control.Visible = true;
         }
-        void InactivateElement(Control pictureBox)
+        void InactivateElement(Control control)
         {
-            pictureBox.Visible = false;
+            control.Visible = false;
         }
         void ControlViews()
         {
             if (mode == AudioMode.None)
             {
-                ActivateElement(StartImage);
-                ActivateElement(PlayImage);
-                InactivateElement(StopImage);
+                ActivateElement(StartPanel);
+                ActivateElement(PlayPanel);
+                InactivateElement(StopPanel);
                 InactivateElement(RecordingLabel);
                 InactivateElement(ListeningLabel);
             }
             else if (mode == AudioMode.Listening)
             {
-                InactivateElement(StartImage);
-                InactivateElement(PlayImage);
-                ActivateElement(StopImage);
+                InactivateElement(StartPanel);
+                InactivateElement(PlayPanel);
+                ActivateElement(StopPanel);
                 InactivateElement(RecordingLabel);
                 ActivateElement(ListeningLabel);
             }
             else if (mode == AudioMode.Recording)
             {
-                InactivateElement(StartImage);
-                InactivateElement(PlayImage);
-                ActivateElement(StopImage);
+                InactivateElement(StartPanel);
+                InactivateElement(PlayPanel);
+                ActivateElement(StopPanel);
                 ActivateElement(RecordingLabel);
                 InactivateElement(ListeningLabel);
             }
@@ -86,6 +86,12 @@ namespace X_ray_Images
                     // Write the recorded audio data to the WAV file
                     waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
                 };
+
+                waveIn.RecordingStopped += (sender, e) =>
+                {
+                    if (!waveFileWriter.CanWrite) waveFileWriter.Flush();
+                };
+
                 waveIn.StartRecording();
             }
         }
@@ -97,12 +103,16 @@ namespace X_ray_Images
                 ControlViews();
                 waveIn.StopRecording();
                 waveFileWriter.Close();
+                waveFileWriter.Dispose();
+                //waveFileWriter = null;
             }
             else if (mode == AudioMode.Listening)
             {
                 mode = AudioMode.None;
                 ControlViews();
                 reader.Close();
+                reader.Dispose();
+                reader = null;
             }
         }
         private void Play_Click(object sender, EventArgs e)

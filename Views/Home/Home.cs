@@ -11,7 +11,6 @@ namespace X_ray_Images
         public Home()
         {
             InitializeComponent();
-            this.Resize += Home_Resize;
         }
         void CreateButtonClick(object sender, EventArgs e)
         {
@@ -25,6 +24,7 @@ namespace X_ray_Images
 
         private void Home_Resize(object sender, EventArgs e)
         {
+            return;
             // Calculate the center position based on the current form size
             int centerX = (this.ClientSize.Width - CreateButton.Width) / 2;
             int centerY = (this.ClientSize.Height - CreateButton.Height) / 2;
