@@ -23,14 +23,6 @@ namespace X_ray_Images.Views.BasicInfo
             this.otherInfo = otherInfo;
             this.statusInfo = statusInfo;
         }
-
-        public override string? ToString()
-        {
-            return baseInfo.ToString() + "\n" + statusInfo.ToString() + "\n"
-            + contactInfo.ToString() + "\n"
-            + otherInfo.ToString();
-        }
-
         public string? Required()
         {
             string patientInfo = "Patient name: " + baseInfo.name + "\n";
@@ -56,8 +48,6 @@ namespace X_ray_Images.Views.BasicInfo
                "Patient Indication: " + statusInfo.indication + "\n" +
                "Patient Phone: " + contactInfo.phone + "\n";
             return patientInfo;
-
-
         }
         public void ConvertToPDF(string path)
         {
@@ -66,7 +56,6 @@ namespace X_ray_Images.Views.BasicInfo
 
             try
             {
-                
                 dateTime = DateTime.ParseExact(baseInfo.date, "d/M/yyyy", CultureInfo.InvariantCulture);
                 if (string.IsNullOrWhiteSpace(otherInfo.nextdate)) { 
                 // 
@@ -85,7 +74,13 @@ namespace X_ray_Images.Views.BasicInfo
                 dateTime, nextdateReview, statusInfo.diagnosis, statusInfo.description, statusInfo.indication,
                 contactInfo.address, contactInfo.phone, path);
 
+        }
 
+        public override string? ToString()
+        {
+            return baseInfo.ToString() + "\n" + statusInfo.ToString() + "\n"
+            + contactInfo.ToString() + "\n"
+            + otherInfo.ToString();
         }
     }
 }

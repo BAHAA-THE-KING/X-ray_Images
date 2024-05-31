@@ -43,7 +43,6 @@
             // 
             DataGridBasic.AllowUserToAddRows = false;
             DataGridBasic.AllowUserToDeleteRows = false;
-            DataGridBasic.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(189, 223, 251);
             dataGridViewCellStyle1.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -53,6 +52,7 @@
             DataGridBasic.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             DataGridBasic.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DataGridBasic.BackgroundColor = Color.FromArgb(196, 211, 249);
+            DataGridBasic.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.RoyalBlue;
             dataGridViewCellStyle2.Font = new Font("Calibri", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -126,12 +126,14 @@
             contant.MinimumWidth = 6;
             contant.Name = "contant";
             contant.ReadOnly = true;
+            contant.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Column2
             // 
             Column2.HeaderText = "المعلومات";
             Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
+            Column2.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // UC_Base
             // 
@@ -146,8 +148,8 @@
         }
 
         #endregion
+        public Guna.UI2.WinForms.Guna2DataGridView DataGridBasic;
         private DataGridViewTextBoxColumn contant;
         private DataGridViewTextBoxColumn Column2;
-        public Guna.UI2.WinForms.Guna2DataGridView DataGridBasic;
     }
 }

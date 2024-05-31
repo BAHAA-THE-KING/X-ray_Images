@@ -33,31 +33,16 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridOther = new Guna.UI2.WinForms.Guna2DataGridView();
             contant = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            DataGridOther = new Guna.UI2.WinForms.Guna2DataGridView();
             ((System.ComponentModel.ISupportInitialize)DataGridOther).BeginInit();
             SuspendLayout();
-            // 
-            // contant
-            // 
-            contant.DividerWidth = 5;
-            contant.HeaderText = "الحقول";
-            contant.MinimumWidth = 6;
-            contant.Name = "contant";
-            contant.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "المعلومات";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
             // 
             // DataGridOther
             // 
             DataGridOther.AllowUserToAddRows = false;
             DataGridOther.AllowUserToDeleteRows = false;
-            DataGridOther.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(189, 223, 251);
             dataGridViewCellStyle1.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -67,6 +52,7 @@
             DataGridOther.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             DataGridOther.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DataGridOther.BackgroundColor = Color.FromArgb(196, 211, 249);
+            DataGridOther.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.RoyalBlue;
             dataGridViewCellStyle2.Font = new Font("Calibri", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -131,6 +117,22 @@
             DataGridOther.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(107, 185, 246);
             DataGridOther.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
             // 
+            // contant
+            // 
+            contant.DividerWidth = 5;
+            contant.HeaderText = "الحقول";
+            contant.MinimumWidth = 6;
+            contant.Name = "contant";
+            contant.ReadOnly = true;
+            contant.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            Column2.HeaderText = "المعلومات";
+            Column2.MinimumWidth = 6;
+            Column2.Name = "Column2";
+            Column2.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
             // UC_Other
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -144,9 +146,8 @@
         }
 
         #endregion
-
+        public Guna.UI2.WinForms.Guna2DataGridView DataGridOther;
         private DataGridViewTextBoxColumn contant;
         private DataGridViewTextBoxColumn Column2;
-        public Guna.UI2.WinForms.Guna2DataGridView DataGridOther;
     }
 }

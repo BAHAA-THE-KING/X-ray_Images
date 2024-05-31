@@ -21,11 +21,11 @@ namespace X_ray_Images.Views.Share
 {
     public partial class Whatsapp_Share : ServiceBase
     {
-        [DllImport("user32.dll", SetLastError = true)]
+        [DllImport("user32.dll", SetLastError = true)]      
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private static extern int CloseDialog(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         private const uint WM_CLOSE = 0x0010;
 
@@ -40,7 +40,7 @@ namespace X_ray_Images.Views.Share
         public bool IsDoc { get; set; } = false;
 
         public event Action FileSent; // Event to signal file sent
-        public event Action WaitingForSelectChat; 
+        public event Action WaitingForSelectChat;
 
 
         public Whatsapp_Share()
@@ -61,8 +61,6 @@ namespace X_ray_Images.Views.Share
                 run();
             }
         }
-
-
         public void run()
         {
             if (driver != null && driver.Url != null)
@@ -126,7 +124,7 @@ namespace X_ray_Images.Views.Share
             if (hWnd != IntPtr.Zero)
             {
                 // Send the WM_CLOSE message to the file dialog
-                SendMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                CloseDialog (hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
         }
 
@@ -135,8 +133,6 @@ namespace X_ray_Images.Views.Share
         {
             if (driver == null) return;
             WebDriverWait wait1 = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
-            //IWebElement parentElement = wait1.Until(d => d.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[3]/div/div[3]/div[1]/div/div")));
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             IWebElement parentElement = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[3]/div/div[3]/div[1]/div/div"));
 
             // Find all child elements within the parent element
@@ -177,20 +173,9 @@ namespace X_ray_Images.Views.Share
                 uploadOption = driver.FindElement(By.XPath("/html/body/div[1]/div/div/div[2]/div[4]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/ul/div/div[2]/li/div"));
             }
             uploadOption.Click();
-
-            // Increase the wait time if necessary to ensure the dialog appears
-            Thread.Sleep(2000); // Adjust this as needed
-
-            // Ensure the file input element is correctly located
+            Thread.Sleep(2000);
             IWebElement fileInput = driver.FindElement(By.CssSelector("input[type='file']"));
-
-            // Use the full path of the file
             var pdfFilePath = Path.GetFullPath(filePath);
-
-            // Print the full path to verify
-            Console.WriteLine("File Path: " + pdfFilePath);
-
-            // Ensure the file exists
             if (!File.Exists(pdfFilePath))
             {
                 Console.WriteLine("File not found: " + pdfFilePath);
@@ -198,35 +183,24 @@ namespace X_ray_Images.Views.Share
             }
             else
             {
-
                 fileInput.SendKeys(pdfFilePath);
-
-
-                Thread.Sleep(1000);
+                 Thread.Sleep(1000);
                 CloseFileDialog();
                 Thread.Sleep(1000);
                 try
                 {
-
                     IWebElement sendButton = driver.FindElement(By.XPath("//span[@data-icon='send']"));
                     sendButton.Click();
-
-
                     Thread.Sleep(6000);
-
                     OnStop();
-
-
                 }
                 catch (Exception ex)
                 {
-                    // Handle any exceptions
-                    Console.WriteLine("Error occurred: " + ex.Message);
+                   Console.WriteLine("Error occurred: " + ex.Message);
                 }
                 finally
                 {
-
-                    if (driver != null)
+                if (driver != null)
                     {
                         driver.Quit();
                     }
@@ -271,6 +245,7 @@ namespace X_ray_Images.Views.Share
             }
             finally
             {
+                //Set(): Sets the event, allowing any waiting threads to proceed.
                 eventForConsoleStart.Set();
             }
         }
