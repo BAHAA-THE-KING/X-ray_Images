@@ -29,12 +29,10 @@ namespace X_ray_Images.Classes
                     EncoderParameter qualityParam = new EncoderParameter(Encoder.Quality, quality);
                     // Get the JPEG codec
                     ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
-
                     if (jpegCodec == null)
                     {
                         throw new Exception("JPEG codec not found");
                     }
-
                     // Create an encoder parameters array
                     EncoderParameters encoderParams = new EncoderParameters(1);
                     encoderParams.Param[0] = qualityParam;

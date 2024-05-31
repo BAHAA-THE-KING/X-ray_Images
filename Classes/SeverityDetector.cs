@@ -1,8 +1,4 @@
 
-
-using Emgu.CV;
-using QuestPDF.Fluent;
-
 namespace X_ray_Images.Classes
 {
     public class SeverityDetector
@@ -16,16 +12,16 @@ namespace X_ray_Images.Classes
             if (heartToThoracicRatio <= 0.5)
             {
                 if (heartToThoracicRatio <= 0.3)
-                    return "Make sure that you are selecting the entire heart.";
+                    return "تأكد من انك قد حددت القلب كاملاً.";
                 else
-                    return "Normal";
+                    return "طبيعي";
             }
             else if (heartToThoracicRatio <= 0.55)
-                return "Mild Enlargement";
+                return "تضخم خفيف";
             else if (heartToThoracicRatio <= 0.60)
-                return "Moderate Enlargement";
+                return "تضخم متوسط";
             else
-                return "Severe Enlargement";
+                return "تضخم شديد";
         }
 
         public static string detect(Bitmap image, int x1, int y1, int x2, int y2)
@@ -52,20 +48,18 @@ namespace X_ray_Images.Classes
                     }
                 }
             }
-
             // Calculate percentage of white pixels
             double whitePercentage = (double)whitePixelCount / totalPixels * 100;
-            // MessageBox.Show("white percentage: "+whitePercentage);
             double low = 20, midLow = 40, mid = 60, midHigh = 80;
             if (whitePercentage < low)
-                return "low illness";
+                return "حالة خفيفة.";
             else if (whitePercentage < midLow)
-                return "mid-low illness";
+                return "حالة خفيفة الى متوسطة.";
             else if (whitePercentage < mid)
-                return "mid illness";
+                return "حالة متوسطة.";
             else if (whitePercentage < midHigh)
-                return "mid-heigh illness";
-            else return "high illness";
+                return "حالة متوسطة الى خطيرة.";
+            else return "حالة خطيرة.";
         }
     }
 }
