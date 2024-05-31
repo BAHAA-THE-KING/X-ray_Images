@@ -23,11 +23,12 @@ namespace X_ray_Images
         WaveFileReader reader;
         WaveOutEvent outputDevice;
         string path = "";
-        public Audio(string path)
+        public Audio(string path, string title)
         {
             InitializeComponent();
             ControlViews();
             this.path = path;
+            Text = title;
         }
         // Control View
         void ActivateElement(Control pictureBox)
@@ -170,7 +171,7 @@ namespace X_ray_Images
         }
 
         private void TelegramImage_Click(object sender, EventArgs e)
-        { 
+        {
             Telegram_Share telegram = new Telegram_Share();
             telegram.FilePath = path;
             telegram.Show();

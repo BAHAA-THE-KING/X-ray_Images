@@ -13,6 +13,8 @@ namespace X_ray_Images
         private System.Windows.Forms.PictureBox PlayImage;
         protected override void Dispose(bool disposing)
         {
+            if (this.mode == AudioMode.Listening) return;
+            if (this.mode == AudioMode.Recording) return;
             if (this.path.Equals(Paths.AudioTempFile)) CreateReport.isAudioOpen = false;
             if (disposing)
             {
@@ -155,7 +157,7 @@ namespace X_ray_Images
             Controls.Add(ConfirmButton);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Audio";
-            Text = "Recording";
+            Text = "تسجيل صوت";
             ((System.ComponentModel.ISupportInitialize)StartImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)StopImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)PlayImage).EndInit();

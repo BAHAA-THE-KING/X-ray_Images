@@ -656,7 +656,7 @@ namespace X_ray_Images
                     newFileName = Paths.AudioTempDir + "\\" + DateTime.Now.ToBinary() + ".wav";
                     recordings[active] = newFileName;
                 }
-                new Audio(newFileName).Show();
+                new Audio(newFileName, "تسجيل للصورة رقم " + (active + 1)).Show();
             }
         }
 
