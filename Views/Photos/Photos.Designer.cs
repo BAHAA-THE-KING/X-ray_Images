@@ -298,7 +298,7 @@ namespace X_ray_Images
             CreateButton.TabIndex = 26;
             CreateButton.Text = "إضافة صورة";
             CreateButton.UseVisualStyleBackColor = false;
-            CreateButton.Click += CreateButton_Click;
+            CreateButton.Click += New_Click;
             // 
             // Telegram
             // 

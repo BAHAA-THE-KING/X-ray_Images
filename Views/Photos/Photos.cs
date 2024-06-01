@@ -132,6 +132,7 @@ namespace X_ray_Images
             ResetState();
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = Paths.CreatePath("testImages");
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
@@ -291,7 +292,7 @@ namespace X_ray_Images
                             thirdPoint.Y = mouseArgs.Y;
 
                             SetImage(Drawer.DrawTriangle(MainImage.Image, firstPoint, secondPoint, thirdPoint));
-                            Reset();
+                            ResetState();
                         }
                     }
                 }
@@ -471,7 +472,6 @@ namespace X_ray_Images
             ActiveImage(GeometryImage);
             this.shapeType = shapeType;
             mode = PhotosMode.Drawing;
-
         }
 
         // Functions
@@ -576,39 +576,6 @@ namespace X_ray_Images
             tempText = text;
         }
 
-
-        private void CreateButton_Click(object sender, EventArgs e)
-        {
-            ResetState();
-
-            string initialDirectory = Paths.CreatePath("testImages");
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = initialDirectory;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
-
-
-                images.Add(MainImage.Image);
-                recordings.Add("");
-                int id = images.Count - 1;
-                active = id;
-
-                GalleryItem galleryItem = new GalleryItem(images[id], id, (object sender, EventArgs e) =>
-                {
-                    active = id;
-                    MainImage.Image = images[id];
-                    MainImage.Size = new Size(images[id].Width, images[id].Height);
-                });
-
-                galleryItems.Add(galleryItem);
-                GalleryPanel.Controls.Add(galleryItem.pictureBox);
-                SetImage(image);
-
-                Reset();
-            }
-        }
         private void WhatsApp_Click(object sender, EventArgs e)
         {
             if (active < images.Count)
