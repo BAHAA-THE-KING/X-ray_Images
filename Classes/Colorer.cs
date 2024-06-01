@@ -15,33 +15,34 @@ namespace X_ray_Images
                 for (int y = startY; y < endY; y++)
                 {
                     Color pixelColor = newImage.GetPixel(x, y);
+                    int pixelBrightness = (int)(pixelColor.GetBrightness() * 255.0f);
 
                     //If Pixel color is closer to white
-                    if (pixelColor.R >= 150)
+                    if (pixelBrightness >= 150)
                     {
                         //Strong color
-                        if (IsInRange(pixelColor.R, 180, 255))
+                        if (IsInRange(pixelBrightness, 180, 255))
                         {
                             newImage.SetPixel(x, y, firstColor);
                         }
                         //Shading color
                         else
                         {
-                            newImage.SetPixel(x, y, getFirstColorShade(pixelColor.R / 10, firstColor));
+                            newImage.SetPixel(x, y, getFirstColorShade(pixelBrightness / 10, firstColor));
                         }
                     }
                     //Else if Pixel color is closer to black
                     else
                     {
                         //Strong color
-                        if (IsInRange(pixelColor.R, 0, 50))
+                        if (IsInRange(pixelBrightness, 0, 50))
                         {
                             newImage.SetPixel(x, y, secondColor);
                         }
                         //Shading color
                         else
                         {
-                            newImage.SetPixel(x, y, getSecondColorShade(pixelColor.R / 10, secondColor));
+                            newImage.SetPixel(x, y, getSecondColorShade(pixelBrightness / 10, secondColor));
 
                         }
                     }
