@@ -11,6 +11,16 @@ namespace X_ray_Images
         private System.Windows.Forms.PictureBox StartImage;
         private System.Windows.Forms.PictureBox StopImage;
         private System.Windows.Forms.PictureBox PlayImage;
+        private System.Windows.Forms.PictureBox WhatsAppImage;
+        private System.Windows.Forms.PictureBox TelegramImage;
+        private System.Windows.Forms.Label MainLabel;
+        private System.Windows.Forms.Label StopLabel;
+        private System.Windows.Forms.Panel PlayPanel;
+        private System.Windows.Forms.Label PlayLabel;
+        private System.Windows.Forms.Panel StopPanel;
+        private System.Windows.Forms.Panel StartPanel;
+        private System.Windows.Forms.Label StartLabel;
+        private OxyPlot.WindowsForms.PlotView AudioPlot;
         protected override void Dispose(bool disposing)
         {
             if (this.mode == AudioMode.Listening) return;
@@ -43,6 +53,7 @@ namespace X_ray_Images
             this.PlayLabel = new System.Windows.Forms.Label();
             this.StartPanel = new System.Windows.Forms.Panel();
             this.StartLabel = new System.Windows.Forms.Label();
+            this.AudioPlot = new OxyPlot.WindowsForms.PlotView();
             ((System.ComponentModel.ISupportInitialize)(this.StartImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StopImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayImage)).BeginInit();
@@ -226,11 +237,18 @@ namespace X_ray_Images
             this.StartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.StartLabel.Click += new System.EventHandler(this.Start_Click);
             // 
+            // AudioPlot
+            // 
+            this.AudioPlot.Location = new System.Drawing.Point(778, 87);
+            this.AudioPlot.Name = "AudioPlot";
+            this.AudioPlot.Size = new System.Drawing.Size(404, 293);
+            this.AudioPlot.TabIndex = 27;
+            // 
             // Audio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 453);
+            this.ClientSize = new System.Drawing.Size(1222, 453);
             this.Controls.Add(this.StartPanel);
             this.Controls.Add(this.PlayPanel);
             this.Controls.Add(this.StopPanel);
@@ -240,6 +258,7 @@ namespace X_ray_Images
             this.Controls.Add(this.RecordingLabel);
             this.Controls.Add(this.ListeningLabel);
             this.Controls.Add(this.ConfirmButton);
+            this.Controls.Add(this.AudioPlot);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Audio";
             this.Text = "تسجيل صوت";
@@ -254,15 +273,5 @@ namespace X_ray_Images
             this.ResumeLayout(false);
 
         }
-
-        private System.Windows.Forms.PictureBox WhatsAppImage;
-        private System.Windows.Forms.PictureBox TelegramImage;
-        private System.Windows.Forms.Label MainLabel;
-        private System.Windows.Forms.Label StopLabel;
-        private System.Windows.Forms.Panel PlayPanel;
-        private System.Windows.Forms.Label PlayLabel;
-        private System.Windows.Forms.Panel StopPanel;
-        private System.Windows.Forms.Panel StartPanel;
-        private System.Windows.Forms.Label StartLabel;
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using NAudio.Wave;
+using OxyPlot;
+using OxyPlot.Series;
 using WTelegramClientTestWF;
 using X_ray_Images.Classes;
 using X_ray_Images.Views.Share;
@@ -19,16 +21,27 @@ namespace X_ray_Images
     {
         AudioMode mode = AudioMode.None;
         WaveInEvent waveIn;
-        WaveFileWriter? waveFileWriter;
+        List<byte> samples = [];
         WaveFileReader reader;
         WaveOutEvent outputDevice;
         string path = "";
+        PlotModel model = new PlotModel();
+        BarSeries series = new BarSeries();
         public Audio(string path, string title)
         {
             InitializeComponent();
             ControlViews();
             this.path = path;
             MainLabel.Text = title;
+
+            model.Title = "Voice Recording";
+
+            AudioPlot.Model = model;
+
+            series.FillColor = OxyColors.Blue;
+            series.StrokeThickness = 1;
+
+            model.Series.Add(series);
         }
         // Control View
         void ActivateElement(Control control)
@@ -76,18 +89,22 @@ namespace X_ray_Images
                 ControlViews();
                 if (File.Exists(path)) File.Delete(path);
                 waveIn = new WaveInEvent();
-                waveFileWriter = null;
                 waveIn.WaveFormat = new WaveFormat(44100, 1);
-                waveIn.DataAvailable += (sender, e) =>
+                waveIn.DataAvailable += (s, e) =>
                 {
-                    Directory.CreateDirectory(Paths.AudioTempDir);
-                    waveFileWriter ??= new WaveFileWriter(path, waveIn.WaveFormat);
-                    waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
-                };
+                    var buffer = e.Buffer;
+                    if (buffer.Length == 0) return;
 
-                waveIn.RecordingStopped += (sender, e) =>
-                {
-                    if (!waveFileWriter.CanWrite) waveFileWriter.Flush();
+                    byte[] bytes = new byte[buffer.Length / sizeof(byte)];
+                    Buffer.BlockCopy(buffer, 0, bytes, 0, bytes.Length * sizeof(byte));
+                    foreach (var smp in bytes)
+                        samples.Add(smp);
+                    series.Items.Clear();
+                    for (int i = 0; i < samples.Count; i++)
+                    {
+                        series.Items.Add(new BarItem(i, samples[i]));
+                    }
+                    AudioPlot.Invalidate();
                 };
 
                 waveIn.StartRecording();
@@ -100,9 +117,12 @@ namespace X_ray_Images
                 mode = AudioMode.None;
                 ControlViews();
                 waveIn.StopRecording();
-                waveFileWriter.Close();
-                waveFileWriter.Dispose();
-                //waveFileWriter = null;
+                waveIn.Dispose();
+                using (var writer = new WaveFileWriter(path, new WaveFormat(44100, 1)))
+                {
+                    writer.Write(samples.ToArray(), 0, samples.Count);
+                    samples.Clear();
+                }
             }
             else if (mode == AudioMode.Listening)
             {
