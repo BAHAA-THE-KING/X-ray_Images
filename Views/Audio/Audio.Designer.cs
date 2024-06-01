@@ -222,7 +222,7 @@ namespace X_ray_Images
             this.StartLabel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartLabel.Size = new System.Drawing.Size(122, 43);
             this.StartLabel.TabIndex = 9;
-            this.StartLabel.Text = "تشغيل";
+            this.StartLabel.Text = "تسجيل";
             this.StartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.StartLabel.Click += new System.EventHandler(this.Start_Click);
             // 

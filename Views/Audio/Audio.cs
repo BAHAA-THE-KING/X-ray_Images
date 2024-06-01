@@ -77,13 +77,11 @@ namespace X_ray_Images
                 if (File.Exists(path)) File.Delete(path);
                 waveIn = new WaveInEvent();
                 waveFileWriter = null;
-                waveIn.WaveFormat = new WaveFormat(44100, 1); // 44100 Hz, mono
+                waveIn.WaveFormat = new WaveFormat(44100, 1);
                 waveIn.DataAvailable += (sender, e) =>
                 {
-                    // Initialize the WaveFileWriter on the first call to the DataAvailable event
                     Directory.CreateDirectory(Paths.AudioTempDir);
                     waveFileWriter ??= new WaveFileWriter(path, waveIn.WaveFormat);
-                    // Write the recorded audio data to the WAV file
                     waveFileWriter.Write(e.Buffer, 0, e.BytesRecorded);
                 };
 
@@ -127,7 +125,7 @@ namespace X_ray_Images
                     outputDevice = new WaveOutEvent();
                     outputDevice.Init(reader);
                     outputDevice.Play();
-                    outputDevice.PlaybackStopped += (object sender, StoppedEventArgs e) =>
+                    outputDevice.PlaybackStopped += (sender, e) =>
                     {
                         if (mode == AudioMode.Listening)
                         {

@@ -220,7 +220,6 @@ namespace X_ray_Images
                 break;
             }
         }
-
         private void SaveZipFile_Click(object sender, EventArgs e)
         {
             string folderToCompress = Paths.CreatePath(BaseInfo.baseInfo.name);
