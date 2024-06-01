@@ -1,4 +1,4 @@
-﻿using Emgu.CV.Face;
+﻿    using Emgu.CV.Face;
 using Guna.UI2.WinForms;
 using System.Windows.Forms;
 using WTelegramClientTestWF;
@@ -39,23 +39,17 @@ namespace X_ray_Images.Views.BasicInfo
             panelContainer.Controls.Add(userControl);
             userControl.BringToFront();
         }
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void ucBase_Click(object sender, EventArgs e)
         {
             addUserControl(ucBase);
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void ucConnection_Click(object sender, EventArgs e)
         {
 
             addUserControl(ucConnection);
         }
-
-        private void panelContainer_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2Button3_Click(object sender, EventArgs e)
+         private void ucOther_Click(object sender, EventArgs e)
         {
 
             addUserControl(ucOther);
@@ -95,7 +89,7 @@ namespace X_ray_Images.Views.BasicInfo
                 result += "الرجاء ادخال استطباب المريض \n";
                 isValid = false;
             }
-            if (connectInfo.phone == "-1") // phone
+            if (string.IsNullOrWhiteSpace(connectInfo.phone)) // phone
             {
                 result += "الرجاء ادخال رقم هاتف المريض \n";
                 isValid = false;
@@ -108,11 +102,12 @@ namespace X_ray_Images.Views.BasicInfo
 
             return isValid;
         }
-        private void guna2Button4_Click(object sender, EventArgs e)
+        private void confirmInfo_Click(object sender, EventArgs e)
         {
             patient = new Patient(baseInfo, connectInfo, otherInfo, statusInfo);
             if (ValidateRequiredFields())
             {
+                MessageBox.Show("تم تأكيد المعلومات.", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
             else
@@ -121,7 +116,7 @@ namespace X_ray_Images.Views.BasicInfo
             }
         }
 
-        private void guna2Button5_Click(object sender, EventArgs e)
+        private void ucStatus_Click(object sender, EventArgs e)
         {
             addUserControl(ucStatus);
         }
@@ -185,7 +180,7 @@ namespace X_ray_Images.Views.BasicInfo
                   
                 }
             }
-        }
+        }   
 
         private void TelegramImage_Click(object sender, EventArgs e)
         {

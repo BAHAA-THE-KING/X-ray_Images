@@ -21,7 +21,7 @@ namespace X_ray_Images.Views.BasicInfo
         public Contact()
         {
             this.address = "";
-            this.phone = "-1";
+            this.phone = "";
         }
         public override string? ToString()
         {

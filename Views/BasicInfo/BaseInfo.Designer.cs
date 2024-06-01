@@ -25,16 +25,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseInfo));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             panel1 = new Panel();
             TelegramImage = new PictureBox();
             guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
@@ -46,7 +46,7 @@
             guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            BasicInfoButton = new Guna.UI2.WinForms.Guna2Button();
             panelContainer = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TelegramImage).BeginInit();
@@ -90,7 +90,7 @@
             guna2Button4.CheckedState.FillColor = Color.Transparent;
             guna2Button4.CustomBorderColor = Color.White;
             guna2Button4.CustomBorderThickness = new Padding(3);
-            guna2Button4.CustomizableEdges = customizableEdges1;
+            guna2Button4.CustomizableEdges = customizableEdges11;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
             guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -101,11 +101,11 @@
             guna2Button4.HoverState.CustomBorderColor = Color.Indigo;
             guna2Button4.Location = new Point(3, 2);
             guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges12;
             guna2Button4.Size = new Size(225, 65);
             guna2Button4.TabIndex = 3;
             guna2Button4.Text = "تأكيد المعلومات";
-            guna2Button4.Click += guna2Button4_Click;
+            guna2Button4.Click += confirmInfo_Click;
             // 
             // WhatsAppImage
             // 
@@ -160,7 +160,7 @@
             panel3.Controls.Add(guna2Button5);
             panel3.Controls.Add(guna2Button3);
             panel3.Controls.Add(guna2Button2);
-            panel3.Controls.Add(guna2Button1);
+            panel3.Controls.Add(BasicInfoButton);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 67);
             panel3.Name = "panel3";
@@ -173,7 +173,7 @@
             guna2Button5.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button5.CustomBorderColor = Color.White;
             guna2Button5.CustomBorderThickness = new Padding(0, 0, 0, 3);
-            guna2Button5.CustomizableEdges = customizableEdges3;
+            guna2Button5.CustomizableEdges = customizableEdges13;
             guna2Button5.DisabledState.BorderColor = Color.DarkGray;
             guna2Button5.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button5.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -184,18 +184,18 @@
             guna2Button5.HoverState.CustomBorderColor = Color.Blue;
             guna2Button5.Location = new Point(499, 11);
             guna2Button5.Name = "guna2Button5";
-            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Button5.ShadowDecoration.CustomizableEdges = customizableEdges14;
             guna2Button5.Size = new Size(225, 65);
             guna2Button5.TabIndex = 3;
             guna2Button5.Text = "معلومات الحالة";
-            guna2Button5.Click += guna2Button5_Click;
+            guna2Button5.Click += ucStatus_Click;
             // 
             // guna2Button3
             // 
             guna2Button3.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button3.CustomBorderColor = Color.White;
             guna2Button3.CustomBorderThickness = new Padding(0, 0, 0, 3);
-            guna2Button3.CustomizableEdges = customizableEdges5;
+            guna2Button3.CustomizableEdges = customizableEdges15;
             guna2Button3.DisabledState.BorderColor = Color.DarkGray;
             guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -206,11 +206,11 @@
             guna2Button3.HoverState.CustomBorderColor = Color.Blue;
             guna2Button3.Location = new Point(20, 12);
             guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges16;
             guna2Button3.Size = new Size(225, 65);
             guna2Button3.TabIndex = 2;
             guna2Button3.Text = "معلومات أخرى";
-            guna2Button3.Click += guna2Button3_Click;
+            guna2Button3.Click += ucOther_Click;
             // 
             // guna2Button2
             // 
@@ -218,7 +218,7 @@
             guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             guna2Button2.CustomBorderColor = Color.White;
             guna2Button2.CustomBorderThickness = new Padding(0, 0, 0, 3);
-            guna2Button2.CustomizableEdges = customizableEdges7;
+            guna2Button2.CustomizableEdges = customizableEdges17;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -229,35 +229,36 @@
             guna2Button2.HoverState.CustomBorderColor = Color.Blue;
             guna2Button2.Location = new Point(262, 11);
             guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2Button2.Size = new Size(225, 65);
             guna2Button2.TabIndex = 1;
             guna2Button2.Text = "معلومات التواصل";
-            guna2Button2.Click += guna2Button2_Click;
+            guna2Button2.Click += ucConnection_Click;
             // 
-            // guna2Button1
+            // BasicInfoButton
             // 
-            guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Button1.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            guna2Button1.Checked = true;
-            guna2Button1.CustomBorderColor = Color.White;
-            guna2Button1.CustomBorderThickness = new Padding(0, 0, 0, 3);
-            guna2Button1.CustomizableEdges = customizableEdges9;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Transparent;
-            guna2Button1.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2Button1.ForeColor = Color.Black;
-            guna2Button1.HoverState.CustomBorderColor = Color.Blue;
-            guna2Button1.Location = new Point(733, 12);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2Button1.Size = new Size(225, 65);
-            guna2Button1.TabIndex = 0;
-            guna2Button1.Text = "معلومات أساسية";
-            guna2Button1.Click += guna2Button1_Click;
+            BasicInfoButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BasicInfoButton.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            BasicInfoButton.Checked = true;
+            BasicInfoButton.CustomBorderColor = Color.White;
+            BasicInfoButton.CustomBorderThickness = new Padding(0, 0, 0, 3);
+            BasicInfoButton.CustomizableEdges = customizableEdges19;
+            BasicInfoButton.DisabledState.BorderColor = Color.DarkGray;
+            BasicInfoButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            BasicInfoButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            BasicInfoButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            BasicInfoButton.FillColor = Color.Transparent;
+            BasicInfoButton.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BasicInfoButton.ForeColor = Color.Black;
+            BasicInfoButton.HoverState.CustomBorderColor = Color.Blue;
+            BasicInfoButton.ImeMode = ImeMode.NoControl;
+            BasicInfoButton.Location = new Point(733, 12);
+            BasicInfoButton.Name = "BasicInfoButton";
+            BasicInfoButton.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            BasicInfoButton.Size = new Size(225, 65);
+            BasicInfoButton.TabIndex = 0;
+            BasicInfoButton.Text = "معلومات أساسية";
+            BasicInfoButton.Click += ucBase_Click;
             // 
             // panelContainer
             // 
@@ -266,7 +267,7 @@
             panelContainer.Name = "panelContainer";
             panelContainer.Size = new Size(963, 406);
             panelContainer.TabIndex = 2;
-            panelContainer.Paint += panelContainer_Paint;
+         
             // 
             // BaseInfo
             // 
@@ -297,7 +298,7 @@
         private Panel panel2;
         private Panel panel3;
         private Panel panelContainer;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button BasicInfoButton;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
