@@ -25,7 +25,7 @@ namespace X_ray_Images.Views.Share
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int CloseDialog(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private static extern int SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         private const uint WM_CLOSE = 0x0010;
 
@@ -124,7 +124,7 @@ namespace X_ray_Images.Views.Share
             if (hWnd != IntPtr.Zero)
             {
                 // Send the WM_CLOSE message to the file dialog
-                CloseDialog (hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                SendMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
             }
         }
 
