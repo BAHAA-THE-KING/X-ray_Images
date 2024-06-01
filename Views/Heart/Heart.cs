@@ -13,8 +13,11 @@ namespace X_ray_Images
 	public partial class Heart : Form
 	{
 		HeartMode mode = HeartMode.None;
-		Point startPoint = new Point(-1, -1);
-		Rectangle tempRect = new Rectangle(0, 0, 0, 0);
+		Point startPoint1 = new Point(-1, -1);
+		Point startPoint2 = new Point(-1, -1);
+		Rectangle tempRect1 = new Rectangle(0, 0, 0, 0);
+		Rectangle tempRect2 = new Rectangle(0, 0, 0, 0);
+		bool firstFinished = false;
 		// Coloring Icons
 		void ActiveImage(PictureBox pictureBox)
 		{
@@ -42,8 +45,11 @@ namespace X_ray_Images
 		}
 		private void Reset()
 		{
-			startPoint = new Point(-1, -1);
-			tempRect = new Rectangle(0, 0, 0, 0);
+			startPoint1 = new Point(-1, -1);
+			startPoint2 = new Point(-1, -1);
+			tempRect1 = new Rectangle(0, 0, 0, 0);
+			tempRect2 = new Rectangle(0, 0, 0, 0);
+			firstFinished = false;
 			MainImage.Invalidate();
 		}
 		private void SetImage(Image image)
@@ -65,8 +71,16 @@ namespace X_ray_Images
 						Reset();
 						return;
 					}
-					startPoint = Selector.BeginSelect(MainImage, e.X, e.Y);
-					tempRect = new Rectangle(startPoint.X, startPoint.Y, 0, 0);
+					if (firstFinished)
+					{
+						startPoint2 = Selector.BeginSelect(MainImage, e.X, e.Y);
+						tempRect2 = new Rectangle(startPoint1.X, startPoint1.Y, 0, 0);
+					}
+					else
+					{
+						startPoint1 = Selector.BeginSelect(MainImage, e.X, e.Y);
+						tempRect1 = new Rectangle(startPoint2.X, startPoint2.Y, 0, 0);
+					}
 				}
 			}
 		}
@@ -78,12 +92,42 @@ namespace X_ray_Images
 				{
 					if (e.Button == MouseButtons.Left)
 					{
-						if (startPoint.X != -1)
+						if (firstFinished)
 						{
-							tempRect = Selector.SelectMove(MainImage, startPoint, e.X, e.Y);
+							if (startPoint2.X != -1)
+							{
+								tempRect2 = Selector.SelectMove(MainImage, startPoint2, e.X, e.Y);
+							}
+						}
+						else
+						{
+							if (startPoint1.X != -1)
+							{
+								tempRect1 = Selector.SelectMove(MainImage, startPoint1, e.X, e.Y);
+							}
 						}
 
 						MainImage.Invalidate();
+					}
+					else if (e.Button == MouseButtons.Right)
+					{
+						Reset();
+					}
+				}
+			}
+		}
+		private void MainImage_MouseUp(object sender, MouseEventArgs e)
+		{
+			if (MainImage.Image != null)
+			{
+				if (mode == HeartMode.Select)
+				{
+					if (e.Button == MouseButtons.Left)
+					{
+						if (!firstFinished)
+						{
+							firstFinished = true;
+						}
 					}
 					else if (e.Button == MouseButtons.Right)
 					{
@@ -97,9 +141,13 @@ namespace X_ray_Images
 			if (MainImage.Image != null)
 			{
 				PaintEventArgs paintEvent = (PaintEventArgs)e;
-				if (tempRect.Width > 0 && tempRect.Height > 0)
+				if (tempRect1.Width > 0 && tempRect1.Height > 0)
 				{
-					paintEvent.Graphics.DrawRectangle(Pens.Red, tempRect);
+					paintEvent.Graphics.DrawRectangle(Pens.Red, tempRect1);
+				}
+				if (tempRect2.Width > 0 && tempRect2.Height > 0)
+				{
+					paintEvent.Graphics.DrawRectangle(Pens.Blue, tempRect2);
 				}
 			}
 		}
@@ -127,13 +175,13 @@ namespace X_ray_Images
 		{
 			if (MainImage.Image != null)
 			{
-				if (mode == HeartMode.Select && tempRect.Width > 0 && tempRect.Height > 0)
+				if (mode == HeartMode.Select && tempRect1.Width > 0 && tempRect1.Height > 0 && tempRect2.Width > 0 && tempRect2.Height > 0)
 				{
-					int startX = tempRect.X;
-					int startY = tempRect.Y;
-					int endX = tempRect.X + tempRect.Width;
-					int endY = tempRect.Y + tempRect.Height;
-					string result = SeverityDetector.detectHeartProblem(new Bitmap(MainImage.Image), startX, startY, endX, endY);
+					int startY1 = tempRect1.Y;
+					int endY1 = tempRect1.Y + tempRect1.Height;
+					int startY2 = tempRect2.Y;
+					int endY2 = tempRect2.Y + tempRect2.Height;
+					string result = SeverityDetector.detectHeartProblem(new Bitmap(MainImage.Image), startY1, endY1, startY2, endY2);
 					ResultLabel.Text = result;
 
 					ResetState();

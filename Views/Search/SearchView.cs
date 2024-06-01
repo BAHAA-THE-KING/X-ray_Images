@@ -104,7 +104,7 @@ namespace X_ray_Images.Views.Search
 
             await Task.Run(() => DisplayResults(images, progress));
 
-            MessageBox.Show(images.Length.ToString() + " images found in folder");
+            MessageBox.Show(images.Length.ToString() + " صور تم ايجادها في المجلد.");
 
             filter_button.Enabled = true;
         }
@@ -137,7 +137,7 @@ namespace X_ray_Images.Views.Search
                     }));
 
                     processed_files++;
-                    int percentage = (int)((double)(processed_files * 100 / total_files));
+                    int percentage = (int)(double)(processed_files * 100 / total_files);
 
                     progress?.Report(percentage);
                 }

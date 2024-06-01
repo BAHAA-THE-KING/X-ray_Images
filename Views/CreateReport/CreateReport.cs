@@ -50,7 +50,7 @@ namespace X_ray_Images
             if (!isAudioOpen)
             {
                 isAudioOpen = true;
-                Audio audio = new Audio(Paths.AudioTempFile);
+                Audio audio = new Audio(Paths.AudioTempFile, "وصف الحالة");
                 audio.Show();
             }
         }
@@ -220,7 +220,6 @@ namespace X_ray_Images
                 break;
             }
         }
-
         private void SaveZipFile_Click(object sender, EventArgs e)
         {
             string folderToCompress = Paths.CreatePath(BaseInfo.baseInfo.name);

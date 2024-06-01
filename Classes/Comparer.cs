@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-
+﻿
 namespace X_ray_Images
 {
     internal class Comparer
@@ -9,19 +7,19 @@ namespace X_ray_Images
         {
             double firstPercentage = whitePercetageOf(first);
             double secondPercentage = whitePercetageOf(second);
-            Console.WriteLine("first:" + firstPercentage + "\n second:" + secondPercentage);
             double developmentPerecentage = 10.0;
             if (Math.Abs(firstPercentage - secondPercentage) >= developmentPerecentage)
             {
-                return firstPercentage > secondPercentage ? "decrease in size noticed" : "Growth in size noticed";
+                return firstPercentage > secondPercentage ?
+                "تم ملاحظة نقصان في الحجم" :
+                "تم ملاحظة زيادة في الحجم";
             }
-            return "similar";
+            return "حالة مماثلة , او تغير طفيف جداً";
         }
 
         private static double whitePercetageOf(Bitmap first)
         {
             int totalPixels = first.Width * first.Height;
-
             // Count white pixels
             int whitePixelCount = 0;
 
@@ -30,7 +28,6 @@ namespace X_ray_Images
                 for (int x = 0; x < first.Width; x++)
                 {
                     Color pixelColor = first.GetPixel(x, y);
-
                     // Check if the pixel color is white or very close to white
                     if (IsWhite(pixelColor))
                     {
@@ -38,7 +35,6 @@ namespace X_ray_Images
                     }
                 }
             }
-
             // Calculate percentage of white pixels
             double whitePercentage = (double)whitePixelCount / totalPixels * 100;
             return whitePercentage;
@@ -48,10 +44,7 @@ namespace X_ray_Images
         {
             double brightnessThreshold = 0.5;
             double brightness = color.GetBrightness();
-            bool isWhiteBrightness = brightness >= brightnessThreshold;
-            int threshold = 130;
-            bool isWhiteRGB = color.R >= threshold && color.G >= threshold && color.B >= threshold;
-            return isWhiteBrightness;
+            return brightness >= brightnessThreshold;
         }
     }
 }

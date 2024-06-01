@@ -111,6 +111,7 @@ namespace X_ray_Images
             thirdPoint = new Point(-1, -1);
             tempRect = new Rectangle(0, 0, 0, 0);
             tempCircle = new Circle(0, 0, 0);
+            tempLine = new Line(-1, -1, -1, -1);
             tempFree = [];
             tempText = "";
             MainImage.Invalidate();
@@ -131,6 +132,7 @@ namespace X_ray_Images
             ResetState();
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = Paths.CreatePath("testImages");
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
@@ -218,11 +220,6 @@ namespace X_ray_Images
                 GalleryPanel.Controls.Clear();
                 galleryItems.Clear();
 
-                if (images.Count > 0)
-                    SetImage(images[active]);
-                else
-                    SetImage(null);
-
                 for (int i = 0; i < images.Count; i++)
                 {
                     int id = i;
@@ -240,6 +237,11 @@ namespace X_ray_Images
                     galleryItems.Add(galleryItem);
                     GalleryPanel.Controls.Add(galleryItem.pictureBox);
                 }
+
+                if (images.Count > 0)
+                    SetImage(images[active]);
+                else
+                    SetImage(null);
 
             }
         }
@@ -290,7 +292,7 @@ namespace X_ray_Images
                             thirdPoint.Y = mouseArgs.Y;
 
                             SetImage(Drawer.DrawTriangle(MainImage.Image, firstPoint, secondPoint, thirdPoint));
-                            Reset();
+                            ResetState();
                         }
                     }
                 }
@@ -470,7 +472,6 @@ namespace X_ray_Images
             ActiveImage(GeometryImage);
             this.shapeType = shapeType;
             mode = PhotosMode.Drawing;
-
         }
 
         // Functions
@@ -539,39 +540,40 @@ namespace X_ray_Images
                 SetImage(newImage);
             }
         }
-
-
-        private void CreateButton_Click(object sender, EventArgs e)
+        private void RecordImage_Click(object sender, EventArgs e)
         {
-            ResetState();
-
-            string initialDirectory = Paths.CreatePath("testImages");
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = initialDirectory;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (active < recordings.Count)
             {
-                Bitmap image = ImageProcessor.LoadImageWithResize(openFileDialog1.FileName);
-
-
-                images.Add(MainImage.Image);
-                recordings.Add("");
-                int id = images.Count - 1;
-                active = id;
-
-                GalleryItem galleryItem = new GalleryItem(images[id], id, (object sender, EventArgs e) =>
+                string newFileName = recordings[active];
+                if (newFileName.Equals(""))
                 {
-                    active = id;
-                    MainImage.Image = images[id];
-                    MainImage.Size = new Size(images[id].Width, images[id].Height);
-                });
-
-                galleryItems.Add(galleryItem);
-                GalleryPanel.Controls.Add(galleryItem.pictureBox);
-                SetImage(image);
-
-                Reset();
+                    newFileName = Paths.AudioTempDir + "\\" + DateTime.Now.ToBinary() + ".wav";
+                    recordings[active] = newFileName;
+                }
+                new Audio(newFileName, "تسجيل للصورة رقم " + (active + 1)).Show();
             }
+        }
+
+        private void TextImage_Click(object sender, EventArgs e)
+        {
+            if (active < images.Count)
+            {
+                if (mode == PhotosMode.None)
+                {
+                    ActiveImage(TextImage);
+                    new Text(setText).Show();
+                }
+                else if (mode == PhotosMode.Text)
+                {
+                    InactiveImage(TextImage);
+                    ResetState();
+                }
+            }
+        }
+        private void setText(string text)
+        {
+            mode = PhotosMode.Text;
+            tempText = text;
         }
 
         private void WhatsApp_Click(object sender, EventArgs e)
@@ -646,42 +648,6 @@ namespace X_ray_Images
             }
 
         }
-        private void RecordImage_Click(object sender, EventArgs e)
-        {
-            if (active < recordings.Count)
-            {
-                string newFileName = recordings[active];
-                if (newFileName.Equals(""))
-                {
-                    newFileName = Paths.AudioTempDir + "\\" + DateTime.Now.ToBinary() + ".wav";
-                    recordings[active] = newFileName;
-                }
-                new Audio(newFileName).Show();
-            }
-        }
-
-        private void TextImage_Click(object sender, EventArgs e)
-        {
-            if (active < images.Count)
-            {
-                if (mode == PhotosMode.None)
-                {
-                    ActiveImage(TextImage);
-                    new Text(setText).Show();
-                }
-                else if (mode == PhotosMode.Text)
-                {
-                    InactiveImage(TextImage);
-                    ResetState();
-                }
-            }
-        }
-        private void setText(string text)
-        {
-            mode = PhotosMode.Text;
-            tempText = text;
-        }
-
         private void Telegram_Click(object sender, EventArgs e)
         {
             if (active < images.Count)

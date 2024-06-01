@@ -42,6 +42,7 @@ namespace X_ray_Images
 			this.MainImage.TabStop = false;
 			this.MainImage.MouseDown += MainImage_MouseDown;
 			this.MainImage.MouseMove += MainImage_MouseMove;
+			this.MainImage.MouseUp += MainImage_MouseUp;
 			this.MainImage.Paint += MainImage_Paint;
 			// 
 			// SelectImage
