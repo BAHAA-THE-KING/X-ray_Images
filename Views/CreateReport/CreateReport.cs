@@ -100,6 +100,8 @@ namespace X_ray_Images
                 }
                 break;
             }
+
+            MessageBox.Show("تم الحفظ بنجاح", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void CompressButtonClick(object sender, EventArgs e)
         {
@@ -219,6 +221,8 @@ namespace X_ray_Images
                 }
                 break;
             }
+            MessageBox.Show("تم الحفظ بنجاح", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
         private void SaveZipFile_Click(object sender, EventArgs e)
         {
@@ -254,6 +258,8 @@ namespace X_ray_Images
                 {
                     MessageBox.Show("يجب عليك الحفظ أولاً", "Save First", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                MessageBox.Show("تم الحفظ بنجاح", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -267,6 +273,7 @@ namespace X_ray_Images
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
+
         }
 
         private void WhatsAppImage_Click(object sender, EventArgs e)

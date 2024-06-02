@@ -107,7 +107,7 @@ namespace X_ray_Images.Views.BasicInfo
             patient = new Patient(baseInfo, connectInfo, otherInfo, statusInfo);
             if (ValidateRequiredFields())
             {
-                MessageBox.Show("تم تأكيد المعلومات.", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("تم تأكيد المعلومات.", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else

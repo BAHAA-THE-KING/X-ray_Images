@@ -150,7 +150,6 @@ namespace X_ray_Images.Classes
                 })
                 .GeneratePdf(filePath);
 
-                MessageBox.Show($"PDF generated successfully at: {filePath}", "Success!");
                 return true;
             }
             catch (Exception exc)

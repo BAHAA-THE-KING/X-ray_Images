@@ -6,7 +6,6 @@ using NAudio.Wave;
 using OxyPlot;
 using OxyPlot.Series;
 using WTelegramClientTestWF;
-using X_ray_Images.Classes;
 using X_ray_Images.Views.Share;
 
 namespace X_ray_Images
@@ -27,6 +26,8 @@ namespace X_ray_Images
         string path = "";
         PlotModel model = new PlotModel();
         BarSeries series = new BarSeries();
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        int timerCount;
         public Audio(string path, string title)
         {
             InitializeComponent();
@@ -42,6 +43,18 @@ namespace X_ray_Images
             series.StrokeThickness = 1;
 
             model.Series.Add(series);
+            timer.Interval = 1000;
+            timerCount = 0;
+            timer.Tick += (sender, e) =>
+            {
+                timerCount++;
+                string minutes = (timerCount % 60).ToString();
+                string seconds = (timerCount / 60).ToString();
+                if (minutes.Length == 1) minutes = "0" + minutes;
+                if (seconds.Length == 1) seconds = "0" + seconds;
+
+                TimerLabel.Text = seconds + ":" + minutes;
+            };
         }
         // Control View
         void ActivateElement(Control control)
@@ -61,6 +74,7 @@ namespace X_ray_Images
                 InactivateElement(StopPanel);
                 InactivateElement(RecordingLabel);
                 InactivateElement(ListeningLabel);
+                TimerLabel.Visible = false;
             }
             else if (mode == AudioMode.Listening)
             {
@@ -69,6 +83,7 @@ namespace X_ray_Images
                 ActivateElement(StopPanel);
                 InactivateElement(RecordingLabel);
                 ActivateElement(ListeningLabel);
+                TimerLabel.Visible = true;
             }
             else if (mode == AudioMode.Recording)
             {
@@ -77,6 +92,7 @@ namespace X_ray_Images
                 ActivateElement(StopPanel);
                 ActivateElement(RecordingLabel);
                 InactivateElement(ListeningLabel);
+                TimerLabel.Visible = true;
             }
         }
 
@@ -88,6 +104,8 @@ namespace X_ray_Images
                 mode = AudioMode.Recording;
                 ControlViews();
                 if (File.Exists(path)) File.Delete(path);
+                timer.Start();
+                TimerLabel.Text = "00:00";
                 waveIn = new WaveInEvent();
                 waveIn.WaveFormat = new WaveFormat(44100, 1);
                 waveIn.DataAvailable += (s, e) =>
@@ -104,7 +122,7 @@ namespace X_ray_Images
                     {
                         series.Items.Add(new BarItem(i, samples[i]));
                     }
-                    AudioPlot.Invalidate();
+                    //AudioPlot.Invalidate();
                 };
 
                 waveIn.StartRecording();
@@ -116,6 +134,8 @@ namespace X_ray_Images
             {
                 mode = AudioMode.None;
                 ControlViews();
+                timerCount = 0;
+                timer.Stop();
                 waveIn.StopRecording();
                 waveIn.Dispose();
                 using (var writer = new WaveFileWriter(path, new WaveFormat(44100, 1)))
@@ -128,6 +148,8 @@ namespace X_ray_Images
             {
                 mode = AudioMode.None;
                 ControlViews();
+                timerCount = 0;
+                timer.Stop();
                 reader.Close();
                 reader.Dispose();
                 reader = null;
@@ -145,6 +167,8 @@ namespace X_ray_Images
                     outputDevice = new WaveOutEvent();
                     outputDevice.Init(reader);
                     outputDevice.Play();
+                    timer.Start();
+                    TimerLabel.Text = "00:00"; 
                     outputDevice.PlaybackStopped += (sender, e) =>
                     {
                         if (mode == AudioMode.Listening)
@@ -164,6 +188,7 @@ namespace X_ray_Images
 
         private void WhatsAppImage_Click(object sender, EventArgs e)
         {
+            if (mode != AudioMode.None) return;
             Thread serviceThread = new Thread(() =>
             {
                 try
@@ -200,6 +225,7 @@ namespace X_ray_Images
 
         private void TelegramImage_Click(object sender, EventArgs e)
         {
+            if (mode != AudioMode.None) return;
             Telegram_Share telegram = new Telegram_Share();
             telegram.FilePath = path;
             telegram.Show();
